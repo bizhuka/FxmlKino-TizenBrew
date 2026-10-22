@@ -5,6 +5,9 @@ var __fxmlLog = (function () {
   var port = null;
   function send(msg) {
     try { console.log('[fxml-service] ' + msg); } catch (e) {}
+    // Under TizenBrew no app listens on our message port: keep the log in a file on the TV
+    // instead (sdb pull /tmp/fxmlkino-service.log).
+    if (__fxmlInTizenBrew) try { require('fs').appendFileSync('/tmp/fxmlkino-service.log', new Date().toISOString() + ' ' + msg + '\n'); } catch (e) {}
     try {
       if (typeof tizen === 'undefined' || !tizen.messageport) return;
       if (!port) port = tizen.messageport.requestRemoteMessagePort(tizen.application.getCurrentApplication().appInfo.packageId + '.FxmlKino', 'fxml-log');
@@ -21,8 +24,8 @@ var __fxmlLog = (function () {
         send(k + ' ' + Array.prototype.join.call(arguments, ' '));
       };
     });
-    send('loading, node ' + process.version);
   } catch (e) {}
+  try { send('loading, node ' + process.version + (__fxmlInTizenBrew ? ', TizenBrew module' : '')); } catch (e) {}
   return send;
 })();
 // Buffer.from / Buffer.alloc arrived in Node 4.5. On 4.4.3 (TU7500, Tizen 5.5), Buffer.from is the
