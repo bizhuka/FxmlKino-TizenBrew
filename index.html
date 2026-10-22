@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<head>
+<meta name="viewport" content="width=1280">
+<meta charset="UTF-8" />
+<script src="$WEBAPIS/webapis/webapis.js"></script>
+<script src="js/library/jquery-1.12.4.min.js"></script>
+<script src="js/load.js"></script>
+
+<title>Fork eXtensible Markup Language viewer application</title>
+<link href="static/app.css" rel="stylesheet">
+</head>
+<body>
+<object id="av-player" type="application/avplayer"></object>
+<div id="startlogo">
+	<div id="loadingTitle">
+		<span>F</span><span>o</span><span>r</span><span>k</span><span>&nbsp;</span><span>b</span><span>r</span><span>o</span><span>w</span><span>s</span><span>e</span><span>r</span>
+	</div>
+	<div id="startcmd" class="loading-status">wait /js/load.js</div>
+	<div id="loading-hint" class="loading-hint"></div>
+	<div class="platform-version">Tizen v1.1.1</div>
+	<div id="vapeMenu">
+		<div class="vapeMenuCard">
+			<div class="vapeMenuHeader"></div>
+			<div class="vapeMenuItems" id="vapeMenuItems">
+				<div class="vapeMenuItem" data-action="continue" tabindex="0">
+					<div class="vapeMenuItemIcon">▶</div>
+					<div class="vapeMenuItemText"></div>
+				</div>
+				<div class="vapeMenuItem" data-action="selectSource" tabindex="0">
+					<div class="vapeMenuItemIcon">📍</div>
+					<div class="vapeMenuItemText"></div>
+					<div class="vapeMenuItemArrow">›</div>
+				</div>
+				<div class="vapeMenuItem" data-action="openMSX" tabindex="0">
+					<div class="vapeMenuItemIcon">🏪</div>
+					<div class="vapeMenuItemText"></div>
+					<div class="vapeMenuItemArrow">›</div>
+				</div>
+				<div class="vapeMenuItem" data-action="openMSXMirror" tabindex="0">
+					<div class="vapeMenuItemIcon">🏪</div>
+					<div class="vapeMenuItemText"></div>
+					<div class="vapeMenuItemArrow">›</div>
+				</div>
+				<div class="vapeMenuItem" data-action="openFxmlPortal" tabindex="0">
+					<div class="vapeMenuItemIcon">🎬</div>
+					<div class="vapeMenuItemText"></div>
+					<div class="vapeMenuItemArrow">›</div>
+				</div>
+				<div class="vapeMenuItem" data-action="clearData" tabindex="0">
+					<div class="vapeMenuItemIcon">🗑</div>
+					<div class="vapeMenuItemText"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="sourceSelectMenu" style="display:none;"></div>
+	<div id="clearDataMenu" style="display:none;"></div>
+	<div id="confirmDialog">
+		<div class="confirmDialogCard">
+			<div class="confirmDialogHeader" id="confirmDialogTitle"></div>
+			<div class="confirmDialogContent" id="confirmDialogContent"></div>
+			<div class="confirmDialogButtons">
+				<button class="confirmDialogButton cancel" id="confirmDialogCancel" tabindex="0"></button>
+				<button class="confirmDialogButton confirm" id="confirmDialogConfirm" tabindex="0"></button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="main">
+	<div id="pr"></div> 
+</div>
+<div id="other" style="display:none;position:absolute;top:0px;left:0px;width:0px;height:0px;"></div>
+<div id="vk" style="display:none;"></div>
+<div id="QualCh" style="display:none;background-color:black;"></div>
+<div id="MenuCh" style="display:none;background-color:black;"></div>
+<div id="popUp" style="display:none;"></div>
+<div id="player" style="display:none;"></div>
+</body>
+</html>
