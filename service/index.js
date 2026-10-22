@@ -5,9 +5,6 @@ var __fxmlLog = (function () {
   var port = null;
   function send(msg) {
     try { console.log('[fxml-service] ' + msg); } catch (e) {}
-    // Under TizenBrew no app listens on our message port: keep the log in a file on the TV
-    // instead (sdb pull /home/owner/share/tmp/sdk_tools/fxmlkino-service.log).
-    if (__fxmlInTizenBrew) try { require('fs').appendFileSync('/home/owner/share/tmp/sdk_tools/fxmlkino-service.log', new Date().toISOString() + ' ' + msg + '\n'); } catch (e) {}
     try {
       if (typeof tizen === 'undefined' || !tizen.messageport) return;
       if (!port) port = tizen.messageport.requestRemoteMessagePort(tizen.application.getCurrentApplication().appInfo.packageId + '.FxmlKino', 'fxml-log');
@@ -21004,7 +21001,7 @@ function _hlsPlaylist() {
   }));
   return _hlsPlaylist.apply(this, arguments);
 }
-var PORT = 8787;
+var PORT = typeof __fxmlInTizenBrew !== "undefined" && __fxmlInTizenBrew ? 8788 : 8787;
 var server = null;
 function log(msg) {
   if (typeof __fxmlLog === "function") __fxmlLog(msg);

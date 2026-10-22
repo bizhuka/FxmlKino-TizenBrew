@@ -32,7 +32,8 @@ var FXML_IN_TIZENBREW = location.protocol === 'http:' && location.port === '8081
 // service (service/index.js, built from fxml-parser), which runs on the TV: the TV fetches the
 // movie sites itself, no PC needed. In the emulator it is the parser on the PC instead
 // (fxml-parser `npm start`): the emulator reaches the PC at 10.0.2.2.
-var FXML_SERVICE_PORT = 8787;
+// 8788 under TizenBrew: the module's service uses its own port (fxml-parser/tv/service.js).
+var FXML_SERVICE_PORT = FXML_IN_TIZENBREW ? 8788 : 8787;
 var FXML_PC_PARSER_URL = "http://10.0.2.2:3000/";
 var FXML_PORTAL_URL = FXML_ON_EMULATOR ? FXML_PC_PARSER_URL : "http://127.0.0.1:" + FXML_SERVICE_PORT + "/";
 // Open the portal on every start (set to false to start on Fork's own start page).
