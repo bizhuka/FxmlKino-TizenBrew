@@ -26,7 +26,7 @@ var version_local_js = 1;
 // Fork engine version the remote loader expects; FxmlKino's own version is FXMLKINO_VERSION
 // (same as config.xml).
 var app_version = "1.1.1";
-var FXMLKINO_VERSION = "1.2.1";
+var FXMLKINO_VERSION = "1.2.2";
 
 // The Tizen emulator can't run web services (see AGENTS.md).
 function isEmulator() {
@@ -70,26 +70,44 @@ function showFxmlStatus(text) {
 }
 
 // Polls the service until it answers (up to ~60 s: a first start on an old TV can be slow).
+var fxmlServiceReady = false;
 function checkFxmlService(attempt) {
 	attempt = attempt || 0;
-	if (attempt) showFxmlStatus('ожидание сервиса ' + attempt + '/30');
+	if (attempt) showFxmlStatus('ожидание сервиса ' + attempt + '/60');
 	var x = new XMLHttpRequest();
 	x.open('GET', FXML_PORTAL_URL, true);
 	x.timeout = 2000;
 	var where = FXML_ON_EMULATOR ? 'эмулятор, парсер на ПК: ' : FXML_IN_TIZENBREW ? 'TizenBrew: ' : '';
 	x.onload = function () {
 		showFxmlStatus(where + (x.status === 200 ? 'сервис работает' : 'сервис ответил ' + x.status));
-		autostartFxmlPortal();
+		fxmlServiceReady = true;
+		runFxmlReadyWaiters();
 	};
 	x.onerror = x.ontimeout = function () {
-		if (attempt < 30) setTimeout(function () { checkFxmlService(attempt + 1); }, 2000);
-		else {
-			if (FXML_ON_EMULATOR) showFxmlStatus(where + 'не отвечает. Запустите на ПК: cd fxml-parser && npm start');
-			else showFxmlStatus('сервис не отвечает (' + FXML_PORTAL_URL + ')');
-			autostartFxmlPortal(); // open it anyway: the portal page then shows the error
-		}
+		if (attempt < 60) setTimeout(function () { checkFxmlService(attempt + 1); }, 1000);
+		else if (FXML_ON_EMULATOR) showFxmlStatus(where + 'не отвечает. Запустите на ПК: cd fxml-parser && npm start');
+		else showFxmlStatus('сервис не отвечает (' + FXML_PORTAL_URL + ')');
 	};
 	x.send();
+}
+
+// The engine opens the portal (window.tizenPreviewPending, set below) as soon as its start page
+// is ready, so it only starts once the service answers: ScriptLoader.init waits for this, at
+// most FXML_START_WAIT_MS (then it starts anyway and the portal page shows the error).
+// Opening the portal later through an 'appcontrol' event (1.2.1) doesn't work on webOS.
+var FXML_START_WAIT_MS = 20000;
+var fxmlReadyWaiters = [];
+function runFxmlReadyWaiters() {
+	var waiters = fxmlReadyWaiters;
+	fxmlReadyWaiters = [];
+	for (var i = 0; i < waiters.length; i++) waiters[i]();
+}
+function whenFxmlServiceReady(callback) {
+	var done = false;
+	var once = function () { if (!done) { done = true; callback(); } };
+	if (fxmlServiceReady || !FXML_PORTAL_AUTOSTART) return once();
+	fxmlReadyWaiters.push(once);
+	setTimeout(once, FXML_START_WAIT_MS);
 }
 
 // Starts the FXML web service (declared in config.xml) unless it is already running.
@@ -167,17 +185,13 @@ if (FXML_ON_EMULATOR) {
 	showFxmlStatus('запуск сервиса…');
 	startFxmlService();
 }
-setTimeout(function () { checkFxmlService(0); }, 1500);
+setTimeout(function () { checkFxmlService(0); }, 300);
 
-// Portal on start: opened only once the service answers (checkFxmlService), the way the loader
-// menu does it (openFxmlPortal). Setting it before made the engine open the portal while the
-// service was still starting (LG: the first start needed a refresh). A Smart Hub launch that
-// brought its own window.tizenPreviewPending still takes priority.
-var fxmlAutostartPending = FXML_PORTAL_AUTOSTART && !window.tizenPreviewPending;
-function autostartFxmlPortal() {
-	if (!fxmlAutostartPending) return;
-	fxmlAutostartPending = false;
-	openFxmlPortal();
+// The engine navigates to window.tizenPreviewPending once its start page is ready (it starts only
+// when the service answers, see whenFxmlServiceReady). A Smart Hub launch with its own data still
+// takes priority.
+if (FXML_PORTAL_AUTOSTART && !window.tizenPreviewPending) {
+	window.tizenPreviewPending = { title: "FXML Кино", playlist_url: FXML_PORTAL_URL, stream_url: "" };
 }
 
 function getLoaderLanguage() {
@@ -1309,12 +1323,15 @@ var ScriptLoader = (function() {
 		}
 		
 		renderLoadingStatus(-1, getTranslation('initializingScriptLoader'), false);
-		
-		setTimeout(function() {
-			if (state.isLoaded) return;
-			if (state.paused) return;
-			startLoading();
-		}, CONFIG.INITIAL_LOAD_DELAY_MS);
+
+		// FxmlKino: start the engine once the parser service answers (see whenFxmlServiceReady).
+		whenFxmlServiceReady(function() {
+			setTimeout(function() {
+				if (state.isLoaded) return;
+				if (state.paused) return;
+				startLoading();
+			}, CONFIG.INITIAL_LOAD_DELAY_MS);
+		});
 	}
 	
 	function startLoading() {
