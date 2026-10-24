@@ -14,8 +14,13 @@ var Ldata = [
 var FORK_ENGINE_LOCAL = true;
 if (FORK_ENGINE_LOCAL) Ldata.unshift(Ldata.splice(Ldata.indexOf("js/main.js"), 1)[0]);
 
-var box_client = "tizen";
-var loader_platform = "samsung_tizen";
+// The same app is built for Samsung Tizen (.wgt) and LG webOS (.ipk, tools/webos/build.mjs).
+// webOS's web runtime provides PalmSystem / PalmServiceBridge; LG's own Fork app uses these values.
+var FXML_ON_WEBOS = typeof window.PalmSystem !== 'undefined' || typeof window.PalmServiceBridge !== 'undefined';
+var box_client = FXML_ON_WEBOS ? "webos" : "tizen";
+var loader_platform = FXML_ON_WEBOS ? "lg_webos" : "samsung_tizen";
+// LG device ID / model, read on webOS by startWebosService(); the engine reads these globals.
+var glg_uid = "", glg_model = "";
 var version_local_files = 260415;
 var version_local_js = 1;
 // Fork engine version the remote loader expects; FxmlKino's own version is FXMLKINO_VERSION
@@ -110,8 +115,46 @@ function startFxmlService() {
 		showFxmlStatus('ошибка запуска сервиса: ' + e.message);
 	}
 }
+// LG webOS: the app's JS service (tools/webos/service.js, same parser bundle) starts on the first
+// call to it and stays alive while this call's subscription is open. Its answer carries the
+// service's latest log lines for the status line. The bridges are kept in globals so the calls
+// aren't garbage-collected.
+var WEBOS_SERVICE = 'luna://com.fxmlkino.tv.service';
+function webosCall(uri, params, onReply) {
+	var bridge = new PalmServiceBridge();
+	bridge.onservicecallback = function (text) {
+		var reply = {};
+		try { reply = JSON.parse(text); } catch (e) {}
+		if (onReply) onReply(reply);
+	};
+	bridge.call(uri, JSON.stringify(params || {}));
+	(window.__fxmlBridges = window.__fxmlBridges || []).push(bridge);
+}
+function startWebosService() {
+	try {
+		webosCall(WEBOS_SERVICE + '/start', { subscribe: true }, function (reply) {
+			if (reply.log && reply.log.length) fxmlLastLog = reply.log[reply.log.length - 1];
+			if (reply.returnValue === false) showFxmlStatus('не удалось запустить сервис: ' + (reply.errorText || reply.errorCode));
+			else if (fxmlStatusText === 'запуск сервиса…') showFxmlStatus('запуск принят');
+			else showFxmlStatus();
+		});
+		// Device ID and model for the engine, as LG's own Fork app sets them in index.html.
+		webosCall('luna://com.webos.service.sm/deviceid/getIDs', { idType: ['LGUDID'] }, function (reply) {
+			if (reply.returnValue !== false) window.glg_uid = reply;
+		});
+		webosCall('luna://com.webos.service.tv.systemproperty/getSystemInfo', { keys: ['modelName', 'firmwareVersion', 'UHD', 'sdkVersion'] }, function (reply) {
+			if (reply.returnValue) window.glg_model = reply.modelName;
+		});
+	} catch (e) {
+		showFxmlStatus('ошибка запуска сервиса: ' + e.message);
+	}
+}
+
 if (FXML_ON_EMULATOR) {
 	showFxmlStatus('эмулятор, парсер на ПК: ' + FXML_PORTAL_URL);
+} else if (FXML_ON_WEBOS) {
+	showFxmlStatus('запуск сервиса…');
+	startWebosService();
 } else if (FXML_IN_TIZENBREW) {
 	showFxmlStatus('TizenBrew: сервис запускает TizenBrew…');
 } else {
