@@ -31,7 +31,10 @@ TizenBrew запускает парсер FxmlKino в фоне при откры
 
 ## Без TizenBrew
 
-Отдельное приложение со своим установщиком для Windows: [FxmlKino-TV](https://github.com/bizhuka/FxmlKino-TV).
+FxmlKino есть и как отдельное приложение: [FxmlKino-TV](https://github.com/bizhuka/FxmlKino-TV/blob/main/README.ru.md).
+Проще всего поставить его той же программой TizenBrew Installer: установка приложения **с GitHub**,
+ввести `bizhuka/FxmlKino-TV`. Работает на любых ТВ с 2017 года, а для ТВ 2022+ сертификат создаёт
+сама.
 
 ## Файлы
 

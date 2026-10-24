@@ -334,15 +334,15 @@ var librarys={
 	libs:function(){
 		
 		return [
-		{name:"jquery",important:0,url:["library/jquery-1.12.4.min.js","http://browser.appfxml.com/library/jquery-1.12.4.min.js","http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js","http://komivp.github.appfxml.com/library/jquery-1.12.4.min.js"]},
-		{name:"json",important:1,url:["library/json.js","http://browser.appfxml.com/library/json.js","http://komivp.github.appfxml.com/library/json.js","https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.min.js"]},
-		{name:"underscore",important:1,require:"jquery",url:["library/underscore_1.8.3.js","http://browser.appfxml.com/library/underscore_1.8.3.js","http://komivp.github.appfxml.com/library/underscore_1.8.3.js","https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"]},
-		{name:"md5",important:1,url:["library/md5.js","http://browser.appfxml.com/library/md5.js","http://komivp.github.appfxml.com/library/md5.js","https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"]},
-		{name:"langs",important:0,url:["library/langs.js","http://browser.appfxml.com/library/langs.js","http://komivp.github.appfxml.com/library/langs.js"]},
-		{name:"guide",important:0,url:["library/jtv.js","http://exec.remotecurl.appfxml.com/curl/jtv.js","http://85.17.30.89/common/jtv.js?v=6","http://46.36.220.208/common/jtv.js?v=6"]},
-		{name:"webOS",important:0,url:["library/webOS.js","http://browser.appfxml.com/library/webOS.js","http://komivp.github.appfxml.com/library/webOS.js"]},
-		{name:"jw",important:0,url:["library/jwplayer_8.20.1.js","http://browser.appfxml.com/library/jwplayer_8.20.1.js","http://komivp.github.appfxml.com/library/jwplayer_8.20.1.js"]},	
-		{name:"js",require:"jquery",important:0,url:["http://browser.appfxml.com/jsobf/beta.js.php?ver="+this.getver(),"http://browser2.appfxml.com/jsobf/beta.js.php?ver="+this.getver(),"http://komivp.github.appfxml.com/app_"+(this.getver()||this.versions().stable)+".js","http://browser2.appinfo.su/jsobf/beta.js.php?ver="+this.getver()]}		
+		{name:"jquery",important:0,url:["js/library/jquery-1.12.4.min.js","http://browser.appfxml.com/library/jquery-1.12.4.min.js","http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js","http://komivp.github.appfxml.com/library/jquery-1.12.4.min.js"]},
+		{name:"json",important:1,url:["js/library/json.js","http://browser.appfxml.com/library/json.js","http://komivp.github.appfxml.com/library/json.js","https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.min.js"]},
+		{name:"underscore",important:1,require:"jquery",url:["js/library/underscore_1.8.3.js","http://browser.appfxml.com/library/underscore_1.8.3.js","http://komivp.github.appfxml.com/library/underscore_1.8.3.js","https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"]},
+		{name:"md5",important:1,url:["js/library/md5.js","http://browser.appfxml.com/library/md5.js","http://komivp.github.appfxml.com/library/md5.js","https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"]},
+		{name:"langs",important:0,url:["js/library/langs.js","http://browser.appfxml.com/library/langs.js","http://komivp.github.appfxml.com/library/langs.js"]},
+		{name:"guide",important:0,url:["js/library/jtv.js","http://exec.remotecurl.appfxml.com/curl/jtv.js","http://85.17.30.89/common/jtv.js?v=6","http://46.36.220.208/common/jtv.js?v=6"]},
+		{name:"webOS",important:0,url:["js/library/webOS.js","http://browser.appfxml.com/library/webOS.js","http://komivp.github.appfxml.com/library/webOS.js"]},
+		{name:"jw",important:0,url:["js/library/jwplayer_8.20.1.js","http://browser.appfxml.com/library/jwplayer_8.20.1.js","http://komivp.github.appfxml.com/library/jwplayer_8.20.1.js"]},	
+		{name:"js",require:"jquery",important:0,url:["js/engine.js","http://browser.appfxml.com/jsobf/beta.js.php?ver="+this.getver(),"http://browser2.appfxml.com/jsobf/beta.js.php?ver="+this.getver(),"http://komivp.github.appfxml.com/app_"+(this.getver()||this.versions().stable)+".js","http://browser2.appinfo.su/jsobf/beta.js.php?ver="+this.getver()]}		
 		];
 	},
 	exis:function(l){
@@ -637,8 +637,8 @@ var librarys={
 if (window.__forkLibLoader) {
 	window.__forkLibLoader.patch(librarys);
 }
+// adds() sets __forkLibrarysStarted itself; setting it here first made adds() skip every library.
 if (!window.__forkLibrarysStarted) {
-	window.__forkLibrarysStarted = true;
 	librarys.adds();
 }
 var tomflight_fail=function(){}

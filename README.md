@@ -31,8 +31,10 @@ when TizenBrew starts, set it under TizenBrew's **Settings → Autolaunch**.
 
 ## Without TizenBrew
 
-A standalone app with its own Windows installer is in
-[FxmlKino-TV](https://github.com/bizhuka/FxmlKino-TV).
+FxmlKino is also a standalone app: [FxmlKino-TV](https://github.com/bizhuka/FxmlKino-TV). The
+easiest way to install it is the same TizenBrew Installer: install an app **from GitHub** and enter
+`bizhuka/FxmlKino-TV`. It works on any TV from 2017 on and creates the certificate for 2022+ TVs
+itself.
 
 ## Files
 
