@@ -26,7 +26,7 @@ var version_local_js = 1;
 // Fork engine version the remote loader expects; FxmlKino's own version is FXMLKINO_VERSION
 // (same as config.xml).
 var app_version = "1.1.1";
-var FXMLKINO_VERSION = "1.2.0";
+var FXMLKINO_VERSION = "1.2.1";
 
 // The Tizen emulator can't run web services (see AGENTS.md).
 function isEmulator() {
@@ -77,11 +77,17 @@ function checkFxmlService(attempt) {
 	x.open('GET', FXML_PORTAL_URL, true);
 	x.timeout = 2000;
 	var where = FXML_ON_EMULATOR ? 'эмулятор, парсер на ПК: ' : FXML_IN_TIZENBREW ? 'TizenBrew: ' : '';
-	x.onload = function () { showFxmlStatus(where + (x.status === 200 ? 'сервис работает' : 'сервис ответил ' + x.status)); };
+	x.onload = function () {
+		showFxmlStatus(where + (x.status === 200 ? 'сервис работает' : 'сервис ответил ' + x.status));
+		autostartFxmlPortal();
+	};
 	x.onerror = x.ontimeout = function () {
 		if (attempt < 30) setTimeout(function () { checkFxmlService(attempt + 1); }, 2000);
-		else if (FXML_ON_EMULATOR) showFxmlStatus(where + 'не отвечает. Запустите на ПК: cd fxml-parser && npm start');
-		else showFxmlStatus('сервис не отвечает (' + FXML_PORTAL_URL + ')');
+		else {
+			if (FXML_ON_EMULATOR) showFxmlStatus(where + 'не отвечает. Запустите на ПК: cd fxml-parser && npm start');
+			else showFxmlStatus('сервис не отвечает (' + FXML_PORTAL_URL + ')');
+			autostartFxmlPortal(); // open it anyway: the portal page then shows the error
+		}
 	};
 	x.send();
 }
@@ -163,10 +169,15 @@ if (FXML_ON_EMULATOR) {
 }
 setTimeout(function () { checkFxmlService(0); }, 1500);
 
-// The engine navigates to window.tizenPreviewPending once its start page is ready
-// (see openFxmlPortal). A Smart Hub launch with its own data still takes priority.
-if (FXML_PORTAL_AUTOSTART && !window.tizenPreviewPending) {
-	window.tizenPreviewPending = { title: "FXML Кино", playlist_url: FXML_PORTAL_URL, stream_url: "" };
+// Portal on start: opened only once the service answers (checkFxmlService), the way the loader
+// menu does it (openFxmlPortal). Setting it before made the engine open the portal while the
+// service was still starting (LG: the first start needed a refresh). A Smart Hub launch that
+// brought its own window.tizenPreviewPending still takes priority.
+var fxmlAutostartPending = FXML_PORTAL_AUTOSTART && !window.tizenPreviewPending;
+function autostartFxmlPortal() {
+	if (!fxmlAutostartPending) return;
+	fxmlAutostartPending = false;
+	openFxmlPortal();
 }
 
 function getLoaderLanguage() {
