@@ -26,7 +26,7 @@ var version_local_js = 1;
 // Fork engine version the remote loader expects; FxmlKino's own version is FXMLKINO_VERSION
 // (same as config.xml).
 var app_version = "1.1.1";
-var FXMLKINO_VERSION = "1.2.2";
+var FXMLKINO_VERSION = "1.2.3";
 
 // The Tizen emulator can't run web services (see AGENTS.md).
 function isEmulator() {
@@ -82,19 +82,25 @@ function checkFxmlService(attempt) {
 		showFxmlStatus(where + (x.status === 200 ? 'сервис работает' : 'сервис ответил ' + x.status));
 		fxmlServiceReady = true;
 		runFxmlReadyWaiters();
+		autostartFxmlPortal();
 	};
 	x.onerror = x.ontimeout = function () {
 		if (attempt < 60) setTimeout(function () { checkFxmlService(attempt + 1); }, 1000);
-		else if (FXML_ON_EMULATOR) showFxmlStatus(where + 'не отвечает. Запустите на ПК: cd fxml-parser && npm start');
-		else showFxmlStatus('сервис не отвечает (' + FXML_PORTAL_URL + ')');
+		else {
+			if (FXML_ON_EMULATOR) showFxmlStatus(where + 'не отвечает. Запустите на ПК: cd fxml-parser && npm start');
+			else showFxmlStatus('сервис не отвечает (' + FXML_PORTAL_URL + ')');
+			autostartFxmlPortal();
+		}
 	};
 	x.send();
 }
 
-// The engine opens the portal (window.tizenPreviewPending, set below) as soon as its start page
-// is ready, so it only starts once the service answers: ScriptLoader.init waits for this, at
-// most FXML_START_WAIT_MS (then it starts anyway and the portal page shows the error).
-// Opening the portal later through an 'appcontrol' event (1.2.1) doesn't work on webOS.
+// webOS only: the engine opens the portal (window.tizenPreviewPending, set below) as soon as its
+// start page is ready, so there it starts only once the service answers: ScriptLoader.init waits
+// for this, at most FXML_START_WAIT_MS (then it starts anyway and the portal page shows the
+// error). Opening the portal later through an 'appcontrol' event doesn't work on webOS. Elsewhere
+// waiting would only slow the start (1.2.2: +2–3 s on Samsung), so the engine starts at once.
+var FXML_WAIT_FOR_SERVICE = FXML_ON_WEBOS;
 var FXML_START_WAIT_MS = 20000;
 var fxmlReadyWaiters = [];
 function runFxmlReadyWaiters() {
@@ -105,7 +111,7 @@ function runFxmlReadyWaiters() {
 function whenFxmlServiceReady(callback) {
 	var done = false;
 	var once = function () { if (!done) { done = true; callback(); } };
-	if (fxmlServiceReady || !FXML_PORTAL_AUTOSTART) return once();
+	if (fxmlServiceReady || !FXML_PORTAL_AUTOSTART || !FXML_WAIT_FOR_SERVICE) return once();
 	fxmlReadyWaiters.push(once);
 	setTimeout(once, FXML_START_WAIT_MS);
 }
@@ -187,11 +193,21 @@ if (FXML_ON_EMULATOR) {
 }
 setTimeout(function () { checkFxmlService(0); }, 300);
 
-// The engine navigates to window.tizenPreviewPending once its start page is ready (it starts only
-// when the service answers, see whenFxmlServiceReady). A Smart Hub launch with its own data still
-// takes priority.
-if (FXML_PORTAL_AUTOSTART && !window.tizenPreviewPending) {
+// Portal on start. A Smart Hub launch with its own window.tizenPreviewPending takes priority.
+// - webOS: the target is set now and the engine starts only once the service answers
+//   (FXML_WAIT_FOR_SERVICE, whenFxmlServiceReady): webOS ignores the 'appcontrol' event.
+// - Tizen, TizenBrew, emulator: the engine starts at once (fast start); the portal is opened when
+//   the service answers (openFxmlPortal: target + 'appcontrol' event), or after the polling ends
+//   without an answer, so the portal page then shows the error.
+var fxmlAutostartPending = FXML_PORTAL_AUTOSTART && !window.tizenPreviewPending;
+if (fxmlAutostartPending && FXML_WAIT_FOR_SERVICE) {
+	fxmlAutostartPending = false;
 	window.tizenPreviewPending = { title: "FXML Кино", playlist_url: FXML_PORTAL_URL, stream_url: "" };
+}
+function autostartFxmlPortal() {
+	if (!fxmlAutostartPending) return;
+	fxmlAutostartPending = false;
+	openFxmlPortal();
 }
 
 function getLoaderLanguage() {

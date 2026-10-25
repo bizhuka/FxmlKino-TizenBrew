@@ -74,6 +74,35 @@ function _iterableToArrayLimit(r, l) {
 function _arrayWithHoles(r) {
   if (Array.isArray(r)) return r;
 }
+function _wrapNativeSuper(t) {
+  var r = "function" == typeof Map ? /* @__PURE__ */ new Map() : void 0;
+  return _wrapNativeSuper = function _wrapNativeSuper2(t2) {
+    if (null === t2 || !_isNativeFunction(t2)) return t2;
+    if ("function" != typeof t2) throw new TypeError("Super expression must either be null or a function");
+    if (void 0 !== r) {
+      if (r.has(t2)) return r.get(t2);
+      r.set(t2, Wrapper);
+    }
+    function Wrapper() {
+      return _construct(t2, arguments, _getPrototypeOf(this).constructor);
+    }
+    return Wrapper.prototype = Object.create(t2.prototype, { constructor: { value: Wrapper, enumerable: false, writable: true, configurable: true } }), _setPrototypeOf(Wrapper, t2);
+  }, _wrapNativeSuper(t);
+}
+function _construct(t, e, r) {
+  if (_isNativeReflectConstruct()) return Reflect.construct.apply(null, arguments);
+  var o = [null];
+  o.push.apply(o, e);
+  var p = new (t.bind.apply(t, o))();
+  return r && _setPrototypeOf(p, r.prototype), p;
+}
+function _isNativeFunction(t) {
+  try {
+    return -1 !== Function.toString.call(t).indexOf("[native code]");
+  } catch (n) {
+    return "function" == typeof t;
+  }
+}
 function _toConsumableArray(r) {
   return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread();
 }
@@ -353,7 +382,7 @@ var __copyProps = function __copyProps2(to, from, except, desc) {
       var _loop = function _loop2() {
         var key = _step.value;
         if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
-          get: function get() {
+          get: function get2() {
             return from[key];
           },
           enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
@@ -616,8 +645,8 @@ var require_tr46 = __commonJS({
       var len = countSymbols(domain_name);
       for (var i = 0; i < len; ++i) {
         var codePoint = domain_name.codePointAt(i);
-        var status = findStatus(codePoint);
-        switch (status[1]) {
+        var status2 = findStatus(codePoint);
+        switch (status2[1]) {
           case "disallowed":
             hasError = true;
             processed += String.fromCodePoint(codePoint);
@@ -625,11 +654,11 @@ var require_tr46 = __commonJS({
           case "ignored":
             break;
           case "mapped":
-            processed += String.fromCodePoint.apply(String, status[2]);
+            processed += String.fromCodePoint.apply(String, status2[2]);
             break;
           case "deviation":
             if (processing_option === PROCESSING_OPTIONS.TRANSITIONAL) {
-              processed += String.fromCodePoint.apply(String, status[2]);
+              processed += String.fromCodePoint.apply(String, status2[2]);
             } else {
               processed += String.fromCodePoint(codePoint);
             }
@@ -642,7 +671,7 @@ var require_tr46 = __commonJS({
               hasError = true;
               processed += String.fromCodePoint(codePoint);
             } else {
-              processed += String.fromCodePoint.apply(String, status[2]);
+              processed += String.fromCodePoint.apply(String, status2[2]);
             }
             break;
           case "disallowed_STD3_valid":
@@ -670,8 +699,8 @@ var require_tr46 = __commonJS({
       }
       var len = countSymbols(label);
       for (var i = 0; i < len; ++i) {
-        var status = findStatus(label.codePointAt(i));
-        if (processing === PROCESSING_OPTIONS.TRANSITIONAL && status[1] !== "valid" || processing === PROCESSING_OPTIONS.NONTRANSITIONAL && status[1] !== "valid" && status[1] !== "deviation") {
+        var status2 = findStatus(label.codePointAt(i));
+        if (processing === PROCESSING_OPTIONS.TRANSITIONAL && status2[1] !== "valid" || processing === PROCESSING_OPTIONS.NONTRANSITIONAL && status2[1] !== "valid" && status2[1] !== "deviation") {
           error = true;
           break;
         }
@@ -753,8 +782,8 @@ var require_url_state_machine = __commonJS({
     function countSymbols(str) {
       return punycode.ucs2.decode(str).length;
     }
-    function at(input, idx) {
-      var c = input[idx];
+    function at(input2, idx) {
+      var c = input2[idx];
       return isNaN(c) ? void 0 : String.fromCodePoint(c);
     }
     function isASCIIDigit(c) {
@@ -816,16 +845,16 @@ var require_url_state_machine = __commonJS({
       return str;
     }
     function utf8PercentDecode(str) {
-      var input = new Buffer(str);
+      var input2 = new Buffer(str);
       var output = [];
-      for (var i = 0; i < input.length; ++i) {
-        if (input[i] !== 37) {
-          output.push(input[i]);
-        } else if (input[i] === 37 && isASCIIHex(input[i + 1]) && isASCIIHex(input[i + 2])) {
-          output.push(parseInt(input.slice(i + 1, i + 3).toString(), 16));
+      for (var i = 0; i < input2.length; ++i) {
+        if (input2[i] !== 37) {
+          output.push(input2[i]);
+        } else if (input2[i] === 37 && isASCIIHex(input2[i + 1]) && isASCIIHex(input2[i + 2])) {
+          output.push(parseInt(input2.slice(i + 1, i + 3).toString(), 16));
           i += 2;
         } else {
-          output.push(input[i]);
+          output.push(input2[i]);
         }
       }
       return new Buffer(output).toString();
@@ -848,33 +877,33 @@ var require_url_state_machine = __commonJS({
       }
       return cStr;
     }
-    function parseIPv4Number(input) {
+    function parseIPv4Number(input2) {
       var R = 10;
-      if (input.length >= 2 && input.charAt(0) === "0" && input.charAt(1).toLowerCase() === "x") {
-        input = input.substring(2);
+      if (input2.length >= 2 && input2.charAt(0) === "0" && input2.charAt(1).toLowerCase() === "x") {
+        input2 = input2.substring(2);
         R = 16;
-      } else if (input.length >= 2 && input.charAt(0) === "0") {
-        input = input.substring(1);
+      } else if (input2.length >= 2 && input2.charAt(0) === "0") {
+        input2 = input2.substring(1);
         R = 8;
       }
-      if (input === "") {
+      if (input2 === "") {
         return 0;
       }
       var regex = R === 10 ? /[^0-9]/ : R === 16 ? /[^0-9A-Fa-f]/ : /[^0-7]/;
-      if (regex.test(input)) {
+      if (regex.test(input2)) {
         return failure;
       }
-      return parseInt(input, R);
+      return parseInt(input2, R);
     }
-    function parseIPv4(input) {
-      var parts = input.split(".");
+    function parseIPv4(input2) {
+      var parts = input2.split(".");
       if (parts[parts.length - 1] === "") {
         if (parts.length > 1) {
           parts.pop();
         }
       }
       if (parts.length > 4) {
-        return input;
+        return input2;
       }
       var numbers = [];
       var _iterator2 = _createForOfIteratorHelper(parts), _step2;
@@ -882,11 +911,11 @@ var require_url_state_machine = __commonJS({
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
           var part = _step2.value;
           if (part === "") {
-            return input;
+            return input2;
           }
           var _n = parseIPv4Number(part);
           if (_n === failure) {
-            return input;
+            return input2;
           }
           numbers.push(_n);
         }
@@ -924,25 +953,25 @@ var require_url_state_machine = __commonJS({
       }
       return output;
     }
-    function parseIPv6(input) {
+    function parseIPv6(input2) {
       var address = [0, 0, 0, 0, 0, 0, 0, 0];
       var pieceIndex = 0;
       var compress = null;
       var pointer = 0;
-      input = punycode.ucs2.decode(input);
-      if (input[pointer] === 58) {
-        if (input[pointer + 1] !== 58) {
+      input2 = punycode.ucs2.decode(input2);
+      if (input2[pointer] === 58) {
+        if (input2[pointer + 1] !== 58) {
           return failure;
         }
         pointer += 2;
         ++pieceIndex;
         compress = pieceIndex;
       }
-      while (pointer < input.length) {
+      while (pointer < input2.length) {
         if (pieceIndex === 8) {
           return failure;
         }
-        if (input[pointer] === 58) {
+        if (input2[pointer] === 58) {
           if (compress !== null) {
             return failure;
           }
@@ -953,12 +982,12 @@ var require_url_state_machine = __commonJS({
         }
         var value = 0;
         var length = 0;
-        while (length < 4 && isASCIIHex(input[pointer])) {
-          value = value * 16 + parseInt(at(input, pointer), 16);
+        while (length < 4 && isASCIIHex(input2[pointer])) {
+          value = value * 16 + parseInt(at(input2, pointer), 16);
           ++pointer;
           ++length;
         }
-        if (input[pointer] === 46) {
+        if (input2[pointer] === 46) {
           if (length === 0) {
             return failure;
           }
@@ -967,20 +996,20 @@ var require_url_state_machine = __commonJS({
             return failure;
           }
           var numbersSeen = 0;
-          while (input[pointer] !== void 0) {
+          while (input2[pointer] !== void 0) {
             var ipv4Piece = null;
             if (numbersSeen > 0) {
-              if (input[pointer] === 46 && numbersSeen < 4) {
+              if (input2[pointer] === 46 && numbersSeen < 4) {
                 ++pointer;
               } else {
                 return failure;
               }
             }
-            if (!isASCIIDigit(input[pointer])) {
+            if (!isASCIIDigit(input2[pointer])) {
               return failure;
             }
-            while (isASCIIDigit(input[pointer])) {
-              var number = parseInt(at(input, pointer));
+            while (isASCIIDigit(input2[pointer])) {
+              var number = parseInt(at(input2, pointer));
               if (ipv4Piece === null) {
                 ipv4Piece = number;
               } else if (ipv4Piece === 0) {
@@ -1003,12 +1032,12 @@ var require_url_state_machine = __commonJS({
             return failure;
           }
           break;
-        } else if (input[pointer] === 58) {
+        } else if (input2[pointer] === 58) {
           ++pointer;
-          if (input[pointer] === void 0) {
+          if (input2[pointer] === void 0) {
             return failure;
           }
-        } else if (input[pointer] !== void 0) {
+        } else if (input2[pointer] !== void 0) {
           return failure;
         }
         address[pieceIndex] = value;
@@ -1053,17 +1082,17 @@ var require_url_state_machine = __commonJS({
       }
       return output;
     }
-    function parseHost(input, isSpecialArg) {
-      if (input[0] === "[") {
-        if (input[input.length - 1] !== "]") {
+    function parseHost(input2, isSpecialArg) {
+      if (input2[0] === "[") {
+        if (input2[input2.length - 1] !== "]") {
           return failure;
         }
-        return parseIPv6(input.substring(1, input.length - 1));
+        return parseIPv6(input2.substring(1, input2.length - 1));
       }
       if (!isSpecialArg) {
-        return parseOpaqueHost(input);
+        return parseOpaqueHost(input2);
       }
-      var domain = utf8PercentDecode(input);
+      var domain = utf8PercentDecode(input2);
       var asciiDomain = tr46.toASCII(domain, false, tr46.PROCESSING_OPTIONS.NONTRANSITIONAL, false);
       if (asciiDomain === null) {
         return failure;
@@ -1077,12 +1106,12 @@ var require_url_state_machine = __commonJS({
       }
       return asciiDomain;
     }
-    function parseOpaqueHost(input) {
-      if (containsForbiddenHostCodePointExcludingPercent(input)) {
+    function parseOpaqueHost(input2) {
+      if (containsForbiddenHostCodePointExcludingPercent(input2)) {
         return failure;
       }
       var output = "";
-      var decoded = punycode.ucs2.decode(input);
+      var decoded = punycode.ucs2.decode(input2);
       for (var i = 0; i < decoded.length; ++i) {
         output += percentEncodeChar(decoded[i], isC0ControlPercentEncode);
       }
@@ -1133,14 +1162,14 @@ var require_url_state_machine = __commonJS({
       return url.replace(/\u0009|\u000A|\u000D/g, "");
     }
     function shortenPath(url) {
-      var path = url.path;
-      if (path.length === 0) {
+      var path2 = url.path;
+      if (path2.length === 0) {
         return;
       }
-      if (url.scheme === "file" && path.length === 1 && isNormalizedWindowsDriveLetter(path[0])) {
+      if (url.scheme === "file" && path2.length === 1 && isNormalizedWindowsDriveLetter(path2[0])) {
         return;
       }
-      path.pop();
+      path2.pop();
     }
     function includesCredentials(url) {
       return url.username !== "" || url.password !== "";
@@ -1151,9 +1180,9 @@ var require_url_state_machine = __commonJS({
     function isNormalizedWindowsDriveLetter(string) {
       return /^[A-Za-z]:$/.test(string);
     }
-    function URLStateMachine(input, base, encodingOverride, url, stateOverride) {
+    function URLStateMachine(input2, base, encodingOverride, url, stateOverride) {
       this.pointer = 0;
-      this.input = input;
+      this.input = input2;
       this.base = base || null;
       this.encodingOverride = encodingOverride || "utf-8";
       this.stateOverride = stateOverride;
@@ -1785,11 +1814,11 @@ var require_url_state_machine = __commonJS({
           return "null";
       }
     };
-    module2.exports.basicURLParse = function(input, options) {
+    module2.exports.basicURLParse = function(input2, options) {
       if (options === void 0) {
         options = {};
       }
-      var usm = new URLStateMachine(input, options.baseURL, options.encodingOverride, options.url, options.stateOverride);
+      var usm = new URLStateMachine(input2, options.baseURL, options.encodingOverride, options.url, options.stateOverride);
       if (usm.failure) {
         return "failure";
       }
@@ -1814,11 +1843,11 @@ var require_url_state_machine = __commonJS({
     module2.exports.serializeInteger = function(integer) {
       return String(integer);
     };
-    module2.exports.parseURL = function(input, options) {
+    module2.exports.parseURL = function(input2, options) {
       if (options === void 0) {
         options = {};
       }
-      return module2.exports.basicURLParse(input, {
+      return module2.exports.basicURLParse(input2, {
         baseURL: options.baseURL,
         encodingOverride: options.encodingOverride
       });
@@ -1851,10 +1880,10 @@ var require_URL_impl = __commonJS({
       }
       return _createClass2(URLImpl, [{
         key: "href",
-        get: function get() {
+        get: function get2() {
           return usm.serializeURL(this._url);
         },
-        set: function set(v) {
+        set: function set2(v) {
           var parsedURL = usm.basicURLParse(v);
           if (parsedURL === "failure") {
             throw new TypeError("Invalid URL");
@@ -1863,15 +1892,15 @@ var require_URL_impl = __commonJS({
         }
       }, {
         key: "origin",
-        get: function get() {
+        get: function get2() {
           return usm.serializeURLOrigin(this._url);
         }
       }, {
         key: "protocol",
-        get: function get() {
+        get: function get2() {
           return this._url.scheme + ":";
         },
-        set: function set(v) {
+        set: function set2(v) {
           usm.basicURLParse(v + ":", {
             url: this._url,
             stateOverride: "scheme start"
@@ -1879,10 +1908,10 @@ var require_URL_impl = __commonJS({
         }
       }, {
         key: "username",
-        get: function get() {
+        get: function get2() {
           return this._url.username;
         },
-        set: function set(v) {
+        set: function set2(v) {
           if (usm.cannotHaveAUsernamePasswordPort(this._url)) {
             return;
           }
@@ -1890,10 +1919,10 @@ var require_URL_impl = __commonJS({
         }
       }, {
         key: "password",
-        get: function get() {
+        get: function get2() {
           return this._url.password;
         },
-        set: function set(v) {
+        set: function set2(v) {
           if (usm.cannotHaveAUsernamePasswordPort(this._url)) {
             return;
           }
@@ -1901,7 +1930,7 @@ var require_URL_impl = __commonJS({
         }
       }, {
         key: "host",
-        get: function get() {
+        get: function get2() {
           var url = this._url;
           if (url.host === null) {
             return "";
@@ -1911,7 +1940,7 @@ var require_URL_impl = __commonJS({
           }
           return usm.serializeHost(url.host) + ":" + usm.serializeInteger(url.port);
         },
-        set: function set(v) {
+        set: function set2(v) {
           if (this._url.cannotBeABaseURL) {
             return;
           }
@@ -1922,13 +1951,13 @@ var require_URL_impl = __commonJS({
         }
       }, {
         key: "hostname",
-        get: function get() {
+        get: function get2() {
           if (this._url.host === null) {
             return "";
           }
           return usm.serializeHost(this._url.host);
         },
-        set: function set(v) {
+        set: function set2(v) {
           if (this._url.cannotBeABaseURL) {
             return;
           }
@@ -1939,13 +1968,13 @@ var require_URL_impl = __commonJS({
         }
       }, {
         key: "port",
-        get: function get() {
+        get: function get2() {
           if (this._url.port === null) {
             return "";
           }
           return usm.serializeInteger(this._url.port);
         },
-        set: function set(v) {
+        set: function set2(v) {
           if (usm.cannotHaveAUsernamePasswordPort(this._url)) {
             return;
           }
@@ -1960,7 +1989,7 @@ var require_URL_impl = __commonJS({
         }
       }, {
         key: "pathname",
-        get: function get() {
+        get: function get2() {
           if (this._url.cannotBeABaseURL) {
             return this._url.path[0];
           }
@@ -1969,7 +1998,7 @@ var require_URL_impl = __commonJS({
           }
           return "/" + this._url.path.join("/");
         },
-        set: function set(v) {
+        set: function set2(v) {
           if (this._url.cannotBeABaseURL) {
             return;
           }
@@ -1981,41 +2010,41 @@ var require_URL_impl = __commonJS({
         }
       }, {
         key: "search",
-        get: function get() {
+        get: function get2() {
           if (this._url.query === null || this._url.query === "") {
             return "";
           }
           return "?" + this._url.query;
         },
-        set: function set(v) {
+        set: function set2(v) {
           var url = this._url;
           if (v === "") {
             url.query = null;
             return;
           }
-          var input = v[0] === "?" ? v.substring(1) : v;
+          var input2 = v[0] === "?" ? v.substring(1) : v;
           url.query = "";
-          usm.basicURLParse(input, {
+          usm.basicURLParse(input2, {
             url: url,
             stateOverride: "query"
           });
         }
       }, {
         key: "hash",
-        get: function get() {
+        get: function get2() {
           if (this._url.fragment === null || this._url.fragment === "") {
             return "";
           }
           return "#" + this._url.fragment;
         },
-        set: function set(v) {
+        set: function set2(v) {
           if (v === "") {
             this._url.fragment = null;
             return;
           }
-          var input = v[0] === "#" ? v.substring(1) : v;
+          var input2 = v[0] === "#" ? v.substring(1) : v;
           this._url.fragment = "";
-          usm.basicURLParse(input, {
+          usm.basicURLParse(input2, {
             url: this._url,
             stateOverride: "fragment"
           });
@@ -2064,10 +2093,10 @@ var require_URL = __commonJS({
       return this[impl].toJSON.apply(this[impl], args);
     };
     Object.defineProperty(URL2.prototype, "href", {
-      get: function get() {
+      get: function get2() {
         return this[impl].href;
       },
-      set: function set(V) {
+      set: function set2(V) {
         V = conversions["USVString"](V);
         this[impl].href = V;
       },
@@ -2081,17 +2110,17 @@ var require_URL = __commonJS({
       return this.href;
     };
     Object.defineProperty(URL2.prototype, "origin", {
-      get: function get() {
+      get: function get2() {
         return this[impl].origin;
       },
       enumerable: true,
       configurable: true
     });
     Object.defineProperty(URL2.prototype, "protocol", {
-      get: function get() {
+      get: function get2() {
         return this[impl].protocol;
       },
-      set: function set(V) {
+      set: function set2(V) {
         V = conversions["USVString"](V);
         this[impl].protocol = V;
       },
@@ -2099,10 +2128,10 @@ var require_URL = __commonJS({
       configurable: true
     });
     Object.defineProperty(URL2.prototype, "username", {
-      get: function get() {
+      get: function get2() {
         return this[impl].username;
       },
-      set: function set(V) {
+      set: function set2(V) {
         V = conversions["USVString"](V);
         this[impl].username = V;
       },
@@ -2110,10 +2139,10 @@ var require_URL = __commonJS({
       configurable: true
     });
     Object.defineProperty(URL2.prototype, "password", {
-      get: function get() {
+      get: function get2() {
         return this[impl].password;
       },
-      set: function set(V) {
+      set: function set2(V) {
         V = conversions["USVString"](V);
         this[impl].password = V;
       },
@@ -2121,10 +2150,10 @@ var require_URL = __commonJS({
       configurable: true
     });
     Object.defineProperty(URL2.prototype, "host", {
-      get: function get() {
+      get: function get2() {
         return this[impl].host;
       },
-      set: function set(V) {
+      set: function set2(V) {
         V = conversions["USVString"](V);
         this[impl].host = V;
       },
@@ -2132,10 +2161,10 @@ var require_URL = __commonJS({
       configurable: true
     });
     Object.defineProperty(URL2.prototype, "hostname", {
-      get: function get() {
+      get: function get2() {
         return this[impl].hostname;
       },
-      set: function set(V) {
+      set: function set2(V) {
         V = conversions["USVString"](V);
         this[impl].hostname = V;
       },
@@ -2143,10 +2172,10 @@ var require_URL = __commonJS({
       configurable: true
     });
     Object.defineProperty(URL2.prototype, "port", {
-      get: function get() {
+      get: function get2() {
         return this[impl].port;
       },
-      set: function set(V) {
+      set: function set2(V) {
         V = conversions["USVString"](V);
         this[impl].port = V;
       },
@@ -2154,10 +2183,10 @@ var require_URL = __commonJS({
       configurable: true
     });
     Object.defineProperty(URL2.prototype, "pathname", {
-      get: function get() {
+      get: function get2() {
         return this[impl].pathname;
       },
-      set: function set(V) {
+      set: function set2(V) {
         V = conversions["USVString"](V);
         this[impl].pathname = V;
       },
@@ -2165,10 +2194,10 @@ var require_URL = __commonJS({
       configurable: true
     });
     Object.defineProperty(URL2.prototype, "search", {
-      get: function get() {
+      get: function get2() {
         return this[impl].search;
       },
-      set: function set(V) {
+      set: function set2(V) {
         V = conversions["USVString"](V);
         this[impl].search = V;
       },
@@ -2176,10 +2205,10 @@ var require_URL = __commonJS({
       configurable: true
     });
     Object.defineProperty(URL2.prototype, "hash", {
-      get: function get() {
+      get: function get2() {
         return this[impl].hash;
       },
-      set: function set(V) {
+      set: function set2(V) {
         V = conversions["USVString"](V);
         this[impl].hash = V;
       },
@@ -2282,12 +2311,12 @@ var require_lib2 = __commonJS({
       }
       return _createClass2(_Blob, [{
         key: "size",
-        get: function get() {
+        get: function get2() {
           return this[BUFFER].length;
         }
       }, {
         key: "type",
-        get: function get() {
+        get: function get2() {
           return this[TYPE];
         }
       }, {
@@ -2808,7 +2837,7 @@ var require_lib2 = __commonJS({
       }
       return _createClass2(_Headers, [{
         key: "get",
-        value: function get(name4) {
+        value: function get2(name4) {
           name4 = "".concat(name4);
           validateName(name4);
           var key = find(this[MAP], name4);
@@ -2847,7 +2876,7 @@ var require_lib2 = __commonJS({
          */
       }, {
         key: "set",
-        value: function set(name4, value) {
+        value: function set2(name4, value) {
           name4 = "".concat(name4);
           value = "".concat(value);
           validateName(name4);
@@ -3084,7 +3113,7 @@ var require_lib2 = __commonJS({
         var body = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : null;
         var opts = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
         Body.call(this, body, opts);
-        var status = opts.status || 200;
+        var status2 = opts.status || 200;
         var headers = new Headers(opts.headers);
         if (body != null && !headers.has("Content-Type")) {
           var contentType = extractContentType(body);
@@ -3094,20 +3123,20 @@ var require_lib2 = __commonJS({
         }
         this[INTERNALS$1] = {
           url: opts.url,
-          status: status,
-          statusText: opts.statusText || STATUS_CODES[status],
+          status: status2,
+          statusText: opts.statusText || STATUS_CODES[status2],
           headers: headers,
           counter: opts.counter
         };
       }
       return _createClass2(_Response, [{
         key: "url",
-        get: function get() {
+        get: function get2() {
           return this[INTERNALS$1].url || "";
         }
       }, {
         key: "status",
-        get: function get() {
+        get: function get2() {
           return this[INTERNALS$1].status;
         }
         /**
@@ -3115,22 +3144,22 @@ var require_lib2 = __commonJS({
          */
       }, {
         key: "ok",
-        get: function get() {
+        get: function get2() {
           return this[INTERNALS$1].status >= 200 && this[INTERNALS$1].status < 300;
         }
       }, {
         key: "redirected",
-        get: function get() {
+        get: function get2() {
           return this[INTERNALS$1].counter > 0;
         }
       }, {
         key: "statusText",
-        get: function get() {
+        get: function get2() {
           return this[INTERNALS$1].statusText;
         }
       }, {
         key: "headers",
-        get: function get() {
+        get: function get2() {
           return this[INTERNALS$1].headers;
         }
         /**
@@ -3193,85 +3222,85 @@ var require_lib2 = __commonJS({
       return parse_url(urlStr);
     }
     var streamDestructionSupported = "destroy" in Stream.Readable.prototype;
-    function isRequest(input) {
-      return _typeof(input) === "object" && _typeof(input[INTERNALS$2]) === "object";
+    function isRequest(input2) {
+      return _typeof(input2) === "object" && _typeof(input2[INTERNALS$2]) === "object";
     }
     function isAbortSignal(signal) {
       var proto = signal && _typeof(signal) === "object" && Object.getPrototypeOf(signal);
       return !!(proto && proto.constructor.name === "AbortSignal");
     }
     var Request = /* @__PURE__ */ (function() {
-      function _Request(input) {
+      function _Request(input2) {
         _classCallCheck2(this, _Request);
         var init = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
         var parsedURL;
-        if (!isRequest(input)) {
-          if (input && input.href) {
-            parsedURL = parseURL(input.href);
+        if (!isRequest(input2)) {
+          if (input2 && input2.href) {
+            parsedURL = parseURL(input2.href);
           } else {
-            parsedURL = parseURL("".concat(input));
+            parsedURL = parseURL("".concat(input2));
           }
-          input = {};
+          input2 = {};
         } else {
-          parsedURL = parseURL(input.url);
+          parsedURL = parseURL(input2.url);
         }
-        var method = init.method || input.method || "GET";
+        var method = init.method || input2.method || "GET";
         method = method.toUpperCase();
-        if ((init.body != null || isRequest(input) && input.body !== null) && (method === "GET" || method === "HEAD")) {
+        if ((init.body != null || isRequest(input2) && input2.body !== null) && (method === "GET" || method === "HEAD")) {
           throw new TypeError("Request with GET/HEAD method cannot have body");
         }
-        var inputBody = init.body != null ? init.body : isRequest(input) && input.body !== null ? _clone(input) : null;
+        var inputBody = init.body != null ? init.body : isRequest(input2) && input2.body !== null ? _clone(input2) : null;
         Body.call(this, inputBody, {
-          timeout: init.timeout || input.timeout || 0,
-          size: init.size || input.size || 0
+          timeout: init.timeout || input2.timeout || 0,
+          size: init.size || input2.size || 0
         });
-        var headers = new Headers(init.headers || input.headers || {});
+        var headers = new Headers(init.headers || input2.headers || {});
         if (inputBody != null && !headers.has("Content-Type")) {
           var contentType = extractContentType(inputBody);
           if (contentType) {
             headers.append("Content-Type", contentType);
           }
         }
-        var signal = isRequest(input) ? input.signal : null;
+        var signal = isRequest(input2) ? input2.signal : null;
         if ("signal" in init) signal = init.signal;
         if (signal != null && !isAbortSignal(signal)) {
           throw new TypeError("Expected signal to be an instanceof AbortSignal");
         }
         this[INTERNALS$2] = {
           method: method,
-          redirect: init.redirect || input.redirect || "follow",
+          redirect: init.redirect || input2.redirect || "follow",
           headers: headers,
           parsedURL: parsedURL,
           signal: signal
         };
-        this.follow = init.follow !== void 0 ? init.follow : input.follow !== void 0 ? input.follow : 20;
-        this.compress = init.compress !== void 0 ? init.compress : input.compress !== void 0 ? input.compress : true;
-        this.counter = init.counter || input.counter || 0;
-        this.agent = init.agent || input.agent;
+        this.follow = init.follow !== void 0 ? init.follow : input2.follow !== void 0 ? input2.follow : 20;
+        this.compress = init.compress !== void 0 ? init.compress : input2.compress !== void 0 ? input2.compress : true;
+        this.counter = init.counter || input2.counter || 0;
+        this.agent = init.agent || input2.agent;
       }
       return _createClass2(_Request, [{
         key: "method",
-        get: function get() {
+        get: function get2() {
           return this[INTERNALS$2].method;
         }
       }, {
         key: "url",
-        get: function get() {
+        get: function get2() {
           return format_url(this[INTERNALS$2].parsedURL);
         }
       }, {
         key: "headers",
-        get: function get() {
+        get: function get2() {
           return this[INTERNALS$2].headers;
         }
       }, {
         key: "redirect",
-        get: function get() {
+        get: function get2() {
           return this[INTERNALS$2].redirect;
         }
       }, {
         key: "signal",
-        get: function get() {
+        get: function get2() {
           return this[INTERNALS$2].signal;
         }
         /**
@@ -7061,10 +7090,10 @@ var require_node = __commonJS({
     Object.keys(domLvl1).forEach(function(key) {
       var shorthand = domLvl1[key];
       Object.defineProperty(NodePrototype, key, {
-        get: function get() {
+        get: function get2() {
           return this[shorthand] || null;
         },
-        set: function set(val) {
+        set: function set2(val) {
           this[shorthand] = val;
           return val;
         }
@@ -7082,10 +7111,10 @@ var require_element = __commonJS({
     Object.keys(domLvl1).forEach(function(key) {
       var shorthand = domLvl1[key];
       Object.defineProperty(ElementPrototype, key, {
-        get: function get() {
+        get: function get2() {
           return this[shorthand] || null;
         },
-        set: function set(val) {
+        set: function set2(val) {
           this[shorthand] = val;
           return val;
         }
@@ -8028,15 +8057,15 @@ var require_buffer_list = __commonJS({
       var key = _toPrimitive(arg, "string");
       return _typeof(key) === "symbol" ? key : String(key);
     }
-    function _toPrimitive(input, hint) {
-      if (_typeof(input) !== "object" || input === null) return input;
-      var prim = input[Symbol.toPrimitive];
+    function _toPrimitive(input2, hint) {
+      if (_typeof(input2) !== "object" || input2 === null) return input2;
+      var prim = input2[Symbol.toPrimitive];
       if (prim !== void 0) {
-        var res = prim.call(input, hint || "default");
+        var res = prim.call(input2, hint || "default");
         if (_typeof(res) !== "object") return res;
         throw new TypeError("@@toPrimitive must return a primitive value.");
       }
-      return (hint === "string" ? String : Number)(input);
+      return (hint === "string" ? String : Number)(input2);
     }
     var _require = require("buffer");
     var Buffer2 = _require.Buffer;
@@ -8408,7 +8437,7 @@ var require_state = __commonJS({
     function highWaterMarkFrom(options, isDuplex, duplexKey) {
       return options.highWaterMark != null ? options.highWaterMark : isDuplex ? options[duplexKey] : null;
     }
-    function getHighWaterMark(state, options, duplexKey, isDuplex) {
+    function getHighWaterMark(state2, options, duplexKey, isDuplex) {
       var hwm = highWaterMarkFrom(options, isDuplex, duplexKey);
       if (hwm != null) {
         if (!(isFinite(hwm) && Math.floor(hwm) === hwm) || hwm < 0) {
@@ -8417,7 +8446,7 @@ var require_state = __commonJS({
         }
         return Math.floor(hwm);
       }
-      return state.objectMode ? 16 : 16 * 1024;
+      return state2.objectMode ? 16 : 16 * 1024;
     }
     module2.exports = {
       getHighWaterMark: getHighWaterMark
@@ -8433,12 +8462,12 @@ var require_stream_writable = __commonJS({
   "node_modules/readable-stream/lib/_stream_writable.js": function node_modules_readableStream_lib__stream_writableJs(exports2, module2) {
     "use strict";
     module2.exports = Writable;
-    function CorkedRequest(state) {
+    function CorkedRequest(state2) {
       var _this = this;
       this.next = null;
       this.entry = null;
       this.finish = function() {
-        onCorkedFinish(_this, state);
+        onCorkedFinish(_this, state2);
       };
     }
     var Duplex;
@@ -8564,11 +8593,11 @@ var require_stream_writable = __commonJS({
       errorOrDestroy(stream2, er);
       process.nextTick(cb, er);
     }
-    function validChunk(stream2, state, chunk, cb) {
+    function validChunk(stream2, state2, chunk, cb) {
       var er;
       if (chunk === null) {
         er = new ERR_STREAM_NULL_VALUES();
-      } else if (typeof chunk !== "string" && !state.objectMode) {
+      } else if (typeof chunk !== "string" && !state2.objectMode) {
         er = new ERR_INVALID_ARG_TYPE("chunk", ["string", "Buffer"], chunk);
       }
       if (er) {
@@ -8579,9 +8608,9 @@ var require_stream_writable = __commonJS({
       return true;
     }
     Writable.prototype.write = function(chunk, encoding, cb) {
-      var state = this._writableState;
+      var state2 = this._writableState;
       var ret = false;
-      var isBuf = !state.objectMode && _isUint8Array(chunk);
+      var isBuf = !state2.objectMode && _isUint8Array(chunk);
       if (isBuf && !Buffer2.isBuffer(chunk)) {
         chunk = _uint8ArrayToBuffer(chunk);
       }
@@ -8590,12 +8619,12 @@ var require_stream_writable = __commonJS({
         encoding = null;
       }
       if (isBuf) encoding = "buffer";
-      else if (!encoding) encoding = state.defaultEncoding;
+      else if (!encoding) encoding = state2.defaultEncoding;
       if (typeof cb !== "function") cb = nop;
-      if (state.ending) writeAfterEnd(this, cb);
-      else if (isBuf || validChunk(this, state, chunk, cb)) {
-        state.pendingcb++;
-        ret = writeOrBuffer(this, state, isBuf, chunk, encoding, cb);
+      if (state2.ending) writeAfterEnd(this, cb);
+      else if (isBuf || validChunk(this, state2, chunk, cb)) {
+        state2.pendingcb++;
+        ret = writeOrBuffer(this, state2, isBuf, chunk, encoding, cb);
       }
       return ret;
     };
@@ -8603,10 +8632,10 @@ var require_stream_writable = __commonJS({
       this._writableState.corked++;
     };
     Writable.prototype.uncork = function() {
-      var state = this._writableState;
-      if (state.corked) {
-        state.corked--;
-        if (!state.writing && !state.corked && !state.bufferProcessing && state.bufferedRequest) clearBuffer(this, state);
+      var state2 = this._writableState;
+      if (state2.corked) {
+        state2.corked--;
+        if (!state2.writing && !state2.corked && !state2.bufferProcessing && state2.bufferedRequest) clearBuffer(this, state2);
       }
     };
     Writable.prototype.setDefaultEncoding = function setDefaultEncoding(encoding) {
@@ -8620,12 +8649,12 @@ var require_stream_writable = __commonJS({
       // because otherwise some prototype manipulation in
       // userland will fail
       enumerable: false,
-      get: function get() {
+      get: function get2() {
         return this._writableState && this._writableState.getBuffer();
       }
     });
-    function decodeChunk(state, chunk, encoding) {
-      if (!state.objectMode && state.decodeStrings !== false && typeof chunk === "string") {
+    function decodeChunk(state2, chunk, encoding) {
+      if (!state2.objectMode && state2.decodeStrings !== false && typeof chunk === "string") {
         chunk = Buffer2.from(chunk, encoding);
       }
       return chunk;
@@ -8635,26 +8664,26 @@ var require_stream_writable = __commonJS({
       // because otherwise some prototype manipulation in
       // userland will fail
       enumerable: false,
-      get: function get() {
+      get: function get2() {
         return this._writableState.highWaterMark;
       }
     });
-    function writeOrBuffer(stream2, state, isBuf, chunk, encoding, cb) {
+    function writeOrBuffer(stream2, state2, isBuf, chunk, encoding, cb) {
       if (!isBuf) {
-        var newChunk = decodeChunk(state, chunk, encoding);
+        var newChunk = decodeChunk(state2, chunk, encoding);
         if (chunk !== newChunk) {
           isBuf = true;
           encoding = "buffer";
           chunk = newChunk;
         }
       }
-      var len = state.objectMode ? 1 : chunk.length;
-      state.length += len;
-      var ret = state.length < state.highWaterMark;
-      if (!ret) state.needDrain = true;
-      if (state.writing || state.corked) {
-        var last = state.lastBufferedRequest;
-        state.lastBufferedRequest = {
+      var len = state2.objectMode ? 1 : chunk.length;
+      state2.length += len;
+      var ret = state2.length < state2.highWaterMark;
+      if (!ret) state2.needDrain = true;
+      if (state2.writing || state2.corked) {
+        var last = state2.lastBufferedRequest;
+        state2.lastBufferedRequest = {
           chunk: chunk,
           encoding: encoding,
           isBuf: isBuf,
@@ -8662,84 +8691,84 @@ var require_stream_writable = __commonJS({
           next: null
         };
         if (last) {
-          last.next = state.lastBufferedRequest;
+          last.next = state2.lastBufferedRequest;
         } else {
-          state.bufferedRequest = state.lastBufferedRequest;
+          state2.bufferedRequest = state2.lastBufferedRequest;
         }
-        state.bufferedRequestCount += 1;
+        state2.bufferedRequestCount += 1;
       } else {
-        doWrite(stream2, state, false, len, chunk, encoding, cb);
+        doWrite(stream2, state2, false, len, chunk, encoding, cb);
       }
       return ret;
     }
-    function doWrite(stream2, state, writev, len, chunk, encoding, cb) {
-      state.writelen = len;
-      state.writecb = cb;
-      state.writing = true;
-      state.sync = true;
-      if (state.destroyed) state.onwrite(new ERR_STREAM_DESTROYED("write"));
-      else if (writev) stream2._writev(chunk, state.onwrite);
-      else stream2._write(chunk, encoding, state.onwrite);
-      state.sync = false;
+    function doWrite(stream2, state2, writev, len, chunk, encoding, cb) {
+      state2.writelen = len;
+      state2.writecb = cb;
+      state2.writing = true;
+      state2.sync = true;
+      if (state2.destroyed) state2.onwrite(new ERR_STREAM_DESTROYED("write"));
+      else if (writev) stream2._writev(chunk, state2.onwrite);
+      else stream2._write(chunk, encoding, state2.onwrite);
+      state2.sync = false;
     }
-    function onwriteError(stream2, state, sync, er, cb) {
-      --state.pendingcb;
+    function onwriteError(stream2, state2, sync, er, cb) {
+      --state2.pendingcb;
       if (sync) {
         process.nextTick(cb, er);
-        process.nextTick(finishMaybe, stream2, state);
+        process.nextTick(finishMaybe, stream2, state2);
         stream2._writableState.errorEmitted = true;
         errorOrDestroy(stream2, er);
       } else {
         cb(er);
         stream2._writableState.errorEmitted = true;
         errorOrDestroy(stream2, er);
-        finishMaybe(stream2, state);
+        finishMaybe(stream2, state2);
       }
     }
-    function onwriteStateUpdate(state) {
-      state.writing = false;
-      state.writecb = null;
-      state.length -= state.writelen;
-      state.writelen = 0;
+    function onwriteStateUpdate(state2) {
+      state2.writing = false;
+      state2.writecb = null;
+      state2.length -= state2.writelen;
+      state2.writelen = 0;
     }
     function onwrite(stream2, er) {
-      var state = stream2._writableState;
-      var sync = state.sync;
-      var cb = state.writecb;
+      var state2 = stream2._writableState;
+      var sync = state2.sync;
+      var cb = state2.writecb;
       if (typeof cb !== "function") throw new ERR_MULTIPLE_CALLBACK();
-      onwriteStateUpdate(state);
-      if (er) onwriteError(stream2, state, sync, er, cb);
+      onwriteStateUpdate(state2);
+      if (er) onwriteError(stream2, state2, sync, er, cb);
       else {
-        var finished = needFinish(state) || stream2.destroyed;
-        if (!finished && !state.corked && !state.bufferProcessing && state.bufferedRequest) {
-          clearBuffer(stream2, state);
+        var finished = needFinish(state2) || stream2.destroyed;
+        if (!finished && !state2.corked && !state2.bufferProcessing && state2.bufferedRequest) {
+          clearBuffer(stream2, state2);
         }
         if (sync) {
-          process.nextTick(afterWrite, stream2, state, finished, cb);
+          process.nextTick(afterWrite, stream2, state2, finished, cb);
         } else {
-          afterWrite(stream2, state, finished, cb);
+          afterWrite(stream2, state2, finished, cb);
         }
       }
     }
-    function afterWrite(stream2, state, finished, cb) {
-      if (!finished) onwriteDrain(stream2, state);
-      state.pendingcb--;
+    function afterWrite(stream2, state2, finished, cb) {
+      if (!finished) onwriteDrain(stream2, state2);
+      state2.pendingcb--;
       cb();
-      finishMaybe(stream2, state);
+      finishMaybe(stream2, state2);
     }
-    function onwriteDrain(stream2, state) {
-      if (state.length === 0 && state.needDrain) {
-        state.needDrain = false;
+    function onwriteDrain(stream2, state2) {
+      if (state2.length === 0 && state2.needDrain) {
+        state2.needDrain = false;
         stream2.emit("drain");
       }
     }
-    function clearBuffer(stream2, state) {
-      state.bufferProcessing = true;
-      var entry = state.bufferedRequest;
+    function clearBuffer(stream2, state2) {
+      state2.bufferProcessing = true;
+      var entry = state2.bufferedRequest;
       if (stream2._writev && entry && entry.next) {
-        var l = state.bufferedRequestCount;
+        var l = state2.bufferedRequestCount;
         var buffer = new Array(l);
-        var holder = state.corkedRequestsFree;
+        var holder = state2.corkedRequestsFree;
         holder.entry = entry;
         var count = 0;
         var allBuffers = true;
@@ -8750,40 +8779,40 @@ var require_stream_writable = __commonJS({
           count += 1;
         }
         buffer.allBuffers = allBuffers;
-        doWrite(stream2, state, true, state.length, buffer, "", holder.finish);
-        state.pendingcb++;
-        state.lastBufferedRequest = null;
+        doWrite(stream2, state2, true, state2.length, buffer, "", holder.finish);
+        state2.pendingcb++;
+        state2.lastBufferedRequest = null;
         if (holder.next) {
-          state.corkedRequestsFree = holder.next;
+          state2.corkedRequestsFree = holder.next;
           holder.next = null;
         } else {
-          state.corkedRequestsFree = new CorkedRequest(state);
+          state2.corkedRequestsFree = new CorkedRequest(state2);
         }
-        state.bufferedRequestCount = 0;
+        state2.bufferedRequestCount = 0;
       } else {
         while (entry) {
           var chunk = entry.chunk;
           var encoding = entry.encoding;
           var cb = entry.callback;
-          var len = state.objectMode ? 1 : chunk.length;
-          doWrite(stream2, state, false, len, chunk, encoding, cb);
+          var len = state2.objectMode ? 1 : chunk.length;
+          doWrite(stream2, state2, false, len, chunk, encoding, cb);
           entry = entry.next;
-          state.bufferedRequestCount--;
-          if (state.writing) {
+          state2.bufferedRequestCount--;
+          if (state2.writing) {
             break;
           }
         }
-        if (entry === null) state.lastBufferedRequest = null;
+        if (entry === null) state2.lastBufferedRequest = null;
       }
-      state.bufferedRequest = entry;
-      state.bufferProcessing = false;
+      state2.bufferedRequest = entry;
+      state2.bufferProcessing = false;
     }
     Writable.prototype._write = function(chunk, encoding, cb) {
       cb(new ERR_METHOD_NOT_IMPLEMENTED("_write()"));
     };
     Writable.prototype._writev = null;
     Writable.prototype.end = function(chunk, encoding, cb) {
-      var state = this._writableState;
+      var state2 = this._writableState;
       if (typeof chunk === "function") {
         cb = chunk;
         chunk = null;
@@ -8793,11 +8822,11 @@ var require_stream_writable = __commonJS({
         encoding = null;
       }
       if (chunk !== null && chunk !== void 0) this.write(chunk, encoding);
-      if (state.corked) {
-        state.corked = 1;
+      if (state2.corked) {
+        state2.corked = 1;
         this.uncork();
       }
-      if (!state.ending) endWritable(this, state, cb);
+      if (!state2.ending) endWritable(this, state2, cb);
       return this;
     };
     Object.defineProperty(Writable.prototype, "writableLength", {
@@ -8805,44 +8834,44 @@ var require_stream_writable = __commonJS({
       // because otherwise some prototype manipulation in
       // userland will fail
       enumerable: false,
-      get: function get() {
+      get: function get2() {
         return this._writableState.length;
       }
     });
-    function needFinish(state) {
-      return state.ending && state.length === 0 && state.bufferedRequest === null && !state.finished && !state.writing;
+    function needFinish(state2) {
+      return state2.ending && state2.length === 0 && state2.bufferedRequest === null && !state2.finished && !state2.writing;
     }
-    function callFinal(stream2, state) {
+    function callFinal(stream2, state2) {
       stream2._final(function(err) {
-        state.pendingcb--;
+        state2.pendingcb--;
         if (err) {
           errorOrDestroy(stream2, err);
         }
-        state.prefinished = true;
+        state2.prefinished = true;
         stream2.emit("prefinish");
-        finishMaybe(stream2, state);
+        finishMaybe(stream2, state2);
       });
     }
-    function prefinish(stream2, state) {
-      if (!state.prefinished && !state.finalCalled) {
-        if (typeof stream2._final === "function" && !state.destroyed) {
-          state.pendingcb++;
-          state.finalCalled = true;
-          process.nextTick(callFinal, stream2, state);
+    function prefinish(stream2, state2) {
+      if (!state2.prefinished && !state2.finalCalled) {
+        if (typeof stream2._final === "function" && !state2.destroyed) {
+          state2.pendingcb++;
+          state2.finalCalled = true;
+          process.nextTick(callFinal, stream2, state2);
         } else {
-          state.prefinished = true;
+          state2.prefinished = true;
           stream2.emit("prefinish");
         }
       }
     }
-    function finishMaybe(stream2, state) {
-      var need = needFinish(state);
+    function finishMaybe(stream2, state2) {
+      var need = needFinish(state2);
       if (need) {
-        prefinish(stream2, state);
-        if (state.pendingcb === 0) {
-          state.finished = true;
+        prefinish(stream2, state2);
+        if (state2.pendingcb === 0) {
+          state2.finished = true;
           stream2.emit("finish");
-          if (state.autoDestroy) {
+          if (state2.autoDestroy) {
             var rState = stream2._readableState;
             if (!rState || rState.autoDestroy && rState.endEmitted) {
               stream2.destroy();
@@ -8852,39 +8881,39 @@ var require_stream_writable = __commonJS({
       }
       return need;
     }
-    function endWritable(stream2, state, cb) {
-      state.ending = true;
-      finishMaybe(stream2, state);
+    function endWritable(stream2, state2, cb) {
+      state2.ending = true;
+      finishMaybe(stream2, state2);
       if (cb) {
-        if (state.finished) process.nextTick(cb);
+        if (state2.finished) process.nextTick(cb);
         else stream2.once("finish", cb);
       }
-      state.ended = true;
+      state2.ended = true;
       stream2.writable = false;
     }
-    function onCorkedFinish(corkReq, state, err) {
+    function onCorkedFinish(corkReq, state2, err) {
       var entry = corkReq.entry;
       corkReq.entry = null;
       while (entry) {
         var cb = entry.callback;
-        state.pendingcb--;
+        state2.pendingcb--;
         cb(err);
         entry = entry.next;
       }
-      state.corkedRequestsFree.next = corkReq;
+      state2.corkedRequestsFree.next = corkReq;
     }
     Object.defineProperty(Writable.prototype, "destroyed", {
       // making it explicit this property is not enumerable
       // because otherwise some prototype manipulation in
       // userland will fail
       enumerable: false,
-      get: function get() {
+      get: function get2() {
         if (this._writableState === void 0) {
           return false;
         }
         return this._writableState.destroyed;
       },
-      set: function set(value) {
+      set: function set2(value) {
         if (!this._writableState) {
           return;
         }
@@ -8939,7 +8968,7 @@ var require_stream_duplex = __commonJS({
       // because otherwise some prototype manipulation in
       // userland will fail
       enumerable: false,
-      get: function get() {
+      get: function get2() {
         return this._writableState.highWaterMark;
       }
     });
@@ -8948,7 +8977,7 @@ var require_stream_duplex = __commonJS({
       // because otherwise some prototype manipulation in
       // userland will fail
       enumerable: false,
-      get: function get() {
+      get: function get2() {
         return this._writableState && this._writableState.getBuffer();
       }
     });
@@ -8957,7 +8986,7 @@ var require_stream_duplex = __commonJS({
       // because otherwise some prototype manipulation in
       // userland will fail
       enumerable: false,
-      get: function get() {
+      get: function get2() {
         return this._writableState.length;
       }
     });
@@ -8973,13 +9002,13 @@ var require_stream_duplex = __commonJS({
       // because otherwise some prototype manipulation in
       // userland will fail
       enumerable: false,
-      get: function get() {
+      get: function get2() {
         if (this._readableState === void 0 || this._writableState === void 0) {
           return false;
         }
         return this._readableState.destroyed && this._writableState.destroyed;
       },
-      set: function set(value) {
+      set: function set2(value) {
         if (this._readableState === void 0 || this._writableState === void 0) {
           return;
         }
@@ -9390,15 +9419,15 @@ var require_async_iterator = __commonJS({
       var key = _toPrimitive(arg, "string");
       return _typeof(key) === "symbol" ? key : String(key);
     }
-    function _toPrimitive(input, hint) {
-      if (_typeof(input) !== "object" || input === null) return input;
-      var prim = input[Symbol.toPrimitive];
+    function _toPrimitive(input2, hint) {
+      if (_typeof(input2) !== "object" || input2 === null) return input2;
+      var prim = input2[Symbol.toPrimitive];
       if (prim !== void 0) {
-        var res = prim.call(input, hint || "default");
+        var res = prim.call(input2, hint || "default");
         if (_typeof(res) !== "object") return res;
         throw new TypeError("@@toPrimitive must return a primitive value.");
       }
-      return (hint === "string" ? String : Number)(input);
+      return (hint === "string" ? String : Number)(input2);
     }
     var finished = require_end_of_stream();
     var kLastResolve = /* @__PURE__ */ Symbol("lastResolve");
@@ -9625,15 +9654,15 @@ var require_from = __commonJS({
       var key = _toPrimitive(arg, "string");
       return _typeof(key) === "symbol" ? key : String(key);
     }
-    function _toPrimitive(input, hint) {
-      if (_typeof(input) !== "object" || input === null) return input;
-      var prim = input[Symbol.toPrimitive];
+    function _toPrimitive(input2, hint) {
+      if (_typeof(input2) !== "object" || input2 === null) return input2;
+      var prim = input2[Symbol.toPrimitive];
       if (prim !== void 0) {
-        var res = prim.call(input, hint || "default");
+        var res = prim.call(input2, hint || "default");
         if (_typeof(res) !== "object") return res;
         throw new TypeError("@@toPrimitive must return a primitive value.");
       }
-      return (hint === "string" ? String : Number)(input);
+      return (hint === "string" ? String : Number)(input2);
     }
     var ERR_INVALID_ARG_TYPE = require_errors().codes.ERR_INVALID_ARG_TYPE;
     function from(Readable, iterable, opts) {
@@ -9810,13 +9839,13 @@ var require_stream_readable = __commonJS({
       // because otherwise some prototype manipulation in
       // userland will fail
       enumerable: false,
-      get: function get() {
+      get: function get2() {
         if (this._readableState === void 0) {
           return false;
         }
         return this._readableState.destroyed;
       },
-      set: function set(value) {
+      set: function set2(value) {
         if (!this._readableState) {
           return;
         }
@@ -9829,12 +9858,12 @@ var require_stream_readable = __commonJS({
       cb(err);
     };
     Readable.prototype.push = function(chunk, encoding) {
-      var state = this._readableState;
+      var state2 = this._readableState;
       var skipChunkCheck;
-      if (!state.objectMode) {
+      if (!state2.objectMode) {
         if (typeof chunk === "string") {
-          encoding = encoding || state.defaultEncoding;
-          if (encoding !== state.encoding) {
+          encoding = encoding || state2.defaultEncoding;
+          if (encoding !== state2.encoding) {
             chunk = Buffer2.from(chunk, encoding);
             encoding = "";
           }
@@ -9850,58 +9879,58 @@ var require_stream_readable = __commonJS({
     };
     function readableAddChunk(stream2, chunk, encoding, addToFront, skipChunkCheck) {
       debug("readableAddChunk", chunk);
-      var state = stream2._readableState;
+      var state2 = stream2._readableState;
       if (chunk === null) {
-        state.reading = false;
-        onEofChunk(stream2, state);
+        state2.reading = false;
+        onEofChunk(stream2, state2);
       } else {
         var er;
-        if (!skipChunkCheck) er = chunkInvalid(state, chunk);
+        if (!skipChunkCheck) er = chunkInvalid(state2, chunk);
         if (er) {
           errorOrDestroy(stream2, er);
-        } else if (state.objectMode || chunk && chunk.length > 0) {
-          if (typeof chunk !== "string" && !state.objectMode && Object.getPrototypeOf(chunk) !== Buffer2.prototype) {
+        } else if (state2.objectMode || chunk && chunk.length > 0) {
+          if (typeof chunk !== "string" && !state2.objectMode && Object.getPrototypeOf(chunk) !== Buffer2.prototype) {
             chunk = _uint8ArrayToBuffer(chunk);
           }
           if (addToFront) {
-            if (state.endEmitted) errorOrDestroy(stream2, new ERR_STREAM_UNSHIFT_AFTER_END_EVENT());
-            else addChunk(stream2, state, chunk, true);
-          } else if (state.ended) {
+            if (state2.endEmitted) errorOrDestroy(stream2, new ERR_STREAM_UNSHIFT_AFTER_END_EVENT());
+            else addChunk(stream2, state2, chunk, true);
+          } else if (state2.ended) {
             errorOrDestroy(stream2, new ERR_STREAM_PUSH_AFTER_EOF());
-          } else if (state.destroyed) {
+          } else if (state2.destroyed) {
             return false;
           } else {
-            state.reading = false;
-            if (state.decoder && !encoding) {
-              chunk = state.decoder.write(chunk);
-              if (state.objectMode || chunk.length !== 0) addChunk(stream2, state, chunk, false);
-              else maybeReadMore(stream2, state);
+            state2.reading = false;
+            if (state2.decoder && !encoding) {
+              chunk = state2.decoder.write(chunk);
+              if (state2.objectMode || chunk.length !== 0) addChunk(stream2, state2, chunk, false);
+              else maybeReadMore(stream2, state2);
             } else {
-              addChunk(stream2, state, chunk, false);
+              addChunk(stream2, state2, chunk, false);
             }
           }
         } else if (!addToFront) {
-          state.reading = false;
-          maybeReadMore(stream2, state);
+          state2.reading = false;
+          maybeReadMore(stream2, state2);
         }
       }
-      return !state.ended && (state.length < state.highWaterMark || state.length === 0);
+      return !state2.ended && (state2.length < state2.highWaterMark || state2.length === 0);
     }
-    function addChunk(stream2, state, chunk, addToFront) {
-      if (state.flowing && state.length === 0 && !state.sync) {
-        state.awaitDrain = 0;
+    function addChunk(stream2, state2, chunk, addToFront) {
+      if (state2.flowing && state2.length === 0 && !state2.sync) {
+        state2.awaitDrain = 0;
         stream2.emit("data", chunk);
       } else {
-        state.length += state.objectMode ? 1 : chunk.length;
-        if (addToFront) state.buffer.unshift(chunk);
-        else state.buffer.push(chunk);
-        if (state.needReadable) emitReadable(stream2);
+        state2.length += state2.objectMode ? 1 : chunk.length;
+        if (addToFront) state2.buffer.unshift(chunk);
+        else state2.buffer.push(chunk);
+        if (state2.needReadable) emitReadable(stream2);
       }
-      maybeReadMore(stream2, state);
+      maybeReadMore(stream2, state2);
     }
-    function chunkInvalid(state, chunk) {
+    function chunkInvalid(state2, chunk) {
       var er;
-      if (!_isUint8Array(chunk) && typeof chunk !== "string" && chunk !== void 0 && !state.objectMode) {
+      if (!_isUint8Array(chunk) && typeof chunk !== "string" && chunk !== void 0 && !state2.objectMode) {
         er = new ERR_INVALID_ARG_TYPE("chunk", ["string", "Buffer", "Uint8Array"], chunk);
       }
       return er;
@@ -9940,151 +9969,151 @@ var require_stream_readable = __commonJS({
       }
       return n;
     }
-    function howMuchToRead(n, state) {
-      if (n <= 0 || state.length === 0 && state.ended) return 0;
-      if (state.objectMode) return 1;
+    function howMuchToRead(n, state2) {
+      if (n <= 0 || state2.length === 0 && state2.ended) return 0;
+      if (state2.objectMode) return 1;
       if (n !== n) {
-        if (state.flowing && state.length) return state.buffer.head.data.length;
-        else return state.length;
+        if (state2.flowing && state2.length) return state2.buffer.head.data.length;
+        else return state2.length;
       }
-      if (n > state.highWaterMark) state.highWaterMark = computeNewHighWaterMark(n);
-      if (n <= state.length) return n;
-      if (!state.ended) {
-        state.needReadable = true;
+      if (n > state2.highWaterMark) state2.highWaterMark = computeNewHighWaterMark(n);
+      if (n <= state2.length) return n;
+      if (!state2.ended) {
+        state2.needReadable = true;
         return 0;
       }
-      return state.length;
+      return state2.length;
     }
     Readable.prototype.read = function(n) {
       debug("read", n);
       n = parseInt(n, 10);
-      var state = this._readableState;
+      var state2 = this._readableState;
       var nOrig = n;
-      if (n !== 0) state.emittedReadable = false;
-      if (n === 0 && state.needReadable && ((state.highWaterMark !== 0 ? state.length >= state.highWaterMark : state.length > 0) || state.ended)) {
-        debug("read: emitReadable", state.length, state.ended);
-        if (state.length === 0 && state.ended) endReadable(this);
+      if (n !== 0) state2.emittedReadable = false;
+      if (n === 0 && state2.needReadable && ((state2.highWaterMark !== 0 ? state2.length >= state2.highWaterMark : state2.length > 0) || state2.ended)) {
+        debug("read: emitReadable", state2.length, state2.ended);
+        if (state2.length === 0 && state2.ended) endReadable(this);
         else emitReadable(this);
         return null;
       }
-      n = howMuchToRead(n, state);
-      if (n === 0 && state.ended) {
-        if (state.length === 0) endReadable(this);
+      n = howMuchToRead(n, state2);
+      if (n === 0 && state2.ended) {
+        if (state2.length === 0) endReadable(this);
         return null;
       }
-      var doRead = state.needReadable;
+      var doRead = state2.needReadable;
       debug("need readable", doRead);
-      if (state.length === 0 || state.length - n < state.highWaterMark) {
+      if (state2.length === 0 || state2.length - n < state2.highWaterMark) {
         doRead = true;
         debug("length less than watermark", doRead);
       }
-      if (state.ended || state.reading) {
+      if (state2.ended || state2.reading) {
         doRead = false;
         debug("reading or ended", doRead);
       } else if (doRead) {
         debug("do read");
-        state.reading = true;
-        state.sync = true;
-        if (state.length === 0) state.needReadable = true;
-        this._read(state.highWaterMark);
-        state.sync = false;
-        if (!state.reading) n = howMuchToRead(nOrig, state);
+        state2.reading = true;
+        state2.sync = true;
+        if (state2.length === 0) state2.needReadable = true;
+        this._read(state2.highWaterMark);
+        state2.sync = false;
+        if (!state2.reading) n = howMuchToRead(nOrig, state2);
       }
       var ret;
-      if (n > 0) ret = fromList(n, state);
+      if (n > 0) ret = fromList(n, state2);
       else ret = null;
       if (ret === null) {
-        state.needReadable = state.length <= state.highWaterMark;
+        state2.needReadable = state2.length <= state2.highWaterMark;
         n = 0;
       } else {
-        state.length -= n;
-        state.awaitDrain = 0;
+        state2.length -= n;
+        state2.awaitDrain = 0;
       }
-      if (state.length === 0) {
-        if (!state.ended) state.needReadable = true;
-        if (nOrig !== n && state.ended) endReadable(this);
+      if (state2.length === 0) {
+        if (!state2.ended) state2.needReadable = true;
+        if (nOrig !== n && state2.ended) endReadable(this);
       }
       if (ret !== null) this.emit("data", ret);
       return ret;
     };
-    function onEofChunk(stream2, state) {
+    function onEofChunk(stream2, state2) {
       debug("onEofChunk");
-      if (state.ended) return;
-      if (state.decoder) {
-        var chunk = state.decoder.end();
+      if (state2.ended) return;
+      if (state2.decoder) {
+        var chunk = state2.decoder.end();
         if (chunk && chunk.length) {
-          state.buffer.push(chunk);
-          state.length += state.objectMode ? 1 : chunk.length;
+          state2.buffer.push(chunk);
+          state2.length += state2.objectMode ? 1 : chunk.length;
         }
       }
-      state.ended = true;
-      if (state.sync) {
+      state2.ended = true;
+      if (state2.sync) {
         emitReadable(stream2);
       } else {
-        state.needReadable = false;
-        if (!state.emittedReadable) {
-          state.emittedReadable = true;
+        state2.needReadable = false;
+        if (!state2.emittedReadable) {
+          state2.emittedReadable = true;
           emitReadable_(stream2);
         }
       }
     }
     function emitReadable(stream2) {
-      var state = stream2._readableState;
-      debug("emitReadable", state.needReadable, state.emittedReadable);
-      state.needReadable = false;
-      if (!state.emittedReadable) {
-        debug("emitReadable", state.flowing);
-        state.emittedReadable = true;
+      var state2 = stream2._readableState;
+      debug("emitReadable", state2.needReadable, state2.emittedReadable);
+      state2.needReadable = false;
+      if (!state2.emittedReadable) {
+        debug("emitReadable", state2.flowing);
+        state2.emittedReadable = true;
         process.nextTick(emitReadable_, stream2);
       }
     }
     function emitReadable_(stream2) {
-      var state = stream2._readableState;
-      debug("emitReadable_", state.destroyed, state.length, state.ended);
-      if (!state.destroyed && (state.length || state.ended)) {
+      var state2 = stream2._readableState;
+      debug("emitReadable_", state2.destroyed, state2.length, state2.ended);
+      if (!state2.destroyed && (state2.length || state2.ended)) {
         stream2.emit("readable");
-        state.emittedReadable = false;
+        state2.emittedReadable = false;
       }
-      state.needReadable = !state.flowing && !state.ended && state.length <= state.highWaterMark;
+      state2.needReadable = !state2.flowing && !state2.ended && state2.length <= state2.highWaterMark;
       flow(stream2);
     }
-    function maybeReadMore(stream2, state) {
-      if (!state.readingMore) {
-        state.readingMore = true;
-        process.nextTick(maybeReadMore_, stream2, state);
+    function maybeReadMore(stream2, state2) {
+      if (!state2.readingMore) {
+        state2.readingMore = true;
+        process.nextTick(maybeReadMore_, stream2, state2);
       }
     }
-    function maybeReadMore_(stream2, state) {
-      while (!state.reading && !state.ended && (state.length < state.highWaterMark || state.flowing && state.length === 0)) {
-        var len = state.length;
+    function maybeReadMore_(stream2, state2) {
+      while (!state2.reading && !state2.ended && (state2.length < state2.highWaterMark || state2.flowing && state2.length === 0)) {
+        var len = state2.length;
         debug("maybeReadMore read 0");
         stream2.read(0);
-        if (len === state.length) break;
+        if (len === state2.length) break;
       }
-      state.readingMore = false;
+      state2.readingMore = false;
     }
     Readable.prototype._read = function(n) {
       errorOrDestroy(this, new ERR_METHOD_NOT_IMPLEMENTED("_read()"));
     };
     Readable.prototype.pipe = function(dest, pipeOpts) {
       var src = this;
-      var state = this._readableState;
-      switch (state.pipesCount) {
+      var state2 = this._readableState;
+      switch (state2.pipesCount) {
         case 0:
-          state.pipes = dest;
+          state2.pipes = dest;
           break;
         case 1:
-          state.pipes = [state.pipes, dest];
+          state2.pipes = [state2.pipes, dest];
           break;
         default:
-          state.pipes.push(dest);
+          state2.pipes.push(dest);
           break;
       }
-      state.pipesCount += 1;
-      debug("pipe count=%d opts=%j", state.pipesCount, pipeOpts);
+      state2.pipesCount += 1;
+      debug("pipe count=%d opts=%j", state2.pipesCount, pipeOpts);
       var doEnd = (!pipeOpts || pipeOpts.end !== false) && dest !== process.stdout && dest !== process.stderr;
       var endFn = doEnd ? onend : unpipe;
-      if (state.endEmitted) process.nextTick(endFn);
+      if (state2.endEmitted) process.nextTick(endFn);
       else src.once("end", endFn);
       dest.on("unpipe", onunpipe);
       function onunpipe(readable, unpipeInfo) {
@@ -10092,7 +10121,7 @@ var require_stream_readable = __commonJS({
         if (readable === src) {
           if (unpipeInfo && unpipeInfo.hasUnpiped === false) {
             unpipeInfo.hasUnpiped = true;
-            cleanup();
+            cleanup2();
           }
         }
       }
@@ -10103,7 +10132,7 @@ var require_stream_readable = __commonJS({
       var ondrain = pipeOnDrain(src);
       dest.on("drain", ondrain);
       var cleanedUp = false;
-      function cleanup() {
+      function cleanup2() {
         debug("cleanup");
         dest.removeListener("close", onclose);
         dest.removeListener("finish", onfinish);
@@ -10114,7 +10143,7 @@ var require_stream_readable = __commonJS({
         src.removeListener("end", unpipe);
         src.removeListener("data", ondata);
         cleanedUp = true;
-        if (state.awaitDrain && (!dest._writableState || dest._writableState.needDrain)) ondrain();
+        if (state2.awaitDrain && (!dest._writableState || dest._writableState.needDrain)) ondrain();
       }
       src.on("data", ondata);
       function ondata(chunk) {
@@ -10122,9 +10151,9 @@ var require_stream_readable = __commonJS({
         var ret = dest.write(chunk);
         debug("dest.write", ret);
         if (ret === false) {
-          if ((state.pipesCount === 1 && state.pipes === dest || state.pipesCount > 1 && indexOf(state.pipes, dest) !== -1) && !cleanedUp) {
-            debug("false write response, pause", state.awaitDrain);
-            state.awaitDrain++;
+          if ((state2.pipesCount === 1 && state2.pipes === dest || state2.pipesCount > 1 && indexOf(state2.pipes, dest) !== -1) && !cleanedUp) {
+            debug("false write response, pause", state2.awaitDrain);
+            state2.awaitDrain++;
           }
           src.pause();
         }
@@ -10152,7 +10181,7 @@ var require_stream_readable = __commonJS({
         src.unpipe(dest);
       }
       dest.emit("pipe", src);
-      if (!state.flowing) {
+      if (!state2.flowing) {
         debug("pipe resume");
         src.resume();
       }
@@ -10160,64 +10189,64 @@ var require_stream_readable = __commonJS({
     };
     function pipeOnDrain(src) {
       return function pipeOnDrainFunctionResult() {
-        var state = src._readableState;
-        debug("pipeOnDrain", state.awaitDrain);
-        if (state.awaitDrain) state.awaitDrain--;
-        if (state.awaitDrain === 0 && EElistenerCount(src, "data")) {
-          state.flowing = true;
+        var state2 = src._readableState;
+        debug("pipeOnDrain", state2.awaitDrain);
+        if (state2.awaitDrain) state2.awaitDrain--;
+        if (state2.awaitDrain === 0 && EElistenerCount(src, "data")) {
+          state2.flowing = true;
           flow(src);
         }
       };
     }
     Readable.prototype.unpipe = function(dest) {
-      var state = this._readableState;
+      var state2 = this._readableState;
       var unpipeInfo = {
         hasUnpiped: false
       };
-      if (state.pipesCount === 0) return this;
-      if (state.pipesCount === 1) {
-        if (dest && dest !== state.pipes) return this;
-        if (!dest) dest = state.pipes;
-        state.pipes = null;
-        state.pipesCount = 0;
-        state.flowing = false;
+      if (state2.pipesCount === 0) return this;
+      if (state2.pipesCount === 1) {
+        if (dest && dest !== state2.pipes) return this;
+        if (!dest) dest = state2.pipes;
+        state2.pipes = null;
+        state2.pipesCount = 0;
+        state2.flowing = false;
         if (dest) dest.emit("unpipe", this, unpipeInfo);
         return this;
       }
       if (!dest) {
-        var dests = state.pipes;
-        var len = state.pipesCount;
-        state.pipes = null;
-        state.pipesCount = 0;
-        state.flowing = false;
+        var dests = state2.pipes;
+        var len = state2.pipesCount;
+        state2.pipes = null;
+        state2.pipesCount = 0;
+        state2.flowing = false;
         for (var i = 0; i < len; i++) dests[i].emit("unpipe", this, {
           hasUnpiped: false
         });
         return this;
       }
-      var index = indexOf(state.pipes, dest);
+      var index = indexOf(state2.pipes, dest);
       if (index === -1) return this;
-      state.pipes.splice(index, 1);
-      state.pipesCount -= 1;
-      if (state.pipesCount === 1) state.pipes = state.pipes[0];
+      state2.pipes.splice(index, 1);
+      state2.pipesCount -= 1;
+      if (state2.pipesCount === 1) state2.pipes = state2.pipes[0];
       dest.emit("unpipe", this, unpipeInfo);
       return this;
     };
     Readable.prototype.on = function(ev, fn) {
       var res = Stream.prototype.on.call(this, ev, fn);
-      var state = this._readableState;
+      var state2 = this._readableState;
       if (ev === "data") {
-        state.readableListening = this.listenerCount("readable") > 0;
-        if (state.flowing !== false) this.resume();
+        state2.readableListening = this.listenerCount("readable") > 0;
+        if (state2.flowing !== false) this.resume();
       } else if (ev === "readable") {
-        if (!state.endEmitted && !state.readableListening) {
-          state.readableListening = state.needReadable = true;
-          state.flowing = false;
-          state.emittedReadable = false;
-          debug("on readable", state.length, state.reading);
-          if (state.length) {
+        if (!state2.endEmitted && !state2.readableListening) {
+          state2.readableListening = state2.needReadable = true;
+          state2.flowing = false;
+          state2.emittedReadable = false;
+          debug("on readable", state2.length, state2.reading);
+          if (state2.length) {
             emitReadable(this);
-          } else if (!state.reading) {
+          } else if (!state2.reading) {
             process.nextTick(nReadingNextTick, this);
           }
         }
@@ -10240,10 +10269,10 @@ var require_stream_readable = __commonJS({
       return res;
     };
     function updateReadableListening(self2) {
-      var state = self2._readableState;
-      state.readableListening = self2.listenerCount("readable") > 0;
-      if (state.resumeScheduled && !state.paused) {
-        state.flowing = true;
+      var state2 = self2._readableState;
+      state2.readableListening = self2.listenerCount("readable") > 0;
+      if (state2.resumeScheduled && !state2.paused) {
+        state2.flowing = true;
       } else if (self2.listenerCount("data") > 0) {
         self2.resume();
       }
@@ -10253,30 +10282,30 @@ var require_stream_readable = __commonJS({
       self2.read(0);
     }
     Readable.prototype.resume = function() {
-      var state = this._readableState;
-      if (!state.flowing) {
+      var state2 = this._readableState;
+      if (!state2.flowing) {
         debug("resume");
-        state.flowing = !state.readableListening;
-        resume(this, state);
+        state2.flowing = !state2.readableListening;
+        resume(this, state2);
       }
-      state.paused = false;
+      state2.paused = false;
       return this;
     };
-    function resume(stream2, state) {
-      if (!state.resumeScheduled) {
-        state.resumeScheduled = true;
-        process.nextTick(resume_, stream2, state);
+    function resume(stream2, state2) {
+      if (!state2.resumeScheduled) {
+        state2.resumeScheduled = true;
+        process.nextTick(resume_, stream2, state2);
       }
     }
-    function resume_(stream2, state) {
-      debug("resume", state.reading);
-      if (!state.reading) {
+    function resume_(stream2, state2) {
+      debug("resume", state2.reading);
+      if (!state2.reading) {
         stream2.read(0);
       }
-      state.resumeScheduled = false;
+      state2.resumeScheduled = false;
       stream2.emit("resume");
       flow(stream2);
-      if (state.flowing && !state.reading) stream2.read(0);
+      if (state2.flowing && !state2.reading) stream2.read(0);
     }
     Readable.prototype.pause = function() {
       debug("call pause flowing=%j", this._readableState.flowing);
@@ -10289,27 +10318,27 @@ var require_stream_readable = __commonJS({
       return this;
     };
     function flow(stream2) {
-      var state = stream2._readableState;
-      debug("flow", state.flowing);
-      while (state.flowing && stream2.read() !== null) ;
+      var state2 = stream2._readableState;
+      debug("flow", state2.flowing);
+      while (state2.flowing && stream2.read() !== null) ;
     }
     Readable.prototype.wrap = function(stream2) {
       var _this = this;
-      var state = this._readableState;
+      var state2 = this._readableState;
       var paused = false;
       stream2.on("end", function() {
         debug("wrapped end");
-        if (state.decoder && !state.ended) {
-          var chunk = state.decoder.end();
+        if (state2.decoder && !state2.ended) {
+          var chunk = state2.decoder.end();
           if (chunk && chunk.length) _this.push(chunk);
         }
         _this.push(null);
       });
       stream2.on("data", function(chunk) {
         debug("wrapped data");
-        if (state.decoder) chunk = state.decoder.write(chunk);
-        if (state.objectMode && (chunk === null || chunk === void 0)) return;
-        else if (!state.objectMode && (!chunk || !chunk.length)) return;
+        if (state2.decoder) chunk = state2.decoder.write(chunk);
+        if (state2.objectMode && (chunk === null || chunk === void 0)) return;
+        else if (!state2.objectMode && (!chunk || !chunk.length)) return;
         var ret = _this.push(chunk);
         if (!ret) {
           paused = true;
@@ -10350,7 +10379,7 @@ var require_stream_readable = __commonJS({
       // because otherwise some prototype manipulation in
       // userland will fail
       enumerable: false,
-      get: function get() {
+      get: function get2() {
         return this._readableState.highWaterMark;
       }
     });
@@ -10359,7 +10388,7 @@ var require_stream_readable = __commonJS({
       // because otherwise some prototype manipulation in
       // userland will fail
       enumerable: false,
-      get: function get() {
+      get: function get2() {
         return this._readableState && this._readableState.buffer;
       }
     });
@@ -10368,12 +10397,12 @@ var require_stream_readable = __commonJS({
       // because otherwise some prototype manipulation in
       // userland will fail
       enumerable: false,
-      get: function get() {
+      get: function get2() {
         return this._readableState.flowing;
       },
-      set: function set(state) {
+      set: function set2(state2) {
         if (this._readableState) {
-          this._readableState.flowing = state;
+          this._readableState.flowing = state2;
         }
       }
     });
@@ -10383,39 +10412,39 @@ var require_stream_readable = __commonJS({
       // because otherwise some prototype manipulation in
       // userland will fail
       enumerable: false,
-      get: function get() {
+      get: function get2() {
         return this._readableState.length;
       }
     });
-    function fromList(n, state) {
-      if (state.length === 0) return null;
+    function fromList(n, state2) {
+      if (state2.length === 0) return null;
       var ret;
-      if (state.objectMode) ret = state.buffer.shift();
-      else if (!n || n >= state.length) {
-        if (state.decoder) ret = state.buffer.join("");
-        else if (state.buffer.length === 1) ret = state.buffer.first();
-        else ret = state.buffer.concat(state.length);
-        state.buffer.clear();
+      if (state2.objectMode) ret = state2.buffer.shift();
+      else if (!n || n >= state2.length) {
+        if (state2.decoder) ret = state2.buffer.join("");
+        else if (state2.buffer.length === 1) ret = state2.buffer.first();
+        else ret = state2.buffer.concat(state2.length);
+        state2.buffer.clear();
       } else {
-        ret = state.buffer.consume(n, state.decoder);
+        ret = state2.buffer.consume(n, state2.decoder);
       }
       return ret;
     }
     function endReadable(stream2) {
-      var state = stream2._readableState;
-      debug("endReadable", state.endEmitted);
-      if (!state.endEmitted) {
-        state.ended = true;
-        process.nextTick(endReadableNT, state, stream2);
+      var state2 = stream2._readableState;
+      debug("endReadable", state2.endEmitted);
+      if (!state2.endEmitted) {
+        state2.ended = true;
+        process.nextTick(endReadableNT, state2, stream2);
       }
     }
-    function endReadableNT(state, stream2) {
-      debug("endReadableNT", state.endEmitted, state.length);
-      if (!state.endEmitted && state.length === 0) {
-        state.endEmitted = true;
+    function endReadableNT(state2, stream2) {
+      debug("endReadableNT", state2.endEmitted, state2.length);
+      if (!state2.endEmitted && state2.length === 0) {
+        state2.endEmitted = true;
         stream2.readable = false;
         stream2.emit("end");
-        if (state.autoDestroy) {
+        if (state2.autoDestroy) {
           var wState = stream2._writableState;
           if (!wState || wState.autoDestroy && wState.finished) {
             stream2.destroy();
@@ -10597,7 +10626,7 @@ var require_pipeline = __commonJS({
         callback(err || new ERR_STREAM_DESTROYED("pipe"));
       };
     }
-    function call(fn) {
+    function call2(fn) {
       fn();
     }
     function pipe(from, to) {
@@ -10623,9 +10652,9 @@ var require_pipeline = __commonJS({
         var writing = i > 0;
         return destroyer(stream2, reading, writing, function(err) {
           if (!error) error = err;
-          if (err) destroys.forEach(call);
+          if (err) destroys.forEach(call2);
           if (reading) return;
-          destroys.forEach(call);
+          destroys.forEach(call2);
           callback(error);
         });
       });
@@ -10779,10 +10808,10 @@ var require_CollectingHandler = __commonJS({
       if (this._cbs.onreset) this._cbs.onreset();
       for (var i = 0, len = this.events.length; i < len; i++) {
         if (this._cbs[this.events[i][0]]) {
-          var num = this.events[i].length;
-          if (num === 1) {
+          var num2 = this.events[i].length;
+          if (num2 === 1) {
             this._cbs[this.events[i][0]]();
-          } else if (num === 2) {
+          } else if (num2 === 2) {
             this._cbs[this.events[i][0]](this.events[i][1]);
           } else {
             this._cbs[this.events[i][0]](this.events[i][1], this.events[i][2]);
@@ -12390,7 +12419,7 @@ var require_pseudos = __commonJS({
         return name4 === "button" || name4 === "input" && getAttribute(elem, "type") === "button";
       },
       //:matches(input, textarea, select, button)
-      input: function input(elem) {
+      input: function input2(elem) {
         var name4 = getName(elem);
         return name4 === "input" || name4 === "textarea" || name4 === "select" || name4 === "button";
       },
@@ -13944,9 +13973,9 @@ var require_lodash6 = __commonJS({
         return func(transform(arg));
       };
     }
-    function setToArray(set) {
-      var index = -1, result = Array(set.size);
-      set.forEach(function(value) {
+    function setToArray(set2) {
+      var index = -1, result = Array(set2.size);
+      set2.forEach(function(value) {
         result[++index] = value;
       });
       return result;
@@ -14128,16 +14157,16 @@ var require_lodash6 = __commonJS({
       return this.__data__.has(key);
     }
     function stackSet(key, value) {
-      var cache2 = this.__data__;
-      if (cache2 instanceof ListCache) {
-        var pairs = cache2.__data__;
+      var cache3 = this.__data__;
+      if (cache3 instanceof ListCache) {
+        var pairs = cache3.__data__;
         if (!Map2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
           pairs.push([key, value]);
           return this;
         }
-        cache2 = this.__data__ = new MapCache(pairs);
+        cache3 = this.__data__ = new MapCache(pairs);
       }
-      cache2.set(key, value);
+      cache3.set(key, value);
       return this;
     }
     Stack.prototype.clear = stackClear;
@@ -14169,11 +14198,11 @@ var require_lodash6 = __commonJS({
     function baseForOwn(object, iteratee) {
       return object && baseFor(object, iteratee, keys);
     }
-    function baseGet(object, path) {
-      path = isKey(path, object) ? [path] : castPath(path);
-      var index = 0, length = path.length;
+    function baseGet(object, path2) {
+      path2 = isKey(path2, object) ? [path2] : castPath(path2);
+      var index = 0, length = path2.length;
       while (object != null && index < length) {
-        object = object[toKey(path[index++])];
+        object = object[toKey(path2[index++])];
       }
       return index && index == length ? object : void 0;
     }
@@ -14295,18 +14324,18 @@ var require_lodash6 = __commonJS({
         return object === source || baseIsMatch(object, source, matchData);
       };
     }
-    function baseMatchesProperty(path, srcValue) {
-      if (isKey(path) && isStrictComparable(srcValue)) {
-        return matchesStrictComparable(toKey(path), srcValue);
+    function baseMatchesProperty(path2, srcValue) {
+      if (isKey(path2) && isStrictComparable(srcValue)) {
+        return matchesStrictComparable(toKey(path2), srcValue);
       }
       return function(object) {
-        var objValue = get(object, path);
-        return objValue === void 0 && objValue === srcValue ? hasIn(object, path) : baseIsEqual(srcValue, objValue, void 0, UNORDERED_COMPARE_FLAG | PARTIAL_COMPARE_FLAG);
+        var objValue = get2(object, path2);
+        return objValue === void 0 && objValue === srcValue ? hasIn(object, path2) : baseIsEqual(srcValue, objValue, void 0, UNORDERED_COMPARE_FLAG | PARTIAL_COMPARE_FLAG);
       };
     }
-    function basePropertyDeep(path) {
+    function basePropertyDeep(path2) {
       return function(object) {
-        return baseGet(object, path);
+        return baseGet(object, path2);
       };
     }
     function baseSome(collection, predicate) {
@@ -14526,11 +14555,11 @@ var require_lodash6 = __commonJS({
         return result;
       };
     }
-    function hasPath(object, path, hasFunc) {
-      path = isKey(path, object) ? [path] : castPath(path);
-      var result, index = -1, length = path.length;
+    function hasPath(object, path2, hasFunc) {
+      path2 = isKey(path2, object) ? [path2] : castPath(path2);
+      var result, index = -1, length = path2.length;
       while (++index < length) {
-        var key = toKey(path[index]);
+        var key = toKey(path2[index]);
         if (!(result = object != null && hasFunc(object, key))) {
           break;
         }
@@ -14631,12 +14660,12 @@ var require_lodash6 = __commonJS({
         throw new TypeError(FUNC_ERROR_TEXT);
       }
       var _memoized = function memoized() {
-        var args = arguments, key = resolver ? resolver.apply(this, args) : args[0], cache2 = _memoized.cache;
-        if (cache2.has(key)) {
-          return cache2.get(key);
+        var args = arguments, key = resolver ? resolver.apply(this, args) : args[0], cache3 = _memoized.cache;
+        if (cache3.has(key)) {
+          return cache3.get(key);
         }
         var result = func.apply(this, args);
-        _memoized.cache = cache2.set(key, result);
+        _memoized.cache = cache3.set(key, result);
         return result;
       };
       _memoized.cache = new (memoize.Cache || MapCache)();
@@ -14677,12 +14706,12 @@ var require_lodash6 = __commonJS({
     function toString(value) {
       return value == null ? "" : baseToString(value);
     }
-    function get(object, path, defaultValue) {
-      var result = object == null ? void 0 : baseGet(object, path);
+    function get2(object, path2, defaultValue) {
+      var result = object == null ? void 0 : baseGet(object, path2);
       return result === void 0 ? defaultValue : result;
     }
-    function hasIn(object, path) {
-      return object != null && hasPath(object, path, baseHasIn);
+    function hasIn(object, path2) {
+      return object != null && hasPath(object, path2, baseHasIn);
     }
     function keys(object) {
       return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
@@ -14690,8 +14719,8 @@ var require_lodash6 = __commonJS({
     function identity(value) {
       return value;
     }
-    function property(path) {
-      return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
+    function property(path2) {
+      return isKey(path2) ? baseProperty(toKey(path2)) : basePropertyDeep(path2);
     }
     module2.exports = some;
   }
@@ -15014,15 +15043,15 @@ var require_attributes2 = __commonJS({
         });
       }
       if (!value || typeof value !== "string") return this;
-      var classNames = value.split(rspace), numClasses = classNames.length, state = typeof stateVal === "boolean" ? stateVal ? 1 : -1 : 0, numElements = this.length, elementClasses, index;
+      var classNames = value.split(rspace), numClasses = classNames.length, state2 = typeof stateVal === "boolean" ? stateVal ? 1 : -1 : 0, numElements = this.length, elementClasses, index;
       for (var i = 0; i < numElements; i++) {
         if (!isTag(this[i])) continue;
         elementClasses = splitClass(this[i].attribs.class);
         for (var j = 0; j < numClasses; j++) {
           index = elementClasses.indexOf(classNames[j]);
-          if (state >= 0 && index < 0) {
+          if (state2 >= 0 && index < 0) {
             elementClasses.push(classNames[j]);
-          } else if (state <= 0 && index >= 0) {
+          } else if (state2 <= 0 && index >= 0) {
             elementClasses.splice(index, 1);
           }
         }
@@ -15160,9 +15189,9 @@ var require_lodash7 = __commonJS({
         return func(transform(arg));
       };
     }
-    function setToArray(set) {
-      var index = -1, result = Array(set.size);
-      set.forEach(function(value) {
+    function setToArray(set2) {
+      var index = -1, result = Array(set2.size);
+      set2.forEach(function(value) {
         result[++index] = value;
       });
       return result;
@@ -15344,16 +15373,16 @@ var require_lodash7 = __commonJS({
       return this.__data__.has(key);
     }
     function stackSet(key, value) {
-      var cache2 = this.__data__;
-      if (cache2 instanceof ListCache) {
-        var pairs = cache2.__data__;
+      var cache3 = this.__data__;
+      if (cache3 instanceof ListCache) {
+        var pairs = cache3.__data__;
         if (!Map2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
           pairs.push([key, value]);
           return this;
         }
-        cache2 = this.__data__ = new MapCache(pairs);
+        cache3 = this.__data__ = new MapCache(pairs);
       }
-      cache2.set(key, value);
+      cache3.set(key, value);
       return this;
     }
     Stack.prototype.clear = stackClear;
@@ -15394,11 +15423,11 @@ var require_lodash7 = __commonJS({
     function baseForOwn(object, iteratee) {
       return object && baseFor(object, iteratee, keys);
     }
-    function baseGet(object, path) {
-      path = isKey(path, object) ? [path] : castPath(path);
-      var index = 0, length = path.length;
+    function baseGet(object, path2) {
+      path2 = isKey(path2, object) ? [path2] : castPath(path2);
+      var index = 0, length = path2.length;
       while (object != null && index < length) {
-        object = object[toKey(path[index++])];
+        object = object[toKey(path2[index++])];
       }
       return index && index == length ? object : void 0;
     }
@@ -15520,18 +15549,18 @@ var require_lodash7 = __commonJS({
         return object === source || baseIsMatch(object, source, matchData);
       };
     }
-    function baseMatchesProperty(path, srcValue) {
-      if (isKey(path) && isStrictComparable(srcValue)) {
-        return matchesStrictComparable(toKey(path), srcValue);
+    function baseMatchesProperty(path2, srcValue) {
+      if (isKey(path2) && isStrictComparable(srcValue)) {
+        return matchesStrictComparable(toKey(path2), srcValue);
       }
       return function(object) {
-        var objValue = get(object, path);
-        return objValue === void 0 && objValue === srcValue ? hasIn(object, path) : baseIsEqual(srcValue, objValue, void 0, UNORDERED_COMPARE_FLAG | PARTIAL_COMPARE_FLAG);
+        var objValue = get2(object, path2);
+        return objValue === void 0 && objValue === srcValue ? hasIn(object, path2) : baseIsEqual(srcValue, objValue, void 0, UNORDERED_COMPARE_FLAG | PARTIAL_COMPARE_FLAG);
       };
     }
-    function basePropertyDeep(path) {
+    function basePropertyDeep(path2) {
       return function(object) {
-        return baseGet(object, path);
+        return baseGet(object, path2);
       };
     }
     function baseToString(value) {
@@ -15743,11 +15772,11 @@ var require_lodash7 = __commonJS({
         return result;
       };
     }
-    function hasPath(object, path, hasFunc) {
-      path = isKey(path, object) ? [path] : castPath(path);
-      var result, index = -1, length = path.length;
+    function hasPath(object, path2, hasFunc) {
+      path2 = isKey(path2, object) ? [path2] : castPath(path2);
+      var result, index = -1, length = path2.length;
       while (++index < length) {
-        var key = toKey(path[index]);
+        var key = toKey(path2[index]);
         if (!(result = object != null && hasFunc(object, key))) {
           break;
         }
@@ -15835,12 +15864,12 @@ var require_lodash7 = __commonJS({
         throw new TypeError(FUNC_ERROR_TEXT);
       }
       var _memoized2 = function memoized() {
-        var args = arguments, key = resolver ? resolver.apply(this, args) : args[0], cache2 = _memoized2.cache;
-        if (cache2.has(key)) {
-          return cache2.get(key);
+        var args = arguments, key = resolver ? resolver.apply(this, args) : args[0], cache3 = _memoized2.cache;
+        if (cache3.has(key)) {
+          return cache3.get(key);
         }
         var result = func.apply(this, args);
-        _memoized2.cache = cache2.set(key, result);
+        _memoized2.cache = cache3.set(key, result);
         return result;
       };
       _memoized2.cache = new (memoize.Cache || MapCache)();
@@ -15900,12 +15929,12 @@ var require_lodash7 = __commonJS({
     function toString(value) {
       return value == null ? "" : baseToString(value);
     }
-    function get(object, path, defaultValue) {
-      var result = object == null ? void 0 : baseGet(object, path);
+    function get2(object, path2, defaultValue) {
+      var result = object == null ? void 0 : baseGet(object, path2);
       return result === void 0 ? defaultValue : result;
     }
-    function hasIn(object, path) {
-      return object != null && hasPath(object, path, baseHasIn);
+    function hasIn(object, path2) {
+      return object != null && hasPath(object, path2, baseHasIn);
     }
     function keys(object) {
       return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
@@ -15913,8 +15942,8 @@ var require_lodash7 = __commonJS({
     function identity(value) {
       return value;
     }
-    function property(path) {
-      return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
+    function property(path2) {
+      return isKey(path2) ? baseProperty(toKey(path2)) : basePropertyDeep(path2);
     }
     module2.exports = reject;
   }
@@ -16041,9 +16070,9 @@ var require_lodash8 = __commonJS({
         return func(transform(arg));
       };
     }
-    function setToArray(set) {
-      var index = -1, result = Array(set.size);
-      set.forEach(function(value) {
+    function setToArray(set2) {
+      var index = -1, result = Array(set2.size);
+      set2.forEach(function(value) {
         result[++index] = value;
       });
       return result;
@@ -16225,16 +16254,16 @@ var require_lodash8 = __commonJS({
       return this.__data__.has(key);
     }
     function stackSet(key, value) {
-      var cache2 = this.__data__;
-      if (cache2 instanceof ListCache) {
-        var pairs = cache2.__data__;
+      var cache3 = this.__data__;
+      if (cache3 instanceof ListCache) {
+        var pairs = cache3.__data__;
         if (!Map2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
           pairs.push([key, value]);
           return this;
         }
-        cache2 = this.__data__ = new MapCache(pairs);
+        cache3 = this.__data__ = new MapCache(pairs);
       }
-      cache2.set(key, value);
+      cache3.set(key, value);
       return this;
     }
     Stack.prototype.clear = stackClear;
@@ -16275,11 +16304,11 @@ var require_lodash8 = __commonJS({
     function baseForOwn(object, iteratee) {
       return object && baseFor(object, iteratee, keys);
     }
-    function baseGet(object, path) {
-      path = isKey(path, object) ? [path] : castPath(path);
-      var index = 0, length = path.length;
+    function baseGet(object, path2) {
+      path2 = isKey(path2, object) ? [path2] : castPath(path2);
+      var index = 0, length = path2.length;
       while (object != null && index < length) {
-        object = object[toKey(path[index++])];
+        object = object[toKey(path2[index++])];
       }
       return index && index == length ? object : void 0;
     }
@@ -16401,18 +16430,18 @@ var require_lodash8 = __commonJS({
         return object === source || baseIsMatch(object, source, matchData);
       };
     }
-    function baseMatchesProperty(path, srcValue) {
-      if (isKey(path) && isStrictComparable(srcValue)) {
-        return matchesStrictComparable(toKey(path), srcValue);
+    function baseMatchesProperty(path2, srcValue) {
+      if (isKey(path2) && isStrictComparable(srcValue)) {
+        return matchesStrictComparable(toKey(path2), srcValue);
       }
       return function(object) {
-        var objValue = get(object, path);
-        return objValue === void 0 && objValue === srcValue ? hasIn(object, path) : baseIsEqual(srcValue, objValue, void 0, UNORDERED_COMPARE_FLAG | PARTIAL_COMPARE_FLAG);
+        var objValue = get2(object, path2);
+        return objValue === void 0 && objValue === srcValue ? hasIn(object, path2) : baseIsEqual(srcValue, objValue, void 0, UNORDERED_COMPARE_FLAG | PARTIAL_COMPARE_FLAG);
       };
     }
-    function basePropertyDeep(path) {
+    function basePropertyDeep(path2) {
       return function(object) {
-        return baseGet(object, path);
+        return baseGet(object, path2);
       };
     }
     function baseToString(value) {
@@ -16624,11 +16653,11 @@ var require_lodash8 = __commonJS({
         return result;
       };
     }
-    function hasPath(object, path, hasFunc) {
-      path = isKey(path, object) ? [path] : castPath(path);
-      var result, index = -1, length = path.length;
+    function hasPath(object, path2, hasFunc) {
+      path2 = isKey(path2, object) ? [path2] : castPath(path2);
+      var result, index = -1, length = path2.length;
       while (++index < length) {
-        var key = toKey(path[index]);
+        var key = toKey(path2[index]);
         if (!(result = object != null && hasFunc(object, key))) {
           break;
         }
@@ -16716,12 +16745,12 @@ var require_lodash8 = __commonJS({
         throw new TypeError(FUNC_ERROR_TEXT);
       }
       var _memoized3 = function memoized() {
-        var args = arguments, key = resolver ? resolver.apply(this, args) : args[0], cache2 = _memoized3.cache;
-        if (cache2.has(key)) {
-          return cache2.get(key);
+        var args = arguments, key = resolver ? resolver.apply(this, args) : args[0], cache3 = _memoized3.cache;
+        if (cache3.has(key)) {
+          return cache3.get(key);
         }
         var result = func.apply(this, args);
-        _memoized3.cache = cache2.set(key, result);
+        _memoized3.cache = cache3.set(key, result);
         return result;
       };
       _memoized3.cache = new (memoize.Cache || MapCache)();
@@ -16762,12 +16791,12 @@ var require_lodash8 = __commonJS({
     function toString(value) {
       return value == null ? "" : baseToString(value);
     }
-    function get(object, path, defaultValue) {
-      var result = object == null ? void 0 : baseGet(object, path);
+    function get2(object, path2, defaultValue) {
+      var result = object == null ? void 0 : baseGet(object, path2);
       return result === void 0 ? defaultValue : result;
     }
-    function hasIn(object, path) {
-      return object != null && hasPath(object, path, baseHasIn);
+    function hasIn(object, path2) {
+      return object != null && hasPath(object, path2, baseHasIn);
     }
     function keys(object) {
       return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
@@ -16775,8 +16804,8 @@ var require_lodash8 = __commonJS({
     function identity(value) {
       return value;
     }
-    function property(path) {
-      return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
+    function property(path2) {
+      return isKey(path2) ? baseProperty(toKey(path2)) : basePropertyDeep(path2);
     }
     module2.exports = filter;
   }
@@ -16909,9 +16938,9 @@ var require_lodash9 = __commonJS({
         return func(transform(arg));
       };
     }
-    function setToArray(set) {
-      var index = -1, result = Array(set.size);
-      set.forEach(function(value) {
+    function setToArray(set2) {
+      var index = -1, result = Array(set2.size);
+      set2.forEach(function(value) {
         result[++index] = value;
       });
       return result;
@@ -17093,16 +17122,16 @@ var require_lodash9 = __commonJS({
       return this.__data__.has(key);
     }
     function stackSet(key, value) {
-      var cache2 = this.__data__;
-      if (cache2 instanceof ListCache) {
-        var pairs = cache2.__data__;
+      var cache3 = this.__data__;
+      if (cache3 instanceof ListCache) {
+        var pairs = cache3.__data__;
         if (!Map2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
           pairs.push([key, value]);
           return this;
         }
-        cache2 = this.__data__ = new MapCache(pairs);
+        cache3 = this.__data__ = new MapCache(pairs);
       }
-      cache2.set(key, value);
+      cache3.set(key, value);
       return this;
     }
     Stack.prototype.clear = stackClear;
@@ -17134,11 +17163,11 @@ var require_lodash9 = __commonJS({
     function baseForOwn(object, iteratee) {
       return object && baseFor(object, iteratee, keys);
     }
-    function baseGet(object, path) {
-      path = isKey(path, object) ? [path] : castPath(path);
-      var index = 0, length = path.length;
+    function baseGet(object, path2) {
+      path2 = isKey(path2, object) ? [path2] : castPath(path2);
+      var index = 0, length = path2.length;
       while (object != null && index < length) {
-        object = object[toKey(path[index++])];
+        object = object[toKey(path2[index++])];
       }
       return index && index == length ? object : void 0;
     }
@@ -17260,18 +17289,18 @@ var require_lodash9 = __commonJS({
         return object === source || baseIsMatch(object, source, matchData);
       };
     }
-    function baseMatchesProperty(path, srcValue) {
-      if (isKey(path) && isStrictComparable(srcValue)) {
-        return matchesStrictComparable(toKey(path), srcValue);
+    function baseMatchesProperty(path2, srcValue) {
+      if (isKey(path2) && isStrictComparable(srcValue)) {
+        return matchesStrictComparable(toKey(path2), srcValue);
       }
       return function(object) {
-        var objValue = get(object, path);
-        return objValue === void 0 && objValue === srcValue ? hasIn(object, path) : baseIsEqual(srcValue, objValue, void 0, UNORDERED_COMPARE_FLAG | PARTIAL_COMPARE_FLAG);
+        var objValue = get2(object, path2);
+        return objValue === void 0 && objValue === srcValue ? hasIn(object, path2) : baseIsEqual(srcValue, objValue, void 0, UNORDERED_COMPARE_FLAG | PARTIAL_COMPARE_FLAG);
       };
     }
-    function basePropertyDeep(path) {
+    function basePropertyDeep(path2) {
       return function(object) {
-        return baseGet(object, path);
+        return baseGet(object, path2);
       };
     }
     function baseToString(value) {
@@ -17483,11 +17512,11 @@ var require_lodash9 = __commonJS({
         return result;
       };
     }
-    function hasPath(object, path, hasFunc) {
-      path = isKey(path, object) ? [path] : castPath(path);
-      var result, index = -1, length = path.length;
+    function hasPath(object, path2, hasFunc) {
+      path2 = isKey(path2, object) ? [path2] : castPath(path2);
+      var result, index = -1, length = path2.length;
       while (++index < length) {
-        var key = toKey(path[index]);
+        var key = toKey(path2[index]);
         if (!(result = object != null && hasFunc(object, key))) {
           break;
         }
@@ -17575,12 +17604,12 @@ var require_lodash9 = __commonJS({
         throw new TypeError(FUNC_ERROR_TEXT);
       }
       var _memoized4 = function memoized() {
-        var args = arguments, key = resolver ? resolver.apply(this, args) : args[0], cache2 = _memoized4.cache;
-        if (cache2.has(key)) {
-          return cache2.get(key);
+        var args = arguments, key = resolver ? resolver.apply(this, args) : args[0], cache3 = _memoized4.cache;
+        if (cache3.has(key)) {
+          return cache3.get(key);
         }
         var result = func.apply(this, args);
-        _memoized4.cache = cache2.set(key, result);
+        _memoized4.cache = cache3.set(key, result);
         return result;
       };
       _memoized4.cache = new (memoize.Cache || MapCache)();
@@ -17621,12 +17650,12 @@ var require_lodash9 = __commonJS({
     function toString(value) {
       return value == null ? "" : baseToString(value);
     }
-    function get(object, path, defaultValue) {
-      var result = object == null ? void 0 : baseGet(object, path);
+    function get2(object, path2, defaultValue) {
+      var result = object == null ? void 0 : baseGet(object, path2);
       return result === void 0 ? defaultValue : result;
     }
-    function hasIn(object, path) {
-      return object != null && hasPath(object, path, baseHasIn);
+    function hasIn(object, path2) {
+      return object != null && hasPath(object, path2, baseHasIn);
     }
     function keys(object) {
       return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
@@ -17634,8 +17663,8 @@ var require_lodash9 = __commonJS({
     function identity(value) {
       return value;
     }
-    function property(path) {
-      return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
+    function property(path2) {
+      return isKey(path2) ? baseProperty(toKey(path2)) : basePropertyDeep(path2);
     }
     module2.exports = reduce;
   }
@@ -17682,17 +17711,17 @@ var require_traversing = __commonJS({
       return this._make(select(selectorOrHaystack, elems, options));
     };
     exports2.parent = function(selector) {
-      var set = [];
+      var set2 = [];
       domEach(this, function(idx, elem) {
         var parentElem = elem.parent;
-        if (parentElem && set.indexOf(parentElem) < 0) {
-          set.push(parentElem);
+        if (parentElem && set2.indexOf(parentElem) < 0) {
+          set2.push(parentElem);
         }
       });
       if (arguments.length) {
-        set = exports2.filter.call(set, selector, this);
+        set2 = exports2.filter.call(set2, selector, this);
       }
-      return this._make(set);
+      return this._make(set2);
     };
     exports2.parents = function(selector) {
       var parentNodes = [];
@@ -17728,17 +17757,17 @@ var require_traversing = __commonJS({
       return this._make(filter ? select(filter, parentNodes, this.options) : parentNodes);
     };
     exports2.closest = function(selector) {
-      var set = [];
+      var set2 = [];
       if (!selector) {
-        return this._make(set);
+        return this._make(set2);
       }
       domEach(this, function(idx, elem) {
         var closestElem = traverseParents(this, elem, selector, 1)[0];
-        if (closestElem && set.indexOf(closestElem) < 0) {
-          set.push(closestElem);
+        if (closestElem && set2.indexOf(closestElem) < 0) {
+          set2.push(closestElem);
         }
       }.bind(this));
-      return this._make(set);
+      return this._make(set2);
     };
     exports2.next = function(selector) {
       if (!this[0]) {
@@ -18656,9 +18685,9 @@ var require_lodash12 = __commonJS({
         return func(transform(arg));
       };
     }
-    function setToArray(set) {
-      var index = -1, result = Array(set.size);
-      set.forEach(function(value) {
+    function setToArray(set2) {
+      var index = -1, result = Array(set2.size);
+      set2.forEach(function(value) {
         result[++index] = value;
       });
       return result;
@@ -18840,16 +18869,16 @@ var require_lodash12 = __commonJS({
       return this.__data__.has(key);
     }
     function stackSet(key, value) {
-      var cache2 = this.__data__;
-      if (cache2 instanceof ListCache) {
-        var pairs = cache2.__data__;
+      var cache3 = this.__data__;
+      if (cache3 instanceof ListCache) {
+        var pairs = cache3.__data__;
         if (!Map2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
           pairs.push([key, value]);
           return this;
         }
-        cache2 = this.__data__ = new MapCache(pairs);
+        cache3 = this.__data__ = new MapCache(pairs);
       }
-      cache2.set(key, value);
+      cache3.set(key, value);
       return this;
     }
     Stack.prototype.clear = stackClear;
@@ -18881,11 +18910,11 @@ var require_lodash12 = __commonJS({
     function baseForOwn(object, iteratee) {
       return object && baseFor(object, iteratee, keys);
     }
-    function baseGet(object, path) {
-      path = isKey(path, object) ? [path] : castPath(path);
-      var index = 0, length = path.length;
+    function baseGet(object, path2) {
+      path2 = isKey(path2, object) ? [path2] : castPath(path2);
+      var index = 0, length = path2.length;
       while (object != null && index < length) {
-        object = object[toKey(path[index++])];
+        object = object[toKey(path2[index++])];
       }
       return index && index == length ? object : void 0;
     }
@@ -19014,18 +19043,18 @@ var require_lodash12 = __commonJS({
         return object === source || baseIsMatch(object, source, matchData);
       };
     }
-    function baseMatchesProperty(path, srcValue) {
-      if (isKey(path) && isStrictComparable(srcValue)) {
-        return matchesStrictComparable(toKey(path), srcValue);
+    function baseMatchesProperty(path2, srcValue) {
+      if (isKey(path2) && isStrictComparable(srcValue)) {
+        return matchesStrictComparable(toKey(path2), srcValue);
       }
       return function(object) {
-        var objValue = get(object, path);
-        return objValue === void 0 && objValue === srcValue ? hasIn(object, path) : baseIsEqual(srcValue, objValue, void 0, UNORDERED_COMPARE_FLAG | PARTIAL_COMPARE_FLAG);
+        var objValue = get2(object, path2);
+        return objValue === void 0 && objValue === srcValue ? hasIn(object, path2) : baseIsEqual(srcValue, objValue, void 0, UNORDERED_COMPARE_FLAG | PARTIAL_COMPARE_FLAG);
       };
     }
-    function basePropertyDeep(path) {
+    function basePropertyDeep(path2) {
       return function(object) {
-        return baseGet(object, path);
+        return baseGet(object, path2);
       };
     }
     function baseToString(value) {
@@ -19237,11 +19266,11 @@ var require_lodash12 = __commonJS({
         return result;
       };
     }
-    function hasPath(object, path, hasFunc) {
-      path = isKey(path, object) ? [path] : castPath(path);
-      var result, index = -1, length = path.length;
+    function hasPath(object, path2, hasFunc) {
+      path2 = isKey(path2, object) ? [path2] : castPath(path2);
+      var result, index = -1, length = path2.length;
       while (++index < length) {
-        var key = toKey(path[index]);
+        var key = toKey(path2[index]);
         if (!(result = object != null && hasFunc(object, key))) {
           break;
         }
@@ -19329,12 +19358,12 @@ var require_lodash12 = __commonJS({
         throw new TypeError(FUNC_ERROR_TEXT);
       }
       var _memoized5 = function memoized() {
-        var args = arguments, key = resolver ? resolver.apply(this, args) : args[0], cache2 = _memoized5.cache;
-        if (cache2.has(key)) {
-          return cache2.get(key);
+        var args = arguments, key = resolver ? resolver.apply(this, args) : args[0], cache3 = _memoized5.cache;
+        if (cache3.has(key)) {
+          return cache3.get(key);
         }
         var result = func.apply(this, args);
-        _memoized5.cache = cache2.set(key, result);
+        _memoized5.cache = cache3.set(key, result);
         return result;
       };
       _memoized5.cache = new (memoize.Cache || MapCache)();
@@ -19375,12 +19404,12 @@ var require_lodash12 = __commonJS({
     function toString(value) {
       return value == null ? "" : baseToString(value);
     }
-    function get(object, path, defaultValue) {
-      var result = object == null ? void 0 : baseGet(object, path);
+    function get2(object, path2, defaultValue) {
+      var result = object == null ? void 0 : baseGet(object, path2);
       return result === void 0 ? defaultValue : result;
     }
-    function hasIn(object, path) {
-      return object != null && hasPath(object, path, baseHasIn);
+    function hasIn(object, path2) {
+      return object != null && hasPath(object, path2, baseHasIn);
     }
     function keys(object) {
       return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
@@ -19388,8 +19417,8 @@ var require_lodash12 = __commonJS({
     function identity(value) {
       return value;
     }
-    function property(path) {
-      return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
+    function property(path2) {
+      return isKey(path2) ? baseProperty(toKey(path2)) : basePropertyDeep(path2);
     }
     module2.exports = map;
   }
@@ -19682,13 +19711,13 @@ function request(_x) {
   return _request.apply(this, arguments);
 }
 function _request() {
-  _request = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee5(url) {
-    var _ref5, _ref5$method, method, _ref5$headers, headers, body, referer, res, _args5 = arguments;
-    return _regenerator().w(function(_context5) {
-      while (1) switch (_context5.n) {
+  _request = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee9(url) {
+    var _ref1, _ref1$method, method, _ref1$headers, headers, body, referer, res, _args9 = arguments;
+    return _regenerator().w(function(_context9) {
+      while (1) switch (_context9.n) {
         case 0:
-          _ref5 = _args5.length > 1 && _args5[1] !== void 0 ? _args5[1] : {}, _ref5$method = _ref5.method, method = _ref5$method === void 0 ? "GET" : _ref5$method, _ref5$headers = _ref5.headers, headers = _ref5$headers === void 0 ? {} : _ref5$headers, body = _ref5.body, referer = _ref5.referer;
-          _context5.n = 1;
+          _ref1 = _args9.length > 1 && _args9[1] !== void 0 ? _args9[1] : {}, _ref1$method = _ref1.method, method = _ref1$method === void 0 ? "GET" : _ref1$method, _ref1$headers = _ref1.headers, headers = _ref1$headers === void 0 ? {} : _ref1$headers, body = _ref1.body, referer = _ref1.referer;
+          _context9.n = 1;
           return fetch(url, _objectSpread2(_objectSpread2({
             method: method,
             body: body,
@@ -19706,16 +19735,16 @@ function _request() {
             } : {}), headers)
           }));
         case 1:
-          res = _context5.v;
+          res = _context9.v;
           if (res.ok) {
-            _context5.n = 2;
+            _context9.n = 2;
             break;
           }
           throw new Error("HTTP ".concat(res.status, " for ").concat(url));
         case 2:
-          return _context5.a(2, res);
+          return _context9.a(2, res);
       }
-    }, _callee5);
+    }, _callee9);
   }));
   return _request.apply(this, arguments);
 }
@@ -19723,16 +19752,16 @@ function getText(_x2, _x3) {
   return _getText.apply(this, arguments);
 }
 function _getText() {
-  _getText = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee6(url, opts) {
-    return _regenerator().w(function(_context6) {
-      while (1) switch (_context6.n) {
+  _getText = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee0(url, opts) {
+    return _regenerator().w(function(_context0) {
+      while (1) switch (_context0.n) {
         case 0:
-          _context6.n = 1;
+          _context0.n = 1;
           return request(url, opts);
         case 1:
-          return _context6.a(2, _context6.v.text());
+          return _context0.a(2, _context0.v.text());
       }
-    }, _callee6);
+    }, _callee0);
   }));
   return _getText.apply(this, arguments);
 }
@@ -19762,11 +19791,11 @@ __export(cinemar_exports, {
     return _tree;
   }
 });
-function page(title, channels) {
+function page(title, channels2) {
   var extra = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
   return _objectSpread2({
     title: title,
-    channels: channels
+    channels: channels2
   }, extra);
 }
 function folder(title, playlistUrl) {
@@ -19860,27 +19889,27 @@ function _tree(_x4, _x5) {
   return _tree2.apply(this, arguments);
 }
 function _tree2() {
-  _tree2 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee7(embedUrl, referer) {
+  _tree2 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee1(embedUrl, referer) {
     var html, m;
-    return _regenerator().w(function(_context7) {
-      while (1) switch (_context7.n) {
+    return _regenerator().w(function(_context1) {
+      while (1) switch (_context1.n) {
         case 0:
-          _context7.n = 1;
+          _context1.n = 1;
           return getTextCached(embedUrl, {
             referer: referer
           });
         case 1:
-          html = _context7.v;
+          html = _context1.v;
           m = html.match(/"file":"(#2[^"]+)"/);
           if (m) {
-            _context7.n = 2;
+            _context1.n = 2;
             break;
           }
           throw new Error("Cinemar: playlist not found in embed page");
         case 2:
-          return _context7.a(2, normalize(_decodePlaylist(m[1])));
+          return _context1.a(2, normalize(_decodePlaylist(m[1])));
       }
-    }, _callee7);
+    }, _callee1);
   }));
   return _tree2.apply(this, arguments);
 }
@@ -19888,13 +19917,13 @@ function _resolve(_x6, _x7) {
   return _resolve2.apply(this, arguments);
 }
 function _resolve2() {
-  _resolve2 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee8(embedUrl, ref) {
+  _resolve2 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee10(embedUrl, ref) {
     var origin, res, json, data;
-    return _regenerator().w(function(_context8) {
-      while (1) switch (_context8.n) {
+    return _regenerator().w(function(_context10) {
+      while (1) switch (_context10.n) {
         case 0:
           origin = new URL(embedUrl).origin;
-          _context8.n = 1;
+          _context10.n = 1;
           return request("".concat(origin, "/api/playlist/load"), {
             method: "POST",
             referer: embedUrl,
@@ -19906,30 +19935,30 @@ function _resolve2() {
             body: JSON.stringify(ref)
           });
         case 1:
-          res = _context8.v;
-          _context8.n = 2;
+          res = _context10.v;
+          _context10.n = 2;
           return res.json();
         case 2:
-          json = _context8.v;
+          json = _context10.v;
           if (!(json.success === false)) {
-            _context8.n = 3;
+            _context10.n = 3;
             break;
           }
           throw new Error("Cinemar: ".concat(json.error || "load failed"));
         case 3:
           data = "data" in json ? json.data : json;
           if (data.file) {
-            _context8.n = 4;
+            _context10.n = 4;
             break;
           }
           throw new Error("Cinemar: no stream in response");
         case 4:
-          return _context8.a(2, {
+          return _context10.a(2, {
             url: data.file,
             subtitles: data.subtitle || void 0
           });
       }
-    }, _callee8);
+    }, _callee10);
   }));
   return _resolve2.apply(this, arguments);
 }
@@ -19956,33 +19985,33 @@ function config(_x8, _x9) {
   return _config.apply(this, arguments);
 }
 function _config() {
-  _config = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee9(embedUrl, referer) {
+  _config = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee11(embedUrl, referer) {
     var html, m;
-    return _regenerator().w(function(_context9) {
-      while (1) switch (_context9.n) {
+    return _regenerator().w(function(_context11) {
+      while (1) switch (_context11.n) {
         case 0:
-          _context9.n = 1;
+          _context11.n = 1;
           return getTextCached(embedUrl, {
             referer: referer
           });
         case 1:
-          html = _context9.v;
+          html = _context11.v;
           m = html.match(/playerConfigs\s*=\s*(\{[\s\S]*?\});\s*\n/);
           if (m) {
-            _context9.n = 2;
+            _context11.n = 2;
             break;
           }
           throw new Error("HDVB: player config not found");
         case 2:
-          return _context9.a(2, JSON.parse(m[1]));
+          return _context11.a(2, JSON.parse(m[1]));
       }
-    }, _callee9);
+    }, _callee11);
   }));
   return _config.apply(this, arguments);
 }
-function post(embedUrl, path, key) {
+function post(embedUrl, path2, key) {
   var origin = new URL(embedUrl).origin;
-  return request(origin + path, {
+  return request(origin + path2, {
     method: "POST",
     referer: embedUrl,
     headers: {
@@ -19995,8 +20024,8 @@ function post(embedUrl, path, key) {
     return r.text();
   });
 }
-function filePath(file) {
-  return file.startsWith("/") ? file : "/playlist/".concat(file.replace(/^~/, ""), ".txt");
+function filePath(file2) {
+  return file2.startsWith("/") ? file2 : "/playlist/".concat(file2.replace(/^~/, ""), ".txt");
 }
 function normalize2(items) {
   return items.filter(function(x) {
@@ -20015,41 +20044,41 @@ function tree22(_x0, _x1) {
   return _tree3.apply(this, arguments);
 }
 function _tree3() {
-  _tree3 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee0(embedUrl, referer) {
+  _tree3 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee12(embedUrl, referer) {
     var cfg, text, json;
-    return _regenerator().w(function(_context0) {
-      while (1) switch (_context0.n) {
+    return _regenerator().w(function(_context12) {
+      while (1) switch (_context12.n) {
         case 0:
-          _context0.n = 1;
+          _context12.n = 1;
           return config(embedUrl, referer);
         case 1:
-          cfg = _context0.v;
+          cfg = _context12.v;
           if (cfg.file.startsWith("/playlist/")) {
-            _context0.n = 2;
+            _context12.n = 2;
             break;
           }
-          return _context0.a(2, [{
+          return _context12.a(2, [{
             title: "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C",
             ref: cfg.file
           }]);
         case 2:
-          _context0.n = 3;
+          _context12.n = 3;
           return post(embedUrl, cfg.file, cfg.key);
         case 3:
-          text = _context0.v;
+          text = _context12.v;
           if (!/^https?:\/\//.test(text.trim())) {
-            _context0.n = 4;
+            _context12.n = 4;
             break;
           }
-          return _context0.a(2, [{
+          return _context12.a(2, [{
             title: "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C",
             ref: cfg.file
           }]);
         case 4:
           json = JSON.parse(text);
-          return _context0.a(2, normalize2(Array.isArray(json) ? json : [json]));
+          return _context12.a(2, normalize2(Array.isArray(json) ? json : [json]));
       }
-    }, _callee0);
+    }, _callee12);
   }));
   return _tree3.apply(this, arguments);
 }
@@ -20057,30 +20086,30 @@ function resolve22(_x10, _x11, _x12) {
   return _resolve3.apply(this, arguments);
 }
 function _resolve3() {
-  _resolve3 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee1(embedUrl, ref, referer) {
+  _resolve3 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee13(embedUrl, ref, referer) {
     var cfg, url;
-    return _regenerator().w(function(_context1) {
-      while (1) switch (_context1.n) {
+    return _regenerator().w(function(_context13) {
+      while (1) switch (_context13.n) {
         case 0:
-          _context1.n = 1;
+          _context13.n = 1;
           return config(embedUrl, referer);
         case 1:
-          cfg = _context1.v;
-          _context1.n = 2;
+          cfg = _context13.v;
+          _context13.n = 2;
           return post(embedUrl, filePath(ref), cfg.key);
         case 2:
-          url = _context1.v.trim();
+          url = _context13.v.trim();
           if (/^https?:\/\//.test(url)) {
-            _context1.n = 3;
+            _context13.n = 3;
             break;
           }
           throw new Error("HDVB: no stream in response");
         case 3:
-          return _context1.a(2, {
+          return _context13.a(2, {
             url: url
           });
       }
-    }, _callee1);
+    }, _callee13);
   }));
   return _resolve3.apply(this, arguments);
 }
@@ -20164,10 +20193,10 @@ function tree32(_x13, _x14, _x15) {
   return _tree4.apply(this, arguments);
 }
 function _tree4() {
-  _tree4 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee10(embedUrl, referer, ua) {
+  _tree4 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee14(embedUrl, referer, ua) {
     var opts, seasons, episodes, _t5;
-    return _regenerator().w(function(_context10) {
-      while (1) switch (_context10.n) {
+    return _regenerator().w(function(_context14) {
+      while (1) switch (_context14.n) {
         case 0:
           opts = _objectSpread2({
             referer: referer
@@ -20177,10 +20206,10 @@ function _tree4() {
             }
           } : {});
           _t5 = _extractSeasons;
-          _context10.n = 1;
+          _context14.n = 1;
           return getTextCached(embedUrl, opts);
         case 1:
-          seasons = _t5(_context10.v).filter(function(s) {
+          seasons = _t5(_context14.v).filter(function(s) {
             return !s.blocked;
           });
           episodes = seasons.flatMap(function(s) {
@@ -20189,18 +20218,18 @@ function _tree4() {
             return e.hls;
           });
           if (episodes.length) {
-            _context10.n = 2;
+            _context14.n = 2;
             break;
           }
-          return _context10.a(2, []);
+          return _context14.a(2, []);
         case 2:
           if (!(episodes.length === 1)) {
-            _context10.n = 3;
+            _context14.n = 3;
             break;
           }
-          return _context10.a(2, [episodeLeaf(episodes[0], "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C")]);
+          return _context14.a(2, [episodeLeaf(episodes[0], "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C")]);
         case 3:
-          return _context10.a(2, seasons.map(function(s) {
+          return _context14.a(2, seasons.map(function(s) {
             return {
               title: "\u0421\u0435\u0437\u043E\u043D ".concat(s.season),
               children: (s.episodes || []).filter(function(e) {
@@ -20211,7 +20240,7 @@ function _tree4() {
             };
           }));
       }
-    }, _callee10);
+    }, _callee14);
   }));
   return _tree4.apply(this, arguments);
 }
@@ -20219,15 +20248,15 @@ function resolve32(_x16, _x17) {
   return _resolve4.apply(this, arguments);
 }
 function _resolve4() {
-  _resolve4 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee11(embedUrl, ref) {
-    return _regenerator().w(function(_context11) {
-      while (1) switch (_context11.n) {
+  _resolve4 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee15(embedUrl, ref) {
+    return _regenerator().w(function(_context15) {
+      while (1) switch (_context15.n) {
         case 0:
-          return _context11.a(2, {
+          return _context15.a(2, {
             url: ref
           });
       }
-    }, _callee11);
+    }, _callee15);
   }));
   return _resolve4.apply(this, arguments);
 }
@@ -20243,11 +20272,11 @@ function playerTree(player, embedUrl, referer, ua) {
     return player.tree(embedUrl, referer, ua);
   });
 }
-function nodeAt(nodes, path) {
+function nodeAt(nodes, path2) {
   var node = {
     children: nodes
   };
-  var _iterator9 = _createForOfIteratorHelper(path), _step9;
+  var _iterator9 = _createForOfIteratorHelper(path2), _step9;
   try {
     for (_iterator9.s(); !(_step9 = _iterator9.n()).done; ) {
       var _node$children;
@@ -20273,31 +20302,31 @@ function hlsVariants(_x18, _x19) {
   return _hlsVariants.apply(this, arguments);
 }
 function _hlsVariants() {
-  _hlsVariants = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee12(masterUrl, ua) {
+  _hlsVariants = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee16(masterUrl, ua) {
     var text, lines, variants, i, _lines, _m$1$match, _m$1$match2, m, uri, height, bandwidth, _t6;
-    return _regenerator().w(function(_context12) {
-      while (1) switch (_context12.p = _context12.n) {
+    return _regenerator().w(function(_context16) {
+      while (1) switch (_context16.p = _context16.n) {
         case 0:
-          _context12.p = 0;
-          _context12.n = 1;
+          _context16.p = 0;
+          _context16.n = 1;
           return getText(masterUrl, uaHeaders(ua));
         case 1:
-          text = _context12.v;
+          text = _context16.v;
           lines = text.split(/\r?\n/);
           variants = [];
           i = 0;
         case 2:
           if (!(i < lines.length)) {
-            _context12.n = 5;
+            _context16.n = 5;
             break;
           }
           m = lines[i].match(/^#EXT-X-STREAM-INF:(.*)$/);
           uri = (_lines = lines[i + 1]) === null || _lines === void 0 ? void 0 : _lines.trim();
           if (!(!m || !uri || uri.startsWith("#"))) {
-            _context12.n = 3;
+            _context16.n = 3;
             break;
           }
-          return _context12.a(3, 4);
+          return _context16.a(3, 4);
         case 3:
           height = Number(((_m$1$match = m[1].match(/RESOLUTION=\d+x(\d+)/)) === null || _m$1$match === void 0 ? void 0 : _m$1$match[1]) || 0);
           bandwidth = Number(((_m$1$match2 = m[1].match(/BANDWIDTH=(\d+)/)) === null || _m$1$match2 === void 0 ? void 0 : _m$1$match2[1]) || 0);
@@ -20308,19 +20337,19 @@ function _hlsVariants() {
           });
         case 4:
           i++;
-          _context12.n = 2;
+          _context16.n = 2;
           break;
         case 5:
-          return _context12.a(2, variants.sort(function(a, b) {
+          return _context16.a(2, variants.sort(function(a, b) {
             return b.height - a.height || b.bandwidth - a.bandwidth;
           }));
         case 6:
-          _context12.p = 6;
-          _t6 = _context12.v;
+          _context16.p = 6;
+          _t6 = _context16.v;
           console.warn("hlsVariants " + masterUrl + ": " + (_t6 && _t6.message));
-          return _context12.a(2, []);
+          return _context16.a(2, []);
       }
-    }, _callee12, null, [[0, 6]]);
+    }, _callee16, null, [[0, 6]]);
   }));
   return _hlsVariants.apply(this, arguments);
 }
@@ -20328,26 +20357,26 @@ function absolutePlaylist(_x20, _x21) {
   return _absolutePlaylist.apply(this, arguments);
 }
 function _absolutePlaylist() {
-  _absolutePlaylist = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee13(playlistUrl, ua) {
+  _absolutePlaylist = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee17(playlistUrl, ua) {
     var text, abs;
-    return _regenerator().w(function(_context13) {
-      while (1) switch (_context13.n) {
+    return _regenerator().w(function(_context17) {
+      while (1) switch (_context17.n) {
         case 0:
-          _context13.n = 1;
+          _context17.n = 1;
           return getText(playlistUrl, uaHeaders(ua));
         case 1:
-          text = _context13.v;
+          text = _context17.v;
           abs = function abs2(u) {
             return new URL(u, playlistUrl).href;
           };
-          return _context13.a(2, text.split(/\r?\n/).map(function(line) {
+          return _context17.a(2, text.split(/\r?\n/).map(function(line) {
             if (!line || line.startsWith("#")) return line.replace(/URI="([^"]+)"/g, function(_, u) {
               return 'URI="'.concat(abs(u), '"');
             });
             return abs(line.trim());
           }).join("\n"));
       }
-    }, _callee13);
+    }, _callee17);
   }));
   return _absolutePlaylist.apply(this, arguments);
 }
@@ -20380,19 +20409,19 @@ function createDleSite(cfg) {
     list: function list() {
       var _arguments = arguments;
       return _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee2() {
-        var path, pageNo, base, url, html, _parseCards, items, hasNext;
+        var path2, pageNo, base, url, html, _parseCards, items, hasNext;
         return _regenerator().w(function(_context2) {
           while (1) switch (_context2.n) {
             case 0:
-              path = _arguments.length > 0 && _arguments[0] !== void 0 ? _arguments[0] : "/";
+              path2 = _arguments.length > 0 && _arguments[0] !== void 0 ? _arguments[0] : "/";
               pageNo = _arguments.length > 1 && _arguments[1] !== void 0 ? _arguments[1] : 1;
-              if (/^\/[\w\-\/]*$/.test(path)) {
+              if (/^\/[\w\-\/]*$/.test(path2)) {
                 _context2.n = 1;
                 break;
               }
               throw new Error("\u041D\u0435\u0432\u0435\u0440\u043D\u044B\u0439 \u043F\u0443\u0442\u044C \u0440\u0430\u0437\u0434\u0435\u043B\u0430");
             case 1:
-              base = path.endsWith("/") ? path : path + "/";
+              base = path2.endsWith("/") ? path2 : path2 + "/";
               url = host + (pageNo > 1 ? "".concat(base, "page/").concat(pageNo, "/") : base);
               _context2.n = 2;
               return getTextCached(url);
@@ -20516,60 +20545,1822 @@ var sites = {
   rezka: rezka,
   kinogo: kinogo
 };
-var ICON_BASE64 = "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";
 var import_querystring = __toESM(require("querystring"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_os = __toESM(require("os"), 1);
+var import_path = __toESM(require("path"), 1);
+var import_crypto = __toESM(require("crypto"), 1);
+var NAME = "qino-state.json";
+function tizenDataFile() {
+  var dir = typeof __dirname === "string" ? __dirname : "";
+  var m = /^\/opt\/usr\/apps\/([^/]+)\//.exec("".concat(dir, "/"));
+  var data = "/opt/usr/home/owner/apps_rw/".concat(m ? m[1] : "FxmlKinoTV", "/data");
+  return import_fs.default.existsSync(data) ? import_path.default.join(data, NAME) : null;
+}
+var CANDIDATES = [
+  process.env.QINO_STATE,
+  tizenDataFile(),
+  // Next to the bundle: LG webOS (the app's service folder is writable there); read-only on Tizen.
+  typeof __dirname === "string" ? import_path.default.join(__dirname, "data", NAME) : null,
+  import_path.default.resolve("data", NAME),
+  import_path.default.join(import_os.default.tmpdir(), "fxmlkino-".concat(NAME))
+].filter(Boolean);
+var file = CANDIDATES.find(function(f) {
+  return import_fs.default.existsSync(f);
+}) || null;
+var state = load2();
+console.warn("[qino] state file: ".concat(file || "none yet", " (candidates: ").concat(CANDIDATES.join(", "), ")"));
+function load2() {
+  try {
+    return file ? JSON.parse(import_fs.default.readFileSync(file, "utf8")) : {};
+  } catch (e) {
+    return {};
+  }
+}
+function tryWrite(f) {
+  try {
+    var dir = import_path.default.dirname(f);
+    if (!import_fs.default.existsSync(dir)) import_fs.default.mkdirSync(dir);
+    import_fs.default.writeFileSync(f, JSON.stringify(state, null, 2));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+function save() {
+  var before = file;
+  file = CANDIDATES.find(tryWrite) || null;
+  if (file === before) return;
+  console.warn("[qino] state file: ".concat(file || "none, memory only"));
+  try {
+    if (before && file) import_fs.default.unlinkSync(before);
+  } catch (e) {
+  }
+}
+function get(key) {
+  return state[key];
+}
+function set(patch) {
+  state = _objectSpread2(_objectSpread2({}, state), patch);
+  for (var _i8 = 0, _Object$keys4 = Object.keys(state); _i8 < _Object$keys4.length; _i8++) {
+    var k = _Object$keys4[_i8];
+    if (state[k] === void 0) delete state[k];
+  }
+  save();
+}
+function session() {
+  return process.env.QINO_SESSION || state.session || "";
+}
+function deviceUuid() {
+  if (!state.deviceUuid) {
+    var b = import_crypto.default.randomBytes(16);
+    b[6] = b[6] & 15 | 64;
+    b[8] = b[8] & 63 | 128;
+    var h = b.toString("hex");
+    set({
+      deviceUuid: "".concat(h.slice(0, 8), "-").concat(h.slice(8, 12), "-").concat(h.slice(12, 16), "-").concat(h.slice(16, 20), "-").concat(h.slice(20))
+    });
+  }
+  return state.deviceUuid;
+}
+var FE = process.env.QINO_FE || "https://tele2.server-api.lfstrm.tv";
+var BE = process.env.QINO_BE || "https://qino.sequoia-api.lfstrm.tv";
+var UA2 = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
+var TIMEOUT_MS2 = 15e3;
+var ApiError = /* @__PURE__ */ (function(_Error) {
+  "use strict";
+  function ApiError2(status2, message, data) {
+    var _this5;
+    _classCallCheck2(this, ApiError2);
+    _this5 = _callSuper(this, ApiError2, [message]);
+    _this5.status = status2;
+    _this5.data = data;
+    return _this5;
+  }
+  _inherits(ApiError2, _Error);
+  return _createClass2(ApiError2);
+})(/* @__PURE__ */ _wrapNativeSuper(Error));
+function appParams() {
+  return {
+    "app.version": "3.10.6",
+    "app.hash": "01ec5f98",
+    "app.buildDate": "1786453794000",
+    "app.id": "sequoia",
+    "app.buildType": "portal",
+    "app.whitelabel": "qino",
+    "app.hostname": "",
+    "app.env": "",
+    "device.type": "pc",
+    "device.brand": "pc",
+    "device.model": "none",
+    "device.uuid": deviceUuid(),
+    "device.drm": "wvm"
+  };
+}
+function timeoutOption(ms) {
+  return typeof AbortSignal !== "undefined" && AbortSignal.timeout ? {
+    signal: AbortSignal.timeout(ms)
+  } : {
+    timeout: ms
+  };
+}
+function call(_x22, _x23) {
+  return _call.apply(this, arguments);
+}
+function _call() {
+  _call = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee18(base, path2) {
+    var _ref10, _ref10$method, method, _ref10$params, params, form, json, _ref10$headers, extra, _ref10$withSession, withSession, _ref10$raw, raw, _ref10$timeout, timeout, q, _i11, _Object$keys7, k, headers, body, res, text, data, msg, _args18 = arguments;
+    return _regenerator().w(function(_context18) {
+      while (1) switch (_context18.n) {
+        case 0:
+          _ref10 = _args18.length > 2 && _args18[2] !== void 0 ? _args18[2] : {}, _ref10$method = _ref10.method, method = _ref10$method === void 0 ? "GET" : _ref10$method, _ref10$params = _ref10.params, params = _ref10$params === void 0 ? {} : _ref10$params, form = _ref10.form, json = _ref10.json, _ref10$headers = _ref10.headers, extra = _ref10$headers === void 0 ? {} : _ref10$headers, _ref10$withSession = _ref10.withSession, withSession = _ref10$withSession === void 0 ? true : _ref10$withSession, _ref10$raw = _ref10.raw, raw = _ref10$raw === void 0 ? false : _ref10$raw, _ref10$timeout = _ref10.timeout, timeout = _ref10$timeout === void 0 ? TIMEOUT_MS2 : _ref10$timeout;
+          q = {};
+          for (_i11 = 0, _Object$keys7 = Object.keys(params); _i11 < _Object$keys7.length; _i11++) {
+            k = _Object$keys7[_i11];
+            if (params[k] !== void 0) q[k] = params[k];
+          }
+          if (withSession && session()) q.session = session();
+          Object.assign(q, appParams());
+          headers = _objectSpread2({
+            "User-Agent": UA2,
+            "Accept-Language": "ru"
+          }, extra);
+          if (form) {
+            headers["Content-Type"] = "application/x-www-form-urlencoded";
+            body = import_querystring.default.stringify(form);
+          } else if (json) {
+            headers["Content-Type"] = "application/json";
+            body = JSON.stringify(json);
+          }
+          _context18.n = 1;
+          return fetch("".concat(base).concat(path2, "?").concat(import_querystring.default.stringify(q)), _objectSpread2({
+            method: method,
+            headers: headers,
+            body: body
+          }, timeoutOption(timeout)));
+        case 1:
+          res = _context18.v;
+          if (!(raw && res.ok)) {
+            _context18.n = 2;
+            break;
+          }
+          return _context18.a(2, res);
+        case 2:
+          _context18.n = 3;
+          return res.text();
+        case 3:
+          text = _context18.v;
+          data = null;
+          try {
+            data = text ? JSON.parse(text) : null;
+          } catch (e) {
+            data = text;
+          }
+          if (res.ok) {
+            _context18.n = 4;
+            break;
+          }
+          msg = data && (data.msg || data.message || data.error) || "HTTP ".concat(res.status);
+          throw new ApiError(res.status, typeof msg === "string" ? msg : JSON.stringify(msg), data);
+        case 4:
+          return _context18.a(2, data);
+      }
+    }, _callee18);
+  }));
+  return _call.apply(this, arguments);
+}
+var cache2 = /* @__PURE__ */ new Map();
+function cached2(key, ttlMs, producer) {
+  var k = "".concat(session(), " ").concat(key);
+  var hit = cache2.get(k);
+  if (hit && hit.expires > Date.now()) return hit.value;
+  var value = Promise.resolve().then(producer);
+  cache2.set(k, {
+    value: value,
+    expires: Date.now() + ttlMs
+  });
+  value.catch(function() {
+    return cache2.delete(k);
+  });
+  return value;
+}
+function clearCache() {
+  cache2.clear();
+}
+function account() {
+  return cached2("account", 60 * 1e3, function() {
+    return call(FE, "/v2/account");
+  });
+}
+function isLoggedIn() {
+  return _isLoggedIn.apply(this, arguments);
+}
+function _isLoggedIn() {
+  _isLoggedIn = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee19() {
+    var _t7;
+    return _regenerator().w(function(_context19) {
+      while (1) switch (_context19.p = _context19.n) {
+        case 0:
+          if (session()) {
+            _context19.n = 1;
+            break;
+          }
+          return _context19.a(2, false);
+        case 1:
+          _context19.p = 1;
+          _context19.n = 2;
+          return account();
+        case 2:
+          return _context19.a(2, !_context19.v.anonymous);
+        case 3:
+          _context19.p = 3;
+          _t7 = _context19.v;
+          return _context19.a(2, false);
+      }
+    }, _callee19, null, [[1, 3]]);
+  }));
+  return _isLoggedIn.apply(this, arguments);
+}
+function tvAssetToken() {
+  return cached2("asset-tokens", 30 * 60 * 1e3, /* @__PURE__ */ _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee5() {
+    return _regenerator().w(function(_context5) {
+      while (1) switch (_context5.n) {
+        case 0:
+          _context5.n = 1;
+          return call(FE, "/user/v1/asset-tokens/v2");
+        case 1:
+          return _context5.a(2, _context5.v.assetTokens.tvAssetToken);
+      }
+    }, _callee5);
+  })));
+}
+function channels() {
+  return cached2("channels", 30 * 60 * 1e3, /* @__PURE__ */ _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee6() {
+    var token, _yield$Promise$all, _yield$Promise$all2, list, medias, byChannel;
+    return _regenerator().w(function(_context6) {
+      while (1) switch (_context6.n) {
+        case 0:
+          _context6.n = 1;
+          return tvAssetToken();
+        case 1:
+          token = _context6.v;
+          _context6.n = 2;
+          return Promise.all([call(FE, "/tv/v2/channels", {
+            params: {
+              "tv-asset-token": token
+            }
+          }), call(FE, "/tv/v2/medias", {
+            params: {
+              "tv-asset-token": token
+            }
+          })]);
+        case 2:
+          _yield$Promise$all = _context6.v;
+          _yield$Promise$all2 = _slicedToArray(_yield$Promise$all, 2);
+          list = _yield$Promise$all2[0].channels;
+          medias = _yield$Promise$all2[1].medias;
+          byChannel = new Map(medias.map(function(m) {
+            return [m.channelId, m];
+          }));
+          return _context6.a(2, list.map(function(c) {
+            var m = byChannel.get(c.id);
+            return {
+              id: c.id,
+              title: c.title,
+              number: c.keyNumber,
+              logo: c.logoUrl,
+              genres: (c.relevantGenres || []).map(function(g2) {
+                return g2.genreId;
+              }),
+              mediaId: m && m.id,
+              scheduleId: m && m.scheduleId,
+              locked: !m || m.isLocked
+            };
+          }).sort(function(a, b) {
+            return (a.number == null ? 9999 : a.number) - (b.number == null ? 9999 : b.number);
+          }));
+      }
+    }, _callee6);
+  })));
+}
+function onAir() {
+  return cached2("on-air", 10 * 60 * 1e3, /* @__PURE__ */ _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee7() {
+    var token, _yield$call, _yield$call$schedules, schedules, map, _iterator0, _step0, s, events;
+    return _regenerator().w(function(_context7) {
+      while (1) switch (_context7.n) {
+        case 0:
+          _context7.n = 1;
+          return tvAssetToken();
+        case 1:
+          token = _context7.v;
+          _context7.n = 2;
+          return call(FE, "/epg/v2/on-air", {
+            params: {
+              "tv-asset-token": token
+            }
+          });
+        case 2:
+          _yield$call = _context7.v;
+          _yield$call$schedules = _yield$call.schedules;
+          schedules = _yield$call$schedules === void 0 ? [] : _yield$call$schedules;
+          map = /* @__PURE__ */ new Map();
+          _iterator0 = _createForOfIteratorHelper(schedules);
+          try {
+            for (_iterator0.s(); !(_step0 = _iterator0.n()).done; ) {
+              s = _step0.value;
+              events = (s.events || []).map(function(e) {
+                return {
+                  title: e.title,
+                  begin: Date.parse(e.scheduledFor.begin),
+                  end: Date.parse(e.scheduledFor.end)
+                };
+              }).sort(function(a, b) {
+                return a.begin - b.begin;
+              });
+              map.set(s.scheduleId, events);
+            }
+          } catch (err) {
+            _iterator0.e(err);
+          } finally {
+            _iterator0.f();
+          }
+          return _context7.a(2, map);
+      }
+    }, _callee7);
+  })));
+}
+function nowAndNext(_x24) {
+  return _nowAndNext.apply(this, arguments);
+}
+function _nowAndNext() {
+  _nowAndNext = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee20(scheduleId) {
+    var events, now, i, k, _t8, _t9;
+    return _regenerator().w(function(_context20) {
+      while (1) switch (_context20.p = _context20.n) {
+        case 0:
+          _context20.p = 0;
+          _context20.n = 1;
+          return onAir();
+        case 1:
+          _t8 = _context20.v.get(scheduleId);
+          if (_t8) {
+            _context20.n = 2;
+            break;
+          }
+          _t8 = [];
+        case 2:
+          events = _t8;
+          _context20.n = 4;
+          break;
+        case 3:
+          _context20.p = 3;
+          _t9 = _context20.v;
+          return _context20.a(2, {});
+        case 4:
+          now = Date.now();
+          i = -1;
+          k = 0;
+        case 5:
+          if (!(k < events.length)) {
+            _context20.n = 7;
+            break;
+          }
+          if (!(events[k].begin <= now && now < events[k].end)) {
+            _context20.n = 6;
+            break;
+          }
+          i = k;
+          return _context20.a(3, 7);
+        case 6:
+          k++;
+          _context20.n = 5;
+          break;
+        case 7:
+          if (!(i < 0)) {
+            _context20.n = 8;
+            break;
+          }
+          return _context20.a(2, {
+            next: events.find(function(e) {
+              return e.begin > now;
+            })
+          });
+        case 8:
+          return _context20.a(2, {
+            now: events[i],
+            next: events[i + 1]
+          });
+      }
+    }, _callee20, null, [[0, 3]]);
+  }));
+  return _nowAndNext.apply(this, arguments);
+}
+function playback(mediaId) {
+  return cached2("playback ".concat(mediaId), 10 * 60 * 1e3, /* @__PURE__ */ _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee8() {
+    var info2, languages;
+    return _regenerator().w(function(_context8) {
+      while (1) switch (_context8.n) {
+        case 0:
+          _context8.n = 1;
+          return call(FE, "/playback-info-media/".concat(encodeURIComponent(mediaId)), {
+            params: {
+              enable50fps: "true"
+            }
+          });
+        case 1:
+          info2 = _context8.v;
+          languages = (info2.languages || []).map(function(l) {
+            return {
+              id: l.id,
+              default: !!l.default,
+              renditions: (l.renditions || []).filter(function(r) {
+                return r.url;
+              }).map(function(r) {
+                return {
+                  id: r.id || r.caption,
+                  url: r.url
+                };
+              })
+            };
+          }).filter(function(l) {
+            return l.renditions.length;
+          }).sort(function(a, b) {
+            return b.default - a.default;
+          });
+          if (languages.length) {
+            _context8.n = 2;
+            break;
+          }
+          throw new ApiError(404, "\u0421\u0435\u0440\u0432\u0435\u0440 \u043D\u0435 \u0432\u0435\u0440\u043D\u0443\u043B \u0441\u0441\u044B\u043B\u043A\u0443 \u043D\u0430 \u043F\u043E\u0442\u043E\u043A");
+        case 2:
+          return _context8.a(2, languages);
+      }
+    }, _callee8);
+  })));
+}
+function captchaImage() {
+  return _captchaImage.apply(this, arguments);
+}
+function _captchaImage() {
+  _captchaImage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee21() {
+    var res, image, h, cookies, setCookies, _t0;
+    return _regenerator().w(function(_context21) {
+      while (1) switch (_context21.n) {
+        case 0:
+          _context21.n = 1;
+          return call(BE, "/contacts-verification/v1/captcha", {
+            params: {
+              t: Date.now()
+            },
+            withSession: false,
+            raw: true
+          });
+        case 1:
+          res = _context21.v;
+          _t0 = Buffer;
+          _context21.n = 2;
+          return res.arrayBuffer();
+        case 2:
+          image = _t0.from.call(_t0, _context21.v);
+          h = res.headers;
+          cookies = "";
+          try {
+            cookies = JSON.parse(h.get("cookie-custom") || "[]").map(function(c) {
+              return "".concat(c.name, "=").concat(c.value, ";");
+            }).join("");
+          } catch (e) {
+          }
+          setCookies = (h.getSetCookie ? h.getSetCookie() : h.raw && h.raw()["set-cookie"] || []).map(function(c) {
+            return c.split(";")[0];
+          });
+          return _context21.a(2, {
+            image: image,
+            type: h.get("content-type") || "image/png",
+            cookies: cookies,
+            cookieHeader: setCookies.join("; ")
+          });
+      }
+    }, _callee21);
+  }));
+  return _captchaImage.apply(this, arguments);
+}
+function startVerification(_ref9) {
+  var phone = _ref9.phone, captcha = _ref9.captcha, cookies = _ref9.cookies, cookieHeader = _ref9.cookieHeader;
+  var cookie = [cookieHeader, cookies.replace(/;$/, "").replace(/;/g, "; ")].filter(Boolean).join("; ");
+  return call(BE, "/contacts-verification/v1/start", {
+    method: "POST",
+    withSession: false,
+    headers: cookie ? {
+      Cookie: cookie
+    } : {},
+    json: {
+      type: "phone",
+      contacts: phone,
+      captcha: captcha,
+      reason: "authentication",
+      cookies: cookies
+    }
+  });
+}
+function verifyCode(_ref0) {
+  var id = _ref0.id, phone = _ref0.phone, code = _ref0.code;
+  if (id) return call(FE, "/contacts-verification/v1/verify/v2", {
+    method: "POST",
+    withSession: false,
+    form: {
+      id: id,
+      code: code
+    }
+  });
+  return call(FE, "/contacts-verification/v1/verify", {
+    method: "POST",
+    withSession: false,
+    form: {
+      type: "phone",
+      contacts: phone,
+      code: code
+    }
+  });
+}
+function availableLogins(_x25) {
+  return _availableLogins.apply(this, arguments);
+}
+function _availableLogins() {
+  _availableLogins = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee22(sessionToken) {
+    var res;
+    return _regenerator().w(function(_context22) {
+      while (1) switch (_context22.n) {
+        case 0:
+          _context22.n = 1;
+          return call(FE, "/auth/v1/with-verified-contacts/available-logins", {
+            withSession: false,
+            params: {
+              "contacts-session-token": sessionToken
+            }
+          });
+        case 1:
+          res = _context22.v;
+          return _context22.a(2, res && res.options || []);
+      }
+    }, _callee22);
+  }));
+  return _availableLogins.apply(this, arguments);
+}
+function loginWithVerifiedContacts(_x26, _x27) {
+  return _loginWithVerifiedContacts.apply(this, arguments);
+}
+function _loginWithVerifiedContacts() {
+  _loginWithVerifiedContacts = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee23(sessionToken, login) {
+    var res;
+    return _regenerator().w(function(_context23) {
+      while (1) switch (_context23.n) {
+        case 0:
+          _context23.n = 1;
+          return call(FE, "/v2/login/methods/with-verified-contacts", {
+            method: "POST",
+            withSession: false,
+            params: {
+              "contacts-session-token": sessionToken
+            },
+            form: {
+              login: login
+            },
+            timeout: 3e4
+          });
+        case 1:
+          res = _context23.v;
+          if (!(!res || !res.session)) {
+            _context23.n = 2;
+            break;
+          }
+          throw new ApiError(500, "\u0421\u0435\u0440\u0432\u0435\u0440 \u043D\u0435 \u0432\u0435\u0440\u043D\u0443\u043B \u0441\u0435\u0441\u0441\u0438\u044E");
+        case 2:
+          set({
+            session: res.session,
+            login: login
+          });
+          clearCache();
+          return _context23.a(2, res);
+      }
+    }, _callee23);
+  }));
+  return _loginWithVerifiedContacts.apply(this, arguments);
+}
+function logout() {
+  return _logout.apply(this, arguments);
+}
+function _logout() {
+  _logout = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee24() {
+    var _t1;
+    return _regenerator().w(function(_context24) {
+      while (1) switch (_context24.p = _context24.n) {
+        case 0:
+          _context24.p = 0;
+          _context24.n = 1;
+          return call(FE, "/logout");
+        case 1:
+          _context24.n = 3;
+          break;
+        case 2:
+          _context24.p = 2;
+          _t1 = _context24.v;
+        case 3:
+          set({
+            session: void 0,
+            login: void 0
+          });
+          clearCache();
+        case 4:
+          return _context24.a(2);
+      }
+    }, _callee24, null, [[0, 2]]);
+  }));
+  return _logout.apply(this, arguments);
+}
+var import_crypto2 = __toESM(require("crypto"), 1);
+var import_os2 = __toESM(require("os"), 1);
+var TTL_MS = 15 * 60 * 1e3;
+var pending = /* @__PURE__ */ new Map();
+function cleanup() {
+  var _iterator1 = _createForOfIteratorHelper(pending), _step1;
+  try {
+    for (_iterator1.s(); !(_step1 = _iterator1.n()).done; ) {
+      var _step1$value = _slicedToArray(_step1.value, 2), lid = _step1$value[0], p = _step1$value[1];
+      if (Date.now() - p.created > TTL_MS) pending.delete(lid);
+    }
+  } catch (err) {
+    _iterator1.e(err);
+  } finally {
+    _iterator1.f();
+  }
+}
+function attempt(lid) {
+  var p = pending.get(String(lid || ""));
+  if (!p) throw Object.assign(new Error("\u0412\u0445\u043E\u0434 \u0443\u0441\u0442\u0430\u0440\u0435\u043B, \u043D\u0430\u0447\u043D\u0438\u0442\u0435 \u0437\u0430\u043D\u043E\u0432\u043E"), {
+    status: 410
+  });
+  return p;
+}
+function normalizePhone(value) {
+  var d = String(value || "").replace(/\D/g, "");
+  if (d.length === 11 && d[0] === "8") d = "7".concat(d.slice(1));
+  if (d.length === 10) d = "7".concat(d);
+  if (d.length < 11 || d.length > 13) throw Object.assign(new Error("\u041D\u0435\u0432\u0435\u0440\u043D\u044B\u0439 \u043D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430"), {
+    status: 400
+  });
+  return "+".concat(d);
+}
+function newCaptcha(_x28) {
+  return _newCaptcha.apply(this, arguments);
+}
+function _newCaptcha() {
+  _newCaptcha = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee25(p) {
+    var _yield$captchaImage, image, type, cookies, cookieHeader;
+    return _regenerator().w(function(_context25) {
+      while (1) switch (_context25.n) {
+        case 0:
+          _context25.n = 1;
+          return captchaImage();
+        case 1:
+          _yield$captchaImage = _context25.v;
+          image = _yield$captchaImage.image;
+          type = _yield$captchaImage.type;
+          cookies = _yield$captchaImage.cookies;
+          cookieHeader = _yield$captchaImage.cookieHeader;
+          Object.assign(p, {
+            captcha: {
+              image: image,
+              type: type
+            },
+            cookies: cookies,
+            cookieHeader: cookieHeader
+          });
+        case 2:
+          return _context25.a(2);
+      }
+    }, _callee25);
+  }));
+  return _newCaptcha.apply(this, arguments);
+}
+var REUSE_MS = 3 * 60 * 1e3;
+function begin(_x29) {
+  return _begin.apply(this, arguments);
+}
+function _begin() {
+  _begin = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee26(phoneInput) {
+    var phone, _iterator12, _step12, _step12$value, oldLid, old, lid, p, _t10;
+    return _regenerator().w(function(_context26) {
+      while (1) switch (_context26.p = _context26.n) {
+        case 0:
+          cleanup();
+          phone = normalizePhone(phoneInput);
+          _iterator12 = _createForOfIteratorHelper(pending);
+          _context26.p = 1;
+          _iterator12.s();
+        case 2:
+          if ((_step12 = _iterator12.n()).done) {
+            _context26.n = 4;
+            break;
+          }
+          _step12$value = _slicedToArray(_step12.value, 2), oldLid = _step12$value[0], old = _step12$value[1];
+          if (!(old.phone === phone && !old.verification && Date.now() - old.created < REUSE_MS)) {
+            _context26.n = 3;
+            break;
+          }
+          return _context26.a(2, oldLid);
+        case 3:
+          _context26.n = 2;
+          break;
+        case 4:
+          _context26.n = 6;
+          break;
+        case 5:
+          _context26.p = 5;
+          _t10 = _context26.v;
+          _iterator12.e(_t10);
+        case 6:
+          _context26.p = 6;
+          _iterator12.f();
+          return _context26.f(6);
+        case 7:
+          lid = import_crypto2.default.randomBytes(8).toString("hex");
+          p = {
+            phone: phone,
+            created: Date.now()
+          };
+          _context26.n = 8;
+          return newCaptcha(p);
+        case 8:
+          pending.set(lid, p);
+          return _context26.a(2, lid);
+      }
+    }, _callee26, null, [[1, 5, 6, 7]]);
+  }));
+  return _begin.apply(this, arguments);
+}
+function sendSms(_x30, _x31) {
+  return _sendSms.apply(this, arguments);
+}
+function _sendSms() {
+  _sendSms = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee27(p, captchaText) {
+    var _t11;
+    return _regenerator().w(function(_context27) {
+      while (1) switch (_context27.p = _context27.n) {
+        case 0:
+          _context27.p = 0;
+          _context27.n = 1;
+          return startVerification({
+            phone: p.phone,
+            captcha: String(captchaText || "").trim(),
+            cookies: p.cookies,
+            cookieHeader: p.cookieHeader
+          });
+        case 1:
+          p.verification = _context27.v;
+          _context27.n = 4;
+          break;
+        case 2:
+          _context27.p = 2;
+          _t11 = _context27.v;
+          _context27.n = 3;
+          return newCaptcha(p);
+        case 3:
+          throw _t11;
+        case 4:
+          return _context27.a(2);
+      }
+    }, _callee27, null, [[0, 2]]);
+  }));
+  return _sendSms.apply(this, arguments);
+}
+function checkCode(_x32, _x33) {
+  return _checkCode.apply(this, arguments);
+}
+function _checkCode() {
+  _checkCode = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee28(p, code) {
+    var result;
+    return _regenerator().w(function(_context28) {
+      while (1) switch (_context28.n) {
+        case 0:
+          _context28.n = 1;
+          return verifyCode({
+            id: p.verification && p.verification.id,
+            phone: p.phone,
+            code: String(code || "").trim()
+          });
+        case 1:
+          result = _context28.v;
+          if (!(!result || !result.sessionToken)) {
+            _context28.n = 2;
+            break;
+          }
+          throw new Error("\u041D\u0435\u0432\u0435\u0440\u043D\u044B\u0439 \u043A\u043E\u0434");
+        case 2:
+          p.token = result.sessionToken;
+          _context28.n = 3;
+          return availableLogins(p.token);
+        case 3:
+          p.logins = _context28.v.map(function(o) {
+            return o.login;
+          }).filter(Boolean);
+          if (p.logins.length) {
+            _context28.n = 4;
+            break;
+          }
+          throw new Error("\u041A \u044D\u0442\u043E\u043C\u0443 \u043D\u043E\u043C\u0435\u0440\u0443 \u043D\u0435 \u043F\u0440\u0438\u0432\u044F\u0437\u0430\u043D \u0430\u043A\u043A\u0430\u0443\u043D\u0442 qino");
+        case 4:
+          if (!(p.logins.length === 1)) {
+            _context28.n = 5;
+            break;
+          }
+          return _context28.a(2, finish(p, p.logins[0]));
+        case 5:
+          return _context28.a(2, {
+            logins: p.logins
+          });
+      }
+    }, _callee28);
+  }));
+  return _checkCode.apply(this, arguments);
+}
+function finish(_x34, _x35) {
+  return _finish.apply(this, arguments);
+}
+function _finish() {
+  _finish = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee29(p, login) {
+    var _iterator13, _step13, _step13$value, lid, v;
+    return _regenerator().w(function(_context29) {
+      while (1) switch (_context29.n) {
+        case 0:
+          if (!(!p.token || !p.logins || p.logins.indexOf(login) < 0)) {
+            _context29.n = 1;
+            break;
+          }
+          throw new Error("\u0421\u043D\u0430\u0447\u0430\u043B\u0430 \u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u043A\u043E\u0434 \u0438\u0437 SMS");
+        case 1:
+          _context29.n = 2;
+          return loginWithVerifiedContacts(p.token, login);
+        case 2:
+          _iterator13 = _createForOfIteratorHelper(pending);
+          try {
+            for (_iterator13.s(); !(_step13 = _iterator13.n()).done; ) {
+              _step13$value = _slicedToArray(_step13.value, 2), lid = _step13$value[0], v = _step13$value[1];
+              if (v === p) pending.delete(lid);
+            }
+          } catch (err) {
+            _iterator13.e(err);
+          } finally {
+            _iterator13.f();
+          }
+          return _context29.a(2, {
+            done: true,
+            login: login
+          });
+      }
+    }, _callee29);
+  }));
+  return _finish.apply(this, arguments);
+}
+function useSession(_x36) {
+  return _useSession.apply(this, arguments);
+}
+function _useSession() {
+  _useSession = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee30(b) {
+    var session2, before, acc;
+    return _regenerator().w(function(_context30) {
+      while (1) switch (_context30.n) {
+        case 0:
+          session2 = String(b.session || "").trim();
+          if (session2) {
+            _context30.n = 1;
+            break;
+          }
+          throw Object.assign(new Error("\u041F\u0443\u0441\u0442\u0430\u044F \u0441\u0435\u0441\u0441\u0438\u044F"), {
+            status: 400
+          });
+        case 1:
+          before = {
+            session: get("session"),
+            deviceUuid: get("deviceUuid")
+          };
+          set({
+            session: session2,
+            deviceUuid: String(b.deviceUuid || "").trim() || before.deviceUuid
+          });
+          clearCache();
+          _context30.n = 2;
+          return isLoggedIn();
+        case 2:
+          if (_context30.v) {
+            _context30.n = 3;
+            break;
+          }
+          set(before);
+          clearCache();
+          throw Object.assign(new Error("qino \u043D\u0435 \u043F\u0440\u0438\u043D\u044F\u043B \u044D\u0442\u0443 \u0441\u0435\u0441\u0441\u0438\u044E"), {
+            status: 400
+          });
+        case 3:
+          _context30.n = 4;
+          return account();
+        case 4:
+          acc = _context30.v;
+          return _context30.a(2, {
+            done: true,
+            login: acc.profile && acc.profile.name || acc.user && acc.user.login || "\u0430\u043A\u043A\u0430\u0443\u043D\u0442"
+          });
+      }
+    }, _callee30);
+  }));
+  return _useSession.apply(this, arguments);
+}
+function status() {
+  return _status.apply(this, arguments);
+}
+function _status() {
+  _status = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee31() {
+    var acc, login;
+    return _regenerator().w(function(_context31) {
+      while (1) switch (_context31.n) {
+        case 0:
+          _context31.n = 1;
+          return isLoggedIn();
+        case 1:
+          if (_context31.v) {
+            _context31.n = 2;
+            break;
+          }
+          return _context31.a(2, {
+            loggedIn: false
+          });
+        case 2:
+          _context31.n = 3;
+          return account();
+        case 3:
+          acc = _context31.v;
+          login = acc.profile && acc.profile.name || acc.user && acc.user.login || "\u0430\u043A\u043A\u0430\u0443\u043D\u0442";
+          return _context31.a(2, {
+            loggedIn: true,
+            login: login,
+            session: session()
+          });
+      }
+    }, _callee31);
+  }));
+  return _status.apply(this, arguments);
+}
+function loginRoute(_x37, _x38, _x39) {
+  return _loginRoute.apply(this, arguments);
+}
+function _loginRoute() {
+  _loginRoute = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee32(sub, q, ctx2) {
+    var base, p, _t12;
+    return _regenerator().w(function(_context32) {
+      while (1) switch (_context32.p = _context32.n) {
+        case 0:
+          base = "".concat(ctx2.base, "/qino/login");
+          if (!(sub === "")) {
+            _context32.n = 1;
+            break;
+          }
+          return _context32.a(2, {
+            html: WEB_PAGE
+          });
+        case 1:
+          if (!(sub === "/captcha.png")) {
+            _context32.n = 3;
+            break;
+          }
+          p = pending.get(String(q.lid || ""));
+          if (!(!p || !p.captcha)) {
+            _context32.n = 2;
+            break;
+          }
+          return _context32.a(2, {
+            binary: Buffer.alloc(0),
+            type: "text/plain",
+            status: 404
+          });
+        case 2:
+          return _context32.a(2, {
+            binary: p.captcha.image,
+            type: p.captcha.type
+          });
+        case 3:
+          if (!(sub.indexOf("/api/") === 0)) {
+            _context32.n = 4;
+            break;
+          }
+          return _context32.a(2, apiRoute(sub.slice(5), ctx2.body || {}));
+        case 4:
+          _context32.p = 4;
+          _context32.n = 5;
+          return fxmlRoute(sub, q, ctx2, base);
+        case 5:
+          return _context32.a(2, _context32.v);
+        case 6:
+          _context32.p = 6;
+          _t12 = _context32.v;
+          console.error("[qino login ".concat(sub, "]"), _t12.message);
+          return _context32.a(2, page("\u0412\u0445\u043E\u0434 \u043F\u043E SMS", [info("\u041E\u0448\u0438\u0431\u043A\u0430: ".concat(_t12.message)), folder("\u041D\u0430\u0447\u0430\u0442\u044C \u0437\u0430\u043D\u043E\u0432\u043E", "".concat(base, "/tv"))]));
+      }
+    }, _callee32, null, [[4, 6]]);
+  }));
+  return _loginRoute.apply(this, arguments);
+}
+function fxmlRoute(_x40, _x41, _x42, _x43) {
+  return _fxmlRoute.apply(this, arguments);
+}
+function _fxmlRoute() {
+  _fxmlRoute = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee33(sub, q, ctx2, base) {
+    var finishItems, web, _web, how, _how, p, _p, result, _t13, _t14, _t15, _t16, _t17, _t18, _t19;
+    return _regenerator().w(function(_context33) {
+      while (1) switch (_context33.p = _context33.n) {
+        case 0:
+          finishItems = function finishItems2(how2) {
+            return [folder("\u042F \u0432\u043E\u0448\u0451\u043B", "".concat(base, "/check"), {
+              description: how2
+            }), folder("\u041D\u0430\u0437\u0430\u0434", "".concat(base, "/tv"), {
+              description: how2
+            })];
+          };
+          _t13 = sub;
+          _context33.n = _t13 === "/tv" ? 1 : _t13 === "/pc" ? 2 : _t13 === "/sms" ? 3 : _t13 === "/phone" ? 4 : _t13 === "/refresh" ? 6 : _t13 === "/captcha" ? 8 : _t13 === "/code" ? 13 : _t13 === "/finish" ? 19 : 21;
+          break;
+        case 1:
+          web = webLoginUrl(ctx2);
+          return _context33.a(2, page("\u0412\u0445\u043E\u0434 \u0432 QINO", [folder("\u0412\u043E\u0439\u0442\u0438 \u0441 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440\u0430 \u0438\u043B\u0438 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430", "".concat(base, "/pc"), {
+            description: "\u041F\u0440\u043E\u0449\u0435 \u0432\u0441\u0435\u0433\u043E: \u043E\u0442\u043A\u0440\u043E\u0439\u0442\u0435 \u0432 \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0435 \u0432 \u0442\u043E\u0439 \u0436\u0435 \u0441\u0435\u0442\u0438 <b>".concat(escapeHtml(web), "</b> \u0438 \u0432\u043E\u0439\u0434\u0438\u0442\u0435 \u043F\u043E SMS, \u043D\u043E\u043C\u0435\u0440 \u0438 \u043A\u043E\u0434 \u0443\u0434\u043E\u0431\u043D\u0435\u0435 \u043D\u0430\u0431\u0438\u0440\u0430\u0442\u044C \u0442\u0430\u043C. \u0417\u0430\u0442\u0435\u043C \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \xAB\u042F \u0432\u043E\u0448\u0451\u043B\xBB.")
+          }), folder("\u0412\u043E\u0439\u0442\u0438 \u043D\u0430 \u0442\u0435\u043B\u0435\u0432\u0438\u0437\u043E\u0440\u0435", "".concat(base, "/sms"), {
+            description: "\u041D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430, \u0441\u0438\u043C\u0432\u043E\u043B\u044B \u0441 \u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0438 \u0438 \u043A\u043E\u0434 \u0438\u0437 SMS \u0432\u0432\u043E\u0434\u044F\u0442\u0441\u044F \u043F\u0443\u043B\u044C\u0442\u043E\u043C. \u0417\u0430\u0442\u0435\u043C \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \xAB\u042F \u0432\u043E\u0448\u0451\u043B\xBB."
+          })]));
+        case 2:
+          _web = webLoginUrl(ctx2);
+          how = "1. \u041D\u0430 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440\u0435 \u0438\u043B\u0438 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0435 \u0432 \u0442\u043E\u0439 \u0436\u0435 \u0441\u0435\u0442\u0438 \u043E\u0442\u043A\u0440\u043E\u0439\u0442\u0435 <b>".concat(escapeHtml(_web), "</b><br>2. \u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430, \u0441\u0438\u043C\u0432\u043E\u043B\u044B \u0441 \u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0438 \u0438 \u043A\u043E\u0434 \u0438\u0437 SMS<br>3. \u041A\u043E\u0433\u0434\u0430 \u0442\u0430\u043C \u043F\u043E\u044F\u0432\u0438\u0442\u0441\u044F \xAB\u0412\u0445\u043E\u0434 \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\xBB, \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u0437\u0434\u0435\u0441\u044C \xAB\u042F \u0432\u043E\u0448\u0451\u043B\xBB");
+          return _context33.a(2, page("\u041E\u0442\u043A\u0440\u043E\u0439\u0442\u0435 ".concat(_web), finishItems(how)));
+        case 3:
+          _how = "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430, \u0437\u0430\u0442\u0435\u043C \u0441\u0438\u043C\u0432\u043E\u043B\u044B \u0441 \u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0438 \u0438 \u043A\u043E\u0434 \u0438\u0437 SMS. \u041F\u043E\u0441\u043B\u0435 \u0432\u0445\u043E\u0434\u0430 \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \xAB\u042F \u0432\u043E\u0448\u0451\u043B\xBB.";
+          return _context33.a(2, page("\u0412\u0445\u043E\u0434 \u043D\u0430 \u0442\u0435\u043B\u0435\u0432\u0438\u0437\u043E\u0440\u0435", [_objectSpread2(_objectSpread2({}, search("\u0412\u0432\u0435\u0441\u0442\u0438 \u043D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430", "".concat(base, "/phone?q={search}"), "\u041D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 77011234567")), {}, {
+            description: _how
+          })].concat(_toConsumableArray(finishItems(_how)))));
+        case 4:
+          _t14 = captchaPage;
+          _t15 = base;
+          _context33.n = 5;
+          return begin(input(q));
+        case 5:
+          return _context33.a(2, _t14(_t15, _context33.v));
+        case 6:
+          _context33.n = 7;
+          return newCaptcha(attempt(q.lid));
+        case 7:
+          return _context33.a(2, captchaPage(base, q.lid));
+        case 8:
+          p = attempt(q.lid);
+          _context33.p = 9;
+          _context33.n = 10;
+          return sendSms(p, input(q));
+        case 10:
+          _context33.n = 12;
+          break;
+        case 11:
+          _context33.p = 11;
+          _t16 = _context33.v;
+          return _context33.a(2, captchaPage(base, q.lid, "\u041D\u0435 \u043F\u043E\u043B\u0443\u0447\u0438\u043B\u043E\u0441\u044C: ".concat(_t16.message)));
+        case 12:
+          return _context33.a(2, codePage(base, q.lid, p));
+        case 13:
+          _p = attempt(q.lid);
+          _context33.p = 14;
+          _context33.n = 15;
+          return checkCode(_p, input(q));
+        case 15:
+          result = _context33.v;
+          _context33.n = 17;
+          break;
+        case 16:
+          _context33.p = 16;
+          _t17 = _context33.v;
+          return _context33.a(2, codePage(base, q.lid, _p, "\u041D\u0435 \u043F\u043E\u043B\u0443\u0447\u0438\u043B\u043E\u0441\u044C: ".concat(_t17.message)));
+        case 17:
+          if (!result.done) {
+            _context33.n = 18;
+            break;
+          }
+          return _context33.a(2, donePage(base, result.login));
+        case 18:
+          return _context33.a(2, page("\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0430\u043A\u043A\u0430\u0443\u043D\u0442", result.logins.map(function(login) {
+            return folder(login, "".concat(base, "/finish?lid=").concat(q.lid, "&login=").concat(encodeURIComponent(login)));
+          })));
+        case 19:
+          _t18 = donePage;
+          _t19 = base;
+          _context33.n = 20;
+          return finish(attempt(q.lid), String(q.login));
+        case 20:
+          return _context33.a(2, _t18(_t19, _context33.v.login));
+        case 21:
+          return _context33.a(2, page("\u0412\u0445\u043E\u0434 \u043F\u043E SMS", [info("\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439 \u0448\u0430\u0433 \u0432\u0445\u043E\u0434\u0430"), folder("\u041D\u0430\u0447\u0430\u0442\u044C \u0437\u0430\u043D\u043E\u0432\u043E", "".concat(base, "/tv"))]));
+        case 22:
+          return _context33.a(2);
+      }
+    }, _callee33, null, [[14, 16], [9, 11]]);
+  }));
+  return _fxmlRoute.apply(this, arguments);
+}
+function apiRoute(_x44, _x45) {
+  return _apiRoute.apply(this, arguments);
+}
+function _apiRoute() {
+  _apiRoute = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee34(step, b) {
+    var lid, _t20, _t21, _t22, _t23, _t24, _t25;
+    return _regenerator().w(function(_context34) {
+      while (1) switch (_context34.p = _context34.n) {
+        case 0:
+          _context34.p = 0;
+          _t20 = step;
+          _context34.n = _t20 === "phone" ? 1 : _t20 === "refresh" ? 3 : _t20 === "captcha" ? 5 : _t20 === "code" ? 7 : _t20 === "finish" ? 9 : _t20 === "session" ? 11 : _t20 === "status" ? 13 : _t20 === "logout" ? 15 : 17;
+          break;
+        case 1:
+          _context34.n = 2;
+          return begin(b.phone);
+        case 2:
+          lid = _context34.v;
+          return _context34.a(2, {
+            json: {
+              lid: lid,
+              phone: pending.get(lid).phone
+            }
+          });
+        case 3:
+          _context34.n = 4;
+          return newCaptcha(attempt(b.lid));
+        case 4:
+          return _context34.a(2, {
+            json: {
+              ok: true
+            }
+          });
+        case 5:
+          _context34.n = 6;
+          return sendSms(attempt(b.lid), b.captcha);
+        case 6:
+          return _context34.a(2, {
+            json: {
+              ok: true
+            }
+          });
+        case 7:
+          _context34.n = 8;
+          return checkCode(attempt(b.lid), b.code);
+        case 8:
+          _t21 = _context34.v;
+          return _context34.a(2, {
+            json: _t21
+          });
+        case 9:
+          _context34.n = 10;
+          return finish(attempt(b.lid), b.login);
+        case 10:
+          _t22 = _context34.v;
+          return _context34.a(2, {
+            json: _t22
+          });
+        case 11:
+          _context34.n = 12;
+          return useSession(b);
+        case 12:
+          _t23 = _context34.v;
+          return _context34.a(2, {
+            json: _t23
+          });
+        case 13:
+          _context34.n = 14;
+          return status();
+        case 14:
+          _t24 = _context34.v;
+          return _context34.a(2, {
+            json: _t24
+          });
+        case 15:
+          _context34.n = 16;
+          return logout();
+        case 16:
+          return _context34.a(2, {
+            json: {
+              ok: true
+            }
+          });
+        case 17:
+          return _context34.a(2, {
+            json: {
+              error: "\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439 \u0448\u0430\u0433"
+            },
+            status: 404
+          });
+        case 18:
+          _context34.n = 20;
+          break;
+        case 19:
+          _context34.p = 19;
+          _t25 = _context34.v;
+          console.error("[qino login api ".concat(step, "]"), _t25.message);
+          return _context34.a(2, {
+            json: {
+              error: _t25.message
+            },
+            status: _t25.status && _t25.status < 500 ? _t25.status : 400
+          });
+        case 20:
+          return _context34.a(2);
+      }
+    }, _callee34, null, [[0, 19]]);
+  }));
+  return _apiRoute.apply(this, arguments);
+}
+function webLoginUrl(ctx2) {
+  var m = /^(https?:\/\/)([^/:]+)(:\d+)?/.exec(ctx2.base) || [];
+  var host = m[2] || "localhost";
+  if (host === "127.0.0.1" || host === "localhost" || host === "10.0.2.2") {
+    var lan = lanAddresses();
+    var home = lan.find(function(ip) {
+      return /^(192\.168\.|10\.|172\.(1[6-9]|2\d|3[01])\.)/.test(ip);
+    });
+    host = home || lan[0] || host;
+  }
+  return "".concat(m[1] || "http://").concat(host).concat(m[3] || "", "/qino/login");
+}
+function lanAddresses() {
+  var out = [];
+  try {
+    var nets = import_os2.default.networkInterfaces();
+    for (var _i9 = 0, _Object$keys5 = Object.keys(nets); _i9 < _Object$keys5.length; _i9++) {
+      var name4 = _Object$keys5[_i9];
+      if (/virtualbox|vmware|vethernet|wsl|docker/i.test(name4)) continue;
+      var _iterator10 = _createForOfIteratorHelper(nets[name4] || []), _step10;
+      try {
+        for (_iterator10.s(); !(_step10 = _iterator10.n()).done; ) {
+          var a = _step10.value;
+          if (a.family === "IPv4" && !a.internal && !/^192\.168\.56\./.test(a.address)) out.push(a.address);
+        }
+      } catch (err) {
+        _iterator10.e(err);
+      } finally {
+        _iterator10.f();
+      }
+    }
+  } catch (e) {
+  }
+  return out;
+}
+function input(q) {
+  return String(q.q && q.q !== "{search}" ? q.q : q.search || "").trim();
+}
+function captchaPage(base, lid, error) {
+  var img = "".concat(base, "/captcha.png?lid=").concat(lid, "&t=").concat(Date.now());
+  var items = [];
+  if (error) items.push(info(error));
+  items.push(search("\u0412\u0432\u0435\u0441\u0442\u0438 \u0441\u0438\u043C\u0432\u043E\u043B\u044B \u0441 \u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0438", "".concat(base, "/captcha?lid=").concat(lid, "&q={search}"), "\u0421\u0438\u043C\u0432\u043E\u043B\u044B \u0441 \u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0438"), folder("\u0414\u0440\u0443\u0433\u0430\u044F \u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0430", "".concat(base, "/refresh?lid=").concat(lid)));
+  for (var _i0 = 0, _items = items; _i0 < _items.length; _i0++) {
+    var it = _items[_i0];
+    it.logo_30x30 = img;
+    it.description = '<img src="'.concat(escapeHtml(img), '" style="width:300px;background:#fff"><br>\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0441\u0438\u043C\u0432\u043E\u043B\u044B \u0441 \u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0438, \u0437\u0430\u0442\u0435\u043C \u043F\u0440\u0438\u0434\u0451\u0442 SMS \u0441 \u043A\u043E\u0434\u043E\u043C.');
+  }
+  return page("\u0412\u0445\u043E\u0434: \u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0430", items);
+}
+function codePage(base, lid, p, error) {
+  var items = [];
+  if (error) items.push(info(error));
+  items.push(search("\u0412\u0432\u0435\u0441\u0442\u0438 \u043A\u043E\u0434 \u0438\u0437 SMS", "".concat(base, "/code?lid=").concat(lid, "&q={search}"), "\u041A\u043E\u0434 \u0438\u0437 SMS"), folder("\u041D\u0430\u0447\u0430\u0442\u044C \u0437\u0430\u043D\u043E\u0432\u043E", "".concat(base, "/sms")));
+  for (var _i1 = 0, _items2 = items; _i1 < _items2.length; _i1++) {
+    var it = _items2[_i1];
+    it.description = "\u041A\u043E\u0434 \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D \u043D\u0430 ".concat(escapeHtml(p.phone));
+  }
+  return page("\u0412\u0445\u043E\u0434: \u043A\u043E\u0434 \u0438\u0437 SMS", items);
+}
+function donePage(base, login) {
+  return page("\u0412\u0445\u043E\u0434 \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D", [folder("\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u043A\u0430\u043D\u0430\u043B\u044B", "".concat(base, "/check"), {
+    description: "\u0410\u043A\u043A\u0430\u0443\u043D\u0442 ".concat(escapeHtml(login))
+  })]);
+}
+var WEB_PAGE = "<!doctype html>\n<html lang=\"ru\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>QINO: \u0432\u0445\u043E\u0434 \u043F\u043E SMS</title>\n<style>\n  body{font:16px system-ui,sans-serif;background:#111;color:#eee;margin:0;padding:24px 16px}\n  main{max-width:360px;margin:0 auto}\n  h1{font-size:22px} label{display:block;margin:16px 0 6px}\n  input,button{font:inherit;width:100%;box-sizing:border-box;padding:10px;border-radius:8px;border:1px solid #444}\n  input{background:#222;color:#eee} button{background:#f60;color:#fff;border:0;margin-top:12px;cursor:pointer}\n  button.link{background:none;color:#f90;padding:4px 0;width:auto}\n  img{display:block;background:#fff;border-radius:8px;margin-top:8px;max-width:100%}\n  .err{color:#f66;min-height:1.2em;margin-top:12px} .ok{color:#6c6} [hidden]{display:none}\n  details{margin-top:32px;color:#999}\n  textarea{font:13px monospace;width:100%;box-sizing:border-box;padding:8px;border-radius:8px;border:1px solid #444;background:#222;color:#eee;word-break:break-all;margin-top:6px}\n  button.warn{background:#933} .note{color:#999;font-size:14px}\n</style></head><body><main>\n<h1>\u0412\u0445\u043E\u0434 \u0432 QINO \u043F\u043E SMS</h1>\n<form id=\"s-phone\"><label>\u041D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430<input name=\"phone\" inputmode=\"tel\" placeholder=\"+7 701-123-45-67\" value=\"+7 \" autofocus required></label><button>\u0414\u0430\u043B\u044C\u0448\u0435</button></form>\n<form id=\"s-captcha\" hidden><label>\u0421\u0438\u043C\u0432\u043E\u043B\u044B \u0441 \u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0438<img id=\"cap\" alt=\"captcha\"></label><button type=\"button\" class=\"link\" id=\"refresh\">\u0414\u0440\u0443\u0433\u0430\u044F \u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0430</button><input name=\"captcha\" autocomplete=\"off\" required><button>\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C SMS</button></form>\n<form id=\"s-code\" hidden><label>\u041A\u043E\u0434 \u0438\u0437 SMS<input name=\"code\" inputmode=\"numeric\" autocomplete=\"one-time-code\" required></label><button>\u0412\u043E\u0439\u0442\u0438</button></form>\n<form id=\"s-login\" hidden><label>\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0430\u043A\u043A\u0430\u0443\u043D\u0442</label><div id=\"logins\"></div></form>\n<div id=\"s-done\" hidden>\n<p class=\"ok\">\u0412\u0445\u043E\u0434 \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D<span id=\"who\"></span>. \u041D\u0430 \u0442\u0435\u043B\u0435\u0432\u0438\u0437\u043E\u0440\u0435 \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \xAB\u042F \u0432\u043E\u0448\u0451\u043B\xBB.</p>\n<label>\u041A\u043E\u0434 \u0441\u0435\u0441\u0441\u0438\u0438: \u0432\u0441\u0442\u0430\u0432\u044C\u0442\u0435 \u0435\u0433\u043E \u043D\u0430 \u0434\u0440\u0443\u0433\u043E\u043C \u0422\u0412 (\u043D\u0430 \u0435\u0433\u043E \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0435 \u0432\u0445\u043E\u0434\u0430), \u0447\u0442\u043E\u0431\u044B \u043D\u0435 \u0432\u0445\u043E\u0434\u0438\u0442\u044C \u0435\u0449\u0451 \u0440\u0430\u0437<textarea id=\"code\" readonly rows=\"4\"></textarea></label>\n<button type=\"button\" id=\"copy\">\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043A\u043E\u0434</button>\n<button type=\"button\" id=\"logout\" class=\"warn\">\u0412\u044B\u0439\u0442\u0438 \u043D\u0430 \u0432\u0441\u0435\u0445 \u0422\u0412</button>\n<p class=\"note\">\u0412\u044B\u0445\u043E\u0434 \u0437\u0430\u0432\u0435\u0440\u0448\u0430\u0435\u0442 \u044D\u0442\u0443 \u0441\u0435\u0441\u0441\u0438\u044E \u0432\u0435\u0437\u0434\u0435: \u043D\u0430 \u0432\u0441\u0435\u0445 \u0442\u0435\u043B\u0435\u0432\u0438\u0437\u043E\u0440\u0430\u0445 \u0438 \u0432 \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430\u0445, \u0433\u0434\u0435 \u043E\u043D\u0430 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F.</p>\n</div>\n<p class=\"err\" id=\"err\"></p>\n<details id=\"s-session\"><summary>\u0423\u0436\u0435 \u0432\u043E\u0448\u043B\u0438 \u043D\u0430 \u0434\u0440\u0443\u0433\u043E\u043C \u0422\u0412 \u0438\u043B\u0438 \u043D\u0430 qino.live? \u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044C \u043A\u043E\u0434 \u0441\u0435\u0441\u0441\u0438\u0438</summary>\n<form id=\"f-session\"><label>\u041A\u043E\u0434 \u0441\u0435\u0441\u0441\u0438\u0438<input name=\"session\" autocomplete=\"off\" required></label><button>\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C</button></form></details>\n</main><script>\nlet lid = '';\nconst BASE = '/qino/login';\nconst $ = (id) => document.getElementById(id);\nconst focusFirst = (id) => { const i = $(id).querySelector('input'); if (i) { i.focus(); i.setSelectionRange?.(i.value.length, i.value.length); } };\nconst show = (id) => { for (const s of ['s-phone','s-captcha','s-code','s-login','s-done']) $(s).hidden = s !== id; $('err').textContent = ''; focusFirst(id); };\nconst post = async (path, body) => {\n  const r = await fetch(BASE + '/api/' + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lid, ...body }) });\n  const j = await r.json().catch(() => ({}));\n  if (!r.ok) throw new Error(j.error || '\u041E\u0448\u0438\u0431\u043A\u0430 ' + r.status);\n  return j;\n};\nconst captcha = () => { $('cap').src = BASE + '/captcha.png?lid=' + lid + '&t=' + Date.now(); };\nconst guard = (fn) => async (e) => { e.preventDefault(); try { await fn(new FormData(e.target)); } catch (err) { $('err').textContent = err.message; } };\n// Logged in: the account, its session code (to paste on another TV) and logout.\nconst account = async () => {\n  const s = await post('status');\n  if (!s.loggedIn) { show('s-phone'); return; }\n  $('who').textContent = ' (' + s.login + ')';\n  $('code').value = s.session;\n  show('s-done');\n  $('s-session').hidden = true;\n};\nconst result = (r) => {\n  if (r.done) return account();\n  $('logins').innerHTML = '';\n  for (const login of r.logins) {\n    const b = document.createElement('button'); b.type = 'button'; b.textContent = login;\n    b.onclick = async () => { try { result(await post('finish', { login })); } catch (err) { $('err').textContent = err.message; } };\n    $('logins').append(b);\n  }\n  show('s-login');\n};\nconst mask = (v) => { let d = v.replace(/\\D/g, ''); if (d[0] === '8') d = '7' + d.slice(1); if (d && d[0] !== '7') d = '7' + d; d = d.slice(0, 11);\n  const p = [d.slice(0, 1), d.slice(1, 4), d.slice(4, 7), d.slice(7, 9), d.slice(9, 11)];\n  return d ? '+' + p[0] + (p[1] ? ' ' + p[1] : '') + (p[2] ? '-' + p[2] : '') + (p[3] ? '-' + p[3] : '') + (p[4] ? '-' + p[4] : '') : ''; };\ndocument.querySelector('[name=phone]').oninput = (e) => { e.target.value = mask(e.target.value); };\n$('s-phone').onsubmit = guard(async (f) => { lid = (await post('phone', { phone: f.get('phone') })).lid; captcha(); show('s-captcha'); });\n$('refresh').onclick = async () => { try { await post('refresh'); captcha(); focusFirst('s-captcha'); } catch (err) { $('err').textContent = err.message; } };\n$('s-captcha').onsubmit = guard(async (f) => {\n  try { await post('captcha', { captcha: f.get('captcha') }); } finally { captcha(); $('s-captcha').reset(); focusFirst('s-captcha'); }\n  show('s-code');\n});\n$('s-code').onsubmit = guard(async (f) => result(await post('code', { code: f.get('code') })));\n$('f-session').onsubmit = guard(async (f) => { await post('session', { session: f.get('session') }); await account(); });\n$('copy').onclick = async () => {\n  $('code').select();\n  try { await navigator.clipboard.writeText($('code').value); } catch (e) { document.execCommand('copy'); }\n  $('copy').textContent = '\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u043E';\n};\n$('logout').onclick = async () => {\n  if (!confirm('\u0412\u044B\u0439\u0442\u0438 \u0438\u0437 QINO \u043D\u0430 \u0432\u0441\u0435\u0445 \u0422\u0412?')) return;\n  try { await post('logout'); $('s-session').hidden = false; $('s-phone').reset(); show('s-phone'); } catch (err) { $('err').textContent = err.message; }\n};\nfocusFirst('s-phone'); // cursor after \"+7 \" (autofocus alone puts it before the \"+\")\naccount().catch(() => show('s-phone'));\n</script></body></html>";
+var QINO_TITLE = "QINO \u0422\u0412";
+var QINO_ICON = "https://qino.live/favicon.ico";
+var GENRES = {
+  news: "\u041D\u043E\u0432\u043E\u0441\u0442\u0438",
+  movie: "\u041A\u0438\u043D\u043E",
+  entertaining: "\u0420\u0430\u0437\u0432\u043B\u0435\u043A\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0435",
+  sport: "\u0421\u043F\u043E\u0440\u0442",
+  children: "\u0414\u0435\u0442\u0441\u043A\u0438\u0435",
+  cognitive: "\u041F\u043E\u0437\u043D\u0430\u0432\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0435",
+  infotainment: "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u043E\u043D\u043D\u044B\u0435",
+  musical: "\u041C\u0443\u0437\u044B\u043A\u0430\u043B\u044C\u043D\u044B\u0435",
+  local: "\u0420\u0435\u0433\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435",
+  religious: "\u0420\u0435\u043B\u0438\u0433\u0438\u043E\u0437\u043D\u044B\u0435",
+  "UltraHD 4K": "UltraHD 4K"
+};
+var LANGUAGES = {
+  ru: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439",
+  kz: "\u049A\u0430\u0437\u0430\u049B\u0448\u0430",
+  kk: "\u049A\u0430\u0437\u0430\u049B\u0448\u0430",
+  en: "English",
+  fr: "Fran\xE7ais",
+  de: "Deutsch",
+  tr: "T\xFCrk\xE7e"
+};
+function qinoRoute(_x46, _x47, _x48) {
+  return _qinoRoute.apply(this, arguments);
+}
+function _qinoRoute() {
+  _qinoRoute = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee35(sub, q, ctx2) {
+    var base, live, channel, items, _t26, _t27;
+    return _regenerator().w(function(_context35) {
+      while (1) switch (_context35.p = _context35.n) {
+        case 0:
+          base = "".concat(ctx2.base, "/qino");
+          live = /^\/live\/([^/]+)\.m3u8$/.exec(sub);
+          if (!live) {
+            _context35.n = 1;
+            break;
+          }
+          return _context35.a(2, livePlaylist(decodeURIComponent(live[1]), q, ctx2));
+        case 1:
+          if (!(sub !== "/login/check" && (sub === "/login" || sub.indexOf("/login/") === 0))) {
+            _context35.n = 2;
+            break;
+          }
+          return _context35.a(2, loginRoute(sub.slice(6), q, ctx2));
+        case 2:
+          channel = /^\/channel\/([^/]+)$/.exec(sub);
+          _context35.p = 3;
+          if (!channel) {
+            _context35.n = 5;
+            break;
+          }
+          _context35.n = 4;
+          return channelPage(base, decodeURIComponent(channel[1]), q);
+        case 4:
+          return _context35.a(2, _context35.v);
+        case 5:
+          _t26 = sub;
+          _context35.n = _t26 === "" ? 6 : _t26 === "/login/check" ? 8 : _t26 === "/channels" ? 12 : _t26 === "/search" ? 14 : _t26 === "/logout" ? 16 : 18;
+          break;
+        case 6:
+          _context35.n = 7;
+          return rootPage(base);
+        case 7:
+          return _context35.a(2, _context35.v);
+        case 8:
+          _context35.n = 9;
+          return isLoggedIn();
+        case 9:
+          if (!_context35.v) {
+            _context35.n = 11;
+            break;
+          }
+          _context35.n = 10;
+          return rootPage(base);
+        case 10:
+          return _context35.a(2, _context35.v);
+        case 11:
+          return _context35.a(2, page("\u0412\u0445\u043E\u0434 \u043D\u0435 \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D", [info("\u0412\u0445\u043E\u0434 \u0435\u0449\u0451 \u043D\u0435 \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D", "\u0417\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u0435 \u0432\u0445\u043E\u0434 \u043F\u043E SMS (\u043D\u0430 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440\u0435, \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0435 \u0438\u043B\u0438 \u0437\u0434\u0435\u0441\u044C), \u0437\u0430\u0442\u0435\u043C \u0441\u043D\u043E\u0432\u0430 \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \xAB\u042F \u0432\u043E\u0448\u0451\u043B\xBB."), folder("\u0412\u043E\u0439\u0442\u0438", "".concat(base, "/login/tv"))]));
+        case 12:
+          _context35.n = 13;
+          return channelsPage(base, q);
+        case 13:
+          return _context35.a(2, _context35.v);
+        case 14:
+          _context35.n = 15;
+          return searchPage(base, q);
+        case 15:
+          return _context35.a(2, _context35.v);
+        case 16:
+          _context35.n = 17;
+          return logout();
+        case 17:
+          return _context35.a(2, page("\u0412\u044B\u0445\u043E\u0434", [info("\u0412\u044B \u0432\u044B\u0448\u043B\u0438 \u0438\u0437 \u0430\u043A\u043A\u0430\u0443\u043D\u0442\u0430"), folder("\u0412\u043E\u0439\u0442\u0438", "".concat(base, "/login/tv"))]));
+        case 18:
+          return _context35.a(2, page("\u041D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E", [info("\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439 \u0440\u0430\u0437\u0434\u0435\u043B: /qino".concat(sub)), folder(QINO_TITLE, base)]));
+        case 19:
+          _context35.n = 21;
+          break;
+        case 20:
+          _context35.p = 20;
+          _t27 = _context35.v;
+          console.error("[qino ".concat(sub, "]"), _t27.message);
+          items = [info("\u041E\u0448\u0438\u0431\u043A\u0430: ".concat(_t27.message), "\u041F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 \u043F\u043E\u0437\u0436\u0435.")];
+          if (_t27.status === 401) items.push(folder("\u0412\u043E\u0439\u0442\u0438", "".concat(base, "/login/tv")));
+          return _context35.a(2, page("\u041E\u0448\u0438\u0431\u043A\u0430", items));
+        case 21:
+          return _context35.a(2);
+      }
+    }, _callee35, null, [[3, 20]]);
+  }));
+  return _qinoRoute.apply(this, arguments);
+}
+function openChannels() {
+  return _openChannels.apply(this, arguments);
+}
+function _openChannels() {
+  _openChannels = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee36() {
+    return _regenerator().w(function(_context36) {
+      while (1) switch (_context36.n) {
+        case 0:
+          _context36.n = 1;
+          return channels();
+        case 1:
+          return _context36.a(2, _context36.v.filter(function(c) {
+            return !c.locked;
+          }));
+      }
+    }, _callee36);
+  }));
+  return _openChannels.apply(this, arguments);
+}
+function rootPage(_x49) {
+  return _rootPage.apply(this, arguments);
+}
+function _rootPage() {
+  _rootPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee37(base) {
+    var items, _ref11, list, present, _i12, _Object$keys8, id, acc, name4;
+    return _regenerator().w(function(_context37) {
+      while (1) switch (_context37.n) {
+        case 0:
+          items = [];
+          _context37.n = 1;
+          return isLoggedIn();
+        case 1:
+          if (_context37.v) {
+            _context37.n = 2;
+            break;
+          }
+          items.push(folder("\u0412\u043E\u0439\u0442\u0438", "".concat(base, "/login/tv"), {
+            description: "\u0411\u0435\u0437 \u0432\u0445\u043E\u0434\u0430 \u043A\u0430\u043D\u0430\u043B\u044B \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B"
+          }));
+          _context37.n = 5;
+          break;
+        case 2:
+          items.push(search("\u041F\u043E\u0438\u0441\u043A \u043A\u0430\u043D\u0430\u043B\u0430", "".concat(base, "/search?q={search}"), "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438\u043B\u0438 \u043D\u043E\u043C\u0435\u0440 \u043A\u0430\u043D\u0430\u043B\u0430"));
+          items.push(folder("\u0412\u0441\u0435 \u043A\u0430\u043D\u0430\u043B\u044B", "".concat(base, "/channels")));
+          items.push(folder("\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u044B\u0435", "".concat(base, "/channels?fav=1")));
+          _context37.n = 3;
+          return openChannels().catch(function() {
+            return [];
+          });
+        case 3:
+          list = _context37.v;
+          present = new Set((_ref11 = []).concat.apply(_ref11, _toConsumableArray(list.map(function(c) {
+            return c.genres;
+          }))));
+          for (_i12 = 0, _Object$keys8 = Object.keys(GENRES); _i12 < _Object$keys8.length; _i12++) {
+            id = _Object$keys8[_i12];
+            if (present.has(id)) items.push(folder(GENRES[id], "".concat(base, "/channels?genre=").concat(encodeURIComponent(id))));
+          }
+          _context37.n = 4;
+          return account();
+        case 4:
+          acc = _context37.v;
+          name4 = acc.profile && acc.profile.name || acc.user && acc.user.login || "\u0430\u043A\u043A\u0430\u0443\u043D\u0442";
+          items.push(folder("\u0412\u044B\u0439\u0442\u0438 (".concat(name4, ")"), "".concat(base, "/logout")));
+        case 5:
+          items.push(folder("\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u0440\u0442\u0430\u043B \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438", "AddFavorite(".concat(QINO_TITLE, ",").concat(QINO_ICON, ",").concat(base, ")"), {
+            logo: QINO_ICON,
+            description: "\u0414\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442 QINO \u0422\u0412 \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438 Fork browser"
+          }));
+          return _context37.a(2, page(QINO_TITLE, items, {
+            icon: QINO_ICON
+          }));
+      }
+    }, _callee37);
+  }));
+  return _rootPage.apply(this, arguments);
+}
+function channelsPage(_x50, _x51) {
+  return _channelsPage.apply(this, arguments);
+}
+function _channelsPage() {
+  _channelsPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee38(base, q) {
+    var list, title, acc, favorites, _t28, _t29;
+    return _regenerator().w(function(_context38) {
+      while (1) switch (_context38.n) {
+        case 0:
+          _context38.n = 1;
+          return openChannels();
+        case 1:
+          list = _context38.v;
+          title = "\u0412\u0441\u0435 \u043A\u0430\u043D\u0430\u043B\u044B";
+          if (q.genre) {
+            list = list.filter(function(c) {
+              return c.genres.indexOf(q.genre) >= 0;
+            });
+            title = GENRES[q.genre] || q.genre;
+          }
+          if (!q.fav) {
+            _context38.n = 3;
+            break;
+          }
+          _context38.n = 2;
+          return account();
+        case 2:
+          acc = _context38.v;
+          favorites = new Set(acc.profile && acc.profile.favorites || []);
+          list = list.filter(function(c) {
+            return favorites.has(c.id);
+          });
+          title = "\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u044B\u0435";
+        case 3:
+          _t28 = page;
+          _t29 = "".concat(QINO_TITLE, ": ").concat(title);
+          _context38.n = 4;
+          return channelItems(list, base);
+        case 4:
+          return _context38.a(2, _t28(_t29, _context38.v));
+      }
+    }, _callee38);
+  }));
+  return _channelsPage.apply(this, arguments);
+}
+function searchPage(_x52, _x53) {
+  return _searchPage.apply(this, arguments);
+}
+function _searchPage() {
+  _searchPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee39(base, q) {
+    var query, needle, list, _t30, _t31;
+    return _regenerator().w(function(_context39) {
+      while (1) switch (_context39.n) {
+        case 0:
+          query = String(q.q && q.q !== "{search}" ? q.q : q.search || "").trim();
+          if (query) {
+            _context39.n = 1;
+            break;
+          }
+          return _context39.a(2, page("\u041F\u043E\u0438\u0441\u043A", [search("\u041F\u043E\u0438\u0441\u043A \u043A\u0430\u043D\u0430\u043B\u0430", "".concat(base, "/search?q={search}"), "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438\u043B\u0438 \u043D\u043E\u043C\u0435\u0440 \u043A\u0430\u043D\u0430\u043B\u0430")]));
+        case 1:
+          needle = query.toLowerCase();
+          _context39.n = 2;
+          return openChannels();
+        case 2:
+          list = _context39.v.filter(function(c) {
+            return c.title.toLowerCase().indexOf(needle) >= 0 || String(c.number) === needle.replace(/^0+/, "");
+          });
+          _t30 = page;
+          _t31 = "\u041F\u043E\u0438\u0441\u043A \xAB".concat(query, "\xBB");
+          _context39.n = 3;
+          return channelItems(list, base, "\u041F\u043E \u0437\u0430\u043F\u0440\u043E\u0441\u0443 \xAB".concat(query, "\xBB \u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E"));
+        case 3:
+          return _context39.a(2, _t30(_t31, _context39.v));
+      }
+    }, _callee39);
+  }));
+  return _searchPage.apply(this, arguments);
+}
+function channelItems(_x54, _x55) {
+  return _channelItems.apply(this, arguments);
+}
+function _channelItems() {
+  _channelItems = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee41(list, base) {
+    var emptyText, items, _args41 = arguments;
+    return _regenerator().w(function(_context41) {
+      while (1) switch (_context41.n) {
+        case 0:
+          emptyText = _args41.length > 2 && _args41[2] !== void 0 ? _args41[2] : "\u041A\u0430\u043D\u0430\u043B\u043E\u0432 \u043D\u0435\u0442";
+          _context41.n = 1;
+          return Promise.all(list.map(/* @__PURE__ */ (function() {
+            var _ref12 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee40(c) {
+              var _t32, _t33, _t34, _t35, _t36;
+              return _regenerator().w(function(_context40) {
+                while (1) switch (_context40.n) {
+                  case 0:
+                    _t32 = folder;
+                    _t33 = "".concat(num(c.number), " ").concat(c.title);
+                    _t34 = "".concat(base, "/channel/").concat(encodeURIComponent(c.mediaId));
+                    _t35 = c.logo;
+                    _context40.n = 1;
+                    return channelDescription(c);
+                  case 1:
+                    _t36 = _context40.v;
+                    return _context40.a(2, _t32(_t33, _t34, {
+                      logo: _t35,
+                      description: _t36
+                    }));
+                }
+              }, _callee40);
+            }));
+            return function(_x88) {
+              return _ref12.apply(this, arguments);
+            };
+          })()));
+        case 1:
+          items = _context41.v;
+          if (!items.length) items.push(info(emptyText));
+          return _context41.a(2, items);
+      }
+    }, _callee41);
+  }));
+  return _channelItems.apply(this, arguments);
+}
+function channelDescription(_x56) {
+  return _channelDescription.apply(this, arguments);
+}
+function _channelDescription() {
+  _channelDescription = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee42(c) {
+    var _yield$nowAndNext, now, next, lines, img;
+    return _regenerator().w(function(_context42) {
+      while (1) switch (_context42.n) {
+        case 0:
+          _context42.n = 1;
+          return nowAndNext(c.scheduleId);
+        case 1:
+          _yield$nowAndNext = _context42.v;
+          now = _yield$nowAndNext.now;
+          next = _yield$nowAndNext.next;
+          lines = [now && "\u0421\u0435\u0439\u0447\u0430\u0441: ".concat(time(now.begin), " ").concat(now.title), next && "\u0414\u0430\u043B\u0435\u0435: ".concat(time(next.begin), " ").concat(next.title)];
+          img = c.logo ? '<img src="'.concat(escapeHtml(c.logo), '" style="float:left;width:120px;margin:0 12px 6px 0">') : "";
+          return _context42.a(2, "".concat(img, "<b>").concat(escapeHtml("".concat(num(c.number), " ").concat(c.title)), "</b><br>").concat(lines.filter(Boolean).map(escapeHtml).join("<br>")));
+      }
+    }, _callee42);
+  }));
+  return _channelDescription.apply(this, arguments);
+}
+function channelPage(_x57, _x58, _x59) {
+  return _channelPage.apply(this, arguments);
+}
+function _channelPage() {
+  _channelPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee43(base, mediaId, q) {
+    var c, name4, opts, languages, lang, link, title, _t37, _t38, _t39;
+    return _regenerator().w(function(_context43) {
+      while (1) switch (_context43.n) {
+        case 0:
+          _context43.n = 1;
+          return channels();
+        case 1:
+          c = _context43.v.find(function(ch) {
+            return ch.mediaId === mediaId;
+          });
+          name4 = c ? "".concat(num(c.number), " ").concat(c.title) : "\u041A\u0430\u043D\u0430\u043B";
+          _t37 = c && c.logo;
+          _t38 = c;
+          if (!_t38) {
+            _context43.n = 3;
+            break;
+          }
+          _context43.n = 2;
+          return channelDescription(c);
+        case 2:
+          _t38 = _context43.v;
+        case 3:
+          _t39 = _t38;
+          opts = {
+            logo: _t37,
+            description: _t39
+          };
+          _context43.n = 4;
+          return playback(mediaId);
+        case 4:
+          languages = _context43.v;
+          lang = languages.find(function(l) {
+            return l.id === q.lang;
+          }) || (languages.length === 1 ? languages[0] : null);
+          link = "".concat(base, "/channel/").concat(encodeURIComponent(mediaId));
+          if (lang) {
+            _context43.n = 5;
+            break;
+          }
+          return _context43.a(2, page("".concat(name4, ": \u0437\u0432\u0443\u043A"), languages.map(function(l) {
+            return folder("".concat(languageName(l.id)).concat(l.default ? " (\u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E)" : ""), "".concat(link, "?lang=").concat(encodeURIComponent(l.id)), opts);
+          })));
+        case 5:
+          title = languages.length > 1 ? "".concat(name4, ": ").concat(languageName(lang.id)) : name4;
+          return _context43.a(2, page("".concat(title, ": \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E"), lang.renditions.map(function(r) {
+            return stream(qualityName(r.id), "".concat(base, "/live/").concat(encodeURIComponent(mediaId), ".m3u8?lang=").concat(encodeURIComponent(lang.id), "&q=").concat(encodeURIComponent(r.id)), opts);
+          })));
+      }
+    }, _callee43);
+  }));
+  return _channelPage.apply(this, arguments);
+}
+function livePlaylist(_x60, _x61, _x62) {
+  return _livePlaylist.apply(this, arguments);
+}
+function _livePlaylist() {
+  _livePlaylist = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee44(mediaId, q, ctx2) {
+    var languages, lang, pick, _t40;
+    return _regenerator().w(function(_context44) {
+      while (1) switch (_context44.n) {
+        case 0:
+          _context44.n = 1;
+          return playback(mediaId);
+        case 1:
+          languages = _context44.v;
+          lang = languages.find(function(l) {
+            return l.id === q.lang;
+          }) || languages[0];
+          pick = lang.renditions.find(function(r) {
+            return r.id === q.q;
+          }) || lang.renditions[0];
+          _context44.n = 2;
+          return absolutePlaylist(pick.url, ctx2.ua);
+        case 2:
+          _t40 = _context44.v;
+          return _context44.a(2, {
+            playlist: _t40
+          });
+      }
+    }, _callee44);
+  }));
+  return _livePlaylist.apply(this, arguments);
+}
+function languageName(id) {
+  return LANGUAGES[String(id).split("-")[0].toLowerCase()] || id;
+}
+function qualityName(quality) {
+  return !quality || quality === "Auto" ? "\u0410\u0432\u0442\u043E" : quality;
+}
+function pad(n, width) {
+  var s = String(n);
+  while (s.length < width) s = "0".concat(s);
+  return s;
+}
+function num(n) {
+  return n == null ? "" : pad(n, 3);
+}
+function time(ms) {
+  var d = new Date(ms);
+  return "".concat(pad(d.getHours(), 2), ":").concat(pad(d.getMinutes(), 2));
+}
+var ICON_BASE64 = "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";
+var import_querystring2 = __toESM(require("querystring"), 1);
 var ICON = Buffer.from(ICON_BASE64, "base64");
-function handle(_x22, _x23) {
+function handle(_x63, _x64) {
   return _handle.apply(this, arguments);
 }
 function _handle() {
-  _handle = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee14(req, res) {
-    var _body;
-    var url, base, q, ctx2, body, json, _t7;
-    return _regenerator().w(function(_context14) {
-      while (1) switch (_context14.p = _context14.n) {
+  _handle = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee45(req, res) {
+    var _body, _body2, _body3, _body4;
+    var url, base, q, ctx2, body, json, _t41, _t42, _t43, _t44, _t45, _t46;
+    return _regenerator().w(function(_context45) {
+      while (1) switch (_context45.p = _context45.n) {
         case 0:
           url = new URL(req.url, "http://localhost");
           if (!(url.pathname === "/icon.png" || url.pathname === "/favicon.ico")) {
-            _context14.n = 1;
+            _context45.n = 1;
             break;
           }
           res.writeHead(200, {
             "Content-Type": "image/png",
             "Cache-Control": "public, max-age=86400"
           });
-          return _context14.a(2, res.end(ICON));
+          return _context45.a(2, res.end(ICON));
         case 1:
           base = baseUrl(req);
-          q = _objectSpread2({}, import_querystring.default.parse((url.search || "").replace(/^\?/, "")));
-          ctx2 = {
-            base: base,
-            ua: req.headers["user-agent"] || ""
-          };
-          _context14.p = 2;
-          _context14.n = 3;
-          return route(url.pathname.replace(/\/+$/, "") || "/", q, ctx2);
-        case 3:
-          body = _context14.v;
-          _context14.n = 6;
+          q = _objectSpread2({}, import_querystring2.default.parse((url.search || "").replace(/^\?/, "")));
+          _t41 = base;
+          _t42 = req.headers["user-agent"] || "";
+          _t43 = req.method;
+          if (!(req.method === "POST")) {
+            _context45.n = 3;
+            break;
+          }
+          _context45.n = 2;
+          return readJson(req);
+        case 2:
+          _t44 = _context45.v;
+          _context45.n = 4;
           break;
+        case 3:
+          _t44 = void 0;
         case 4:
-          _context14.p = 4;
-          _t7 = _context14.v;
-          console.error("[".concat(req.method, " ").concat(req.url, "]"), _t7);
+          _t45 = _t44;
+          ctx2 = {
+            base: _t41,
+            ua: _t42,
+            method: _t43,
+            body: _t45
+          };
+          _context45.p = 5;
+          _context45.n = 6;
+          return route(url.pathname.replace(/\/+$/, "") || "/", q, ctx2);
+        case 6:
+          body = _context45.v;
+          _context45.n = 9;
+          break;
+        case 7:
+          _context45.p = 7;
+          _t46 = _context45.v;
+          console.error("[".concat(req.method, " ").concat(req.url, "]"), _t46);
           if (!url.pathname.endsWith(".m3u8")) {
-            _context14.n = 5;
+            _context45.n = 8;
             break;
           }
           res.writeHead(502, {
             "Content-Type": "text/plain; charset=utf-8"
           });
-          return _context14.a(2, res.end(_t7.message));
-        case 5:
-          body = page("\u041E\u0448\u0438\u0431\u043A\u0430", [info("\u041E\u0448\u0438\u0431\u043A\u0430: ".concat(_t7.message), "\u041F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 \u043F\u043E\u0437\u0436\u0435 \u0438\u043B\u0438 \u0441\u043C\u0435\u043D\u0438\u0442\u0435 \u0437\u0435\u0440\u043A\u0430\u043B\u043E \u0441\u0430\u0439\u0442\u0430.")]);
-        case 6:
+          return _context45.a(2, res.end(_t46.message));
+        case 8:
+          body = page("\u041E\u0448\u0438\u0431\u043A\u0430", [info("\u041E\u0448\u0438\u0431\u043A\u0430: ".concat(_t46.message), "\u041F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 \u043F\u043E\u0437\u0436\u0435 \u0438\u043B\u0438 \u0441\u043C\u0435\u043D\u0438\u0442\u0435 \u0437\u0435\u0440\u043A\u0430\u043B\u043E \u0441\u0430\u0439\u0442\u0430.")]);
+        case 9:
           if (!(((_body = body) === null || _body === void 0 ? void 0 : _body.playlist) !== void 0)) {
-            _context14.n = 7;
+            _context45.n = 10;
             break;
           }
           res.writeHead(200, {
@@ -20577,8 +22368,38 @@ function _handle() {
             "Access-Control-Allow-Origin": "*",
             "Cache-Control": "no-store"
           });
-          return _context14.a(2, res.end(body.playlist));
-        case 7:
+          return _context45.a(2, res.end(body.playlist));
+        case 10:
+          if (!(((_body2 = body) === null || _body2 === void 0 ? void 0 : _body2.binary) !== void 0)) {
+            _context45.n = 11;
+            break;
+          }
+          res.writeHead(body.status || 200, {
+            "Content-Type": body.type,
+            "Cache-Control": "no-store"
+          });
+          return _context45.a(2, res.end(body.binary));
+        case 11:
+          if (!(((_body3 = body) === null || _body3 === void 0 ? void 0 : _body3.html) !== void 0)) {
+            _context45.n = 12;
+            break;
+          }
+          res.writeHead(200, {
+            "Content-Type": "text/html; charset=utf-8",
+            "Cache-Control": "no-store"
+          });
+          return _context45.a(2, res.end(body.html));
+        case 12:
+          if (!(((_body4 = body) === null || _body4 === void 0 ? void 0 : _body4.json) !== void 0)) {
+            _context45.n = 13;
+            break;
+          }
+          res.writeHead(body.status || 200, {
+            "Content-Type": "application/json; charset=utf-8",
+            "Cache-Control": "no-store"
+          });
+          return _context45.a(2, res.end(JSON.stringify(body.json)));
+        case 13:
           json = JSON.stringify(body, null, q.pretty ? 2 : 0);
           res.writeHead(200, {
             "Content-Type": "application/json; charset=utf-8",
@@ -20586,12 +22407,31 @@ function _handle() {
             "Cache-Control": "no-store"
           });
           res.end(json);
-        case 8:
-          return _context14.a(2);
+        case 14:
+          return _context45.a(2);
       }
-    }, _callee14, null, [[2, 4]]);
+    }, _callee45, null, [[5, 7]]);
   }));
   return _handle.apply(this, arguments);
+}
+function readJson(req) {
+  return new Promise(function(resolve4) {
+    var data = "";
+    req.on("data", function(chunk) {
+      data += chunk;
+      if (data.length > 1e5) req.destroy();
+    });
+    req.on("end", function() {
+      try {
+        resolve4(data ? JSON.parse(data) : {});
+      } catch (e) {
+        resolve4({});
+      }
+    });
+    req.on("error", function() {
+      return resolve4({});
+    });
+  });
 }
 function baseUrl(req) {
   var proto = (req.headers["x-forwarded-proto"] || "http").split(",")[0].trim();
@@ -20600,97 +22440,113 @@ function baseUrl(req) {
 }
 function qs(params) {
   var kept = {};
-  for (var _i8 = 0, _Object$keys4 = Object.keys(params); _i8 < _Object$keys4.length; _i8++) {
-    var k = _Object$keys4[_i8];
+  for (var _i10 = 0, _Object$keys6 = Object.keys(params); _i10 < _Object$keys6.length; _i10++) {
+    var k = _Object$keys6[_i10];
     if (params[k] !== void 0 && params[k] !== "") kept[k] = params[k];
   }
-  return import_querystring.default.stringify(kept);
+  return import_querystring2.default.stringify(kept);
 }
-function route(_x24, _x25, _x26) {
+function route(_x65, _x66, _x67) {
   return _route.apply(this, arguments);
 }
 function _route() {
-  _route = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee15(path, q, ctx2) {
-    var base, _path$split, _path$split2, siteId, action, site, link, _t8;
-    return _regenerator().w(function(_context15) {
-      while (1) switch (_context15.n) {
+  _route = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee46(path2, q, ctx2) {
+    var base, _path2$split, _path2$split2, siteId, action, site, link, _t47;
+    return _regenerator().w(function(_context46) {
+      while (1) switch (_context46.n) {
         case 0:
           base = ctx2.base;
-          if (!(path === "/")) {
-            _context15.n = 1;
+          if (!(path2 === "/")) {
+            _context46.n = 1;
             break;
           }
-          return _context15.a(2, rootPage(base));
+          return _context46.a(2, rootPage2(base));
         case 1:
-          _path$split = path.split("/"), _path$split2 = _slicedToArray(_path$split, 3), siteId = _path$split2[1], action = _path$split2[2];
+          if (!(path2 === "/qino" || path2.indexOf("/qino/") === 0)) {
+            _context46.n = 2;
+            break;
+          }
+          return _context46.a(2, qinoRoute(path2.slice(5), q, ctx2));
+        case 2:
+          if (!(path2 === "/login")) {
+            _context46.n = 3;
+            break;
+          }
+          return _context46.a(2, qinoRoute("/login", q, ctx2));
+        case 3:
+          _path2$split = path2.split("/"), _path2$split2 = _slicedToArray(_path2$split, 3), siteId = _path2$split2[1], action = _path2$split2[2];
           site = sites[siteId];
           if (site) {
-            _context15.n = 2;
+            _context46.n = 4;
             break;
           }
-          return _context15.a(2, page("\u041D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E", [info("\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439 \u0440\u0430\u0437\u0434\u0435\u043B: ".concat(path)), folder("\u041D\u0430 \u0433\u043B\u0430\u0432\u043D\u0443\u044E", "".concat(base, "/"))]));
-        case 2:
+          return _context46.a(2, page("\u041D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E", [info("\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439 \u0440\u0430\u0437\u0434\u0435\u043B: ".concat(path2)), folder("\u041D\u0430 \u0433\u043B\u0430\u0432\u043D\u0443\u044E", "".concat(base, "/"))]));
+        case 4:
           link = function link2(act, params) {
             return "".concat(base, "/").concat(site.id, "/").concat(act, "?").concat(qs(params));
           };
-          _t8 = action;
-          _context15.n = _t8 === void 0 ? 3 : _t8 === "list" ? 4 : _t8 === "search" ? 5 : _t8 === "item" ? 6 : _t8 === "play" ? 7 : _t8 === "hls.m3u8" ? 8 : 9;
+          _t47 = action;
+          _context46.n = _t47 === void 0 ? 5 : _t47 === "list" ? 6 : _t47 === "search" ? 7 : _t47 === "item" ? 8 : _t47 === "play" ? 9 : _t47 === "hls.m3u8" ? 10 : 11;
           break;
-        case 3:
-          return _context15.a(2, sitePage(site, base, link));
-        case 4:
-          return _context15.a(2, listPage(site, q, link));
         case 5:
-          return _context15.a(2, searchPage(site, q, link));
+          return _context46.a(2, sitePage(site, base, link));
         case 6:
-          return _context15.a(2, itemPage(site, q, link, ctx2));
+          return _context46.a(2, listPage(site, q, link));
         case 7:
-          return _context15.a(2, playPage(site, q, link, ctx2));
+          return _context46.a(2, searchPage2(site, q, link));
         case 8:
-          return _context15.a(2, hlsPlaylist(site, q, ctx2));
+          return _context46.a(2, itemPage(site, q, link, ctx2));
         case 9:
-          return _context15.a(2, page("\u041D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E", [info("\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430\u044F \u043A\u043E\u043C\u0430\u043D\u0434\u0430")]));
+          return _context46.a(2, playPage(site, q, link, ctx2));
         case 10:
-          return _context15.a(2);
+          return _context46.a(2, hlsPlaylist(site, q, ctx2));
+        case 11:
+          return _context46.a(2, page("\u041D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E", [info("\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430\u044F \u043A\u043E\u043C\u0430\u043D\u0434\u0430")]));
+        case 12:
+          return _context46.a(2);
       }
-    }, _callee15);
+    }, _callee46);
   }));
   return _route.apply(this, arguments);
 }
-function rootPage(base) {
-  var channels = Object.values(sites).map(function(s) {
+function rootPage2(base) {
+  var channels2 = Object.values(sites).map(function(s) {
     return folder(s.title, "".concat(base, "/").concat(s.id), {
       logo: s.icon,
       description: s.host
     });
   });
+  channels2.push(folder(QINO_TITLE, "".concat(base, "/qino"), {
+    logo: QINO_ICON,
+    description: "\u0422\u0435\u043B\u0435\u043A\u0430\u043D\u0430\u043B\u044B qino.live (\u0432\u0445\u043E\u0434 \u043F\u043E SMS)"
+  }));
   var icon = "".concat(base, "/icon.png");
-  channels.push(folder("\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u0440\u0442\u0430\u043B \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438", "AddFavorite(FXML \u041A\u0438\u043D\u043E,".concat(icon, ",").concat(base, "/)"), {
+  channels2.push(folder("\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u0440\u0442\u0430\u043B \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438", "AddFavorite(FXML \u041A\u0438\u043D\u043E,".concat(icon, ",").concat(base, "/)"), {
     logo: icon,
     description: "\u0414\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442 \u044D\u0442\u043E\u0442 \u043F\u043E\u0440\u0442\u0430\u043B \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438 Fork browser"
   }));
-  return page("FXML \u041A\u0438\u043D\u043E", channels, {
+  return page("FXML \u041A\u0438\u043D\u043E", channels2, {
     icon: icon
   });
 }
 function sitePage(site, base, link) {
-  var channels = [search("\u041F\u043E\u0438\u0441\u043A", link("search", {
+  var channels2 = [search("\u041F\u043E\u0438\u0441\u043A", link("search", {
     q: "{search}"
   }))];
-  var _iterator0 = _createForOfIteratorHelper(site.categories), _step0;
+  var _iterator11 = _createForOfIteratorHelper(site.categories), _step11;
   try {
-    for (_iterator0.s(); !(_step0 = _iterator0.n()).done; ) {
-      var _step0$value = _slicedToArray(_step0.value, 2), title = _step0$value[0], path = _step0$value[1];
-      channels.push(folder(title, link("list", {
-        path: path
+    for (_iterator11.s(); !(_step11 = _iterator11.n()).done; ) {
+      var _step11$value = _slicedToArray(_step11.value, 2), title = _step11$value[0], path2 = _step11$value[1];
+      channels2.push(folder(title, link("list", {
+        path: path2
       })));
     }
   } catch (err) {
-    _iterator0.e(err);
+    _iterator11.e(err);
   } finally {
-    _iterator0.f();
+    _iterator11.f();
   }
-  return page(site.title, channels, {
+  return page(site.title, channels2, {
     icon: site.icon
   });
 }
@@ -20704,94 +22560,94 @@ function cardItems(items, link) {
     });
   });
 }
-function listPage(_x27, _x28, _x29) {
+function listPage(_x68, _x69, _x70) {
   return _listPage.apply(this, arguments);
 }
 function _listPage() {
-  _listPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee16(site, q, link) {
+  _listPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee47(site, q, link) {
     var _site$categories$find;
-    var path, pageNo, _yield$site$list, items, hasNext, channels, name4;
-    return _regenerator().w(function(_context16) {
-      while (1) switch (_context16.n) {
+    var path2, pageNo, _yield$site$list, items, hasNext, channels2, name4;
+    return _regenerator().w(function(_context47) {
+      while (1) switch (_context47.n) {
         case 0:
-          path = q.path || "/";
+          path2 = q.path || "/";
           pageNo = Math.max(1, parseInt(q.page, 10) || 1);
-          _context16.n = 1;
-          return site.list(path, pageNo);
+          _context47.n = 1;
+          return site.list(path2, pageNo);
         case 1:
-          _yield$site$list = _context16.v;
+          _yield$site$list = _context47.v;
           items = _yield$site$list.items;
           hasNext = _yield$site$list.hasNext;
-          channels = cardItems(items, link);
-          if (!channels.length) channels.push(info("\u041D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E"));
-          if (hasNext) channels.push(folder("\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u0430 ".concat(pageNo + 1, " \u2192"), link("list", {
-            path: path,
+          channels2 = cardItems(items, link);
+          if (!channels2.length) channels2.push(info("\u041D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E"));
+          if (hasNext) channels2.push(folder("\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u0430 ".concat(pageNo + 1, " \u2192"), link("list", {
+            path: path2,
             page: pageNo + 1
           })));
-          name4 = ((_site$categories$find = site.categories.find(function(_ref6) {
-            var _ref7 = _slicedToArray(_ref6, 2), p = _ref7[1];
-            return p === path;
-          })) === null || _site$categories$find === void 0 ? void 0 : _site$categories$find[0]) || path;
-          return _context16.a(2, page("".concat(site.title, ": ").concat(name4).concat(pageNo > 1 ? " (\u0441\u0442\u0440. ".concat(pageNo, ")") : ""), channels));
+          name4 = ((_site$categories$find = site.categories.find(function(_ref13) {
+            var _ref14 = _slicedToArray(_ref13, 2), p = _ref14[1];
+            return p === path2;
+          })) === null || _site$categories$find === void 0 ? void 0 : _site$categories$find[0]) || path2;
+          return _context47.a(2, page("".concat(site.title, ": ").concat(name4).concat(pageNo > 1 ? " (\u0441\u0442\u0440. ".concat(pageNo, ")") : ""), channels2));
       }
-    }, _callee16);
+    }, _callee47);
   }));
   return _listPage.apply(this, arguments);
 }
-function searchPage(_x30, _x31, _x32) {
-  return _searchPage.apply(this, arguments);
+function searchPage2(_x71, _x72, _x73) {
+  return _searchPage2.apply(this, arguments);
 }
-function _searchPage() {
-  _searchPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee17(site, q, link) {
-    var query, items, channels;
-    return _regenerator().w(function(_context17) {
-      while (1) switch (_context17.n) {
+function _searchPage2() {
+  _searchPage2 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee48(site, q, link) {
+    var query, items, channels2;
+    return _regenerator().w(function(_context48) {
+      while (1) switch (_context48.n) {
         case 0:
           query = (q.q && q.q !== "{search}" ? q.q : q.search || "").trim();
           if (query) {
-            _context17.n = 1;
+            _context48.n = 1;
             break;
           }
-          return _context17.a(2, page("\u041F\u043E\u0438\u0441\u043A", [search("\u041F\u043E\u0438\u0441\u043A", link("search", {
+          return _context48.a(2, page("\u041F\u043E\u0438\u0441\u043A", [search("\u041F\u043E\u0438\u0441\u043A", link("search", {
             q: "{search}"
           }))]));
         case 1:
-          _context17.n = 2;
+          _context48.n = 2;
           return site.search(query);
         case 2:
-          items = _context17.v;
-          channels = cardItems(items, link);
-          if (!channels.length) channels.push(info("\u041F\u043E \u0437\u0430\u043F\u0440\u043E\u0441\u0443 \xAB".concat(query, "\xBB \u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E")));
-          return _context17.a(2, page("".concat(site.title, ": \u043F\u043E\u0438\u0441\u043A \xAB").concat(query, "\xBB"), channels));
+          items = _context48.v;
+          channels2 = cardItems(items, link);
+          if (!channels2.length) channels2.push(info("\u041F\u043E \u0437\u0430\u043F\u0440\u043E\u0441\u0443 \xAB".concat(query, "\xBB \u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E")));
+          return _context48.a(2, page("".concat(site.title, ": \u043F\u043E\u0438\u0441\u043A \xAB").concat(query, "\xBB"), channels2));
       }
-    }, _callee17);
+    }, _callee48);
   }));
-  return _searchPage.apply(this, arguments);
+  return _searchPage2.apply(this, arguments);
 }
-function itemPage(_x33, _x34, _x35, _x36) {
+function itemPage(_x74, _x75, _x76, _x77) {
   return _itemPage.apply(this, arguments);
 }
 function _itemPage() {
-  _itemPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee18(site, q, link, ctx2) {
-    var d, ei, embed, path, nodes, node, children, channels, crumbs, walk, _iterator1, _step1, i;
-    return _regenerator().w(function(_context18) {
-      while (1) switch (_context18.n) {
+  _itemPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee49(site, q, link, ctx2) {
+    var d, ei, embed, path2, nodes, node, children, channels2, crumbs, walk, _iterator14, _step14, i;
+    return _regenerator().w(function(_context49) {
+      while (1) switch (_context49.n) {
         case 0:
-          _context18.n = 1;
+          _context49.n = 1;
           return site.details(q.u);
         case 1:
-          d = _context18.v;
+          d = _context49.v;
           if (d.embeds.length) {
-            _context18.n = 2;
+            _context49.n = 2;
             break;
           }
-          return _context18.a(2, page(d.title, [info("\u041F\u043B\u0435\u0435\u0440 \u0434\u043B\u044F \u044D\u0442\u043E\u0433\u043E \u0432\u0438\u0434\u0435\u043E \u043D\u0435 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442\u0441\u044F", d.description)]));
+          return _context49.a(2, page(d.title, [info("\u041F\u043B\u0435\u0435\u0440 \u0434\u043B\u044F \u044D\u0442\u043E\u0433\u043E \u0432\u0438\u0434\u0435\u043E \u043D\u0435 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442\u0441\u044F", d.description)]));
         case 2:
           if (!(q.e === void 0 && d.embeds.length > 1)) {
-            _context18.n = 3;
+            _context49.n = 3;
             break;
           }
-          return _context18.a(2, page(d.title, d.embeds.map(function(e, i2) {
+          return _context49.a(2, page(d.title, d.embeds.map(function(e, i2) {
             return folder("\u041F\u043B\u0435\u0435\u0440 ".concat(i2 + 1, ": ").concat(e.player.name), link("item", {
               u: q.u,
               e: i2
@@ -20803,20 +22659,20 @@ function _itemPage() {
           ei = Number(q.e) || 0;
           embed = d.embeds[ei];
           if (embed) {
-            _context18.n = 4;
+            _context49.n = 4;
             break;
           }
           throw new Error("\u041F\u043B\u0435\u0435\u0440 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D");
         case 4:
-          path = q.p ? q.p.split(".").map(Number) : [];
-          _context18.n = 5;
+          path2 = q.p ? q.p.split(".").map(Number) : [];
+          _context49.n = 5;
           return playerTree(embed.player, embed.url, d.url, ctx2.ua);
         case 5:
-          nodes = _context18.v;
-          node = nodeAt(nodes, path);
+          nodes = _context49.v;
+          node = nodeAt(nodes, path2);
           children = node.children || [];
-          channels = children.map(function(child, i2) {
-            var p = [].concat(_toConsumableArray(path), [i2]).join(".");
+          channels2 = children.map(function(child, i2) {
+            var p = [].concat(_toConsumableArray(path2), [i2]).join(".");
             var params = {
               u: q.u,
               e: ei,
@@ -20829,87 +22685,87 @@ function _itemPage() {
               description: d.description
             });
           });
-          if (!channels.length) channels.push(info("\u0412\u0438\u0434\u0435\u043E \u043F\u043E\u043A\u0430 \u043D\u0435\u0442"));
+          if (!channels2.length) channels2.push(info("\u0412\u0438\u0434\u0435\u043E \u043F\u043E\u043A\u0430 \u043D\u0435\u0442"));
           crumbs = [];
           walk = {
             children: nodes
           };
-          _iterator1 = _createForOfIteratorHelper(path);
+          _iterator14 = _createForOfIteratorHelper(path2);
           try {
-            for (_iterator1.s(); !(_step1 = _iterator1.n()).done; ) {
-              i = _step1.value;
+            for (_iterator14.s(); !(_step14 = _iterator14.n()).done; ) {
+              i = _step14.value;
               crumbs.push((walk = walk.children[i]).title);
             }
           } catch (err) {
-            _iterator1.e(err);
+            _iterator14.e(err);
           } finally {
-            _iterator1.f();
+            _iterator14.f();
           }
-          return _context18.a(2, page([d.title].concat(crumbs).join(" / "), channels));
+          return _context49.a(2, page([d.title].concat(crumbs).join(" / "), channels2));
       }
-    }, _callee18);
+    }, _callee49);
   }));
   return _itemPage.apply(this, arguments);
 }
-function resolveStream(_x37, _x38, _x39) {
+function resolveStream(_x78, _x79, _x80) {
   return _resolveStream.apply(this, arguments);
 }
 function _resolveStream() {
-  _resolveStream = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee19(site, q, ua) {
-    var d, embed, path, nodes, node, stream2;
-    return _regenerator().w(function(_context19) {
-      while (1) switch (_context19.n) {
+  _resolveStream = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee50(site, q, ua) {
+    var d, embed, path2, nodes, node, stream2;
+    return _regenerator().w(function(_context50) {
+      while (1) switch (_context50.n) {
         case 0:
-          _context19.n = 1;
+          _context50.n = 1;
           return site.details(q.u);
         case 1:
-          d = _context19.v;
+          d = _context50.v;
           embed = d.embeds[Number(q.e) || 0];
           if (embed) {
-            _context19.n = 2;
+            _context50.n = 2;
             break;
           }
           throw new Error("\u041F\u043B\u0435\u0435\u0440 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D");
         case 2:
-          path = (q.p || "").split(".").filter(Boolean).map(Number);
-          _context19.n = 3;
+          path2 = (q.p || "").split(".").filter(Boolean).map(Number);
+          _context50.n = 3;
           return playerTree(embed.player, embed.url, d.url, ua);
         case 3:
-          nodes = _context19.v;
-          node = nodeAt(nodes, path);
+          nodes = _context50.v;
+          node = nodeAt(nodes, path2);
           if (node.ref) {
-            _context19.n = 4;
+            _context50.n = 4;
             break;
           }
           throw new Error("\u042D\u0442\u043E \u043D\u0435 \u0432\u0438\u0434\u0435\u043E");
         case 4:
-          _context19.n = 5;
+          _context50.n = 5;
           return embed.player.resolve(embed.url, node.ref, d.url);
         case 5:
-          stream2 = _context19.v;
-          return _context19.a(2, _objectSpread2({
+          stream2 = _context50.v;
+          return _context50.a(2, _objectSpread2({
             d: d,
             embed: embed,
             node: node
           }, stream2));
       }
-    }, _callee19);
+    }, _callee50);
   }));
   return _resolveStream.apply(this, arguments);
 }
-function playPage(_x40, _x41, _x42, _x43) {
+function playPage(_x81, _x82, _x83, _x84) {
   return _playPage.apply(this, arguments);
 }
 function _playPage() {
-  _playPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee20(site, q, link, ctx2) {
-    var _yield$resolveStream, d, embed, node, url, subtitles, opts, streamUrl, channels, _iterator10, _step10, v, _t9;
-    return _regenerator().w(function(_context20) {
-      while (1) switch (_context20.n) {
+  _playPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee51(site, q, link, ctx2) {
+    var _yield$resolveStream, d, embed, node, url, subtitles, opts, streamUrl, channels2, _iterator15, _step15, v, _t48;
+    return _regenerator().w(function(_context51) {
+      while (1) switch (_context51.n) {
         case 0:
-          _context20.n = 1;
+          _context51.n = 1;
           return resolveStream(site, q, ctx2.ua);
         case 1:
-          _yield$resolveStream = _context20.v;
+          _yield$resolveStream = _context51.v;
           d = _yield$resolveStream.d;
           embed = _yield$resolveStream.embed;
           node = _yield$resolveStream.node;
@@ -20930,74 +22786,74 @@ function _playPage() {
           } : function(h, variantUrl) {
             return variantUrl || url;
           };
-          channels = [stream("\u0410\u0432\u0442\u043E (\u043B\u0443\u0447\u0448\u0435\u0435 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E)", streamUrl(), opts)];
-          _t9 = _createForOfIteratorHelper;
-          _context20.n = 2;
+          channels2 = [stream("\u0410\u0432\u0442\u043E (\u043B\u0443\u0447\u0448\u0435\u0435 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E)", streamUrl(), opts)];
+          _t48 = _createForOfIteratorHelper;
+          _context51.n = 2;
           return hlsVariants(url, ctx2.ua);
         case 2:
-          _iterator10 = _t9(_context20.v);
+          _iterator15 = _t48(_context51.v);
           try {
-            for (_iterator10.s(); !(_step10 = _iterator10.n()).done; ) {
-              v = _step10.value;
-              if (v.height) channels.push(stream("".concat(v.height, "p"), streamUrl(v.height, v.url), opts));
+            for (_iterator15.s(); !(_step15 = _iterator15.n()).done; ) {
+              v = _step15.value;
+              if (v.height) channels2.push(stream("".concat(v.height, "p"), streamUrl(v.height, v.url), opts));
             }
           } catch (err) {
-            _iterator10.e(err);
+            _iterator15.e(err);
           } finally {
-            _iterator10.f();
+            _iterator15.f();
           }
-          return _context20.a(2, page("".concat(d.title, " / ").concat(node.title), channels));
+          return _context51.a(2, page("".concat(d.title, " / ").concat(node.title), channels2));
       }
-    }, _callee20);
+    }, _callee51);
   }));
   return _playPage.apply(this, arguments);
 }
-function hlsPlaylist(_x44, _x45, _x46) {
+function hlsPlaylist(_x85, _x86, _x87) {
   return _hlsPlaylist.apply(this, arguments);
 }
 function _hlsPlaylist() {
-  _hlsPlaylist = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee21(site, q, ctx2) {
-    var _yield$resolveStream2, url, height, variant, _t0, _t1;
-    return _regenerator().w(function(_context21) {
-      while (1) switch (_context21.n) {
+  _hlsPlaylist = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee52(site, q, ctx2) {
+    var _yield$resolveStream2, url, height, variant, _t49, _t50;
+    return _regenerator().w(function(_context52) {
+      while (1) switch (_context52.n) {
         case 0:
-          _context21.n = 1;
+          _context52.n = 1;
           return resolveStream(site, q, ctx2.ua);
         case 1:
-          _yield$resolveStream2 = _context21.v;
+          _yield$resolveStream2 = _context52.v;
           url = _yield$resolveStream2.url;
           height = Number(q.h) || 0;
           if (!height) {
-            _context21.n = 4;
+            _context52.n = 4;
             break;
           }
-          _context21.n = 2;
+          _context52.n = 2;
           return hlsVariants(url, ctx2.ua);
         case 2:
-          variant = _context21.v.find(function(v) {
+          variant = _context52.v.find(function(v) {
             return v.height === height;
           });
           if (!variant) {
-            _context21.n = 4;
+            _context52.n = 4;
             break;
           }
-          _context21.n = 3;
+          _context52.n = 3;
           return absolutePlaylist(variant.url, ctx2.ua);
         case 3:
-          _t0 = _context21.v;
-          return _context21.a(2, {
-            playlist: _t0
+          _t49 = _context52.v;
+          return _context52.a(2, {
+            playlist: _t49
           });
         case 4:
-          _context21.n = 5;
+          _context52.n = 5;
           return absolutePlaylist(url, ctx2.ua);
         case 5:
-          _t1 = _context21.v;
-          return _context21.a(2, {
-            playlist: _t1
+          _t50 = _context52.v;
+          return _context52.a(2, {
+            playlist: _t50
           });
       }
-    }, _callee21);
+    }, _callee52);
   }));
   return _hlsPlaylist.apply(this, arguments);
 }
@@ -21026,8 +22882,8 @@ function start(reason) {
       log("server error " + (err && err.code));
       server = null;
     });
-    server.listen(PORT, "127.0.0.1", function() {
-      return log(reason + ": listening on 127.0.0.1:" + PORT);
+    server.listen(PORT, "0.0.0.0", function() {
+      return log(reason + ": listening on 0.0.0.0:" + PORT);
     });
   } catch (err) {
     log("start failed " + (err && err.stack));

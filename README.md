@@ -9,6 +9,8 @@ on Samsung Smart TVs as [Fork browser](https://wiki.forkbrowser.top/wiki/FXML) (
 - Pick the season, episode and voice-over, and the quality up to 1080p, as on the site.
 - The sites are read **by the TV itself**: no PC and no server. If the sites open on your
   computer, they should work on your TV too.
+- **Being tested:** QINO ТВ, the live TV channels of [qino.live](https://qino.live/). It needs a
+  qino.live account; you log in with an SMS code, in a phone or PC browser or on the TV.
 
 This repository is FxmlKino as a **[TizenBrew](https://github.com/reisxd/TizenBrew) module**. With
 TizenBrew there's no signing and no device IDs: it works on any Samsung TV TizenBrew supports
