@@ -20791,6 +20791,9 @@ function tvAssetToken() {
     }, _callee5);
   })));
 }
+function logoThumb(url) {
+  return url && /\.lfstrm\.tv\/images\//.test(url) && url.indexOf("?") < 0 ? "".concat(url, "?width=320&height=180") : url;
+}
 function channels() {
   return cached2("channels", 30 * 60 * 1e3, /* @__PURE__ */ _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee6() {
     var token, _yield$Promise$all, _yield$Promise$all2, list, medias, byChannel;
@@ -20825,7 +20828,7 @@ function channels() {
               id: c.id,
               title: c.title,
               number: c.keyNumber,
-              logo: c.logoUrl,
+              logo: logoThumb(c.logoUrl),
               genres: (c.relevantGenres || []).map(function(g2) {
                 return g2.genreId;
               }),

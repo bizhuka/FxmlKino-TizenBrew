@@ -1,6 +1,6 @@
 {
   "name": "fxmlkino",
-  "version": "1.2.4",
+  "version": "1.2.6",
   "description": "FxmlKino: HDRezka and Kinogo on Samsung TVs as Fork browser (FXML) pages. The sites are parsed on the TV itself.",
   "packageType": "app",
   "appName": "FxmlKino",

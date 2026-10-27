@@ -26,7 +26,7 @@ var version_local_js = 1;
 // Fork engine version the remote loader expects; FxmlKino's own version is FXMLKINO_VERSION
 // (same as config.xml).
 var app_version = "1.1.1";
-var FXMLKINO_VERSION = "1.2.4";
+var FXMLKINO_VERSION = "1.2.6";
 
 // The Tizen emulator can't run web services (see AGENTS.md).
 function isEmulator() {
