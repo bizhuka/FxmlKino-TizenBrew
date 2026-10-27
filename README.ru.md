@@ -38,6 +38,9 @@ FxmlKino есть и как отдельное приложение: [FxmlKino-T
 ввести `bizhuka/FxmlKino-TV`. Работает на любых ТВ с 2017 года, а для ТВ 2022+ сертификат создаёт
 сама.
 
+Для телевизоров LG на webOS и для Android (приставки, телефоны; в тестировании) там же есть свои
+пакеты: см. [FxmlKino-TV](https://github.com/bizhuka/FxmlKino-TV/blob/main/README.ru.md).
+
 ## Файлы
 
 | Файл | Назначение |

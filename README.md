@@ -38,6 +38,9 @@ easiest way to install it is the same TizenBrew Installer: install an app **from
 `bizhuka/FxmlKino-TV`. It works on any TV from 2017 on and creates the certificate for 2022+ TVs
 itself.
 
+LG webOS TVs and Android (TV boxes, phones; being tested) have their own packages there too:
+see [FxmlKino-TV](https://github.com/bizhuka/FxmlKino-TV#readme).
+
 ## Files
 
 | File | Purpose |

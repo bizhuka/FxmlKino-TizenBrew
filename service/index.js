@@ -19614,14 +19614,6 @@ var import_whatwg_url = __toESM(require_public_api(), 1);
 var import_https = __toESM(require("https"), 1);
 var import_tls = __toESM(require("tls"), 1);
 var EXTRA_CA = ["-----BEGIN CERTIFICATE-----\nMIIFazCCA1OgAwIBAgIRAIIQz7DSQONZRGPgu2OCiwAwDQYJKoZIhvcNAQELBQAwTzELMAkG\nA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2VhcmNoIEdyb3VwMRUw\nEwYDVQQDEwxJU1JHIFJvb3QgWDEwHhcNMTUwNjA0MTEwNDM4WhcNMzUwNjA0MTEwNDM4WjBP\nMQswCQYDVQQGEwJVUzEpMCcGA1UEChMgSW50ZXJuZXQgU2VjdXJpdHkgUmVzZWFyY2ggR3Jv\ndXAxFTATBgNVBAMTDElTUkcgUm9vdCBYMTCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoC\nggIBAK3oJHP0FDfzm54rVygch77ct984kIxuPOZXoHj3dcKi/vVqbvYATyjb3miGbESTtrFj\n/RQSa78f0uoxmyF+0TM8ukj13Xnfs7j/EvEhmkvBioZxaUpmZmyPfjxwv60pIgbz5MDmgK7i\nS4+3mX6UA5/TR5d8mUgjU+g4rk8Kb4Mu0UlXjIB0ttov0DiNewNwIRt18jA8+o+u3dpjq+sW\nT8KOEUt+zwvo/7V3LvSye0rgTBIlDHCNAymg4VMk7BPZ7hm/ELNKjD+Jo2FR3qyHB5T0Y3Hs\nLuJvW5iB4YlcNHlsdu87kGJ55tukmi8mxdAQ4Q7e2RCOFvu396j3x+UCB5iPNgiV5+I3lg02\ndZ77DnKxHZu8A/lJBdiB3QW0KtZB6awBdpUKD9jf1b0SHzUvKBds0pjBqAlkd25HN7rOrFle\naJ1/ctaJxQZBKT5ZPt0m9STJEadao0xAH0ahmbWnOlFuhjuefXKnEgV4We0+UXgVCwOPjdAv\nBbI+e0ocS3MFEvzG6uBQE3xDk3SzynTnjh8BCNAw1FtxNrQHusEwMFxIt4I7mKZ9YIqioymC\nzLq9gwQbooMDQaHWBfEbwrbwqHyGO0aoSCqI3Haadr8faqU9GY/rOPNk3sgrDQoo//fb4hVC\n1CLQJ13hef4Y53CIrU7m2Ys6xt0nUW7/vGT1M0NPAgMBAAGjQjBAMA4GA1UdDwEB/wQEAwIB\nBjAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBR5tFnme7bl5AFzgAiIyBpY9umbbjANBgkq\nhkiG9w0BAQsFAAOCAgEAVR9YqbyyqFDQDLHYGmkgJykIrGF1XIpu+ILlaS/V9lZLubhzEFnT\nIZd+50xx+7LSYK05qAvqFyFWhfFQDlnrzuBZ6brJFe+GnY+EgPbk6ZGQ3BebYhtF8GaV0nxv\nwuo77x/Py9auJ/GpsMiu/X1+mvoiBOv/2X/qkSsisRcOj/KKNFtY2PwByVS5uCbMiogziUwt\nhDyC3+6WVwW6LLv3xLfHTjuCvjHIInNzktHCgKQ5ORAzI4JMPJ+GslWYHb4phowim57iaztX\nOoJwTdwJx4nLCgdNbOhdjsnvzqvHu7UrTkXWStAmzOVyyghqpZXjFaH3pO3JLF+l+/+sKAIu\nvtd7u+Nxe5AW0wdeRlN8NwdCjNPElpzVmbUq4JUagEiuTDkHzsxHpFKVK7q4+63SM1N95R1N\nbdWhscdCb+ZAJzVcoyi3B43njTOQ5yOf+1CceWxG1bQVs5ZufpsMljq4Ui0/1lvh+wjChP4k\nqKOJ2qxq4RgqsahDYVvTH9w7jXbyLeiNdd8XM2w9U/t7y0Ff/9yi0GE44Za4rF2LN9d11TPA\nmRGunUHBcnWEvgJBQl9nJEiU0Zsnvgc/ubhPgXRR4Xq37Z0j4r7g1SgEEzwxA57demyPxgcY\nxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=\n-----END CERTIFICATE-----", "-----BEGIN CERTIFICATE-----\nMIICGzCCAaGgAwIBAgIQQdKd0XLq7qeAwSxs6S+HUjAKBggqhkjOPQQDAzBPMQswCQYDVQQG\nEwJVUzEpMCcGA1UEChMgSW50ZXJuZXQgU2VjdXJpdHkgUmVzZWFyY2ggR3JvdXAxFTATBgNV\nBAMTDElTUkcgUm9vdCBYMjAeFw0yMDA5MDQwMDAwMDBaFw00MDA5MTcxNjAwMDBaME8xCzAJ\nBgNVBAYTAlVTMSkwJwYDVQQKEyBJbnRlcm5ldCBTZWN1cml0eSBSZXNlYXJjaCBHcm91cDEV\nMBMGA1UEAxMMSVNSRyBSb290IFgyMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEzZvVn4CDCuwJ\nSvMWSj5cz3es3mcFDR0HttwW+1qLFNvicWDEukWVEYmO6gbf9yoWHKS5xcUy4APgHoIYOIvX\nRdgKam7mAHf7AlF9ItgKbppbd9/w+kHsOdx1ymgHDB/qo0IwQDAOBgNVHQ8BAf8EBAMCAQYw\nDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUfEKWrt5LSDv6kviejM9ti6lyN5UwCgYIKoZI\nzj0EAwMDaAAwZQIwe3lORlCEwkSHRhtFcP9Ymd70/aTSVaYgLXTWNLxBo1BfASdWtL4ndQav\nEi51mI38AjEAi/V3bNTIZargCyzuFJ0nN6T5U6VR5CmD1/iQMVtCnwr1/q4AaOeMSQ+2b1tb\nFfLn\n-----END CERTIFICATE-----"];
-var g = typeof globalThis !== "undefined" ? globalThis : global;
-if (typeof g.fetch !== "function") {
-  g.fetch = import_node_fetch.default;
-  g.Headers = import_node_fetch.default.Headers;
-  g.Request = import_node_fetch.default.Request;
-  g.Response = import_node_fetch.default.Response;
-}
-if (typeof g.URL !== "function") g.URL = import_whatwg_url.URL;
 function define(obj, name4, fn) {
   if (typeof obj[name4] !== "function") {
     Object.defineProperty(obj, name4, {
@@ -19677,6 +19669,14 @@ define(Array.prototype, "includes", function includes(x) {
     return y !== y;
   });
 });
+var g = typeof globalThis !== "undefined" ? globalThis : global;
+if (typeof g.fetch !== "function") {
+  g.fetch = import_node_fetch.default;
+  g.Headers = import_node_fetch.default.Headers;
+  g.Request = import_node_fetch.default.Request;
+  g.Response = import_node_fetch.default.Response;
+}
+if (typeof g.URL !== "function") g.URL = import_whatwg_url.URL;
 try {
   ctx = import_tls.default.createSecureContext();
   EXTRA_CA.forEach(function(pem) {
@@ -20557,14 +20557,11 @@ function tizenDataFile() {
   var data = "/opt/usr/home/owner/apps_rw/".concat(m ? m[1] : "FxmlKinoTV", "/data");
   return import_fs.default.existsSync(data) ? import_path.default.join(data, NAME) : null;
 }
-var CANDIDATES = [
-  process.env.QINO_STATE,
-  tizenDataFile(),
-  // Next to the bundle: LG webOS (the app's service folder is writable there); read-only on Tizen.
-  typeof __dirname === "string" ? import_path.default.join(__dirname, "data", NAME) : null,
-  import_path.default.resolve("data", NAME),
-  import_path.default.join(import_os.default.tmpdir(), "fxmlkino-".concat(NAME))
-].filter(Boolean);
+function webosDataFile() {
+  var dir = typeof __dirname === "string" ? __dirname : "";
+  return /^\/media\/(developer|cryptofs)\/apps\//.test(dir) ? import_path.default.join(dir, "data", NAME) : null;
+}
+var CANDIDATES = [process.env.QINO_STATE, tizenDataFile(), webosDataFile(), import_path.default.resolve("data", NAME), import_path.default.join(import_os.default.tmpdir(), "fxmlkino-".concat(NAME))].filter(Boolean);
 var file = CANDIDATES.find(function(f) {
   return import_fs.default.existsSync(f);
 }) || null;
