@@ -26,7 +26,7 @@ var version_local_js = 1;
 // Fork engine version the remote loader expects; FxmlKino's own version is FXMLKINO_VERSION
 // (same as config.xml).
 var app_version = "1.1.1";
-var FXMLKINO_VERSION = "1.2.6";
+var FXMLKINO_VERSION = "1.2.8";
 
 // The Tizen emulator can't run web services (see AGENTS.md).
 function isEmulator() {
@@ -50,6 +50,35 @@ var FXML_PC_PARSER_URL = "http://10.0.2.2:3000/";
 var FXML_PORTAL_URL = FXML_ON_EMULATOR ? FXML_PC_PARSER_URL : "http://127.0.0.1:" + FXML_SERVICE_PORT + "/";
 // Open the portal on every start (set to false to start on Fork's own start page).
 var FXML_PORTAL_AUTOSTART = true;
+
+// "FXML Кино" first among the start page's shortcuts («Избранное»). Fork keeps the start page in
+// localStorage "glstart" ({config, fav: [...], search}) and adds new shortcuts at the end, so a
+// portal shortcut added by hand ends up behind everything else. Done once per device, before the
+// engine reads it: a shortcut the user moves or deletes afterwards stays that way. Same code in
+// android/fork-patch/load-fxml.js.
+function addFxmlStartShortcut() {
+	try {
+		if (localStorage.getItem('fxmlkino_start_shortcut')) return;
+		var saved = localStorage.getItem('glstart');
+		var start = saved ? JSON.parse(saved) : {};
+		var fav = start.fav || [];
+		var root = FXML_PORTAL_URL.replace(/\/$/, '');
+		var shortcut = null;
+		for (var i = 0; i < fav.length; i++) {
+			if (fav[i] && String(fav[i].playlist_url || '').replace(/\/$/, '') === root) {
+				shortcut = fav.splice(i, 1)[0];
+				break;
+			}
+		}
+		fav.unshift(shortcut || { title: 'FXML Кино', playlist_url: FXML_PORTAL_URL, logo_30x30: FXML_PORTAL_URL + 'icon.png' });
+		start.fav = fav;
+		localStorage.setItem('glstart', JSON.stringify(start));
+		localStorage.setItem('fxmlkino_start_shortcut', '1');
+	} catch (e) {
+		console.log('[fxml] start shortcut: ' + e.message);
+	}
+}
+addFxmlStartShortcut();
 
 // Status line on the splash screen, so the service can be checked on a TV without a debugger.
 var fxmlLastLog = '';
