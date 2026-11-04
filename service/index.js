@@ -44,36 +44,10 @@ var __fxmlLog = (function () {
 })();
 
 // tv/.build/stage2.js
-function _slicedToArray(r, e) {
-  return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest();
-}
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _iterableToArrayLimit(r, l) {
-  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-  if (null != t) {
-    var e, n, i, u, a = [], f = true, o = false;
-    try {
-      if (i = (t = t.call(r)).next, 0 === l) {
-        if (Object(t) !== t) return;
-        f = false;
-      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = true) ;
-    } catch (r2) {
-      o = true, n = r2;
-    } finally {
-      try {
-        if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return;
-      } finally {
-        if (o) throw n;
-      }
-    }
-    return a;
-  }
-}
-function _arrayWithHoles(r) {
-  if (Array.isArray(r)) return r;
-}
+var _excluded = ["note", "long"];
+var _excluded2 = ["buttons", "items", "more", "kind", "style"];
+var _excluded3 = ["ctx", "buttons", "more", "kind"];
+var _excluded4 = ["note", "long"];
 function _wrapNativeSuper(t) {
   var r = "function" == typeof Map ? /* @__PURE__ */ new Map() : void 0;
   return _wrapNativeSuper = function _wrapNativeSuper2(t2) {
@@ -114,6 +88,54 @@ function _iterableToArray(r) {
 }
 function _arrayWithoutHoles(r) {
   if (Array.isArray(r)) return _arrayLikeToArray(r);
+}
+function _objectWithoutProperties(e, t) {
+  if (null == e) return {};
+  var o, r, i = _objectWithoutPropertiesLoose(e, t);
+  if (Object.getOwnPropertySymbols) {
+    var n = Object.getOwnPropertySymbols(e);
+    for (r = 0; r < n.length; r++) o = n[r], -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]);
+  }
+  return i;
+}
+function _objectWithoutPropertiesLoose(r, e) {
+  if (null == r) return {};
+  var t = {};
+  for (var n in r) if ({}.hasOwnProperty.call(r, n)) {
+    if (-1 !== e.indexOf(n)) continue;
+    t[n] = r[n];
+  }
+  return t;
+}
+function _slicedToArray(r, e) {
+  return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest();
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _iterableToArrayLimit(r, l) {
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (null != t) {
+    var e, n, i, u, a = [], f = true, o = false;
+    try {
+      if (i = (t = t.call(r)).next, 0 === l) {
+        if (Object(t) !== t) return;
+        f = false;
+      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = true) ;
+    } catch (r2) {
+      o = true, n = r2;
+    } finally {
+      try {
+        if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return;
+      } finally {
+        if (o) throw n;
+      }
+    }
+    return a;
+  }
+}
+function _arrayWithHoles(r) {
+  if (Array.isArray(r)) return r;
 }
 function ownKeys(e, r) {
   var t = Object.keys(e);
@@ -370,8 +392,8 @@ var __commonJS = function __commonJS2(cb, mod) {
   };
 };
 var __export = function __export2(target, all) {
-  for (var name4 in all) __defProp(target, name4, {
-    get: all[name4],
+  for (var name5 in all) __defProp(target, name5, {
+    get: all[name5],
     enumerable: true
   });
 };
@@ -614,7 +636,7 @@ var require_tr46 = __commonJS({
       TRANSITIONAL: 0,
       NONTRANSITIONAL: 1
     };
-    function normalize3(str) {
+    function normalize4(str) {
       return str.split("\0").map(function(s) {
         return s.normalize("NFC");
       }).join("\0");
@@ -694,7 +716,7 @@ var require_tr46 = __commonJS({
         processing_option = PROCESSING_OPTIONS.NONTRANSITIONAL;
       }
       var error = false;
-      if (normalize3(label) !== label || label[3] === "-" && label[4] === "-" || label[0] === "-" || label[label.length - 1] === "-" || label.indexOf(".") !== -1 || label.search(combiningMarksRegex) === 0) {
+      if (normalize4(label) !== label || label[3] === "-" && label[4] === "-" || label[0] === "-" || label[label.length - 1] === "-" || label.indexOf(".") !== -1 || label.search(combiningMarksRegex) === 0) {
         error = true;
       }
       var len = countSymbols(label);
@@ -712,7 +734,7 @@ var require_tr46 = __commonJS({
     }
     function processing(domain_name, useSTD3, processing_option) {
       var result = mapChars(domain_name, useSTD3, processing_option);
-      result.string = normalize3(result.string);
+      result.string = normalize4(result.string);
       var labels = result.string.split(".");
       for (var i = 0; i < labels.length; ++i) {
         try {
@@ -2552,10 +2574,10 @@ var require_lib2 = __commonJS({
       var _iterator4 = _createForOfIteratorHelper(Object.getOwnPropertyNames(Body.prototype)), _step4;
       try {
         for (_iterator4.s(); !(_step4 = _iterator4.n()).done; ) {
-          var name4 = _step4.value;
-          if (!(name4 in proto)) {
-            var desc = Object.getOwnPropertyDescriptor(Body.prototype, name4);
-            Object.defineProperty(proto, name4, desc);
+          var name5 = _step4.value;
+          if (!(name5 in proto)) {
+            var desc = Object.getOwnPropertyDescriptor(Body.prototype, name5);
+            Object.defineProperty(proto, name5, desc);
           }
         }
       } catch (err) {
@@ -2589,7 +2611,7 @@ var require_lib2 = __commonJS({
       var accum = [];
       var accumBytes = 0;
       var abort = false;
-      return new Body.Promise(function(resolve4, reject) {
+      return new Body.Promise(function(resolve5, reject) {
         var resTimeout;
         if (_this4.timeout) {
           resTimeout = setTimeout(function() {
@@ -2623,7 +2645,7 @@ var require_lib2 = __commonJS({
           }
           clearTimeout(resTimeout);
           try {
-            resolve4(Buffer.concat(accum, accumBytes));
+            resolve5(Buffer.concat(accum, accumBytes));
           } catch (err) {
             reject(new FetchError("Could not create Buffer from response body for ".concat(_this4.url, ": ").concat(err.message), "system", err));
           }
@@ -2749,10 +2771,10 @@ var require_lib2 = __commonJS({
     Body.Promise = global.Promise;
     var invalidTokenRegex = /[^\^_`a-zA-Z\-0-9!#$%&'*+.|~]/;
     var invalidHeaderCharRegex = /[^\t\x20-\x7e\x80-\xff]/;
-    function validateName(name4) {
-      name4 = "".concat(name4);
-      if (invalidTokenRegex.test(name4) || name4 === "") {
-        throw new TypeError("".concat(name4, " is not a legal HTTP header name"));
+    function validateName(name5) {
+      name5 = "".concat(name5);
+      if (invalidTokenRegex.test(name5) || name5 === "") {
+        throw new TypeError("".concat(name5, " is not a legal HTTP header name"));
       }
     }
     function validateValue(value) {
@@ -2761,10 +2783,10 @@ var require_lib2 = __commonJS({
         throw new TypeError("".concat(value, " is not a legal HTTP header value"));
       }
     }
-    function find(map, name4) {
-      name4 = name4.toLowerCase();
+    function find(map, name5) {
+      name5 = name5.toLowerCase();
       for (var key in map) {
-        if (key.toLowerCase() === name4) {
+        if (key.toLowerCase() === name5) {
           return key;
         }
       }
@@ -2837,10 +2859,10 @@ var require_lib2 = __commonJS({
       }
       return _createClass2(_Headers, [{
         key: "get",
-        value: function get2(name4) {
-          name4 = "".concat(name4);
-          validateName(name4);
-          var key = find(this[MAP], name4);
+        value: function get2(name5) {
+          name5 = "".concat(name5);
+          validateName(name5);
+          var key = find(this[MAP], name5);
           if (key === void 0) {
             return null;
           }
@@ -2861,8 +2883,8 @@ var require_lib2 = __commonJS({
           var i = 0;
           while (i < pairs.length) {
             var _pairs$i = pairs[i];
-            var name4 = _pairs$i[0], value = _pairs$i[1];
-            callback.call(thisArg, value, name4, this);
+            var name5 = _pairs$i[0], value = _pairs$i[1];
+            callback.call(thisArg, value, name5, this);
             pairs = getHeaders(this);
             i++;
           }
@@ -2876,13 +2898,13 @@ var require_lib2 = __commonJS({
          */
       }, {
         key: "set",
-        value: function set2(name4, value) {
-          name4 = "".concat(name4);
+        value: function set2(name5, value) {
+          name5 = "".concat(name5);
           value = "".concat(value);
-          validateName(name4);
+          validateName(name5);
           validateValue(value);
-          var key = find(this[MAP], name4);
-          this[MAP][key !== void 0 ? key : name4] = [value];
+          var key = find(this[MAP], name5);
+          this[MAP][key !== void 0 ? key : name5] = [value];
         }
         /**
          * Append a value onto existing header
@@ -2893,16 +2915,16 @@ var require_lib2 = __commonJS({
          */
       }, {
         key: "append",
-        value: function append(name4, value) {
-          name4 = "".concat(name4);
+        value: function append(name5, value) {
+          name5 = "".concat(name5);
           value = "".concat(value);
-          validateName(name4);
+          validateName(name5);
           validateValue(value);
-          var key = find(this[MAP], name4);
+          var key = find(this[MAP], name5);
           if (key !== void 0) {
             this[MAP][key].push(value);
           } else {
-            this[MAP][name4] = [value];
+            this[MAP][name5] = [value];
           }
         }
         /**
@@ -2913,10 +2935,10 @@ var require_lib2 = __commonJS({
          */
       }, {
         key: "has",
-        value: function has(name4) {
-          name4 = "".concat(name4);
-          validateName(name4);
-          return find(this[MAP], name4) !== void 0;
+        value: function has(name5) {
+          name5 = "".concat(name5);
+          validateName(name5);
+          return find(this[MAP], name5) !== void 0;
         }
         /**
          * Delete all header values given name
@@ -2926,10 +2948,10 @@ var require_lib2 = __commonJS({
          */
       }, {
         key: "delete",
-        value: function _delete(name4) {
-          name4 = "".concat(name4);
-          validateName(name4);
-          var key = find(this[MAP], name4);
+        value: function _delete(name5) {
+          name5 = "".concat(name5);
+          validateName(name5);
+          var key = find(this[MAP], name5);
           if (key !== void 0) {
             delete this[MAP][key];
           }
@@ -3076,22 +3098,22 @@ var require_lib2 = __commonJS({
     function createHeadersLenient(obj) {
       var headers = new Headers();
       for (var _i5 = 0, _Object$keys2 = Object.keys(obj); _i5 < _Object$keys2.length; _i5++) {
-        var name4 = _Object$keys2[_i5];
-        if (invalidTokenRegex.test(name4)) {
+        var name5 = _Object$keys2[_i5];
+        if (invalidTokenRegex.test(name5)) {
           continue;
         }
-        if (Array.isArray(obj[name4])) {
-          var _iterator7 = _createForOfIteratorHelper(obj[name4]), _step7;
+        if (Array.isArray(obj[name5])) {
+          var _iterator7 = _createForOfIteratorHelper(obj[name5]), _step7;
           try {
             for (_iterator7.s(); !(_step7 = _iterator7.n()).done; ) {
               var val = _step7.value;
               if (invalidHeaderCharRegex.test(val)) {
                 continue;
               }
-              if (headers[MAP][name4] === void 0) {
-                headers[MAP][name4] = [val];
+              if (headers[MAP][name5] === void 0) {
+                headers[MAP][name5] = [val];
               } else {
-                headers[MAP][name4].push(val);
+                headers[MAP][name5].push(val);
               }
             }
           } catch (err) {
@@ -3099,8 +3121,8 @@ var require_lib2 = __commonJS({
           } finally {
             _iterator7.f();
           }
-        } else if (!invalidHeaderCharRegex.test(obj[name4])) {
-          headers[MAP][name4] = [obj[name4]];
+        } else if (!invalidHeaderCharRegex.test(obj[name5])) {
+          headers[MAP][name5] = [obj[name5]];
         }
       }
       return headers;
@@ -3412,7 +3434,7 @@ var require_lib2 = __commonJS({
         throw new Error("native promise missing, set fetch.Promise to your favorite alternative");
       }
       Body.Promise = fetch2.Promise;
-      return new fetch2.Promise(function(resolve4, reject) {
+      return new fetch2.Promise(function(resolve5, reject) {
         var request2 = new Request(url, opts);
         var options = getNodeRequestOptions(request2);
         var send = (options.protocol === "https:" ? https2 : http2).request;
@@ -3532,8 +3554,8 @@ var require_lib2 = __commonJS({
                 };
                 if (!isDomainOrSubdomain(request2.url, locationURL) || !isSameProtocol(request2.url, locationURL)) {
                   for (var _i6 = 0, _arr = ["authorization", "www-authenticate", "cookie", "cookie2"]; _i6 < _arr.length; _i6++) {
-                    var name4 = _arr[_i6];
-                    requestOpts.headers.delete(name4);
+                    var name5 = _arr[_i6];
+                    requestOpts.headers.delete(name5);
                   }
                 }
                 if (res.statusCode !== 303 && request2.body && getTotalBytes(request2) === null) {
@@ -3546,7 +3568,7 @@ var require_lib2 = __commonJS({
                   requestOpts.body = void 0;
                   requestOpts.headers.delete("content-length");
                 }
-                resolve4(fetch2(new Request(locationURL, requestOpts)));
+                resolve5(fetch2(new Request(locationURL, requestOpts)));
                 finalize();
                 return;
             }
@@ -3567,7 +3589,7 @@ var require_lib2 = __commonJS({
           var codings = headers.get("Content-Encoding");
           if (!request2.compress || request2.method === "HEAD" || codings === null || res.statusCode === 204 || res.statusCode === 304) {
             response = new Response(body, response_options);
-            resolve4(response);
+            resolve5(response);
             return;
           }
           var zlibOptions = {
@@ -3577,7 +3599,7 @@ var require_lib2 = __commonJS({
           if (codings == "gzip" || codings == "x-gzip") {
             body = body.pipe(zlib.createGunzip(zlibOptions));
             response = new Response(body, response_options);
-            resolve4(response);
+            resolve5(response);
             return;
           }
           if (codings == "deflate" || codings == "x-deflate") {
@@ -3589,12 +3611,12 @@ var require_lib2 = __commonJS({
                 body = body.pipe(zlib.createInflateRaw());
               }
               response = new Response(body, response_options);
-              resolve4(response);
+              resolve5(response);
             });
             raw.on("end", function() {
               if (!response) {
                 response = new Response(body, response_options);
-                resolve4(response);
+                resolve5(response);
               }
             });
             return;
@@ -3602,11 +3624,11 @@ var require_lib2 = __commonJS({
           if (codings == "br" && typeof zlib.createBrotliDecompress === "function") {
             body = body.pipe(zlib.createBrotliDecompress());
             response = new Response(body, response_options);
-            resolve4(response);
+            resolve5(response);
             return;
           }
           response = new Response(body, response_options);
-          resolve4(response);
+          resolve5(response);
         });
         writeToStream(req, request2);
       });
@@ -6678,8 +6700,8 @@ var require_Tokenizer = __commonJS({
     Tokenizer.prototype._getSection = function() {
       return this._buffer.substring(this._sectionStart, this._index);
     };
-    Tokenizer.prototype._emitToken = function(name4) {
-      this._cbs[name4](this._getSection());
+    Tokenizer.prototype._emitToken = function(name5) {
+      this._cbs[name5](this._getSection());
       this._sectionStart = -1;
     };
     Tokenizer.prototype._emitPartial = function(value) {
@@ -6876,20 +6898,20 @@ var require_Parser = __commonJS({
       this.endIndex--;
       if (this._cbs.ontext) this._cbs.ontext(data);
     };
-    Parser.prototype.onopentagname = function(name4) {
+    Parser.prototype.onopentagname = function(name5) {
       if (this._lowerCaseTagNames) {
-        name4 = name4.toLowerCase();
+        name5 = name5.toLowerCase();
       }
-      this._tagname = name4;
-      if (!this._options.xmlMode && name4 in openImpliesClose) {
-        for (var el; (el = this._stack[this._stack.length - 1]) in openImpliesClose[name4]; this.onclosetag(el)) ;
+      this._tagname = name5;
+      if (!this._options.xmlMode && name5 in openImpliesClose) {
+        for (var el; (el = this._stack[this._stack.length - 1]) in openImpliesClose[name5]; this.onclosetag(el)) ;
       }
-      if (this._options.xmlMode || !(name4 in voidElements)) {
-        this._stack.push(name4);
-        if (name4 in foreignContextElements) this._foreignContext.push(true);
-        else if (name4 in htmlIntegrationElements) this._foreignContext.push(false);
+      if (this._options.xmlMode || !(name5 in voidElements)) {
+        this._stack.push(name5);
+        if (name5 in foreignContextElements) this._foreignContext.push(true);
+        else if (name5 in htmlIntegrationElements) this._foreignContext.push(false);
       }
-      if (this._cbs.onopentagname) this._cbs.onopentagname(name4);
+      if (this._cbs.onopentagname) this._cbs.onopentagname(name5);
       if (this._cbs.onopentag) this._attribs = {};
     };
     Parser.prototype.onopentagend = function() {
@@ -6903,27 +6925,27 @@ var require_Parser = __commonJS({
       }
       this._tagname = "";
     };
-    Parser.prototype.onclosetag = function(name4) {
+    Parser.prototype.onclosetag = function(name5) {
       this._updatePosition(1);
       if (this._lowerCaseTagNames) {
-        name4 = name4.toLowerCase();
+        name5 = name5.toLowerCase();
       }
-      if (name4 in foreignContextElements || name4 in htmlIntegrationElements) {
+      if (name5 in foreignContextElements || name5 in htmlIntegrationElements) {
         this._foreignContext.pop();
       }
-      if (this._stack.length && (!(name4 in voidElements) || this._options.xmlMode)) {
-        var pos = this._stack.lastIndexOf(name4);
+      if (this._stack.length && (!(name5 in voidElements) || this._options.xmlMode)) {
+        var pos = this._stack.lastIndexOf(name5);
         if (pos !== -1) {
           if (this._cbs.onclosetag) {
             pos = this._stack.length - pos;
             while (pos--) this._cbs.onclosetag(this._stack.pop());
           } else this._stack.length = pos;
-        } else if (name4 === "p" && !this._options.xmlMode) {
-          this.onopentagname(name4);
+        } else if (name5 === "p" && !this._options.xmlMode) {
+          this.onopentagname(name5);
           this._closeCurrentTag();
         }
-      } else if (!this._options.xmlMode && (name4 === "br" || name4 === "p")) {
-        this.onopentagname(name4);
+      } else if (!this._options.xmlMode && (name5 === "br" || name5 === "p")) {
+        this.onopentagname(name5);
         this._closeCurrentTag();
       }
     };
@@ -6935,20 +6957,20 @@ var require_Parser = __commonJS({
       }
     };
     Parser.prototype._closeCurrentTag = function() {
-      var name4 = this._tagname;
+      var name5 = this._tagname;
       this.onopentagend();
-      if (this._stack[this._stack.length - 1] === name4) {
+      if (this._stack[this._stack.length - 1] === name5) {
         if (this._cbs.onclosetag) {
-          this._cbs.onclosetag(name4);
+          this._cbs.onclosetag(name5);
         }
         this._stack.pop();
       }
     };
-    Parser.prototype.onattribname = function(name4) {
+    Parser.prototype.onattribname = function(name5) {
       if (this._lowerCaseAttributeNames) {
-        name4 = name4.toLowerCase();
+        name5 = name5.toLowerCase();
       }
-      this._attribname = name4;
+      this._attribname = name5;
     };
     Parser.prototype.onattribdata = function(value) {
       this._attribvalue += value;
@@ -6962,22 +6984,22 @@ var require_Parser = __commonJS({
       this._attribvalue = "";
     };
     Parser.prototype._getInstructionName = function(value) {
-      var idx = value.search(re_nameEnd), name4 = idx < 0 ? value : value.substr(0, idx);
+      var idx = value.search(re_nameEnd), name5 = idx < 0 ? value : value.substr(0, idx);
       if (this._lowerCaseTagNames) {
-        name4 = name4.toLowerCase();
+        name5 = name5.toLowerCase();
       }
-      return name4;
+      return name5;
     };
     Parser.prototype.ondeclaration = function(value) {
       if (this._cbs.onprocessinginstruction) {
-        var name4 = this._getInstructionName(value);
-        this._cbs.onprocessinginstruction("!" + name4, "!" + value);
+        var name5 = this._getInstructionName(value);
+        this._cbs.onprocessinginstruction("!" + name5, "!" + value);
       }
     };
     Parser.prototype.onprocessinginstruction = function(value) {
       if (this._cbs.onprocessinginstruction) {
-        var name4 = this._getInstructionName(value);
-        this._cbs.onprocessinginstruction("?" + name4, "?" + value);
+        var name5 = this._getInstructionName(value);
+        this._cbs.onprocessinginstruction("?" + name5, "?" + value);
       }
     };
     Parser.prototype.oncomment = function(value) {
@@ -7214,10 +7236,10 @@ var require_domhandler = __commonJS({
       siblings.push(element);
       element.parent = parent || null;
     };
-    DomHandler.prototype.onopentag = function(name4, attribs) {
+    DomHandler.prototype.onopentag = function(name5, attribs) {
       var properties = {
-        type: name4 === "script" ? ElementType.Script : name4 === "style" ? ElementType.Style : ElementType.Tag,
-        name: name4,
+        type: name5 === "script" ? ElementType.Script : name5 === "style" ? ElementType.Style : ElementType.Tag,
+        name: name5,
         attribs: attribs,
         children: []
       };
@@ -7226,23 +7248,23 @@ var require_domhandler = __commonJS({
       this._tagStack.push(element);
     };
     DomHandler.prototype.ontext = function(data) {
-      var normalize3 = this._options.normalizeWhitespace || this._options.ignoreWhitespace;
+      var normalize4 = this._options.normalizeWhitespace || this._options.ignoreWhitespace;
       var lastTag;
       if (!this._tagStack.length && this.dom.length && (lastTag = this.dom[this.dom.length - 1]).type === ElementType.Text) {
-        if (normalize3) {
+        if (normalize4) {
           lastTag.data = (lastTag.data + data).replace(re_whitespace, " ");
         } else {
           lastTag.data += data;
         }
       } else {
         if (this._tagStack.length && (lastTag = this._tagStack[this._tagStack.length - 1]) && (lastTag = lastTag.children[lastTag.children.length - 1]) && lastTag.type === ElementType.Text) {
-          if (normalize3) {
+          if (normalize4) {
             lastTag.data = (lastTag.data + data).replace(re_whitespace, " ");
           } else {
             lastTag.data += data;
           }
         } else {
-          if (normalize3) {
+          if (normalize4) {
             data = data.replace(re_whitespace, " ");
           }
           var element = this._createDomElement({
@@ -7282,9 +7304,9 @@ var require_domhandler = __commonJS({
     DomHandler.prototype.oncommentend = DomHandler.prototype.oncdataend = function() {
       this._tagStack.pop();
     };
-    DomHandler.prototype.onprocessinginstruction = function(name4, data) {
+    DomHandler.prototype.onprocessinginstruction = function(name5, data) {
       var element = this._createDomElement({
-        name: name4,
+        name: name5,
         data: data,
         type: ElementType.Directive
       });
@@ -7302,8 +7324,8 @@ var require_encode = __commonJS({
     var htmlReplacer = getInverseReplacer(inverseHTML);
     exports2.HTML = getInverse(inverseHTML, htmlReplacer);
     function getInverseObj(obj) {
-      return Object.keys(obj).sort().reduce(function(inverse, name4) {
-        inverse[obj[name4]] = "&" + name4 + ";";
+      return Object.keys(obj).sort().reduce(function(inverse, name5) {
+        inverse[obj[name5]] = "&" + name5 + ";";
         return inverse;
       }, {});
     }
@@ -7331,8 +7353,8 @@ var require_encode = __commonJS({
       return "&#x" + codePoint.toString(16).toUpperCase() + ";";
     }
     function getInverse(inverse, re) {
-      function func(name4) {
-        return inverse[name4];
+      function func(name5) {
+        return inverse[name5];
       }
       return function(data) {
         return data.replace(re, func).replace(re_astralSymbols, astralReplacer).replace(re_nonASCII, singleCharReplacer);
@@ -7565,11 +7587,11 @@ var require_traversal = __commonJS({
       var parent = getParent(elem);
       return parent ? getChildren(parent) : [elem];
     };
-    exports2.getAttributeValue = function(elem, name4) {
-      return elem.attribs && elem.attribs[name4];
+    exports2.getAttributeValue = function(elem, name5) {
+      return elem.attribs && elem.attribs[name5];
     };
-    exports2.hasAttrib = function(elem, name4) {
-      return !!elem.attribs && hasOwnProperty.call(elem.attribs, name4);
+    exports2.hasAttrib = function(elem, name5) {
+      return !!elem.attribs && hasOwnProperty.call(elem.attribs, name5);
     };
     exports2.getName = function(elem) {
       return elem.name;
@@ -7741,16 +7763,16 @@ var require_legacy2 = __commonJS({
       return true;
     };
     var Checks = {
-      tag_name: function tag_name(name4) {
-        if (typeof name4 === "function") {
+      tag_name: function tag_name(name5) {
+        if (typeof name5 === "function") {
           return function(elem) {
-            return isTag(elem) && name4(elem.name);
+            return isTag(elem) && name5(elem.name);
           };
-        } else if (name4 === "*") {
+        } else if (name5 === "*") {
           return isTag;
         } else {
           return function(elem) {
-            return isTag(elem) && elem.name === name4;
+            return isTag(elem) && elem.name === name5;
           };
         }
       },
@@ -7804,8 +7826,8 @@ var require_legacy2 = __commonJS({
       if (!Array.isArray(element)) element = [element];
       return this.findOne(getAttribCheck("id", id), element, recurse !== false);
     };
-    exports2.getElementsByTagName = function(name4, element, recurse, limit) {
-      return this.filter(Checks.tag_name(name4), element, recurse, limit);
+    exports2.getElementsByTagName = function(name5, element, recurse, limit) {
+      return this.filter(Checks.tag_name(name5), element, recurse, limit);
     };
     exports2.getElementsByTagType = function(type, element, recurse, limit) {
       return this.filter(Checks.tag_type(type), element, recurse, limit);
@@ -8390,10 +8412,10 @@ var require_errors = __commonJS({
         return str.indexOf(search2, start2) !== -1;
       }
     }
-    createErrorType("ERR_INVALID_OPT_VALUE", function(name4, value) {
-      return 'The value "' + value + '" is invalid for option "' + name4 + '"';
+    createErrorType("ERR_INVALID_OPT_VALUE", function(name5, value) {
+      return 'The value "' + value + '" is invalid for option "' + name5 + '"';
     }, TypeError);
-    createErrorType("ERR_INVALID_ARG_TYPE", function(name4, expected, actual) {
+    createErrorType("ERR_INVALID_ARG_TYPE", function(name5, expected, actual) {
       var determiner;
       if (typeof expected === "string" && startsWith(expected, "not ")) {
         determiner = "must not be";
@@ -8402,22 +8424,22 @@ var require_errors = __commonJS({
         determiner = "must be";
       }
       var msg;
-      if (endsWith(name4, " argument")) {
-        msg = "The ".concat(name4, " ").concat(determiner, " ").concat(oneOf(expected, "type"));
+      if (endsWith(name5, " argument")) {
+        msg = "The ".concat(name5, " ").concat(determiner, " ").concat(oneOf(expected, "type"));
       } else {
-        var type = includes2(name4, ".") ? "property" : "argument";
-        msg = 'The "'.concat(name4, '" ').concat(type, " ").concat(determiner, " ").concat(oneOf(expected, "type"));
+        var type = includes2(name5, ".") ? "property" : "argument";
+        msg = 'The "'.concat(name5, '" ').concat(type, " ").concat(determiner, " ").concat(oneOf(expected, "type"));
       }
       msg += ". Received type ".concat(_typeof(actual));
       return msg;
     }, TypeError);
     createErrorType("ERR_STREAM_PUSH_AFTER_EOF", "stream.push() after EOF");
-    createErrorType("ERR_METHOD_NOT_IMPLEMENTED", function(name4) {
-      return "The " + name4 + " method is not implemented";
+    createErrorType("ERR_METHOD_NOT_IMPLEMENTED", function(name5) {
+      return "The " + name5 + " method is not implemented";
     });
     createErrorType("ERR_STREAM_PREMATURE_CLOSE", "Premature close");
-    createErrorType("ERR_STREAM_DESTROYED", function(name4) {
-      return "Cannot call " + name4 + " after a stream was destroyed";
+    createErrorType("ERR_STREAM_DESTROYED", function(name5) {
+      return "Cannot call " + name5 + " after a stream was destroyed";
     });
     createErrorType("ERR_MULTIPLE_CALLBACK", "Callback called multiple times");
     createErrorType("ERR_STREAM_CANNOT_PIPE", "Cannot pipe, not readable");
@@ -8441,8 +8463,8 @@ var require_state = __commonJS({
       var hwm = highWaterMarkFrom(options, isDuplex, duplexKey);
       if (hwm != null) {
         if (!(isFinite(hwm) && Math.floor(hwm) === hwm) || hwm < 0) {
-          var name4 = isDuplex ? duplexKey : "highWaterMark";
-          throw new ERR_INVALID_OPT_VALUE(name4, hwm);
+          var name5 = isDuplex ? duplexKey : "highWaterMark";
+          throw new ERR_INVALID_OPT_VALUE(name5, hwm);
         }
         return Math.floor(hwm);
       }
@@ -9444,14 +9466,14 @@ var require_async_iterator = __commonJS({
       };
     }
     function readAndResolve(iter) {
-      var resolve4 = iter[kLastResolve];
-      if (resolve4 !== null) {
+      var resolve5 = iter[kLastResolve];
+      if (resolve5 !== null) {
         var data = iter[kStream].read();
         if (data !== null) {
           iter[kLastPromise] = null;
           iter[kLastResolve] = null;
           iter[kLastReject] = null;
-          resolve4(createIterResult(data, false));
+          resolve5(createIterResult(data, false));
         }
       }
     }
@@ -9459,13 +9481,13 @@ var require_async_iterator = __commonJS({
       process.nextTick(readAndResolve, iter);
     }
     function wrapForNext(lastPromise, iter) {
-      return function(resolve4, reject) {
+      return function(resolve5, reject) {
         lastPromise.then(function() {
           if (iter[kEnded]) {
-            resolve4(createIterResult(void 0, true));
+            resolve5(createIterResult(void 0, true));
             return;
           }
-          iter[kHandlePromise](resolve4, reject);
+          iter[kHandlePromise](resolve5, reject);
         }, reject);
       };
     }
@@ -9485,12 +9507,12 @@ var require_async_iterator = __commonJS({
           return Promise.resolve(createIterResult(void 0, true));
         }
         if (this[kStream].destroyed) {
-          return new Promise(function(resolve4, reject) {
+          return new Promise(function(resolve5, reject) {
             process.nextTick(function() {
               if (_this[kError]) {
                 reject(_this[kError]);
               } else {
-                resolve4(createIterResult(void 0, true));
+                resolve5(createIterResult(void 0, true));
               }
             });
           });
@@ -9513,13 +9535,13 @@ var require_async_iterator = __commonJS({
       return this;
     }), _defineProperty(_Object$setPrototypeO, "return", function _return() {
       var _this2 = this;
-      return new Promise(function(resolve4, reject) {
+      return new Promise(function(resolve5, reject) {
         _this2[kStream].destroy(null, function(err) {
           if (err) {
             reject(err);
             return;
           }
-          resolve4(createIterResult(void 0, true));
+          resolve5(createIterResult(void 0, true));
         });
       });
     }), _Object$setPrototypeO), AsyncIteratorPrototype);
@@ -9541,15 +9563,15 @@ var require_async_iterator = __commonJS({
         value: stream2._readableState.endEmitted,
         writable: true
       }), _defineProperty(_Object$create, kHandlePromise, {
-        value: function value(resolve4, reject) {
+        value: function value(resolve5, reject) {
           var data = iterator[kStream].read();
           if (data) {
             iterator[kLastPromise] = null;
             iterator[kLastResolve] = null;
             iterator[kLastReject] = null;
-            resolve4(createIterResult(data, false));
+            resolve5(createIterResult(data, false));
           } else {
-            iterator[kLastResolve] = resolve4;
+            iterator[kLastResolve] = resolve5;
             iterator[kLastReject] = reject;
           }
         },
@@ -9568,12 +9590,12 @@ var require_async_iterator = __commonJS({
           iterator[kError] = err;
           return;
         }
-        var resolve4 = iterator[kLastResolve];
-        if (resolve4 !== null) {
+        var resolve5 = iterator[kLastResolve];
+        if (resolve5 !== null) {
           iterator[kLastPromise] = null;
           iterator[kLastResolve] = null;
           iterator[kLastReject] = null;
-          resolve4(createIterResult(void 0, true));
+          resolve5(createIterResult(void 0, true));
         }
         iterator[kEnded] = true;
       });
@@ -9586,7 +9608,7 @@ var require_async_iterator = __commonJS({
 var require_from = __commonJS({
   "node_modules/readable-stream/lib/internal/streams/from.js": function node_modules_readableStream_lib_internal_streams_fromJs(exports2, module2) {
     "use strict";
-    function asyncGeneratorStep2(gen, resolve4, reject, _next, _throw, key, arg) {
+    function asyncGeneratorStep2(gen, resolve5, reject, _next, _throw, key, arg) {
       try {
         var info2 = gen[key](arg);
         var value = info2.value;
@@ -9595,7 +9617,7 @@ var require_from = __commonJS({
         return;
       }
       if (info2.done) {
-        resolve4(value);
+        resolve5(value);
       } else {
         Promise.resolve(value).then(_next, _throw);
       }
@@ -9603,13 +9625,13 @@ var require_from = __commonJS({
     function _asyncToGenerator(fn) {
       return function() {
         var self2 = this, args = arguments;
-        return new Promise(function(resolve4, reject) {
+        return new Promise(function(resolve5, reject) {
           var gen = fn.apply(self2, args);
           function _next(value) {
-            asyncGeneratorStep2(gen, resolve4, reject, _next, _throw, "next", value);
+            asyncGeneratorStep2(gen, resolve5, reject, _next, _throw, "next", value);
           }
           function _throw(err) {
-            asyncGeneratorStep2(gen, resolve4, reject, _next, _throw, "throw", err);
+            asyncGeneratorStep2(gen, resolve5, reject, _next, _throw, "throw", err);
           }
           _next(void 0);
         });
@@ -10721,18 +10743,18 @@ var require_Stream = __commonJS({
       this.scope = scope;
     }
     var EVENTS = require_lib3().EVENTS;
-    Object.keys(EVENTS).forEach(function(name4) {
-      if (EVENTS[name4] === 0) {
-        Cbs.prototype["on" + name4] = function() {
-          this.scope.emit(name4);
+    Object.keys(EVENTS).forEach(function(name5) {
+      if (EVENTS[name5] === 0) {
+        Cbs.prototype["on" + name5] = function() {
+          this.scope.emit(name5);
         };
-      } else if (EVENTS[name4] === 1) {
-        Cbs.prototype["on" + name4] = function(a) {
-          this.scope.emit(name4, a);
+      } else if (EVENTS[name5] === 1) {
+        Cbs.prototype["on" + name5] = function(a) {
+          this.scope.emit(name5, a);
         };
-      } else if (EVENTS[name4] === 2) {
-        Cbs.prototype["on" + name4] = function(a, b) {
-          this.scope.emit(name4, a, b);
+      } else if (EVENTS[name5] === 2) {
+        Cbs.prototype["on" + name5] = function(a, b) {
+          this.scope.emit(name5, a, b);
         };
       } else {
         throw Error("wrong number of arguments!");
@@ -10747,21 +10769,21 @@ var require_ProxyHandler = __commonJS({
       this._cbs = cbs || {};
     }
     var EVENTS = require_lib3().EVENTS;
-    Object.keys(EVENTS).forEach(function(name4) {
-      if (EVENTS[name4] === 0) {
-        name4 = "on" + name4;
-        ProxyHandler.prototype[name4] = function() {
-          if (this._cbs[name4]) this._cbs[name4]();
+    Object.keys(EVENTS).forEach(function(name5) {
+      if (EVENTS[name5] === 0) {
+        name5 = "on" + name5;
+        ProxyHandler.prototype[name5] = function() {
+          if (this._cbs[name5]) this._cbs[name5]();
         };
-      } else if (EVENTS[name4] === 1) {
-        name4 = "on" + name4;
-        ProxyHandler.prototype[name4] = function(a) {
-          if (this._cbs[name4]) this._cbs[name4](a);
+      } else if (EVENTS[name5] === 1) {
+        name5 = "on" + name5;
+        ProxyHandler.prototype[name5] = function(a) {
+          if (this._cbs[name5]) this._cbs[name5](a);
         };
-      } else if (EVENTS[name4] === 2) {
-        name4 = "on" + name4;
-        ProxyHandler.prototype[name4] = function(a, b) {
-          if (this._cbs[name4]) this._cbs[name4](a, b);
+      } else if (EVENTS[name5] === 2) {
+        name5 = "on" + name5;
+        ProxyHandler.prototype[name5] = function(a, b) {
+          if (this._cbs[name5]) this._cbs[name5](a, b);
         };
       } else {
         throw Error("wrong number of arguments");
@@ -10777,24 +10799,24 @@ var require_CollectingHandler = __commonJS({
       this.events = [];
     }
     var EVENTS = require_lib3().EVENTS;
-    Object.keys(EVENTS).forEach(function(name4) {
-      if (EVENTS[name4] === 0) {
-        name4 = "on" + name4;
-        CollectingHandler.prototype[name4] = function() {
-          this.events.push([name4]);
-          if (this._cbs[name4]) this._cbs[name4]();
+    Object.keys(EVENTS).forEach(function(name5) {
+      if (EVENTS[name5] === 0) {
+        name5 = "on" + name5;
+        CollectingHandler.prototype[name5] = function() {
+          this.events.push([name5]);
+          if (this._cbs[name5]) this._cbs[name5]();
         };
-      } else if (EVENTS[name4] === 1) {
-        name4 = "on" + name4;
-        CollectingHandler.prototype[name4] = function(a) {
-          this.events.push([name4, a]);
-          if (this._cbs[name4]) this._cbs[name4](a);
+      } else if (EVENTS[name5] === 1) {
+        name5 = "on" + name5;
+        CollectingHandler.prototype[name5] = function(a) {
+          this.events.push([name5, a]);
+          if (this._cbs[name5]) this._cbs[name5](a);
         };
-      } else if (EVENTS[name4] === 2) {
-        name4 = "on" + name4;
-        CollectingHandler.prototype[name4] = function(a, b) {
-          this.events.push([name4, a, b]);
-          if (this._cbs[name4]) this._cbs[name4](a, b);
+      } else if (EVENTS[name5] === 2) {
+        name5 = "on" + name5;
+        CollectingHandler.prototype[name5] = function(a, b) {
+          this.events.push([name5, a, b]);
+          if (this._cbs[name5]) this._cbs[name5](a, b);
         };
       } else {
         throw Error("wrong number of arguments");
@@ -10825,9 +10847,9 @@ var require_lib3 = __commonJS({
   "node_modules/cheerio-legacy/node_modules/htmlparser2/lib/index.js": function node_modules_cheerioLegacy_node_modules_htmlparser2_lib_indexJs(exports2, module2) {
     var Parser = require_Parser();
     var DomHandler = require_domhandler();
-    function defineProp(name4, value) {
-      delete module2.exports[name4];
-      module2.exports[name4] = value;
+    function defineProp(name5, value) {
+      delete module2.exports[name5];
+      module2.exports[name5] = value;
       return value;
     }
     module2.exports = {
@@ -11285,8 +11307,8 @@ var require_lodash2 = __commonJS({
     var nativeMax = Math.max;
     var nativeMin = Math.min;
     var defineProperty = (function() {
-      var func = getNative(Object, "defineProperty"), name4 = getNative.name;
-      return name4 && name4.length > 2 ? func : void 0;
+      var func = getNative(Object, "defineProperty"), name5 = getNative.name;
+      return name5 && name5.length > 2 ? func : void 0;
     })();
     function baseCreate(proto) {
       return isObject(proto) ? objectCreate(proto) : {};
@@ -12038,116 +12060,116 @@ var require_attributes = __commonJS({
     var attributeRules = {
       __proto__: null,
       equals: function equals(next, data) {
-        var name4 = data.name, value = data.value;
+        var name5 = data.name, value = data.value;
         if (data.ignoreCase) {
           value = value.toLowerCase();
           return function equalsIC(elem) {
-            var attr = getAttributeValue(elem, name4);
+            var attr = getAttributeValue(elem, name5);
             return attr != null && attr.toLowerCase() === value && next(elem);
           };
         }
         return function equals2(elem) {
-          return getAttributeValue(elem, name4) === value && next(elem);
+          return getAttributeValue(elem, name5) === value && next(elem);
         };
       },
       hyphen: function hyphen(next, data) {
-        var name4 = data.name, value = data.value, len = value.length;
+        var name5 = data.name, value = data.value, len = value.length;
         if (data.ignoreCase) {
           value = value.toLowerCase();
           return function hyphenIC(elem) {
-            var attr = getAttributeValue(elem, name4);
+            var attr = getAttributeValue(elem, name5);
             return attr != null && (attr.length === len || attr.charAt(len) === "-") && attr.substr(0, len).toLowerCase() === value && next(elem);
           };
         }
         return function hyphen2(elem) {
-          var attr = getAttributeValue(elem, name4);
+          var attr = getAttributeValue(elem, name5);
           return attr != null && attr.substr(0, len) === value && (attr.length === len || attr.charAt(len) === "-") && next(elem);
         };
       },
       element: function element(next, data) {
-        var name4 = data.name, value = data.value;
+        var name5 = data.name, value = data.value;
         if (/\s/.test(value)) {
           return falseFunc;
         }
         value = value.replace(reChars, "\\$&");
         var pattern = "(?:^|\\s)" + value + "(?:$|\\s)", flags = data.ignoreCase ? "i" : "", regex = new RegExp(pattern, flags);
         return function element2(elem) {
-          var attr = getAttributeValue(elem, name4);
+          var attr = getAttributeValue(elem, name5);
           return attr != null && regex.test(attr) && next(elem);
         };
       },
       exists: function exists(next, data) {
-        var name4 = data.name;
+        var name5 = data.name;
         return function exists2(elem) {
-          return hasAttrib(elem, name4) && next(elem);
+          return hasAttrib(elem, name5) && next(elem);
         };
       },
       start: function start2(next, data) {
-        var name4 = data.name, value = data.value, len = value.length;
+        var name5 = data.name, value = data.value, len = value.length;
         if (len === 0) {
           return falseFunc;
         }
         if (data.ignoreCase) {
           value = value.toLowerCase();
           return function startIC(elem) {
-            var attr = getAttributeValue(elem, name4);
+            var attr = getAttributeValue(elem, name5);
             return attr != null && attr.substr(0, len).toLowerCase() === value && next(elem);
           };
         }
         return function start22(elem) {
-          var attr = getAttributeValue(elem, name4);
+          var attr = getAttributeValue(elem, name5);
           return attr != null && attr.substr(0, len) === value && next(elem);
         };
       },
       end: function end(next, data) {
-        var name4 = data.name, value = data.value, len = -value.length;
+        var name5 = data.name, value = data.value, len = -value.length;
         if (len === 0) {
           return falseFunc;
         }
         if (data.ignoreCase) {
           value = value.toLowerCase();
           return function endIC(elem) {
-            var attr = getAttributeValue(elem, name4);
+            var attr = getAttributeValue(elem, name5);
             return attr != null && attr.substr(len).toLowerCase() === value && next(elem);
           };
         }
         return function end2(elem) {
-          var attr = getAttributeValue(elem, name4);
+          var attr = getAttributeValue(elem, name5);
           return attr != null && attr.substr(len) === value && next(elem);
         };
       },
       any: function any(next, data) {
-        var name4 = data.name, value = data.value;
+        var name5 = data.name, value = data.value;
         if (value === "") {
           return falseFunc;
         }
         if (data.ignoreCase) {
           var regex = new RegExp(value.replace(reChars, "\\$&"), "i");
           return function anyIC(elem) {
-            var attr = getAttributeValue(elem, name4);
+            var attr = getAttributeValue(elem, name5);
             return attr != null && regex.test(attr) && next(elem);
           };
         }
         return function any2(elem) {
-          var attr = getAttributeValue(elem, name4);
+          var attr = getAttributeValue(elem, name5);
           return attr != null && attr.indexOf(value) >= 0 && next(elem);
         };
       },
       not: function not(next, data) {
-        var name4 = data.name, value = data.value;
+        var name5 = data.name, value = data.value;
         if (value === "") {
           return function notEmpty(elem) {
-            return !!getAttributeValue(elem, name4) && next(elem);
+            return !!getAttributeValue(elem, name5) && next(elem);
           };
         } else if (data.ignoreCase) {
           value = value.toLowerCase();
           return function notIC(elem) {
-            var attr = getAttributeValue(elem, name4);
+            var attr = getAttributeValue(elem, name5);
             return attr != null && attr.toLowerCase() !== value && next(elem);
           };
         }
         return function not2(elem) {
-          return getAttributeValue(elem, name4) !== value && next(elem);
+          return getAttributeValue(elem, name5) !== value && next(elem);
         };
       }
     };
@@ -12181,9 +12203,9 @@ var require_pseudos = __commonJS({
         if (isTag(elems[i])) return elems[i];
       }
     }
-    function getAttribFunc(name4, value) {
+    function getAttribFunc(name5, value) {
       var data = {
-        name: name4,
+        name: name5,
         value: value
       };
       return function attribFunc(next) {
@@ -12410,18 +12432,18 @@ var require_pseudos = __commonJS({
       },
       //:matches(h1, h2, h3, h4, h5, h6)
       header: function header(elem) {
-        var name4 = getName(elem);
-        return name4 === "h1" || name4 === "h2" || name4 === "h3" || name4 === "h4" || name4 === "h5" || name4 === "h6";
+        var name5 = getName(elem);
+        return name5 === "h1" || name5 === "h2" || name5 === "h3" || name5 === "h4" || name5 === "h5" || name5 === "h6";
       },
       //:matches(button, input[type=button])
       button: function button(elem) {
-        var name4 = getName(elem);
-        return name4 === "button" || name4 === "input" && getAttribute(elem, "type") === "button";
+        var name5 = getName(elem);
+        return name5 === "button" || name5 === "input" && getAttribute(elem, "type") === "button";
       },
       //:matches(input, textarea, select, button)
       input: function input2(elem) {
-        var name4 = getName(elem);
-        return name4 === "input" || name4 === "textarea" || name4 === "select" || name4 === "button";
+        var name5 = getName(elem);
+        return name5 === "input" || name5 === "textarea" || name5 === "select" || name5 === "button";
       },
       //input:matches(:not([type!='']), [type='text' i])
       text: function text(elem) {
@@ -12429,36 +12451,36 @@ var require_pseudos = __commonJS({
         return getName(elem) === "input" && (!(attr = getAttribute(elem, "type")) || attr.toLowerCase() === "text");
       }
     };
-    function verifyArgs(func, name4, subselect) {
+    function verifyArgs(func, name5, subselect) {
       if (subselect === null) {
-        if (func.length > 1 && name4 !== "scope") {
-          throw new SyntaxError("pseudo-selector :" + name4 + " requires an argument");
+        if (func.length > 1 && name5 !== "scope") {
+          throw new SyntaxError("pseudo-selector :" + name5 + " requires an argument");
         }
       } else {
         if (func.length === 1) {
-          throw new SyntaxError("pseudo-selector :" + name4 + " doesn't have any arguments");
+          throw new SyntaxError("pseudo-selector :" + name5 + " doesn't have any arguments");
         }
       }
     }
     var re_CSS3 = /^(?:(?:nth|last|first|only)-(?:child|of-type)|root|empty|(?:en|dis)abled|checked|not)$/;
     module2.exports = {
       compile: function compile(next, data, options, context) {
-        var name4 = data.name, subselect = data.data;
-        if (options && options.strict && !re_CSS3.test(name4)) {
-          throw SyntaxError(":" + name4 + " isn't part of CSS3");
+        var name5 = data.name, subselect = data.data;
+        if (options && options.strict && !re_CSS3.test(name5)) {
+          throw SyntaxError(":" + name5 + " isn't part of CSS3");
         }
-        if (typeof filters[name4] === "function") {
-          verifyArgs(filters[name4], name4, subselect);
-          return filters[name4](next, subselect, options, context);
-        } else if (typeof pseudos[name4] === "function") {
-          var func = pseudos[name4];
-          verifyArgs(func, name4, subselect);
+        if (typeof filters[name5] === "function") {
+          verifyArgs(filters[name5], name5, subselect);
+          return filters[name5](next, subselect, options, context);
+        } else if (typeof pseudos[name5] === "function") {
+          var func = pseudos[name5];
+          verifyArgs(func, name5, subselect);
           if (next === trueFunc) return func;
           return function pseudoArgs(elem) {
             return func(elem, subselect) && next(elem);
           };
         } else {
-          throw new SyntaxError("unmatched pseudo-class :" + name4);
+          throw new SyntaxError("unmatched pseudo-class :" + name5);
         }
       },
       filters: filters,
@@ -12537,7 +12559,7 @@ var require_css_what = __commonJS({
       return subselects;
     }
     function parseSelector(subselects, selector, options) {
-      var tokens = [], sawWS = false, data, firstChar, name4, quot;
+      var tokens = [], sawWS = false, data, firstChar, name5, quot;
       function getName() {
         var sub = selector.match(re_name)[0];
         selector = selector.substr(sub.length);
@@ -12602,13 +12624,13 @@ var require_css_what = __commonJS({
               throw new SyntaxError("Malformed attribute selector: " + selector);
             }
             selector = selector.substr(data[0].length);
-            name4 = unescapeCSS(data[1]);
+            name5 = unescapeCSS(data[1]);
             if (!options || ("lowerCaseAttributeNames" in options ? options.lowerCaseAttributeNames : !options.xmlMode)) {
-              name4 = name4.toLowerCase();
+              name5 = name5.toLowerCase();
             }
             tokens.push({
               type: "attribute",
-              name: name4,
+              name: name5,
               action: actionTypes[data[2]],
               value: unescapeCSS(data[4] || data[5] || ""),
               ignoreCase: !!data[6]
@@ -12623,10 +12645,10 @@ var require_css_what = __commonJS({
               continue;
             }
             selector = selector.substr(1);
-            name4 = getName().toLowerCase();
+            name5 = getName().toLowerCase();
             data = null;
             if (selector.charAt(0) === "(") {
-              if (name4 in unpackPseudos) {
+              if (name5 in unpackPseudos) {
                 quot = selector.charAt(1);
                 var quoted = quot in quotes;
                 selector = selector.substr(quoted + 1);
@@ -12634,13 +12656,13 @@ var require_css_what = __commonJS({
                 selector = parseSelector(data, selector, options);
                 if (quoted) {
                   if (selector.charAt(0) !== quot) {
-                    throw new SyntaxError("unmatched quotes in :" + name4);
+                    throw new SyntaxError("unmatched quotes in :" + name5);
                   } else {
                     selector = selector.substr(1);
                   }
                 }
                 if (selector.charAt(0) !== ")") {
-                  throw new SyntaxError("missing closing parenthesis in :" + name4 + " " + selector);
+                  throw new SyntaxError("missing closing parenthesis in :" + name5 + " " + selector);
                 }
                 selector = selector.substr(1);
               } else {
@@ -12654,7 +12676,7 @@ var require_css_what = __commonJS({
                 }
                 data = selector.substr(1, pos - 2);
                 selector = selector.substr(pos);
-                if (name4 in stripQuotesFromPseudos) {
+                if (name5 in stripQuotesFromPseudos) {
                   quot = data.charAt(0);
                   if (quot === data.slice(-1) && quot in quotes) {
                     data = data.slice(1, -1);
@@ -12665,17 +12687,17 @@ var require_css_what = __commonJS({
             }
             tokens.push({
               type: "pseudo",
-              name: name4,
+              name: name5,
               data: data
             });
           } else if (re_name.test(selector)) {
-            name4 = getName();
+            name5 = getName();
             if (!options || ("lowerCaseTags" in options ? options.lowerCaseTags : !options.xmlMode)) {
-              name4 = name4.toLowerCase();
+              name5 = name5.toLowerCase();
             }
             tokens.push({
               type: "tag",
-              name: name4
+              name: name5
             });
           } else {
             if (tokens.length && tokens[tokens.length - 1].type === "descendant") {
@@ -12711,9 +12733,9 @@ var require_general = __commonJS({
       pseudo: require_pseudos().compile,
       //tags
       tag: function tag(next, data) {
-        var name4 = data.name;
+        var name5 = data.name;
         return function tag2(elem) {
-          return getName(elem) === name4 && next(elem);
+          return getName(elem) === name5 && next(elem);
         };
       },
       //traversal
@@ -14748,62 +14770,62 @@ var require_attributes2 = __commonJS({
     };
     var rboolean = /^(?:autofocus|autoplay|async|checked|controls|defer|disabled|hidden|loop|multiple|open|readonly|required|scoped|selected)$/i;
     var rbrace = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/;
-    var getAttr = function getAttr2(elem, name4) {
+    var getAttr = function getAttr2(elem, name5) {
       if (!elem || !isTag(elem)) return;
       if (!elem.attribs) {
         elem.attribs = {};
       }
-      if (!name4) {
+      if (!name5) {
         return elem.attribs;
       }
-      if (hasOwn.call(elem.attribs, name4)) {
-        return rboolean.test(name4) ? name4 : elem.attribs[name4];
+      if (hasOwn.call(elem.attribs, name5)) {
+        return rboolean.test(name5) ? name5 : elem.attribs[name5];
       }
-      if (elem.name === "option" && name4 === "value") {
+      if (elem.name === "option" && name5 === "value") {
         return $.text(elem.children);
       }
-      if (elem.name === "input" && (elem.attribs.type === "radio" || elem.attribs.type === "checkbox") && name4 === "value") {
+      if (elem.name === "input" && (elem.attribs.type === "radio" || elem.attribs.type === "checkbox") && name5 === "value") {
         return "on";
       }
     };
-    var setAttr = function setAttr2(el, name4, value) {
+    var setAttr = function setAttr2(el, name5, value) {
       if (value === null) {
-        removeAttribute(el, name4);
+        removeAttribute(el, name5);
       } else {
-        el.attribs[name4] = value + "";
+        el.attribs[name5] = value + "";
       }
     };
-    exports2.attr = function(name4, value) {
-      if (_typeof(name4) === "object" || value !== void 0) {
+    exports2.attr = function(name5, value) {
+      if (_typeof(name5) === "object" || value !== void 0) {
         if (typeof value === "function") {
           return domEach(this, function(i, el) {
-            setAttr(el, name4, value.call(el, i, el.attribs[name4]));
+            setAttr(el, name5, value.call(el, i, el.attribs[name5]));
           });
         }
         return domEach(this, function(i, el) {
           if (!isTag(el)) return;
-          if (_typeof(name4) === "object") {
-            _.forEach(name4, function(value2, name5) {
-              setAttr(el, name5, value2);
+          if (_typeof(name5) === "object") {
+            _.forEach(name5, function(value2, name6) {
+              setAttr(el, name6, value2);
             });
           } else {
-            setAttr(el, name4, value);
+            setAttr(el, name5, value);
           }
         });
       }
-      return getAttr(this[0], name4);
+      return getAttr(this[0], name5);
     };
-    var getProp = function getProp2(el, name4) {
+    var getProp = function getProp2(el, name5) {
       if (!el || !isTag(el)) return;
-      return el.hasOwnProperty(name4) ? el[name4] : rboolean.test(name4) ? getAttr(el, name4) !== void 0 : getAttr(el, name4);
+      return el.hasOwnProperty(name5) ? el[name5] : rboolean.test(name5) ? getAttr(el, name5) !== void 0 : getAttr(el, name5);
     };
-    var setProp = function setProp2(el, name4, value) {
-      el[name4] = rboolean.test(name4) ? !!value : value;
+    var setProp = function setProp2(el, name5, value) {
+      el[name5] = rboolean.test(name5) ? !!value : value;
     };
-    exports2.prop = function(name4, value) {
+    exports2.prop = function(name5, value) {
       var i = 0, property;
-      if (typeof name4 === "string" && value === void 0) {
-        switch (name4) {
+      if (typeof name5 === "string" && value === void 0) {
+        switch (name5) {
           case "style":
             property = this.css();
             _.forEach(property, function(v, p) {
@@ -14816,40 +14838,40 @@ var require_attributes2 = __commonJS({
             property = this[0].name.toUpperCase();
             break;
           default:
-            property = getProp(this[0], name4);
+            property = getProp(this[0], name5);
         }
         return property;
       }
-      if (_typeof(name4) === "object" || value !== void 0) {
+      if (_typeof(name5) === "object" || value !== void 0) {
         if (typeof value === "function") {
           return domEach(this, function(i2, el) {
-            setProp(el, name4, value.call(el, i2, getProp(el, name4)));
+            setProp(el, name5, value.call(el, i2, getProp(el, name5)));
           });
         }
         return domEach(this, function(i2, el) {
           if (!isTag(el)) return;
-          if (_typeof(name4) === "object") {
-            _.forEach(name4, function(val, name5) {
-              setProp(el, name5, val);
+          if (_typeof(name5) === "object") {
+            _.forEach(name5, function(val, name6) {
+              setProp(el, name6, val);
             });
           } else {
-            setProp(el, name4, value);
+            setProp(el, name5, value);
           }
         });
       }
     };
-    var setData = function setData2(el, name4, value) {
+    var setData = function setData2(el, name5, value) {
       if (!el.data) {
         el.data = {};
       }
-      if (_typeof(name4) === "object") return _.extend(el.data, name4);
-      if (typeof name4 === "string" && value !== void 0) {
-        el.data[name4] = value;
-      } else if (_typeof(name4) === "object") {
-        _.extend(el.data, name4);
+      if (_typeof(name5) === "object") return _.extend(el.data, name5);
+      if (typeof name5 === "string" && value !== void 0) {
+        el.data[name5] = value;
+      } else if (_typeof(name5) === "object") {
+        _.extend(el.data, name5);
       }
     };
-    var readData = function readData2(el, name4) {
+    var readData = function readData2(el, name5) {
       var readAll = arguments.length === 1;
       var domNames, domName, jsNames, jsName, value, idx, length;
       if (readAll) {
@@ -14860,8 +14882,8 @@ var require_attributes2 = __commonJS({
           return camelCase(domName2.slice(dataAttrPrefix.length));
         });
       } else {
-        domNames = [dataAttrPrefix + cssCase(name4)];
-        jsNames = [name4];
+        domNames = [dataAttrPrefix + cssCase(name5)];
+        jsNames = [name5];
       }
       for (idx = 0, length = domNames.length; idx < length; ++idx) {
         domName = domNames[idx];
@@ -14883,24 +14905,24 @@ var require_attributes2 = __commonJS({
       }
       return readAll ? el.data : value;
     };
-    exports2.data = function(name4, value) {
+    exports2.data = function(name5, value) {
       var elem = this[0];
       if (!elem || !isTag(elem)) return;
       if (!elem.data) {
         elem.data = {};
       }
-      if (!name4) {
+      if (!name5) {
         return readData(elem);
       }
-      if (_typeof(name4) === "object" || value !== void 0) {
+      if (_typeof(name5) === "object" || value !== void 0) {
         domEach(this, function(i, el) {
-          setData(el, name4, value);
+          setData(el, name5, value);
         });
         return this;
-      } else if (hasOwn.call(elem.data, name4)) {
-        return elem.data[name4];
+      } else if (hasOwn.call(elem.data, name5)) {
+        return elem.data[name5];
       }
-      return readData(elem, name4);
+      return readData(elem, name5);
     };
     exports2.val = function(value) {
       var querying = arguments.length === 0, element = this[0];
@@ -14954,13 +14976,13 @@ var require_attributes2 = __commonJS({
           return this.attr("value");
       }
     };
-    var removeAttribute = function removeAttribute2(elem, name4) {
-      if (!elem.attribs || !hasOwn.call(elem.attribs, name4)) return;
-      delete elem.attribs[name4];
+    var removeAttribute = function removeAttribute2(elem, name5) {
+      if (!elem.attribs || !hasOwn.call(elem.attribs, name5)) return;
+      delete elem.attribs[name5];
     };
-    exports2.removeAttr = function(name4) {
+    exports2.removeAttr = function(name5) {
       domEach(this, function(i, elem) {
-        removeAttribute(elem, name4);
+        removeAttribute(elem, name5);
       });
       return this;
     };
@@ -19454,7 +19476,7 @@ var require_forms = __commonJS({
         // Convert each of the elements to its value(s)
       ).map(function(i, elem) {
         var $elem = Cheerio(elem);
-        var name4 = $elem.attr("name");
+        var name5 = $elem.attr("name");
         var val = $elem.val();
         if (val == null) {
           return null;
@@ -19462,13 +19484,13 @@ var require_forms = __commonJS({
           if (Array.isArray(val)) {
             return _.map(val, function(val2) {
               return {
-                name: name4,
+                name: name5,
                 value: val2.replace(rCRLF, "\r\n")
               };
             });
           } else {
             return {
-              name: name4,
+              name: name5,
               value: val.replace(rCRLF, "\r\n")
             };
           }
@@ -19614,9 +19636,9 @@ var import_whatwg_url = __toESM(require_public_api(), 1);
 var import_https = __toESM(require("https"), 1);
 var import_tls = __toESM(require("tls"), 1);
 var EXTRA_CA = ["-----BEGIN CERTIFICATE-----\nMIIFazCCA1OgAwIBAgIRAIIQz7DSQONZRGPgu2OCiwAwDQYJKoZIhvcNAQELBQAwTzELMAkG\nA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2VhcmNoIEdyb3VwMRUw\nEwYDVQQDEwxJU1JHIFJvb3QgWDEwHhcNMTUwNjA0MTEwNDM4WhcNMzUwNjA0MTEwNDM4WjBP\nMQswCQYDVQQGEwJVUzEpMCcGA1UEChMgSW50ZXJuZXQgU2VjdXJpdHkgUmVzZWFyY2ggR3Jv\ndXAxFTATBgNVBAMTDElTUkcgUm9vdCBYMTCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoC\nggIBAK3oJHP0FDfzm54rVygch77ct984kIxuPOZXoHj3dcKi/vVqbvYATyjb3miGbESTtrFj\n/RQSa78f0uoxmyF+0TM8ukj13Xnfs7j/EvEhmkvBioZxaUpmZmyPfjxwv60pIgbz5MDmgK7i\nS4+3mX6UA5/TR5d8mUgjU+g4rk8Kb4Mu0UlXjIB0ttov0DiNewNwIRt18jA8+o+u3dpjq+sW\nT8KOEUt+zwvo/7V3LvSye0rgTBIlDHCNAymg4VMk7BPZ7hm/ELNKjD+Jo2FR3qyHB5T0Y3Hs\nLuJvW5iB4YlcNHlsdu87kGJ55tukmi8mxdAQ4Q7e2RCOFvu396j3x+UCB5iPNgiV5+I3lg02\ndZ77DnKxHZu8A/lJBdiB3QW0KtZB6awBdpUKD9jf1b0SHzUvKBds0pjBqAlkd25HN7rOrFle\naJ1/ctaJxQZBKT5ZPt0m9STJEadao0xAH0ahmbWnOlFuhjuefXKnEgV4We0+UXgVCwOPjdAv\nBbI+e0ocS3MFEvzG6uBQE3xDk3SzynTnjh8BCNAw1FtxNrQHusEwMFxIt4I7mKZ9YIqioymC\nzLq9gwQbooMDQaHWBfEbwrbwqHyGO0aoSCqI3Haadr8faqU9GY/rOPNk3sgrDQoo//fb4hVC\n1CLQJ13hef4Y53CIrU7m2Ys6xt0nUW7/vGT1M0NPAgMBAAGjQjBAMA4GA1UdDwEB/wQEAwIB\nBjAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBR5tFnme7bl5AFzgAiIyBpY9umbbjANBgkq\nhkiG9w0BAQsFAAOCAgEAVR9YqbyyqFDQDLHYGmkgJykIrGF1XIpu+ILlaS/V9lZLubhzEFnT\nIZd+50xx+7LSYK05qAvqFyFWhfFQDlnrzuBZ6brJFe+GnY+EgPbk6ZGQ3BebYhtF8GaV0nxv\nwuo77x/Py9auJ/GpsMiu/X1+mvoiBOv/2X/qkSsisRcOj/KKNFtY2PwByVS5uCbMiogziUwt\nhDyC3+6WVwW6LLv3xLfHTjuCvjHIInNzktHCgKQ5ORAzI4JMPJ+GslWYHb4phowim57iaztX\nOoJwTdwJx4nLCgdNbOhdjsnvzqvHu7UrTkXWStAmzOVyyghqpZXjFaH3pO3JLF+l+/+sKAIu\nvtd7u+Nxe5AW0wdeRlN8NwdCjNPElpzVmbUq4JUagEiuTDkHzsxHpFKVK7q4+63SM1N95R1N\nbdWhscdCb+ZAJzVcoyi3B43njTOQ5yOf+1CceWxG1bQVs5ZufpsMljq4Ui0/1lvh+wjChP4k\nqKOJ2qxq4RgqsahDYVvTH9w7jXbyLeiNdd8XM2w9U/t7y0Ff/9yi0GE44Za4rF2LN9d11TPA\nmRGunUHBcnWEvgJBQl9nJEiU0Zsnvgc/ubhPgXRR4Xq37Z0j4r7g1SgEEzwxA57demyPxgcY\nxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=\n-----END CERTIFICATE-----", "-----BEGIN CERTIFICATE-----\nMIICGzCCAaGgAwIBAgIQQdKd0XLq7qeAwSxs6S+HUjAKBggqhkjOPQQDAzBPMQswCQYDVQQG\nEwJVUzEpMCcGA1UEChMgSW50ZXJuZXQgU2VjdXJpdHkgUmVzZWFyY2ggR3JvdXAxFTATBgNV\nBAMTDElTUkcgUm9vdCBYMjAeFw0yMDA5MDQwMDAwMDBaFw00MDA5MTcxNjAwMDBaME8xCzAJ\nBgNVBAYTAlVTMSkwJwYDVQQKEyBJbnRlcm5ldCBTZWN1cml0eSBSZXNlYXJjaCBHcm91cDEV\nMBMGA1UEAxMMSVNSRyBSb290IFgyMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEzZvVn4CDCuwJ\nSvMWSj5cz3es3mcFDR0HttwW+1qLFNvicWDEukWVEYmO6gbf9yoWHKS5xcUy4APgHoIYOIvX\nRdgKam7mAHf7AlF9ItgKbppbd9/w+kHsOdx1ymgHDB/qo0IwQDAOBgNVHQ8BAf8EBAMCAQYw\nDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUfEKWrt5LSDv6kviejM9ti6lyN5UwCgYIKoZI\nzj0EAwMDaAAwZQIwe3lORlCEwkSHRhtFcP9Ymd70/aTSVaYgLXTWNLxBo1BfASdWtL4ndQav\nEi51mI38AjEAi/V3bNTIZargCyzuFJ0nN6T5U6VR5CmD1/iQMVtCnwr1/q4AaOeMSQ+2b1tb\nFfLn\n-----END CERTIFICATE-----"];
-function define(obj, name4, fn) {
-  if (typeof obj[name4] !== "function") {
-    Object.defineProperty(obj, name4, {
+function define(obj, name5, fn) {
+  if (typeof obj[name5] !== "function") {
+    Object.defineProperty(obj, name5, {
       value: fn,
       configurable: true,
       writable: true,
@@ -19687,7 +19709,7 @@ try {
   console.warn("extra CA: " + (err && err.message));
 }
 var ctx;
-var import_http6 = __toESM(require("http"), 1);
+var import_http7 = __toESM(require("http"), 1);
 var cheerio = __toESM(require_cheerio_legacy(), 1);
 var UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
 var TIMEOUT_MS = 12e3;
@@ -19711,13 +19733,13 @@ function request(_x) {
   return _request.apply(this, arguments);
 }
 function _request() {
-  _request = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee9(url) {
-    var _ref1, _ref1$method, method, _ref1$headers, headers, body, referer, res, _args9 = arguments;
-    return _regenerator().w(function(_context9) {
-      while (1) switch (_context9.n) {
+  _request = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee0(url) {
+    var _ref24, _ref24$method, method, _ref24$headers, headers, body, referer, res, _args0 = arguments;
+    return _regenerator().w(function(_context0) {
+      while (1) switch (_context0.n) {
         case 0:
-          _ref1 = _args9.length > 1 && _args9[1] !== void 0 ? _args9[1] : {}, _ref1$method = _ref1.method, method = _ref1$method === void 0 ? "GET" : _ref1$method, _ref1$headers = _ref1.headers, headers = _ref1$headers === void 0 ? {} : _ref1$headers, body = _ref1.body, referer = _ref1.referer;
-          _context9.n = 1;
+          _ref24 = _args0.length > 1 && _args0[1] !== void 0 ? _args0[1] : {}, _ref24$method = _ref24.method, method = _ref24$method === void 0 ? "GET" : _ref24$method, _ref24$headers = _ref24.headers, headers = _ref24$headers === void 0 ? {} : _ref24$headers, body = _ref24.body, referer = _ref24.referer;
+          _context0.n = 1;
           return fetch(url, _objectSpread2(_objectSpread2({
             method: method,
             body: body,
@@ -19735,16 +19757,16 @@ function _request() {
             } : {}), headers)
           }));
         case 1:
-          res = _context9.v;
+          res = _context0.v;
           if (res.ok) {
-            _context9.n = 2;
+            _context0.n = 2;
             break;
           }
           throw new Error("HTTP ".concat(res.status, " for ").concat(url));
         case 2:
-          return _context9.a(2, res);
+          return _context0.a(2, res);
       }
-    }, _callee9);
+    }, _callee0);
   }));
   return _request.apply(this, arguments);
 }
@@ -19752,16 +19774,16 @@ function getText(_x2, _x3) {
   return _getText.apply(this, arguments);
 }
 function _getText() {
-  _getText = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee0(url, opts) {
-    return _regenerator().w(function(_context0) {
-      while (1) switch (_context0.n) {
+  _getText = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee1(url, opts) {
+    return _regenerator().w(function(_context1) {
+      while (1) switch (_context1.n) {
         case 0:
-          _context0.n = 1;
+          _context1.n = 1;
           return request(url, opts);
         case 1:
-          return _context0.a(2, _context0.v.text());
+          return _context1.a(2, _context1.v.text());
       }
-    }, _callee0);
+    }, _callee1);
   }));
   return _getText.apply(this, arguments);
 }
@@ -19858,6 +19880,75 @@ function clean(obj) {
   }
   return obj;
 }
+var TILES_PER_ROW = {
+  compact: 5,
+  detailed: 4
+};
+var TITLE_BAR = "position:absolute;left:0;right:0;bottom:0;overflow:hidden;padding:2px 6px;font-size:20px;line-height:26px;color:#fff;background:rgba(0,0,0,.75);";
+var NOTE = "font-size:15px;line-height:19px;color:#ccc;max-height:114px;overflow:hidden;";
+var ICON_TILE = '<div style="width:208px;height:136px;overflow:hidden;margin:2px 15px;text-align:center;border-radius:6px;background:#282828;color:#eee;font-size:20px;"><img src="$logo_30x30" style="width:72px;height:72px;margin-top:12px;"><div style="margin-top:6px;">$title</div></div>';
+var FOCUS_NOTE = ".fxnote{display:none;} .htmlselected .fxnote{display:block;}";
+var CSS = {
+  hidden: "#content{margin-left:30px;} .description{visibility:hidden;} ".concat(FOCUS_NOTE),
+  panel: "#content{margin-left:6px;} ".concat(FOCUS_NOTE, " .description{left:770px;right:auto;top:105px;bottom:auto;width:500px;height:auto;max-height:530px;font-size:18px;line-height:23px;color:#fff;background:rgba(0,0,0,.72);padding:12px;box-sizing:border-box;overflow:hidden;}")
+};
+var noteHtml = function noteHtml2(note) {
+  return escapeHtml(note).replace(/\$/g, "&#36;");
+};
+function tileTemplate(kind, style, note) {
+  if (kind === "icon") return ICON_TILE;
+  var small = style === "detailed";
+  var _ref5 = kind === "wide" ? small ? [170, 96] : [208, 117] : small ? [170, 248] : [208, 303], _ref6 = _slicedToArray(_ref5, 2), w = _ref6[0], h = _ref6[1];
+  var text = noteHtml(note);
+  return '<div style="position:relative;width:'.concat(w, "px;height:").concat(h, "px;overflow:hidden;margin:2px ").concat(small ? 8 : 15, 'px;text-align:center;"><img src="$logo_30x30" style="width:').concat(w, "px;height:").concat(h, 'px;"><div style="').concat(TITLE_BAR).concat(small ? "font-size:17px;line-height:22px;" : "", '">$title').concat(text ? '<div class="fxnote" style="'.concat(NOTE, '">').concat(text, "</div>") : "", "</div></div>");
+}
+var buttonTemplate = function buttonTemplate2(width) {
+  return '<div style="width:'.concat(width, 'px;height:32px;line-height:32px;margin:2px 4px;overflow:hidden;text-align:center;white-space:nowrap;font-size:20px;border-radius:4px;border:1px solid #454545;color:#eee;background:#282828;">$title</div>');
+};
+var buttonWidth = function buttonWidth2(title) {
+  return 24 + String(title).length * 12;
+};
+function buttonRow(items) {
+  var width = 0;
+  return items.map(function(it, i) {
+    var w = buttonWidth(it.title);
+    var br = i === 0 || width + w + 10 > 1180;
+    width = br ? w + 10 : width + w + 10;
+    return _objectSpread2(_objectSpread2({}, it), {}, {
+      position: "html",
+      template: buttonTemplate(w),
+      br: br ? 1 : void 0
+    });
+  });
+}
+function tiles(items, kind, style) {
+  var perRow = kind === "icon" ? 5 : TILES_PER_ROW[style];
+  return items.map(function(_ref7, i) {
+    var note = _ref7.note, long = _ref7.long, it = _objectWithoutProperties(_ref7, _excluded);
+    if (!it.logo_30x30) return _objectSpread2(_objectSpread2({}, it), {}, {
+      position: "html",
+      template: buttonTemplate(buttonWidth(it.title)),
+      br: 1
+    });
+    var tile = _objectSpread2(_objectSpread2({}, it), {}, {
+      position: "html",
+      template: tileTemplate(kind, style, note),
+      br: i % perRow === 0 ? 1 : void 0
+    });
+    if (style === "detailed") tile.description = ["<b>".concat(it.title, "</b>")].concat(_toConsumableArray((long || []).map(escapeHtml))).join("<br>");
+    return tile;
+  });
+}
+function tilePage(title, _ref8) {
+  var _ref8$buttons = _ref8.buttons, buttons = _ref8$buttons === void 0 ? [] : _ref8$buttons, _ref8$items = _ref8.items, items = _ref8$items === void 0 ? [] : _ref8$items, _ref8$more = _ref8.more, more = _ref8$more === void 0 ? [] : _ref8$more, _ref8$kind = _ref8.kind, kind = _ref8$kind === void 0 ? "poster" : _ref8$kind, _ref8$style = _ref8.style, style = _ref8$style === void 0 ? "compact" : _ref8$style, extra = _objectWithoutProperties(_ref8, _excluded2);
+  return page(title, [].concat(_toConsumableArray(buttonRow(buttons)), _toConsumableArray(tiles(items, kind, style)), _toConsumableArray(buttonRow(more))), _objectSpread2({
+    typeList: "start",
+    align: "left",
+    css: style === "detailed" && kind !== "icon" ? CSS.panel : CSS.hidden,
+    defaultSelect: String(buttons.length),
+    cacheinfo: "nocache"
+  }, extra));
+}
 var _name = "Cinemar";
 function _matches(url) {
   return /^https?:\/\/(www\.)?cinemar\.[a-z]+\/embed\//i.test(url);
@@ -19889,27 +19980,27 @@ function _tree(_x4, _x5) {
   return _tree2.apply(this, arguments);
 }
 function _tree2() {
-  _tree2 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee1(embedUrl, referer) {
+  _tree2 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee10(embedUrl, referer) {
     var html, m;
-    return _regenerator().w(function(_context1) {
-      while (1) switch (_context1.n) {
+    return _regenerator().w(function(_context10) {
+      while (1) switch (_context10.n) {
         case 0:
-          _context1.n = 1;
+          _context10.n = 1;
           return getTextCached(embedUrl, {
             referer: referer
           });
         case 1:
-          html = _context1.v;
+          html = _context10.v;
           m = html.match(/"file":"(#2[^"]+)"/);
           if (m) {
-            _context1.n = 2;
+            _context10.n = 2;
             break;
           }
           throw new Error("Cinemar: playlist not found in embed page");
         case 2:
-          return _context1.a(2, normalize(_decodePlaylist(m[1])));
+          return _context10.a(2, normalize(_decodePlaylist(m[1])));
       }
-    }, _callee1);
+    }, _callee10);
   }));
   return _tree2.apply(this, arguments);
 }
@@ -19917,13 +20008,13 @@ function _resolve(_x6, _x7) {
   return _resolve2.apply(this, arguments);
 }
 function _resolve2() {
-  _resolve2 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee10(embedUrl, ref) {
+  _resolve2 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee11(embedUrl, ref) {
     var origin, res, json, data;
-    return _regenerator().w(function(_context10) {
-      while (1) switch (_context10.n) {
+    return _regenerator().w(function(_context11) {
+      while (1) switch (_context11.n) {
         case 0:
           origin = new URL(embedUrl).origin;
-          _context10.n = 1;
+          _context11.n = 1;
           return request("".concat(origin, "/api/playlist/load"), {
             method: "POST",
             referer: embedUrl,
@@ -19935,30 +20026,30 @@ function _resolve2() {
             body: JSON.stringify(ref)
           });
         case 1:
-          res = _context10.v;
-          _context10.n = 2;
+          res = _context11.v;
+          _context11.n = 2;
           return res.json();
         case 2:
-          json = _context10.v;
+          json = _context11.v;
           if (!(json.success === false)) {
-            _context10.n = 3;
+            _context11.n = 3;
             break;
           }
           throw new Error("Cinemar: ".concat(json.error || "load failed"));
         case 3:
           data = "data" in json ? json.data : json;
           if (data.file) {
-            _context10.n = 4;
+            _context11.n = 4;
             break;
           }
           throw new Error("Cinemar: no stream in response");
         case 4:
-          return _context10.a(2, {
+          return _context11.a(2, {
             url: data.file,
             subtitles: data.subtitle || void 0
           });
       }
-    }, _callee10);
+    }, _callee11);
   }));
   return _resolve2.apply(this, arguments);
 }
@@ -19985,27 +20076,27 @@ function config(_x8, _x9) {
   return _config.apply(this, arguments);
 }
 function _config() {
-  _config = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee11(embedUrl, referer) {
+  _config = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee12(embedUrl, referer) {
     var html, m;
-    return _regenerator().w(function(_context11) {
-      while (1) switch (_context11.n) {
+    return _regenerator().w(function(_context12) {
+      while (1) switch (_context12.n) {
         case 0:
-          _context11.n = 1;
+          _context12.n = 1;
           return getTextCached(embedUrl, {
             referer: referer
           });
         case 1:
-          html = _context11.v;
+          html = _context12.v;
           m = html.match(/playerConfigs\s*=\s*(\{[\s\S]*?\});\s*\n/);
           if (m) {
-            _context11.n = 2;
+            _context12.n = 2;
             break;
           }
           throw new Error("HDVB: player config not found");
         case 2:
-          return _context11.a(2, JSON.parse(m[1]));
+          return _context12.a(2, JSON.parse(m[1]));
       }
-    }, _callee11);
+    }, _callee12);
   }));
   return _config.apply(this, arguments);
 }
@@ -20044,50 +20135,8 @@ function tree22(_x0, _x1) {
   return _tree3.apply(this, arguments);
 }
 function _tree3() {
-  _tree3 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee12(embedUrl, referer) {
+  _tree3 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee13(embedUrl, referer) {
     var cfg, text, json;
-    return _regenerator().w(function(_context12) {
-      while (1) switch (_context12.n) {
-        case 0:
-          _context12.n = 1;
-          return config(embedUrl, referer);
-        case 1:
-          cfg = _context12.v;
-          if (cfg.file.startsWith("/playlist/")) {
-            _context12.n = 2;
-            break;
-          }
-          return _context12.a(2, [{
-            title: "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C",
-            ref: cfg.file
-          }]);
-        case 2:
-          _context12.n = 3;
-          return post(embedUrl, cfg.file, cfg.key);
-        case 3:
-          text = _context12.v;
-          if (!/^https?:\/\//.test(text.trim())) {
-            _context12.n = 4;
-            break;
-          }
-          return _context12.a(2, [{
-            title: "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C",
-            ref: cfg.file
-          }]);
-        case 4:
-          json = JSON.parse(text);
-          return _context12.a(2, normalize2(Array.isArray(json) ? json : [json]));
-      }
-    }, _callee12);
-  }));
-  return _tree3.apply(this, arguments);
-}
-function resolve22(_x10, _x11, _x12) {
-  return _resolve3.apply(this, arguments);
-}
-function _resolve3() {
-  _resolve3 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee13(embedUrl, ref, referer) {
-    var cfg, url;
     return _regenerator().w(function(_context13) {
       while (1) switch (_context13.n) {
         case 0:
@@ -20095,21 +20144,63 @@ function _resolve3() {
           return config(embedUrl, referer);
         case 1:
           cfg = _context13.v;
-          _context13.n = 2;
+          if (cfg.file.startsWith("/playlist/")) {
+            _context13.n = 2;
+            break;
+          }
+          return _context13.a(2, [{
+            title: "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C",
+            ref: cfg.file
+          }]);
+        case 2:
+          _context13.n = 3;
+          return post(embedUrl, cfg.file, cfg.key);
+        case 3:
+          text = _context13.v;
+          if (!/^https?:\/\//.test(text.trim())) {
+            _context13.n = 4;
+            break;
+          }
+          return _context13.a(2, [{
+            title: "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C",
+            ref: cfg.file
+          }]);
+        case 4:
+          json = JSON.parse(text);
+          return _context13.a(2, normalize2(Array.isArray(json) ? json : [json]));
+      }
+    }, _callee13);
+  }));
+  return _tree3.apply(this, arguments);
+}
+function resolve22(_x10, _x11, _x12) {
+  return _resolve3.apply(this, arguments);
+}
+function _resolve3() {
+  _resolve3 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee14(embedUrl, ref, referer) {
+    var cfg, url;
+    return _regenerator().w(function(_context14) {
+      while (1) switch (_context14.n) {
+        case 0:
+          _context14.n = 1;
+          return config(embedUrl, referer);
+        case 1:
+          cfg = _context14.v;
+          _context14.n = 2;
           return post(embedUrl, filePath(ref), cfg.key);
         case 2:
-          url = _context13.v.trim();
+          url = _context14.v.trim();
           if (/^https?:\/\//.test(url)) {
-            _context13.n = 3;
+            _context14.n = 3;
             break;
           }
           throw new Error("HDVB: no stream in response");
         case 3:
-          return _context13.a(2, {
+          return _context14.a(2, {
             url: url
           });
       }
-    }, _callee13);
+    }, _callee14);
   }));
   return _resolve3.apply(this, arguments);
 }
@@ -20193,10 +20284,10 @@ function tree32(_x13, _x14, _x15) {
   return _tree4.apply(this, arguments);
 }
 function _tree4() {
-  _tree4 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee14(embedUrl, referer, ua) {
-    var opts, seasons, episodes, _t5;
-    return _regenerator().w(function(_context14) {
-      while (1) switch (_context14.n) {
+  _tree4 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee15(embedUrl, referer, ua) {
+    var opts, seasons, episodes, _t6;
+    return _regenerator().w(function(_context15) {
+      while (1) switch (_context15.n) {
         case 0:
           opts = _objectSpread2({
             referer: referer
@@ -20205,11 +20296,11 @@ function _tree4() {
               "User-Agent": ua
             }
           } : {});
-          _t5 = _extractSeasons;
-          _context14.n = 1;
+          _t6 = _extractSeasons;
+          _context15.n = 1;
           return getTextCached(embedUrl, opts);
         case 1:
-          seasons = _t5(_context14.v).filter(function(s) {
+          seasons = _t6(_context15.v).filter(function(s) {
             return !s.blocked;
           });
           episodes = seasons.flatMap(function(s) {
@@ -20218,18 +20309,18 @@ function _tree4() {
             return e.hls;
           });
           if (episodes.length) {
-            _context14.n = 2;
+            _context15.n = 2;
             break;
           }
-          return _context14.a(2, []);
+          return _context15.a(2, []);
         case 2:
           if (!(episodes.length === 1)) {
-            _context14.n = 3;
+            _context15.n = 3;
             break;
           }
-          return _context14.a(2, [episodeLeaf(episodes[0], "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C")]);
+          return _context15.a(2, [episodeLeaf(episodes[0], "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C")]);
         case 3:
-          return _context14.a(2, seasons.map(function(s) {
+          return _context15.a(2, seasons.map(function(s) {
             return {
               title: "\u0421\u0435\u0437\u043E\u043D ".concat(s.season),
               children: (s.episodes || []).filter(function(e) {
@@ -20240,7 +20331,7 @@ function _tree4() {
             };
           }));
       }
-    }, _callee14);
+    }, _callee15);
   }));
   return _tree4.apply(this, arguments);
 }
@@ -20248,19 +20339,126 @@ function resolve32(_x16, _x17) {
   return _resolve4.apply(this, arguments);
 }
 function _resolve4() {
-  _resolve4 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee15(embedUrl, ref) {
-    return _regenerator().w(function(_context15) {
-      while (1) switch (_context15.n) {
+  _resolve4 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee16(embedUrl, ref) {
+    return _regenerator().w(function(_context16) {
+      while (1) switch (_context16.n) {
         case 0:
-          return _context15.a(2, {
+          return _context16.a(2, {
             url: ref
           });
       }
-    }, _callee15);
+    }, _callee16);
   }));
   return _resolve4.apply(this, arguments);
 }
-var players = [cinemar_exports, hdvb_exports, nextembed_exports];
+var kinovibe_exports = {};
+__export(kinovibe_exports, {
+  matches: function matches4() {
+    return matches42;
+  },
+  name: function name4() {
+    return name42;
+  },
+  resolve: function resolve4() {
+    return resolve42;
+  },
+  tree: function tree4() {
+    return tree42;
+  }
+});
+var name42 = "Kinovibe";
+function matches42(url) {
+  return /^https?:\/\/[^/]*kvb\.cool\//.test(url) || /\/player\/[^/]+\/[^/?]+\.txt/.test(url);
+}
+function normalize3(items) {
+  return items.filter(function(x) {
+    return x && (x.file || Array.isArray(x.folder) || Array.isArray(x.playlist));
+  }).map(function(x, i) {
+    var title = stripTags(String(x.comment || x.title || "").replace(/<br\s*\/?>/gi, " ")) || "\u0427\u0430\u0441\u0442\u044C ".concat(i + 1);
+    var children = x.folder || x.playlist;
+    return children ? {
+      title: title,
+      children: normalize3(children)
+    } : {
+      title: title,
+      ref: x.file
+    };
+  });
+}
+function tree42(_x18, _x19) {
+  return _tree5.apply(this, arguments);
+}
+function _tree5() {
+  _tree5 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee17(file2, referer) {
+    var json, _t7;
+    return _regenerator().w(function(_context17) {
+      while (1) switch (_context17.n) {
+        case 0:
+          if (/\.txt(\?|$)/.test(file2)) {
+            _context17.n = 1;
+            break;
+          }
+          return _context17.a(2, [{
+            title: "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C",
+            ref: file2
+          }]);
+        case 1:
+          _t7 = JSON;
+          _context17.n = 2;
+          return getTextCached(file2, {
+            referer: referer
+          });
+        case 2:
+          json = _t7.parse.call(_t7, _context17.v.trim());
+          return _context17.a(2, normalize3(json.playlist || json));
+      }
+    }, _callee17);
+  }));
+  return _tree5.apply(this, arguments);
+}
+function resolve42(_x20, _x21) {
+  return _resolve5.apply(this, arguments);
+}
+function _resolve5() {
+  _resolve5 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee18(file2, ref) {
+    var m, variants;
+    return _regenerator().w(function(_context18) {
+      while (1) switch (_context18.n) {
+        case 0:
+          m = /\[([\d,\s]+)\]/.exec(ref);
+          if (m) {
+            _context18.n = 1;
+            break;
+          }
+          return _context18.a(2, {
+            url: ref,
+            variants: []
+          });
+        case 1:
+          variants = m[1].split(",").map(Number).filter(Boolean).sort(function(a, b) {
+            return b - a;
+          }).map(function(height) {
+            return {
+              height: height,
+              url: ref.replace(m[0], height)
+            };
+          });
+          if (variants.length) {
+            _context18.n = 2;
+            break;
+          }
+          throw new Error("Kinovibe: no quality in the file name");
+        case 2:
+          return _context18.a(2, {
+            url: variants[0].url,
+            variants: variants
+          });
+      }
+    }, _callee18);
+  }));
+  return _resolve5.apply(this, arguments);
+}
+var players = [cinemar_exports, hdvb_exports, nextembed_exports, kinovibe_exports];
 function findPlayer(embedUrl) {
   return players.find(function(p) {
     return p.matches(embedUrl);
@@ -20298,35 +20496,35 @@ function uaHeaders(ua) {
     }
   } : {};
 }
-function hlsVariants(_x18, _x19) {
+function hlsVariants(_x22, _x23) {
   return _hlsVariants.apply(this, arguments);
 }
 function _hlsVariants() {
-  _hlsVariants = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee16(masterUrl, ua) {
-    var text, lines, variants, i, _lines, _m$1$match, _m$1$match2, m, uri, height, bandwidth, _t6;
-    return _regenerator().w(function(_context16) {
-      while (1) switch (_context16.p = _context16.n) {
+  _hlsVariants = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee19(masterUrl, ua) {
+    var text, lines, variants, i, _lines, _m$1$match, _m$1$match2, m, uri, height, bandwidth, _t8;
+    return _regenerator().w(function(_context19) {
+      while (1) switch (_context19.p = _context19.n) {
         case 0:
-          _context16.p = 0;
-          _context16.n = 1;
+          _context19.p = 0;
+          _context19.n = 1;
           return getText(masterUrl, uaHeaders(ua));
         case 1:
-          text = _context16.v;
+          text = _context19.v;
           lines = text.split(/\r?\n/);
           variants = [];
           i = 0;
         case 2:
           if (!(i < lines.length)) {
-            _context16.n = 5;
+            _context19.n = 5;
             break;
           }
           m = lines[i].match(/^#EXT-X-STREAM-INF:(.*)$/);
           uri = (_lines = lines[i + 1]) === null || _lines === void 0 ? void 0 : _lines.trim();
           if (!(!m || !uri || uri.startsWith("#"))) {
-            _context16.n = 3;
+            _context19.n = 3;
             break;
           }
-          return _context16.a(3, 4);
+          return _context19.a(3, 4);
         case 3:
           height = Number(((_m$1$match = m[1].match(/RESOLUTION=\d+x(\d+)/)) === null || _m$1$match === void 0 ? void 0 : _m$1$match[1]) || 0);
           bandwidth = Number(((_m$1$match2 = m[1].match(/BANDWIDTH=(\d+)/)) === null || _m$1$match2 === void 0 ? void 0 : _m$1$match2[1]) || 0);
@@ -20337,46 +20535,46 @@ function _hlsVariants() {
           });
         case 4:
           i++;
-          _context16.n = 2;
+          _context19.n = 2;
           break;
         case 5:
-          return _context16.a(2, variants.sort(function(a, b) {
+          return _context19.a(2, variants.sort(function(a, b) {
             return b.height - a.height || b.bandwidth - a.bandwidth;
           }));
         case 6:
-          _context16.p = 6;
-          _t6 = _context16.v;
-          console.warn("hlsVariants " + masterUrl + ": " + (_t6 && _t6.message));
-          return _context16.a(2, []);
+          _context19.p = 6;
+          _t8 = _context19.v;
+          console.warn("hlsVariants " + masterUrl + ": " + (_t8 && _t8.message));
+          return _context19.a(2, []);
       }
-    }, _callee16, null, [[0, 6]]);
+    }, _callee19, null, [[0, 6]]);
   }));
   return _hlsVariants.apply(this, arguments);
 }
-function absolutePlaylist(_x20, _x21) {
+function absolutePlaylist(_x24, _x25) {
   return _absolutePlaylist.apply(this, arguments);
 }
 function _absolutePlaylist() {
-  _absolutePlaylist = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee17(playlistUrl, ua) {
+  _absolutePlaylist = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee20(playlistUrl, ua) {
     var text, abs;
-    return _regenerator().w(function(_context17) {
-      while (1) switch (_context17.n) {
+    return _regenerator().w(function(_context20) {
+      while (1) switch (_context20.n) {
         case 0:
-          _context17.n = 1;
+          _context20.n = 1;
           return getText(playlistUrl, uaHeaders(ua));
         case 1:
-          text = _context17.v;
+          text = _context20.v;
           abs = function abs2(u) {
             return new URL(u, playlistUrl).href;
           };
-          return _context17.a(2, text.split(/\r?\n/).map(function(line) {
+          return _context20.a(2, text.split(/\r?\n/).map(function(line) {
             if (!line || line.startsWith("#")) return line.replace(/URI="([^"]+)"/g, function(_, u) {
               return 'URI="'.concat(abs(u), '"');
             });
             return abs(line.trim());
           }).join("\n"));
       }
-    }, _callee17);
+    }, _callee20);
   }));
   return _absolutePlaylist.apply(this, arguments);
 }
@@ -20385,14 +20583,26 @@ function createDleSite(cfg) {
   var abs = function abs2(u) {
     return u ? new URL(u, host + "/").href : void 0;
   };
+  function titleUrl(pageUrl) {
+    var url = abs(pageUrl);
+    var baseDomain = function baseDomain2(u) {
+      return new URL(u).hostname.split(".").slice(-2).join(".");
+    };
+    if (new URL(url).protocol !== "https:" || baseDomain(url) !== baseDomain(host)) throw new Error("\u0427\u0443\u0436\u043E\u0439 \u0430\u0434\u0440\u0435\u0441 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B");
+    return url;
+  }
   function parseCards(html) {
     var $ = cheerio.load(html);
     var items = [];
-    $(cfg.cardSelector).each(function(_, el) {
-      var card3 = cfg.card($, $(el));
-      if (card3 !== null && card3 !== void 0 && card3.url && card3.title) items.push(_objectSpread2(_objectSpread2({}, card3), {}, {
-        url: abs(card3.url),
-        poster: abs(card3.poster)
+    var cards = $(cfg.cardSelector);
+    if (!cards.length && cfg.fallbackSelector) cards = $(cfg.fallbackSelector);
+    cards.each(function(_, el) {
+      var card4 = cfg.card($, $(el));
+      if (card4 !== null && card4 !== void 0 && card4.url && card4.title && !items.some(function(it) {
+        return it.url === abs(card4.url);
+      })) items.push(_objectSpread2(_objectSpread2({}, card4), {}, {
+        url: abs(card4.url),
+        poster: abs(card4.poster)
       }));
     });
     return {
@@ -20453,29 +20663,39 @@ function createDleSite(cfg) {
         }, _callee3);
       }))();
     },
-    // Movie page: title, poster, description and the embedded players we can decode.
-    details: function details(pageUrl) {
-      return _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee4() {
-        var _$$attr;
-        var url, baseDomain, $, embeds, _t4;
+    // A title's full description, from its own page. Only the text is kept: a TV would run out of
+    // memory caching whole pages for every title of a catalog.
+    story: function story(pageUrl) {
+      var url = titleUrl(pageUrl);
+      return cached("story ".concat(url), 6 * 60 * 60 * 1e3, /* @__PURE__ */ _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee4() {
+        var _t4, _t5;
         return _regenerator().w(function(_context4) {
           while (1) switch (_context4.n) {
             case 0:
-              url = abs(pageUrl);
-              baseDomain = function baseDomain2(u) {
-                return new URL(u).hostname.split(".").slice(-2).join(".");
-              };
-              if (!(new URL(url).protocol !== "https:" || baseDomain(url) !== baseDomain(host))) {
-                _context4.n = 1;
-                break;
-              }
-              throw new Error("\u0427\u0443\u0436\u043E\u0439 \u0430\u0434\u0440\u0435\u0441 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B");
-            case 1:
               _t4 = cheerio;
-              _context4.n = 2;
+              _context4.n = 1;
+              return getText(url);
+            case 1:
+              _t5 = _t4.load.call(_t4, _context4.v);
+              return _context4.a(2, _t5(cfg.storySelector).first().text().replace(/\s+/g, " ").trim());
+          }
+        }, _callee4);
+      })));
+    },
+    // Movie page: title, poster, description and the embedded players we can decode.
+    details: function details(pageUrl) {
+      return _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee5() {
+        var _$$attr;
+        var url, html, $, embeds, onPage, pagePlayer, title;
+        return _regenerator().w(function(_context5) {
+          while (1) switch (_context5.n) {
+            case 0:
+              url = titleUrl(pageUrl);
+              _context5.n = 1;
               return getTextCached(url);
-            case 2:
-              $ = _t4.load.call(_t4, _context4.v);
+            case 1:
+              html = _context5.v;
+              $ = cheerio.load(html);
               embeds = [];
               $("iframe").each(function(_, el) {
                 var src = $(el).attr("data-src") || $(el).attr("src");
@@ -20489,15 +20709,22 @@ function createDleSite(cfg) {
                   player: player
                 });
               });
-              return _context4.a(2, {
+              onPage = /new Playerjs\(\{[^}]*?file:\s*"([^"]+)"/.exec(html);
+              pagePlayer = onPage && findPlayer(onPage[1]);
+              if (pagePlayer) embeds.push({
+                url: onPage[1],
+                player: pagePlayer
+              });
+              title = $("h1").first().text().trim() || $("title").text().trim();
+              return _context5.a(2, {
                 url: url,
-                title: $("h1").first().text().trim() || $("title").text().trim(),
-                poster: abs($('meta[property="og:image"]').attr("content")),
+                title: cfg.cleanTitle ? cfg.cleanTitle(title) : title,
+                poster: abs($('meta[property="og:image"]').attr("content") || $('img[itemprop="image"]').attr("src")),
                 description: (_$$attr = $('meta[name="description"]').attr("content")) === null || _$$attr === void 0 ? void 0 : _$$attr.trim(),
                 embeds: embeds
               });
           }
-        }, _callee4);
+        }, _callee5);
       }))();
     }
   };
@@ -20506,9 +20733,10 @@ var rezka = createDleSite({
   id: "rezka",
   title: "HDRezka",
   host: process.env.REZKA_HOST || "https://kz.rezka.biz",
-  icon: "https://kz.rezka.biz/templates/rezka/images/favicon/favicon.ico",
+  icon: "https://kz.rezka.biz/templates/rezka/images/favicon/apple-touch-icon.png",
   categories: [["\u0413\u043B\u0430\u0432\u043D\u0430\u044F", "/"], ["\u041D\u043E\u0432\u0438\u043D\u043A\u0438", "/new/"], ["\u0424\u0438\u043B\u044C\u043C\u044B", "/filmy/"], ["\u0421\u0435\u0440\u0438\u0430\u043B\u044B", "/serialy/"], ["\u041C\u0443\u043B\u044C\u0442\u0444\u0438\u043B\u044C\u043C\u044B", "/multfilmy/"], ["\u041C\u0443\u043B\u044C\u0442-\u0441\u0435\u0440\u0438\u0430\u043B\u044B", "/multserial/"], ["\u0410\u043D\u0438\u043C\u0435", "/anime/"]],
   cardSelector: ".postItem",
+  storySelector: ".postText",
   card: function card($, el) {
     var a = el.find(".postTitle a").first();
     return {
@@ -20523,15 +20751,18 @@ var kinogo = createDleSite({
   id: "kinogo",
   title: "Kinogo",
   host: process.env.KINOGO_HOST || "https://sim.kinogo.tm",
-  icon: "https://sim.kinogo.tm/favicon.ico",
+  icon: "https://sim.kinogo.tm/apple-touch-icon.png",
   categories: [["\u0413\u043B\u0430\u0432\u043D\u0430\u044F", "/"], ["\u041D\u043E\u0432\u0438\u043D\u043A\u0438", "/novinki/"], ["\u0424\u0438\u043B\u044C\u043C\u044B", "/filmy/"], ["\u0421\u0435\u0440\u0438\u0430\u043B\u044B", "/serialy/"], ["\u0420\u0443\u0441\u0441\u043A\u0438\u0435 \u0441\u0435\u0440\u0438\u0430\u043B\u044B", "/russkie-serialy/"], ["\u041C\u0443\u043B\u044C\u0442\u0444\u0438\u043B\u044C\u043C\u044B", "/multfilmy/"], ["\u041C\u0443\u043B\u044C\u0442\u0441\u0435\u0440\u0438\u0430\u043B\u044B", "/multserialy/"], ["\u0410\u043D\u0438\u043C\u0435", "/anime/"], ["\u0410\u043D\u0438\u043C\u0435-\u0441\u0435\u0440\u0438\u0430\u043B\u044B", "/anime-serialy/"], ["\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430\u043B\u044C\u043D\u044B\u0435", "/dokumentalnye/"]],
   cardSelector: "article.shortStory",
+  storySelector: ".filmDescription",
   card: function card2($, el) {
     var a = el.find(".hTitle h2 a").first();
     var info2 = el.find(".sInfo > span").map(function(_, s) {
       return $(s).text().replace(/\s+/g, " ").trim();
     }).get().filter(function(t) {
       return /^(Год|Страна|Жанр)/.test(t);
+    }).map(function(t) {
+      return t.replace(/^Жанр:\s*/, "").replace(/(Фильмы|Сериалы|Мультфильмы|Мультсериалы|Аниме|Новинки)\s*\/\s*/g, "");
     });
     return {
       url: a.attr("href"),
@@ -20541,11 +20772,45 @@ var kinogo = createDleSite({
     };
   }
 });
+var kinovibe = createDleSite({
+  id: "kinovibe",
+  title: "KinoVibe",
+  host: process.env.KINOVIBE_HOST || "https://kinovibe.cc",
+  icon: "https://kinovibe.cc/templates/tochka/images/touch-icon-ipad.png",
+  categories: [
+    ["\u0413\u043B\u0430\u0432\u043D\u0430\u044F", "/"],
+    ["\u041F\u0440\u0435\u043C\u044C\u0435\u0440\u044B", "/new/"],
+    ["\u0424\u0438\u043B\u044C\u043C\u044B", "/films/"],
+    // Not /series/: its paging answers 404.
+    ["\u0421\u0435\u0440\u0438\u0430\u043B\u044B", "/serial/"],
+    ["\u0414\u043E\u0440\u0430\u043C\u044B", "/dorams/"],
+    ["\u041C\u0443\u043B\u044C\u0442\u0444\u0438\u043B\u044C\u043C\u044B", "/cartoon/"],
+    ["\u0410\u043D\u0438\u043C\u0435", "/anime/"],
+    ["\u0422\u0412-\u0448\u043E\u0443", "/show/"]
+  ],
+  // The list itself (first pages also show promo sections above it) and search results; the home
+  // page has only sections.
+  cardSelector: "#dle-content .custom1-item, a.sres-wrap",
+  fallbackSelector: ".custom1-item",
+  storySelector: '[itemprop="description"]',
+  card: function card3($, el) {
+    var a = el.is("a") ? el : el.find("a.custom1-img").first();
+    return {
+      url: a.attr("href"),
+      title: (a.find(".custom1-title").text() || a.find("h2").text()).trim(),
+      poster: a.find("img.mini_poster").attr("src"),
+      lines: [el.find(".ShortStorySerias").text().trim(), a.find(".sres-desc").text().trim()]
+    };
+  },
+  cleanTitle: function cleanTitle(t) {
+    return t.replace(/^(Фильм|Сериал|Дорама|Мультфильм|Мультсериал|Аниме|ТВ-шоу)\s+/i, "").replace(/\s+смотреть онлайн.*$/i, "");
+  }
+});
 var sites = {
   rezka: rezka,
-  kinogo: kinogo
+  kinogo: kinogo,
+  kinovibe: kinovibe
 };
-var import_querystring = __toESM(require("querystring"), 1);
 var import_fs = __toESM(require("fs"), 1);
 var import_os = __toESM(require("os"), 1);
 var import_path = __toESM(require("path"), 1);
@@ -20620,6 +20885,89 @@ function deviceUuid() {
   }
   return state.deviceUuid;
 }
+var MODES = [["compact", "\u043A\u043E\u043C\u043F\u0430\u043A\u0442\u043D\u0430\u044F \u043F\u043B\u0438\u0442\u043A\u0430"], ["detailed", "\u043F\u043E\u0434\u0440\u043E\u0431\u043D\u0430\u044F \u043F\u043B\u0438\u0442\u043A\u0430"], ["list", "\u0441\u043F\u0438\u0441\u043E\u043A"]];
+var shape = function shape2(x, y, w, h) {
+  return '<rect x="'.concat(x, '" y="').concat(y, '" width="').concat(w, '" height="').concat(h, '" rx="2" fill="#fff"/>');
+};
+var ICONS = {
+  compact: [6, 26, 46].map(function(x) {
+    return [10, 36].map(function(y) {
+      return shape(x, y, 14, 18);
+    }).join("");
+  }).join(""),
+  detailed: [8, 26].map(function(x) {
+    return [10, 36].map(function(y) {
+      return shape(x, y, 14, 18);
+    }).join("");
+  }).join("") + shape(44, 10, 14, 44),
+  list: [10, 24, 38, 52].map(function(y) {
+    return shape(6, y, 6, 6) + shape(16, y, 42, 6);
+  }).join("")
+};
+function viewIcon(file2) {
+  var icon = ICONS[file2.replace(/\.svg$/, "")];
+  if (!icon) return {
+    binary: Buffer.from("not found"),
+    type: "text/plain",
+    status: 404
+  };
+  return {
+    binary: Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">'.concat(icon, "</svg>")),
+    type: "image/svg+xml"
+  };
+}
+var modeIndex = function modeIndex2() {
+  return Math.max(0, MODES.findIndex(function(_ref0) {
+    var _ref1 = _slicedToArray(_ref0, 1), id = _ref1[0];
+    return id === get("view");
+  }));
+};
+function viewMode() {
+  return MODES[modeIndex()][0];
+}
+function setViewMode(mode) {
+  set({
+    view: MODES.some(function(_ref10) {
+      var _ref11 = _slicedToArray(_ref10, 1), id = _ref11[0];
+      return id === mode;
+    }) ? mode : MODES[0][0]
+  });
+}
+function viewToggle(ctx2) {
+  var current = modeIndex();
+  return _objectSpread2(_objectSpread2({}, folder("\u0412\u0438\u0434: ".concat(MODES[current][1], " \u25BC"), "menu", {
+    logo: "".concat(ctx2.base, "/view/").concat(MODES[current][0], ".svg"),
+    description: "\u041A\u0430\u043A \u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043A\u0430\u0442\u0430\u043B\u043E\u0433\u0438"
+  })), {}, {
+    menu: MODES.map(function(_ref12, i) {
+      var _ref13 = _slicedToArray(_ref12, 2), id = _ref13[0], name5 = _ref13[1];
+      return {
+        title: "".concat(i === current ? "\u2713 " : "").concat(name5),
+        playlist_url: "".concat(ctx2.base, "/view?set=").concat(id, "&back=").concat(encodeURIComponent(ctx2.self || "/")),
+        logo_30x30: "".concat(ctx2.base, "/view/").concat(id, ".svg")
+      };
+    })
+  });
+}
+function catalogPage(title, items, _ref14) {
+  var ctx2 = _ref14.ctx, _ref14$buttons = _ref14.buttons, buttons = _ref14$buttons === void 0 ? [] : _ref14$buttons, _ref14$more = _ref14.more, more = _ref14$more === void 0 ? [] : _ref14$more, kind = _ref14.kind, extra = _objectWithoutProperties(_ref14, _excluded3);
+  var toggle = viewToggle(ctx2);
+  var style = viewMode();
+  if (style !== "list") return tilePage(title, _objectSpread2({
+    buttons: [].concat(_toConsumableArray(buttons), [toggle]),
+    items: items,
+    more: more,
+    kind: kind,
+    style: style
+  }, extra));
+  return page(title, [].concat(_toConsumableArray(items.map(function(_ref15) {
+    var note = _ref15.note, long = _ref15.long, it = _objectWithoutProperties(_ref15, _excluded4);
+    return it;
+  })), _toConsumableArray(more), [toggle]), _objectSpread2({
+    cacheinfo: "nocache"
+  }, extra));
+}
+var import_querystring = __toESM(require("querystring"), 1);
 var FE = process.env.QINO_FE || "https://tele2.server-api.lfstrm.tv";
 var BE = process.env.QINO_BE || "https://qino.sequoia-api.lfstrm.tv";
 var UA2 = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
@@ -20661,16 +21009,16 @@ function timeoutOption(ms) {
     timeout: ms
   };
 }
-function call(_x22, _x23) {
+function call(_x26, _x27) {
   return _call.apply(this, arguments);
 }
 function _call() {
-  _call = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee18(base, path2) {
-    var _ref10, _ref10$method, method, _ref10$params, params, form, json, _ref10$headers, extra, _ref10$withSession, withSession, _ref10$raw, raw, _ref10$timeout, timeout, q, _i11, _Object$keys7, k, headers, body, res, text, data, msg, _args18 = arguments;
-    return _regenerator().w(function(_context18) {
-      while (1) switch (_context18.n) {
+  _call = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee21(base, path2) {
+    var _ref25, _ref25$method, method, _ref25$params, params, form, json, _ref25$headers, extra, _ref25$withSession, withSession, _ref25$raw, raw, _ref25$timeout, timeout, q, _i11, _Object$keys7, k, headers, body, res, text, data, msg, _args21 = arguments;
+    return _regenerator().w(function(_context21) {
+      while (1) switch (_context21.n) {
         case 0:
-          _ref10 = _args18.length > 2 && _args18[2] !== void 0 ? _args18[2] : {}, _ref10$method = _ref10.method, method = _ref10$method === void 0 ? "GET" : _ref10$method, _ref10$params = _ref10.params, params = _ref10$params === void 0 ? {} : _ref10$params, form = _ref10.form, json = _ref10.json, _ref10$headers = _ref10.headers, extra = _ref10$headers === void 0 ? {} : _ref10$headers, _ref10$withSession = _ref10.withSession, withSession = _ref10$withSession === void 0 ? true : _ref10$withSession, _ref10$raw = _ref10.raw, raw = _ref10$raw === void 0 ? false : _ref10$raw, _ref10$timeout = _ref10.timeout, timeout = _ref10$timeout === void 0 ? TIMEOUT_MS2 : _ref10$timeout;
+          _ref25 = _args21.length > 2 && _args21[2] !== void 0 ? _args21[2] : {}, _ref25$method = _ref25.method, method = _ref25$method === void 0 ? "GET" : _ref25$method, _ref25$params = _ref25.params, params = _ref25$params === void 0 ? {} : _ref25$params, form = _ref25.form, json = _ref25.json, _ref25$headers = _ref25.headers, extra = _ref25$headers === void 0 ? {} : _ref25$headers, _ref25$withSession = _ref25.withSession, withSession = _ref25$withSession === void 0 ? true : _ref25$withSession, _ref25$raw = _ref25.raw, raw = _ref25$raw === void 0 ? false : _ref25$raw, _ref25$timeout = _ref25.timeout, timeout = _ref25$timeout === void 0 ? TIMEOUT_MS2 : _ref25$timeout;
           q = {};
           for (_i11 = 0, _Object$keys7 = Object.keys(params); _i11 < _Object$keys7.length; _i11++) {
             k = _Object$keys7[_i11];
@@ -20689,24 +21037,24 @@ function _call() {
             headers["Content-Type"] = "application/json";
             body = JSON.stringify(json);
           }
-          _context18.n = 1;
+          _context21.n = 1;
           return fetch("".concat(base).concat(path2, "?").concat(import_querystring.default.stringify(q)), _objectSpread2({
             method: method,
             headers: headers,
             body: body
           }, timeoutOption(timeout)));
         case 1:
-          res = _context18.v;
+          res = _context21.v;
           if (!(raw && res.ok)) {
-            _context18.n = 2;
+            _context21.n = 2;
             break;
           }
-          return _context18.a(2, res);
+          return _context21.a(2, res);
         case 2:
-          _context18.n = 3;
+          _context21.n = 3;
           return res.text();
         case 3:
-          text = _context18.v;
+          text = _context21.v;
           data = null;
           try {
             data = text ? JSON.parse(text) : null;
@@ -20714,15 +21062,15 @@ function _call() {
             data = text;
           }
           if (res.ok) {
-            _context18.n = 4;
+            _context21.n = 4;
             break;
           }
           msg = data && (data.msg || data.message || data.error) || "HTTP ".concat(res.status);
           throw new ApiError(res.status, typeof msg === "string" ? msg : JSON.stringify(msg), data);
         case 4:
-          return _context18.a(2, data);
+          return _context21.a(2, data);
       }
-    }, _callee18);
+    }, _callee21);
   }));
   return _call.apply(this, arguments);
 }
@@ -20753,58 +21101,58 @@ function isLoggedIn() {
   return _isLoggedIn.apply(this, arguments);
 }
 function _isLoggedIn() {
-  _isLoggedIn = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee19() {
-    var _t7;
-    return _regenerator().w(function(_context19) {
-      while (1) switch (_context19.p = _context19.n) {
+  _isLoggedIn = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee22() {
+    var _t9;
+    return _regenerator().w(function(_context22) {
+      while (1) switch (_context22.p = _context22.n) {
         case 0:
           if (session()) {
-            _context19.n = 1;
+            _context22.n = 1;
             break;
           }
-          return _context19.a(2, false);
+          return _context22.a(2, false);
         case 1:
-          _context19.p = 1;
-          _context19.n = 2;
+          _context22.p = 1;
+          _context22.n = 2;
           return account();
         case 2:
-          return _context19.a(2, !_context19.v.anonymous);
+          return _context22.a(2, !_context22.v.anonymous);
         case 3:
-          _context19.p = 3;
-          _t7 = _context19.v;
-          return _context19.a(2, false);
+          _context22.p = 3;
+          _t9 = _context22.v;
+          return _context22.a(2, false);
       }
-    }, _callee19, null, [[1, 3]]);
+    }, _callee22, null, [[1, 3]]);
   }));
   return _isLoggedIn.apply(this, arguments);
 }
 function tvAssetToken() {
-  return cached2("asset-tokens", 30 * 60 * 1e3, /* @__PURE__ */ _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee5() {
-    return _regenerator().w(function(_context5) {
-      while (1) switch (_context5.n) {
+  return cached2("asset-tokens", 30 * 60 * 1e3, /* @__PURE__ */ _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee6() {
+    return _regenerator().w(function(_context6) {
+      while (1) switch (_context6.n) {
         case 0:
-          _context5.n = 1;
+          _context6.n = 1;
           return call(FE, "/user/v1/asset-tokens/v2");
         case 1:
-          return _context5.a(2, _context5.v.assetTokens.tvAssetToken);
+          return _context6.a(2, _context6.v.assetTokens.tvAssetToken);
       }
-    }, _callee5);
+    }, _callee6);
   })));
 }
 function logoThumb(url) {
   return url && /\.lfstrm\.tv\/images\//.test(url) && url.indexOf("?") < 0 ? "".concat(url, "?width=320&height=180") : url;
 }
 function channels() {
-  return cached2("channels", 30 * 60 * 1e3, /* @__PURE__ */ _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee6() {
+  return cached2("channels", 30 * 60 * 1e3, /* @__PURE__ */ _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee7() {
     var token, _yield$Promise$all, _yield$Promise$all2, list, medias, byChannel;
-    return _regenerator().w(function(_context6) {
-      while (1) switch (_context6.n) {
+    return _regenerator().w(function(_context7) {
+      while (1) switch (_context7.n) {
         case 0:
-          _context6.n = 1;
+          _context7.n = 1;
           return tvAssetToken();
         case 1:
-          token = _context6.v;
-          _context6.n = 2;
+          token = _context7.v;
+          _context7.n = 2;
           return Promise.all([call(FE, "/tv/v2/channels", {
             params: {
               "tv-asset-token": token
@@ -20815,14 +21163,14 @@ function channels() {
             }
           })]);
         case 2:
-          _yield$Promise$all = _context6.v;
+          _yield$Promise$all = _context7.v;
           _yield$Promise$all2 = _slicedToArray(_yield$Promise$all, 2);
           list = _yield$Promise$all2[0].channels;
           medias = _yield$Promise$all2[1].medias;
           byChannel = new Map(medias.map(function(m) {
             return [m.channelId, m];
           }));
-          return _context6.a(2, list.map(function(c) {
+          return _context7.a(2, list.map(function(c) {
             var m = byChannel.get(c.id);
             return {
               id: c.id,
@@ -20840,27 +21188,27 @@ function channels() {
             return (a.number == null ? 9999 : a.number) - (b.number == null ? 9999 : b.number);
           }));
       }
-    }, _callee6);
+    }, _callee7);
   })));
 }
 function onAir() {
-  return cached2("on-air", 10 * 60 * 1e3, /* @__PURE__ */ _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee7() {
+  return cached2("on-air", 10 * 60 * 1e3, /* @__PURE__ */ _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee8() {
     var token, _yield$call, _yield$call$schedules, schedules, map, _iterator0, _step0, s, events;
-    return _regenerator().w(function(_context7) {
-      while (1) switch (_context7.n) {
+    return _regenerator().w(function(_context8) {
+      while (1) switch (_context8.n) {
         case 0:
-          _context7.n = 1;
+          _context8.n = 1;
           return tvAssetToken();
         case 1:
-          token = _context7.v;
-          _context7.n = 2;
+          token = _context8.v;
+          _context8.n = 2;
           return call(FE, "/epg/v2/on-air", {
             params: {
               "tv-asset-token": token
             }
           });
         case 2:
-          _yield$call = _context7.v;
+          _yield$call = _context8.v;
           _yield$call$schedules = _yield$call.schedules;
           schedules = _yield$call$schedules === void 0 ? [] : _yield$call$schedules;
           map = /* @__PURE__ */ new Map();
@@ -20884,91 +21232,91 @@ function onAir() {
           } finally {
             _iterator0.f();
           }
-          return _context7.a(2, map);
+          return _context8.a(2, map);
       }
-    }, _callee7);
+    }, _callee8);
   })));
 }
-function nowAndNext(_x24) {
+function nowAndNext(_x28) {
   return _nowAndNext.apply(this, arguments);
 }
 function _nowAndNext() {
-  _nowAndNext = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee20(scheduleId) {
-    var events, now, i, k, _t8, _t9;
-    return _regenerator().w(function(_context20) {
-      while (1) switch (_context20.p = _context20.n) {
+  _nowAndNext = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee23(scheduleId) {
+    var events, now, i, k, _t0, _t1;
+    return _regenerator().w(function(_context23) {
+      while (1) switch (_context23.p = _context23.n) {
         case 0:
-          _context20.p = 0;
-          _context20.n = 1;
+          _context23.p = 0;
+          _context23.n = 1;
           return onAir();
         case 1:
-          _t8 = _context20.v.get(scheduleId);
-          if (_t8) {
-            _context20.n = 2;
+          _t0 = _context23.v.get(scheduleId);
+          if (_t0) {
+            _context23.n = 2;
             break;
           }
-          _t8 = [];
+          _t0 = [];
         case 2:
-          events = _t8;
-          _context20.n = 4;
+          events = _t0;
+          _context23.n = 4;
           break;
         case 3:
-          _context20.p = 3;
-          _t9 = _context20.v;
-          return _context20.a(2, {});
+          _context23.p = 3;
+          _t1 = _context23.v;
+          return _context23.a(2, {});
         case 4:
           now = Date.now();
           i = -1;
           k = 0;
         case 5:
           if (!(k < events.length)) {
-            _context20.n = 7;
+            _context23.n = 7;
             break;
           }
           if (!(events[k].begin <= now && now < events[k].end)) {
-            _context20.n = 6;
+            _context23.n = 6;
             break;
           }
           i = k;
-          return _context20.a(3, 7);
+          return _context23.a(3, 7);
         case 6:
           k++;
-          _context20.n = 5;
+          _context23.n = 5;
           break;
         case 7:
           if (!(i < 0)) {
-            _context20.n = 8;
+            _context23.n = 8;
             break;
           }
-          return _context20.a(2, {
+          return _context23.a(2, {
             next: events.find(function(e) {
               return e.begin > now;
             })
           });
         case 8:
-          return _context20.a(2, {
+          return _context23.a(2, {
             now: events[i],
             next: events[i + 1]
           });
       }
-    }, _callee20, null, [[0, 3]]);
+    }, _callee23, null, [[0, 3]]);
   }));
   return _nowAndNext.apply(this, arguments);
 }
 function playback(mediaId) {
-  return cached2("playback ".concat(mediaId), 10 * 60 * 1e3, /* @__PURE__ */ _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee8() {
+  return cached2("playback ".concat(mediaId), 10 * 60 * 1e3, /* @__PURE__ */ _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee9() {
     var info2, languages;
-    return _regenerator().w(function(_context8) {
-      while (1) switch (_context8.n) {
+    return _regenerator().w(function(_context9) {
+      while (1) switch (_context9.n) {
         case 0:
-          _context8.n = 1;
+          _context9.n = 1;
           return call(FE, "/playback-info-media/".concat(encodeURIComponent(mediaId)), {
             params: {
               enable50fps: "true"
             }
           });
         case 1:
-          info2 = _context8.v;
+          info2 = _context9.v;
           languages = (info2.languages || []).map(function(l) {
             return {
               id: l.id,
@@ -20988,26 +21336,26 @@ function playback(mediaId) {
             return b.default - a.default;
           });
           if (languages.length) {
-            _context8.n = 2;
+            _context9.n = 2;
             break;
           }
           throw new ApiError(404, "\u0421\u0435\u0440\u0432\u0435\u0440 \u043D\u0435 \u0432\u0435\u0440\u043D\u0443\u043B \u0441\u0441\u044B\u043B\u043A\u0443 \u043D\u0430 \u043F\u043E\u0442\u043E\u043A");
         case 2:
-          return _context8.a(2, languages);
+          return _context9.a(2, languages);
       }
-    }, _callee8);
+    }, _callee9);
   })));
 }
 function captchaImage() {
   return _captchaImage.apply(this, arguments);
 }
 function _captchaImage() {
-  _captchaImage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee21() {
-    var res, image, h, cookies, setCookies, _t0;
-    return _regenerator().w(function(_context21) {
-      while (1) switch (_context21.n) {
+  _captchaImage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee24() {
+    var res, image, h, cookies, setCookies, _t10;
+    return _regenerator().w(function(_context24) {
+      while (1) switch (_context24.n) {
         case 0:
-          _context21.n = 1;
+          _context24.n = 1;
           return call(BE, "/contacts-verification/v1/captcha", {
             params: {
               t: Date.now()
@@ -21016,12 +21364,12 @@ function _captchaImage() {
             raw: true
           });
         case 1:
-          res = _context21.v;
-          _t0 = Buffer;
-          _context21.n = 2;
+          res = _context24.v;
+          _t10 = Buffer;
+          _context24.n = 2;
           return res.arrayBuffer();
         case 2:
-          image = _t0.from.call(_t0, _context21.v);
+          image = _t10.from.call(_t10, _context24.v);
           h = res.headers;
           cookies = "";
           try {
@@ -21033,19 +21381,19 @@ function _captchaImage() {
           setCookies = (h.getSetCookie ? h.getSetCookie() : h.raw && h.raw()["set-cookie"] || []).map(function(c) {
             return c.split(";")[0];
           });
-          return _context21.a(2, {
+          return _context24.a(2, {
             image: image,
             type: h.get("content-type") || "image/png",
             cookies: cookies,
             cookieHeader: setCookies.join("; ")
           });
       }
-    }, _callee21);
+    }, _callee24);
   }));
   return _captchaImage.apply(this, arguments);
 }
-function startVerification(_ref9) {
-  var phone = _ref9.phone, captcha = _ref9.captcha, cookies = _ref9.cookies, cookieHeader = _ref9.cookieHeader;
+function startVerification(_ref20) {
+  var phone = _ref20.phone, captcha = _ref20.captcha, cookies = _ref20.cookies, cookieHeader = _ref20.cookieHeader;
   var cookie = [cookieHeader, cookies.replace(/;$/, "").replace(/;/g, "; ")].filter(Boolean).join("; ");
   return call(BE, "/contacts-verification/v1/start", {
     method: "POST",
@@ -21062,8 +21410,8 @@ function startVerification(_ref9) {
     }
   });
 }
-function verifyCode(_ref0) {
-  var id = _ref0.id, phone = _ref0.phone, code = _ref0.code;
+function verifyCode(_ref21) {
+  var id = _ref21.id, phone = _ref21.phone, code = _ref21.code;
   if (id) return call(FE, "/contacts-verification/v1/verify/v2", {
     method: "POST",
     withSession: false,
@@ -21082,16 +21430,16 @@ function verifyCode(_ref0) {
     }
   });
 }
-function availableLogins(_x25) {
+function availableLogins(_x29) {
   return _availableLogins.apply(this, arguments);
 }
 function _availableLogins() {
-  _availableLogins = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee22(sessionToken) {
+  _availableLogins = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee25(sessionToken) {
     var res;
-    return _regenerator().w(function(_context22) {
-      while (1) switch (_context22.n) {
+    return _regenerator().w(function(_context25) {
+      while (1) switch (_context25.n) {
         case 0:
-          _context22.n = 1;
+          _context25.n = 1;
           return call(FE, "/auth/v1/with-verified-contacts/available-logins", {
             withSession: false,
             params: {
@@ -21099,23 +21447,23 @@ function _availableLogins() {
             }
           });
         case 1:
-          res = _context22.v;
-          return _context22.a(2, res && res.options || []);
+          res = _context25.v;
+          return _context25.a(2, res && res.options || []);
       }
-    }, _callee22);
+    }, _callee25);
   }));
   return _availableLogins.apply(this, arguments);
 }
-function loginWithVerifiedContacts(_x26, _x27) {
+function loginWithVerifiedContacts(_x30, _x31) {
   return _loginWithVerifiedContacts.apply(this, arguments);
 }
 function _loginWithVerifiedContacts() {
-  _loginWithVerifiedContacts = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee23(sessionToken, login) {
+  _loginWithVerifiedContacts = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee26(sessionToken, login) {
     var res;
-    return _regenerator().w(function(_context23) {
-      while (1) switch (_context23.n) {
+    return _regenerator().w(function(_context26) {
+      while (1) switch (_context26.n) {
         case 0:
-          _context23.n = 1;
+          _context26.n = 1;
           return call(FE, "/v2/login/methods/with-verified-contacts", {
             method: "POST",
             withSession: false,
@@ -21128,9 +21476,9 @@ function _loginWithVerifiedContacts() {
             timeout: 3e4
           });
         case 1:
-          res = _context23.v;
+          res = _context26.v;
           if (!(!res || !res.session)) {
-            _context23.n = 2;
+            _context26.n = 2;
             break;
           }
           throw new ApiError(500, "\u0421\u0435\u0440\u0432\u0435\u0440 \u043D\u0435 \u0432\u0435\u0440\u043D\u0443\u043B \u0441\u0435\u0441\u0441\u0438\u044E");
@@ -21140,9 +21488,9 @@ function _loginWithVerifiedContacts() {
             login: login
           });
           clearCache();
-          return _context23.a(2, res);
+          return _context26.a(2, res);
       }
-    }, _callee23);
+    }, _callee26);
   }));
   return _loginWithVerifiedContacts.apply(this, arguments);
 }
@@ -21150,20 +21498,20 @@ function logout() {
   return _logout.apply(this, arguments);
 }
 function _logout() {
-  _logout = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee24() {
-    var _t1;
-    return _regenerator().w(function(_context24) {
-      while (1) switch (_context24.p = _context24.n) {
+  _logout = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee27() {
+    var _t11;
+    return _regenerator().w(function(_context27) {
+      while (1) switch (_context27.p = _context27.n) {
         case 0:
-          _context24.p = 0;
-          _context24.n = 1;
+          _context27.p = 0;
+          _context27.n = 1;
           return call(FE, "/logout");
         case 1:
-          _context24.n = 3;
+          _context27.n = 3;
           break;
         case 2:
-          _context24.p = 2;
-          _t1 = _context24.v;
+          _context27.p = 2;
+          _t11 = _context27.v;
         case 3:
           set({
             session: void 0,
@@ -21171,9 +21519,9 @@ function _logout() {
           });
           clearCache();
         case 4:
-          return _context24.a(2);
+          return _context27.a(2);
       }
-    }, _callee24, null, [[0, 2]]);
+    }, _callee27, null, [[0, 2]]);
   }));
   return _logout.apply(this, arguments);
 }
@@ -21210,19 +21558,19 @@ function normalizePhone(value) {
   });
   return "+".concat(d);
 }
-function newCaptcha(_x28) {
+function newCaptcha(_x32) {
   return _newCaptcha.apply(this, arguments);
 }
 function _newCaptcha() {
-  _newCaptcha = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee25(p) {
+  _newCaptcha = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee28(p) {
     var _yield$captchaImage, image, type, cookies, cookieHeader;
-    return _regenerator().w(function(_context25) {
-      while (1) switch (_context25.n) {
+    return _regenerator().w(function(_context28) {
+      while (1) switch (_context28.n) {
         case 0:
-          _context25.n = 1;
+          _context28.n = 1;
           return captchaImage();
         case 1:
-          _yield$captchaImage = _context25.v;
+          _yield$captchaImage = _context28.v;
           image = _yield$captchaImage.image;
           type = _yield$captchaImage.type;
           cookies = _yield$captchaImage.cookies;
@@ -21236,79 +21584,79 @@ function _newCaptcha() {
             cookieHeader: cookieHeader
           });
         case 2:
-          return _context25.a(2);
+          return _context28.a(2);
       }
-    }, _callee25);
+    }, _callee28);
   }));
   return _newCaptcha.apply(this, arguments);
 }
 var REUSE_MS = 3 * 60 * 1e3;
-function begin(_x29) {
+function begin(_x33) {
   return _begin.apply(this, arguments);
 }
 function _begin() {
-  _begin = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee26(phoneInput) {
-    var phone, _iterator12, _step12, _step12$value, oldLid, old, lid, p, _t10;
-    return _regenerator().w(function(_context26) {
-      while (1) switch (_context26.p = _context26.n) {
+  _begin = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee29(phoneInput) {
+    var phone, _iterator12, _step12, _step12$value, oldLid, old, lid, p, _t12;
+    return _regenerator().w(function(_context29) {
+      while (1) switch (_context29.p = _context29.n) {
         case 0:
           cleanup();
           phone = normalizePhone(phoneInput);
           _iterator12 = _createForOfIteratorHelper(pending);
-          _context26.p = 1;
+          _context29.p = 1;
           _iterator12.s();
         case 2:
           if ((_step12 = _iterator12.n()).done) {
-            _context26.n = 4;
+            _context29.n = 4;
             break;
           }
           _step12$value = _slicedToArray(_step12.value, 2), oldLid = _step12$value[0], old = _step12$value[1];
           if (!(old.phone === phone && !old.verification && Date.now() - old.created < REUSE_MS)) {
-            _context26.n = 3;
+            _context29.n = 3;
             break;
           }
-          return _context26.a(2, oldLid);
+          return _context29.a(2, oldLid);
         case 3:
-          _context26.n = 2;
+          _context29.n = 2;
           break;
         case 4:
-          _context26.n = 6;
+          _context29.n = 6;
           break;
         case 5:
-          _context26.p = 5;
-          _t10 = _context26.v;
-          _iterator12.e(_t10);
+          _context29.p = 5;
+          _t12 = _context29.v;
+          _iterator12.e(_t12);
         case 6:
-          _context26.p = 6;
+          _context29.p = 6;
           _iterator12.f();
-          return _context26.f(6);
+          return _context29.f(6);
         case 7:
           lid = import_crypto2.default.randomBytes(8).toString("hex");
           p = {
             phone: phone,
             created: Date.now()
           };
-          _context26.n = 8;
+          _context29.n = 8;
           return newCaptcha(p);
         case 8:
           pending.set(lid, p);
-          return _context26.a(2, lid);
+          return _context29.a(2, lid);
       }
-    }, _callee26, null, [[1, 5, 6, 7]]);
+    }, _callee29, null, [[1, 5, 6, 7]]);
   }));
   return _begin.apply(this, arguments);
 }
-function sendSms(_x30, _x31) {
+function sendSms(_x34, _x35) {
   return _sendSms.apply(this, arguments);
 }
 function _sendSms() {
-  _sendSms = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee27(p, captchaText) {
-    var _t11;
-    return _regenerator().w(function(_context27) {
-      while (1) switch (_context27.p = _context27.n) {
+  _sendSms = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee30(p, captchaText) {
+    var _t13;
+    return _regenerator().w(function(_context30) {
+      while (1) switch (_context30.p = _context30.n) {
         case 0:
-          _context27.p = 0;
-          _context27.n = 1;
+          _context30.p = 0;
+          _context30.n = 1;
           return startVerification({
             phone: p.phone,
             captcha: String(captchaText || "").trim(),
@@ -21316,89 +21664,89 @@ function _sendSms() {
             cookieHeader: p.cookieHeader
           });
         case 1:
-          p.verification = _context27.v;
-          _context27.n = 4;
+          p.verification = _context30.v;
+          _context30.n = 4;
           break;
         case 2:
-          _context27.p = 2;
-          _t11 = _context27.v;
-          _context27.n = 3;
+          _context30.p = 2;
+          _t13 = _context30.v;
+          _context30.n = 3;
           return newCaptcha(p);
         case 3:
-          throw _t11;
+          throw _t13;
         case 4:
-          return _context27.a(2);
+          return _context30.a(2);
       }
-    }, _callee27, null, [[0, 2]]);
+    }, _callee30, null, [[0, 2]]);
   }));
   return _sendSms.apply(this, arguments);
 }
-function checkCode(_x32, _x33) {
+function checkCode(_x36, _x37) {
   return _checkCode.apply(this, arguments);
 }
 function _checkCode() {
-  _checkCode = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee28(p, code) {
+  _checkCode = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee31(p, code) {
     var result;
-    return _regenerator().w(function(_context28) {
-      while (1) switch (_context28.n) {
+    return _regenerator().w(function(_context31) {
+      while (1) switch (_context31.n) {
         case 0:
-          _context28.n = 1;
+          _context31.n = 1;
           return verifyCode({
             id: p.verification && p.verification.id,
             phone: p.phone,
             code: String(code || "").trim()
           });
         case 1:
-          result = _context28.v;
+          result = _context31.v;
           if (!(!result || !result.sessionToken)) {
-            _context28.n = 2;
+            _context31.n = 2;
             break;
           }
           throw new Error("\u041D\u0435\u0432\u0435\u0440\u043D\u044B\u0439 \u043A\u043E\u0434");
         case 2:
           p.token = result.sessionToken;
-          _context28.n = 3;
+          _context31.n = 3;
           return availableLogins(p.token);
         case 3:
-          p.logins = _context28.v.map(function(o) {
+          p.logins = _context31.v.map(function(o) {
             return o.login;
           }).filter(Boolean);
           if (p.logins.length) {
-            _context28.n = 4;
+            _context31.n = 4;
             break;
           }
           throw new Error("\u041A \u044D\u0442\u043E\u043C\u0443 \u043D\u043E\u043C\u0435\u0440\u0443 \u043D\u0435 \u043F\u0440\u0438\u0432\u044F\u0437\u0430\u043D \u0430\u043A\u043A\u0430\u0443\u043D\u0442 qino");
         case 4:
           if (!(p.logins.length === 1)) {
-            _context28.n = 5;
+            _context31.n = 5;
             break;
           }
-          return _context28.a(2, finish(p, p.logins[0]));
+          return _context31.a(2, finish(p, p.logins[0]));
         case 5:
-          return _context28.a(2, {
+          return _context31.a(2, {
             logins: p.logins
           });
       }
-    }, _callee28);
+    }, _callee31);
   }));
   return _checkCode.apply(this, arguments);
 }
-function finish(_x34, _x35) {
+function finish(_x38, _x39) {
   return _finish.apply(this, arguments);
 }
 function _finish() {
-  _finish = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee29(p, login) {
+  _finish = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee32(p, login) {
     var _iterator13, _step13, _step13$value, lid, v;
-    return _regenerator().w(function(_context29) {
-      while (1) switch (_context29.n) {
+    return _regenerator().w(function(_context32) {
+      while (1) switch (_context32.n) {
         case 0:
           if (!(!p.token || !p.logins || p.logins.indexOf(login) < 0)) {
-            _context29.n = 1;
+            _context32.n = 1;
             break;
           }
           throw new Error("\u0421\u043D\u0430\u0447\u0430\u043B\u0430 \u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u043A\u043E\u0434 \u0438\u0437 SMS");
         case 1:
-          _context29.n = 2;
+          _context32.n = 2;
           return loginWithVerifiedContacts(p.token, login);
         case 2:
           _iterator13 = _createForOfIteratorHelper(pending);
@@ -21412,27 +21760,27 @@ function _finish() {
           } finally {
             _iterator13.f();
           }
-          return _context29.a(2, {
+          return _context32.a(2, {
             done: true,
             login: login
           });
       }
-    }, _callee29);
+    }, _callee32);
   }));
   return _finish.apply(this, arguments);
 }
-function useSession(_x36) {
+function useSession(_x40) {
   return _useSession.apply(this, arguments);
 }
 function _useSession() {
-  _useSession = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee30(b) {
+  _useSession = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee33(b) {
     var session2, before, acc;
-    return _regenerator().w(function(_context30) {
-      while (1) switch (_context30.n) {
+    return _regenerator().w(function(_context33) {
+      while (1) switch (_context33.n) {
         case 0:
           session2 = String(b.session || "").trim();
           if (session2) {
-            _context30.n = 1;
+            _context33.n = 1;
             break;
           }
           throw Object.assign(new Error("\u041F\u0443\u0441\u0442\u0430\u044F \u0441\u0435\u0441\u0441\u0438\u044F"), {
@@ -21448,11 +21796,11 @@ function _useSession() {
             deviceUuid: String(b.deviceUuid || "").trim() || before.deviceUuid
           });
           clearCache();
-          _context30.n = 2;
+          _context33.n = 2;
           return isLoggedIn();
         case 2:
-          if (_context30.v) {
-            _context30.n = 3;
+          if (_context33.v) {
+            _context33.n = 3;
             break;
           }
           set(before);
@@ -21461,16 +21809,16 @@ function _useSession() {
             status: 400
           });
         case 3:
-          _context30.n = 4;
+          _context33.n = 4;
           return account();
         case 4:
-          acc = _context30.v;
-          return _context30.a(2, {
+          acc = _context33.v;
+          return _context33.a(2, {
             done: true,
             login: acc.profile && acc.profile.name || acc.user && acc.user.login || "\u0430\u043A\u043A\u0430\u0443\u043D\u0442"
           });
       }
-    }, _callee30);
+    }, _callee33);
   }));
   return _useSession.apply(this, arguments);
 }
@@ -21478,104 +21826,104 @@ function status() {
   return _status.apply(this, arguments);
 }
 function _status() {
-  _status = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee31() {
+  _status = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee34() {
     var acc, login;
-    return _regenerator().w(function(_context31) {
-      while (1) switch (_context31.n) {
+    return _regenerator().w(function(_context34) {
+      while (1) switch (_context34.n) {
         case 0:
-          _context31.n = 1;
+          _context34.n = 1;
           return isLoggedIn();
         case 1:
-          if (_context31.v) {
-            _context31.n = 2;
+          if (_context34.v) {
+            _context34.n = 2;
             break;
           }
-          return _context31.a(2, {
+          return _context34.a(2, {
             loggedIn: false
           });
         case 2:
-          _context31.n = 3;
+          _context34.n = 3;
           return account();
         case 3:
-          acc = _context31.v;
+          acc = _context34.v;
           login = acc.profile && acc.profile.name || acc.user && acc.user.login || "\u0430\u043A\u043A\u0430\u0443\u043D\u0442";
-          return _context31.a(2, {
+          return _context34.a(2, {
             loggedIn: true,
             login: login,
             session: session()
           });
       }
-    }, _callee31);
+    }, _callee34);
   }));
   return _status.apply(this, arguments);
 }
-function loginRoute(_x37, _x38, _x39) {
+function loginRoute(_x41, _x42, _x43) {
   return _loginRoute.apply(this, arguments);
 }
 function _loginRoute() {
-  _loginRoute = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee32(sub, q, ctx2) {
-    var base, p, _t12;
-    return _regenerator().w(function(_context32) {
-      while (1) switch (_context32.p = _context32.n) {
+  _loginRoute = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee35(sub, q, ctx2) {
+    var base, p, _t14;
+    return _regenerator().w(function(_context35) {
+      while (1) switch (_context35.p = _context35.n) {
         case 0:
           base = "".concat(ctx2.base, "/qino/login");
           if (!(sub === "")) {
-            _context32.n = 1;
+            _context35.n = 1;
             break;
           }
-          return _context32.a(2, {
+          return _context35.a(2, {
             html: WEB_PAGE
           });
         case 1:
           if (!(sub === "/captcha.png")) {
-            _context32.n = 3;
+            _context35.n = 3;
             break;
           }
           p = pending.get(String(q.lid || ""));
           if (!(!p || !p.captcha)) {
-            _context32.n = 2;
+            _context35.n = 2;
             break;
           }
-          return _context32.a(2, {
+          return _context35.a(2, {
             binary: Buffer.alloc(0),
             type: "text/plain",
             status: 404
           });
         case 2:
-          return _context32.a(2, {
+          return _context35.a(2, {
             binary: p.captcha.image,
             type: p.captcha.type
           });
         case 3:
           if (!(sub.indexOf("/api/") === 0)) {
-            _context32.n = 4;
+            _context35.n = 4;
             break;
           }
-          return _context32.a(2, apiRoute(sub.slice(5), ctx2.body || {}));
+          return _context35.a(2, apiRoute(sub.slice(5), ctx2.body || {}));
         case 4:
-          _context32.p = 4;
-          _context32.n = 5;
+          _context35.p = 4;
+          _context35.n = 5;
           return fxmlRoute(sub, q, ctx2, base);
         case 5:
-          return _context32.a(2, _context32.v);
+          return _context35.a(2, _context35.v);
         case 6:
-          _context32.p = 6;
-          _t12 = _context32.v;
-          console.error("[qino login ".concat(sub, "]"), _t12.message);
-          return _context32.a(2, page("\u0412\u0445\u043E\u0434 \u043F\u043E SMS", [info("\u041E\u0448\u0438\u0431\u043A\u0430: ".concat(_t12.message)), folder("\u041D\u0430\u0447\u0430\u0442\u044C \u0437\u0430\u043D\u043E\u0432\u043E", "".concat(base, "/tv"))]));
+          _context35.p = 6;
+          _t14 = _context35.v;
+          console.error("[qino login ".concat(sub, "]"), _t14.message);
+          return _context35.a(2, page("\u0412\u0445\u043E\u0434 \u043F\u043E SMS", [info("\u041E\u0448\u0438\u0431\u043A\u0430: ".concat(_t14.message)), folder("\u041D\u0430\u0447\u0430\u0442\u044C \u0437\u0430\u043D\u043E\u0432\u043E", "".concat(base, "/tv"))]));
       }
-    }, _callee32, null, [[4, 6]]);
+    }, _callee35, null, [[4, 6]]);
   }));
   return _loginRoute.apply(this, arguments);
 }
-function fxmlRoute(_x40, _x41, _x42, _x43) {
+function fxmlRoute(_x44, _x45, _x46, _x47) {
   return _fxmlRoute.apply(this, arguments);
 }
 function _fxmlRoute() {
-  _fxmlRoute = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee33(sub, q, ctx2, base) {
-    var finishItems, web, _web, how, _how, p, _p, result, _t13, _t14, _t15, _t16, _t17, _t18, _t19;
-    return _regenerator().w(function(_context33) {
-      while (1) switch (_context33.p = _context33.n) {
+  _fxmlRoute = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee36(sub, q, ctx2, base) {
+    var finishItems, web, _web, how, _how, p, _p, result, _t15, _t16, _t17, _t18, _t19, _t20, _t21;
+    return _regenerator().w(function(_context36) {
+      while (1) switch (_context36.p = _context36.n) {
         case 0:
           finishItems = function finishItems2(how2) {
             return [folder("\u042F \u0432\u043E\u0448\u0451\u043B", "".concat(base, "/check"), {
@@ -21584,12 +21932,12 @@ function _fxmlRoute() {
               description: how2
             })];
           };
-          _t13 = sub;
-          _context33.n = _t13 === "/tv" ? 1 : _t13 === "/pc" ? 2 : _t13 === "/sms" ? 3 : _t13 === "/phone" ? 4 : _t13 === "/refresh" ? 6 : _t13 === "/captcha" ? 8 : _t13 === "/code" ? 13 : _t13 === "/finish" ? 19 : 21;
+          _t15 = sub;
+          _context36.n = _t15 === "/tv" ? 1 : _t15 === "/pc" ? 2 : _t15 === "/sms" ? 3 : _t15 === "/phone" ? 4 : _t15 === "/refresh" ? 6 : _t15 === "/captcha" ? 8 : _t15 === "/code" ? 13 : _t15 === "/finish" ? 19 : 21;
           break;
         case 1:
           web = webLoginUrl(ctx2);
-          return _context33.a(2, page("\u0412\u0445\u043E\u0434 \u0432 QINO", [folder("\u0412\u043E\u0439\u0442\u0438 \u0441 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440\u0430 \u0438\u043B\u0438 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430", "".concat(base, "/pc"), {
+          return _context36.a(2, page("\u0412\u0445\u043E\u0434 \u0432 QINO", [folder("\u0412\u043E\u0439\u0442\u0438 \u0441 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440\u0430 \u0438\u043B\u0438 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430", "".concat(base, "/pc"), {
             description: "\u041F\u0440\u043E\u0449\u0435 \u0432\u0441\u0435\u0433\u043E: \u043E\u0442\u043A\u0440\u043E\u0439\u0442\u0435 \u0432 \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0435 \u0432 \u0442\u043E\u0439 \u0436\u0435 \u0441\u0435\u0442\u0438 <b>".concat(escapeHtml(web), "</b> \u0438 \u0432\u043E\u0439\u0434\u0438\u0442\u0435 \u043F\u043E SMS, \u043D\u043E\u043C\u0435\u0440 \u0438 \u043A\u043E\u0434 \u0443\u0434\u043E\u0431\u043D\u0435\u0435 \u043D\u0430\u0431\u0438\u0440\u0430\u0442\u044C \u0442\u0430\u043C. \u0417\u0430\u0442\u0435\u043C \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \xAB\u042F \u0432\u043E\u0448\u0451\u043B\xBB.")
           }), folder("\u0412\u043E\u0439\u0442\u0438 \u043D\u0430 \u0442\u0435\u043B\u0435\u0432\u0438\u0437\u043E\u0440\u0435", "".concat(base, "/sms"), {
             description: "\u041D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430, \u0441\u0438\u043C\u0432\u043E\u043B\u044B \u0441 \u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0438 \u0438 \u043A\u043E\u0434 \u0438\u0437 SMS \u0432\u0432\u043E\u0434\u044F\u0442\u0441\u044F \u043F\u0443\u043B\u044C\u0442\u043E\u043C. \u0417\u0430\u0442\u0435\u043C \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \xAB\u042F \u0432\u043E\u0448\u0451\u043B\xBB."
@@ -21597,184 +21945,184 @@ function _fxmlRoute() {
         case 2:
           _web = webLoginUrl(ctx2);
           how = "1. \u041D\u0430 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440\u0435 \u0438\u043B\u0438 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0435 \u0432 \u0442\u043E\u0439 \u0436\u0435 \u0441\u0435\u0442\u0438 \u043E\u0442\u043A\u0440\u043E\u0439\u0442\u0435 <b>".concat(escapeHtml(_web), "</b><br>2. \u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430, \u0441\u0438\u043C\u0432\u043E\u043B\u044B \u0441 \u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0438 \u0438 \u043A\u043E\u0434 \u0438\u0437 SMS<br>3. \u041A\u043E\u0433\u0434\u0430 \u0442\u0430\u043C \u043F\u043E\u044F\u0432\u0438\u0442\u0441\u044F \xAB\u0412\u0445\u043E\u0434 \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\xBB, \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u0437\u0434\u0435\u0441\u044C \xAB\u042F \u0432\u043E\u0448\u0451\u043B\xBB");
-          return _context33.a(2, page("\u041E\u0442\u043A\u0440\u043E\u0439\u0442\u0435 ".concat(_web), finishItems(how)));
+          return _context36.a(2, page("\u041E\u0442\u043A\u0440\u043E\u0439\u0442\u0435 ".concat(_web), finishItems(how)));
         case 3:
           _how = "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430, \u0437\u0430\u0442\u0435\u043C \u0441\u0438\u043C\u0432\u043E\u043B\u044B \u0441 \u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0438 \u0438 \u043A\u043E\u0434 \u0438\u0437 SMS. \u041F\u043E\u0441\u043B\u0435 \u0432\u0445\u043E\u0434\u0430 \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \xAB\u042F \u0432\u043E\u0448\u0451\u043B\xBB.";
-          return _context33.a(2, page("\u0412\u0445\u043E\u0434 \u043D\u0430 \u0442\u0435\u043B\u0435\u0432\u0438\u0437\u043E\u0440\u0435", [_objectSpread2(_objectSpread2({}, search("\u0412\u0432\u0435\u0441\u0442\u0438 \u043D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430", "".concat(base, "/phone?q={search}"), "\u041D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 77011234567")), {}, {
+          return _context36.a(2, page("\u0412\u0445\u043E\u0434 \u043D\u0430 \u0442\u0435\u043B\u0435\u0432\u0438\u0437\u043E\u0440\u0435", [_objectSpread2(_objectSpread2({}, search("\u0412\u0432\u0435\u0441\u0442\u0438 \u043D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430", "".concat(base, "/phone?q={search}"), "\u041D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 77011234567")), {}, {
             description: _how
           })].concat(_toConsumableArray(finishItems(_how)))));
         case 4:
-          _t14 = captchaPage;
-          _t15 = base;
-          _context33.n = 5;
+          _t16 = captchaPage;
+          _t17 = base;
+          _context36.n = 5;
           return begin(input(q));
         case 5:
-          return _context33.a(2, _t14(_t15, _context33.v));
+          return _context36.a(2, _t16(_t17, _context36.v));
         case 6:
-          _context33.n = 7;
+          _context36.n = 7;
           return newCaptcha(attempt(q.lid));
         case 7:
-          return _context33.a(2, captchaPage(base, q.lid));
+          return _context36.a(2, captchaPage(base, q.lid));
         case 8:
           p = attempt(q.lid);
-          _context33.p = 9;
-          _context33.n = 10;
+          _context36.p = 9;
+          _context36.n = 10;
           return sendSms(p, input(q));
         case 10:
-          _context33.n = 12;
+          _context36.n = 12;
           break;
         case 11:
-          _context33.p = 11;
-          _t16 = _context33.v;
-          return _context33.a(2, captchaPage(base, q.lid, "\u041D\u0435 \u043F\u043E\u043B\u0443\u0447\u0438\u043B\u043E\u0441\u044C: ".concat(_t16.message)));
+          _context36.p = 11;
+          _t18 = _context36.v;
+          return _context36.a(2, captchaPage(base, q.lid, "\u041D\u0435 \u043F\u043E\u043B\u0443\u0447\u0438\u043B\u043E\u0441\u044C: ".concat(_t18.message)));
         case 12:
-          return _context33.a(2, codePage(base, q.lid, p));
+          return _context36.a(2, codePage(base, q.lid, p));
         case 13:
           _p = attempt(q.lid);
-          _context33.p = 14;
-          _context33.n = 15;
+          _context36.p = 14;
+          _context36.n = 15;
           return checkCode(_p, input(q));
         case 15:
-          result = _context33.v;
-          _context33.n = 17;
+          result = _context36.v;
+          _context36.n = 17;
           break;
         case 16:
-          _context33.p = 16;
-          _t17 = _context33.v;
-          return _context33.a(2, codePage(base, q.lid, _p, "\u041D\u0435 \u043F\u043E\u043B\u0443\u0447\u0438\u043B\u043E\u0441\u044C: ".concat(_t17.message)));
+          _context36.p = 16;
+          _t19 = _context36.v;
+          return _context36.a(2, codePage(base, q.lid, _p, "\u041D\u0435 \u043F\u043E\u043B\u0443\u0447\u0438\u043B\u043E\u0441\u044C: ".concat(_t19.message)));
         case 17:
           if (!result.done) {
-            _context33.n = 18;
+            _context36.n = 18;
             break;
           }
-          return _context33.a(2, donePage(base, result.login));
+          return _context36.a(2, donePage(base, result.login));
         case 18:
-          return _context33.a(2, page("\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0430\u043A\u043A\u0430\u0443\u043D\u0442", result.logins.map(function(login) {
+          return _context36.a(2, page("\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0430\u043A\u043A\u0430\u0443\u043D\u0442", result.logins.map(function(login) {
             return folder(login, "".concat(base, "/finish?lid=").concat(q.lid, "&login=").concat(encodeURIComponent(login)));
           })));
         case 19:
-          _t18 = donePage;
-          _t19 = base;
-          _context33.n = 20;
+          _t20 = donePage;
+          _t21 = base;
+          _context36.n = 20;
           return finish(attempt(q.lid), String(q.login));
         case 20:
-          return _context33.a(2, _t18(_t19, _context33.v.login));
+          return _context36.a(2, _t20(_t21, _context36.v.login));
         case 21:
-          return _context33.a(2, page("\u0412\u0445\u043E\u0434 \u043F\u043E SMS", [info("\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439 \u0448\u0430\u0433 \u0432\u0445\u043E\u0434\u0430"), folder("\u041D\u0430\u0447\u0430\u0442\u044C \u0437\u0430\u043D\u043E\u0432\u043E", "".concat(base, "/tv"))]));
+          return _context36.a(2, page("\u0412\u0445\u043E\u0434 \u043F\u043E SMS", [info("\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439 \u0448\u0430\u0433 \u0432\u0445\u043E\u0434\u0430"), folder("\u041D\u0430\u0447\u0430\u0442\u044C \u0437\u0430\u043D\u043E\u0432\u043E", "".concat(base, "/tv"))]));
         case 22:
-          return _context33.a(2);
+          return _context36.a(2);
       }
-    }, _callee33, null, [[14, 16], [9, 11]]);
+    }, _callee36, null, [[14, 16], [9, 11]]);
   }));
   return _fxmlRoute.apply(this, arguments);
 }
-function apiRoute(_x44, _x45) {
+function apiRoute(_x48, _x49) {
   return _apiRoute.apply(this, arguments);
 }
 function _apiRoute() {
-  _apiRoute = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee34(step, b) {
-    var lid, _t20, _t21, _t22, _t23, _t24, _t25;
-    return _regenerator().w(function(_context34) {
-      while (1) switch (_context34.p = _context34.n) {
+  _apiRoute = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee37(step, b) {
+    var lid, _t22, _t23, _t24, _t25, _t26, _t27;
+    return _regenerator().w(function(_context37) {
+      while (1) switch (_context37.p = _context37.n) {
         case 0:
-          _context34.p = 0;
-          _t20 = step;
-          _context34.n = _t20 === "phone" ? 1 : _t20 === "refresh" ? 3 : _t20 === "captcha" ? 5 : _t20 === "code" ? 7 : _t20 === "finish" ? 9 : _t20 === "session" ? 11 : _t20 === "status" ? 13 : _t20 === "logout" ? 15 : 17;
+          _context37.p = 0;
+          _t22 = step;
+          _context37.n = _t22 === "phone" ? 1 : _t22 === "refresh" ? 3 : _t22 === "captcha" ? 5 : _t22 === "code" ? 7 : _t22 === "finish" ? 9 : _t22 === "session" ? 11 : _t22 === "status" ? 13 : _t22 === "logout" ? 15 : 17;
           break;
         case 1:
-          _context34.n = 2;
+          _context37.n = 2;
           return begin(b.phone);
         case 2:
-          lid = _context34.v;
-          return _context34.a(2, {
+          lid = _context37.v;
+          return _context37.a(2, {
             json: {
               lid: lid,
               phone: pending.get(lid).phone
             }
           });
         case 3:
-          _context34.n = 4;
+          _context37.n = 4;
           return newCaptcha(attempt(b.lid));
         case 4:
-          return _context34.a(2, {
+          return _context37.a(2, {
             json: {
               ok: true
             }
           });
         case 5:
-          _context34.n = 6;
+          _context37.n = 6;
           return sendSms(attempt(b.lid), b.captcha);
         case 6:
-          return _context34.a(2, {
+          return _context37.a(2, {
             json: {
               ok: true
             }
           });
         case 7:
-          _context34.n = 8;
+          _context37.n = 8;
           return checkCode(attempt(b.lid), b.code);
         case 8:
-          _t21 = _context34.v;
-          return _context34.a(2, {
-            json: _t21
-          });
-        case 9:
-          _context34.n = 10;
-          return finish(attempt(b.lid), b.login);
-        case 10:
-          _t22 = _context34.v;
-          return _context34.a(2, {
-            json: _t22
-          });
-        case 11:
-          _context34.n = 12;
-          return useSession(b);
-        case 12:
-          _t23 = _context34.v;
-          return _context34.a(2, {
+          _t23 = _context37.v;
+          return _context37.a(2, {
             json: _t23
           });
-        case 13:
-          _context34.n = 14;
-          return status();
-        case 14:
-          _t24 = _context34.v;
-          return _context34.a(2, {
+        case 9:
+          _context37.n = 10;
+          return finish(attempt(b.lid), b.login);
+        case 10:
+          _t24 = _context37.v;
+          return _context37.a(2, {
             json: _t24
           });
+        case 11:
+          _context37.n = 12;
+          return useSession(b);
+        case 12:
+          _t25 = _context37.v;
+          return _context37.a(2, {
+            json: _t25
+          });
+        case 13:
+          _context37.n = 14;
+          return status();
+        case 14:
+          _t26 = _context37.v;
+          return _context37.a(2, {
+            json: _t26
+          });
         case 15:
-          _context34.n = 16;
+          _context37.n = 16;
           return logout();
         case 16:
-          return _context34.a(2, {
+          return _context37.a(2, {
             json: {
               ok: true
             }
           });
         case 17:
-          return _context34.a(2, {
+          return _context37.a(2, {
             json: {
               error: "\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439 \u0448\u0430\u0433"
             },
             status: 404
           });
         case 18:
-          _context34.n = 20;
+          _context37.n = 20;
           break;
         case 19:
-          _context34.p = 19;
-          _t25 = _context34.v;
-          console.error("[qino login api ".concat(step, "]"), _t25.message);
-          return _context34.a(2, {
+          _context37.p = 19;
+          _t27 = _context37.v;
+          console.error("[qino login api ".concat(step, "]"), _t27.message);
+          return _context37.a(2, {
             json: {
-              error: _t25.message
+              error: _t27.message
             },
-            status: _t25.status && _t25.status < 500 ? _t25.status : 400
+            status: _t27.status && _t27.status < 500 ? _t27.status : 400
           });
         case 20:
-          return _context34.a(2);
+          return _context37.a(2);
       }
-    }, _callee34, null, [[0, 19]]);
+    }, _callee37, null, [[0, 19]]);
   }));
   return _apiRoute.apply(this, arguments);
 }
@@ -21795,9 +22143,9 @@ function lanAddresses() {
   try {
     var nets = import_os2.default.networkInterfaces();
     for (var _i9 = 0, _Object$keys5 = Object.keys(nets); _i9 < _Object$keys5.length; _i9++) {
-      var name4 = _Object$keys5[_i9];
-      if (/virtualbox|vmware|vethernet|wsl|docker/i.test(name4)) continue;
-      var _iterator10 = _createForOfIteratorHelper(nets[name4] || []), _step10;
+      var name5 = _Object$keys5[_i9];
+      if (/virtualbox|vmware|vethernet|wsl|docker/i.test(name5)) continue;
+      var _iterator10 = _createForOfIteratorHelper(nets[name5] || []), _step10;
       try {
         for (_iterator10.s(); !(_step10 = _iterator10.n()).done; ) {
           var a = _step10.value;
@@ -21868,93 +22216,93 @@ var LANGUAGES = {
   de: "Deutsch",
   tr: "T\xFCrk\xE7e"
 };
-function qinoRoute(_x46, _x47, _x48) {
+function qinoRoute(_x50, _x51, _x52) {
   return _qinoRoute.apply(this, arguments);
 }
 function _qinoRoute() {
-  _qinoRoute = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee35(sub, q, ctx2) {
-    var base, live, channel, items, _t26, _t27;
-    return _regenerator().w(function(_context35) {
-      while (1) switch (_context35.p = _context35.n) {
+  _qinoRoute = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee38(sub, q, ctx2) {
+    var base, live, channel, items, _t28, _t29;
+    return _regenerator().w(function(_context38) {
+      while (1) switch (_context38.p = _context38.n) {
         case 0:
           base = "".concat(ctx2.base, "/qino");
           live = /^\/live\/([^/]+)\.m3u8$/.exec(sub);
           if (!live) {
-            _context35.n = 1;
+            _context38.n = 1;
             break;
           }
-          return _context35.a(2, livePlaylist(decodeURIComponent(live[1]), q, ctx2));
+          return _context38.a(2, livePlaylist(decodeURIComponent(live[1]), q, ctx2));
         case 1:
           if (!(sub !== "/login/check" && (sub === "/login" || sub.indexOf("/login/") === 0))) {
-            _context35.n = 2;
+            _context38.n = 2;
             break;
           }
-          return _context35.a(2, loginRoute(sub.slice(6), q, ctx2));
+          return _context38.a(2, loginRoute(sub.slice(6), q, ctx2));
         case 2:
           channel = /^\/channel\/([^/]+)$/.exec(sub);
-          _context35.p = 3;
+          _context38.p = 3;
           if (!channel) {
-            _context35.n = 5;
+            _context38.n = 5;
             break;
           }
-          _context35.n = 4;
+          _context38.n = 4;
           return channelPage(base, decodeURIComponent(channel[1]), q);
         case 4:
-          return _context35.a(2, _context35.v);
+          return _context38.a(2, _context38.v);
         case 5:
-          _t26 = sub;
-          _context35.n = _t26 === "" ? 6 : _t26 === "/login/check" ? 8 : _t26 === "/channels" ? 12 : _t26 === "/search" ? 14 : _t26 === "/logout" ? 16 : 18;
+          _t28 = sub;
+          _context38.n = _t28 === "" ? 6 : _t28 === "/login/check" ? 8 : _t28 === "/channels" ? 12 : _t28 === "/search" ? 14 : _t28 === "/logout" ? 16 : 18;
           break;
         case 6:
-          _context35.n = 7;
+          _context38.n = 7;
           return rootPage(base);
         case 7:
-          return _context35.a(2, _context35.v);
+          return _context38.a(2, _context38.v);
         case 8:
-          _context35.n = 9;
+          _context38.n = 9;
           return isLoggedIn();
         case 9:
-          if (!_context35.v) {
-            _context35.n = 11;
+          if (!_context38.v) {
+            _context38.n = 11;
             break;
           }
-          _context35.n = 10;
+          _context38.n = 10;
           return rootPage(base);
         case 10:
-          return _context35.a(2, _context35.v);
+          return _context38.a(2, _context38.v);
         case 11:
-          return _context35.a(2, page("\u0412\u0445\u043E\u0434 \u043D\u0435 \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D", [info("\u0412\u0445\u043E\u0434 \u0435\u0449\u0451 \u043D\u0435 \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D", "\u0417\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u0435 \u0432\u0445\u043E\u0434 \u043F\u043E SMS (\u043D\u0430 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440\u0435, \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0435 \u0438\u043B\u0438 \u0437\u0434\u0435\u0441\u044C), \u0437\u0430\u0442\u0435\u043C \u0441\u043D\u043E\u0432\u0430 \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \xAB\u042F \u0432\u043E\u0448\u0451\u043B\xBB."), folder("\u0412\u043E\u0439\u0442\u0438", "".concat(base, "/login/tv"))]));
+          return _context38.a(2, page("\u0412\u0445\u043E\u0434 \u043D\u0435 \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D", [info("\u0412\u0445\u043E\u0434 \u0435\u0449\u0451 \u043D\u0435 \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D", "\u0417\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u0435 \u0432\u0445\u043E\u0434 \u043F\u043E SMS (\u043D\u0430 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440\u0435, \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0435 \u0438\u043B\u0438 \u0437\u0434\u0435\u0441\u044C), \u0437\u0430\u0442\u0435\u043C \u0441\u043D\u043E\u0432\u0430 \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \xAB\u042F \u0432\u043E\u0448\u0451\u043B\xBB."), folder("\u0412\u043E\u0439\u0442\u0438", "".concat(base, "/login/tv"))]));
         case 12:
-          _context35.n = 13;
-          return channelsPage(base, q);
+          _context38.n = 13;
+          return channelsPage(base, q, ctx2);
         case 13:
-          return _context35.a(2, _context35.v);
+          return _context38.a(2, _context38.v);
         case 14:
-          _context35.n = 15;
-          return searchPage(base, q);
+          _context38.n = 15;
+          return searchPage(base, q, ctx2);
         case 15:
-          return _context35.a(2, _context35.v);
+          return _context38.a(2, _context38.v);
         case 16:
-          _context35.n = 17;
+          _context38.n = 17;
           return logout();
         case 17:
-          return _context35.a(2, page("\u0412\u044B\u0445\u043E\u0434", [info("\u0412\u044B \u0432\u044B\u0448\u043B\u0438 \u0438\u0437 \u0430\u043A\u043A\u0430\u0443\u043D\u0442\u0430"), folder("\u0412\u043E\u0439\u0442\u0438", "".concat(base, "/login/tv"))]));
+          return _context38.a(2, page("\u0412\u044B\u0445\u043E\u0434", [info("\u0412\u044B \u0432\u044B\u0448\u043B\u0438 \u0438\u0437 \u0430\u043A\u043A\u0430\u0443\u043D\u0442\u0430"), folder("\u0412\u043E\u0439\u0442\u0438", "".concat(base, "/login/tv"))]));
         case 18:
-          return _context35.a(2, page("\u041D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E", [info("\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439 \u0440\u0430\u0437\u0434\u0435\u043B: /qino".concat(sub)), folder(QINO_TITLE, base)]));
+          return _context38.a(2, page("\u041D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E", [info("\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439 \u0440\u0430\u0437\u0434\u0435\u043B: /qino".concat(sub)), folder(QINO_TITLE, base)]));
         case 19:
-          _context35.n = 21;
+          _context38.n = 21;
           break;
         case 20:
-          _context35.p = 20;
-          _t27 = _context35.v;
-          console.error("[qino ".concat(sub, "]"), _t27.message);
-          items = [info("\u041E\u0448\u0438\u0431\u043A\u0430: ".concat(_t27.message), "\u041F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 \u043F\u043E\u0437\u0436\u0435.")];
-          if (_t27.status === 401) items.push(folder("\u0412\u043E\u0439\u0442\u0438", "".concat(base, "/login/tv")));
-          return _context35.a(2, page("\u041E\u0448\u0438\u0431\u043A\u0430", items));
+          _context38.p = 20;
+          _t29 = _context38.v;
+          console.error("[qino ".concat(sub, "]"), _t29.message);
+          items = [info("\u041E\u0448\u0438\u0431\u043A\u0430: ".concat(_t29.message), "\u041F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 \u043F\u043E\u0437\u0436\u0435.")];
+          if (_t29.status === 401) items.push(folder("\u0412\u043E\u0439\u0442\u0438", "".concat(base, "/login/tv")));
+          return _context38.a(2, page("\u041E\u0448\u0438\u0431\u043A\u0430", items));
         case 21:
-          return _context35.a(2);
+          return _context38.a(2);
       }
-    }, _callee35, null, [[3, 20]]);
+    }, _callee38, null, [[3, 20]]);
   }));
   return _qinoRoute.apply(this, arguments);
 }
@@ -21962,92 +22310,92 @@ function openChannels() {
   return _openChannels.apply(this, arguments);
 }
 function _openChannels() {
-  _openChannels = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee36() {
-    return _regenerator().w(function(_context36) {
-      while (1) switch (_context36.n) {
+  _openChannels = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee39() {
+    return _regenerator().w(function(_context39) {
+      while (1) switch (_context39.n) {
         case 0:
-          _context36.n = 1;
+          _context39.n = 1;
           return channels();
         case 1:
-          return _context36.a(2, _context36.v.filter(function(c) {
+          return _context39.a(2, _context39.v.filter(function(c) {
             return !c.locked;
           }));
       }
-    }, _callee36);
+    }, _callee39);
   }));
   return _openChannels.apply(this, arguments);
 }
-function rootPage(_x49) {
+function rootPage(_x53) {
   return _rootPage.apply(this, arguments);
 }
 function _rootPage() {
-  _rootPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee37(base) {
-    var items, _ref11, list, present, _i12, _Object$keys8, id, acc, name4;
-    return _regenerator().w(function(_context37) {
-      while (1) switch (_context37.n) {
+  _rootPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee40(base) {
+    var items, _ref26, list, present, _i12, _Object$keys8, id, acc, name5;
+    return _regenerator().w(function(_context40) {
+      while (1) switch (_context40.n) {
         case 0:
           items = [];
-          _context37.n = 1;
+          _context40.n = 1;
           return isLoggedIn();
         case 1:
-          if (_context37.v) {
-            _context37.n = 2;
+          if (_context40.v) {
+            _context40.n = 2;
             break;
           }
           items.push(folder("\u0412\u043E\u0439\u0442\u0438", "".concat(base, "/login/tv"), {
             description: "\u0411\u0435\u0437 \u0432\u0445\u043E\u0434\u0430 \u043A\u0430\u043D\u0430\u043B\u044B \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B"
           }));
-          _context37.n = 5;
+          _context40.n = 5;
           break;
         case 2:
           items.push(search("\u041F\u043E\u0438\u0441\u043A \u043A\u0430\u043D\u0430\u043B\u0430", "".concat(base, "/search?q={search}"), "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438\u043B\u0438 \u043D\u043E\u043C\u0435\u0440 \u043A\u0430\u043D\u0430\u043B\u0430"));
           items.push(folder("\u0412\u0441\u0435 \u043A\u0430\u043D\u0430\u043B\u044B", "".concat(base, "/channels")));
           items.push(folder("\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u044B\u0435", "".concat(base, "/channels?fav=1")));
-          _context37.n = 3;
+          _context40.n = 3;
           return openChannels().catch(function() {
             return [];
           });
         case 3:
-          list = _context37.v;
-          present = new Set((_ref11 = []).concat.apply(_ref11, _toConsumableArray(list.map(function(c) {
+          list = _context40.v;
+          present = new Set((_ref26 = []).concat.apply(_ref26, _toConsumableArray(list.map(function(c) {
             return c.genres;
           }))));
           for (_i12 = 0, _Object$keys8 = Object.keys(GENRES); _i12 < _Object$keys8.length; _i12++) {
             id = _Object$keys8[_i12];
             if (present.has(id)) items.push(folder(GENRES[id], "".concat(base, "/channels?genre=").concat(encodeURIComponent(id))));
           }
-          _context37.n = 4;
+          _context40.n = 4;
           return account();
         case 4:
-          acc = _context37.v;
-          name4 = acc.profile && acc.profile.name || acc.user && acc.user.login || "\u0430\u043A\u043A\u0430\u0443\u043D\u0442";
-          items.push(folder("\u0412\u044B\u0439\u0442\u0438 (".concat(name4, ")"), "".concat(base, "/logout")));
+          acc = _context40.v;
+          name5 = acc.profile && acc.profile.name || acc.user && acc.user.login || "\u0430\u043A\u043A\u0430\u0443\u043D\u0442";
+          items.push(folder("\u0412\u044B\u0439\u0442\u0438 (".concat(name5, ")"), "".concat(base, "/logout")));
         case 5:
           items.push(folder("\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u0440\u0442\u0430\u043B \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438", "AddFavorite(".concat(QINO_TITLE, ",").concat(QINO_ICON, ",").concat(base, ")"), {
             logo: QINO_ICON,
             description: "\u0414\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442 QINO \u0422\u0412 \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438 Fork browser"
           }));
-          return _context37.a(2, page(QINO_TITLE, items, {
+          return _context40.a(2, page(QINO_TITLE, items, {
             icon: QINO_ICON
           }));
       }
-    }, _callee37);
+    }, _callee40);
   }));
   return _rootPage.apply(this, arguments);
 }
-function channelsPage(_x50, _x51) {
+function channelsPage(_x54, _x55, _x56) {
   return _channelsPage.apply(this, arguments);
 }
 function _channelsPage() {
-  _channelsPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee38(base, q) {
-    var list, title, acc, favorites, _t28, _t29;
-    return _regenerator().w(function(_context38) {
-      while (1) switch (_context38.n) {
+  _channelsPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee41(base, q, ctx2) {
+    var list, title, acc, favorites, _t30, _t31;
+    return _regenerator().w(function(_context41) {
+      while (1) switch (_context41.n) {
         case 0:
-          _context38.n = 1;
+          _context41.n = 1;
           return openChannels();
         case 1:
-          list = _context38.v;
+          list = _context41.v;
           title = "\u0412\u0441\u0435 \u043A\u0430\u043D\u0430\u043B\u044B";
           if (q.genre) {
             list = list.filter(function(c) {
@@ -22056,217 +22404,235 @@ function _channelsPage() {
             title = GENRES[q.genre] || q.genre;
           }
           if (!q.fav) {
-            _context38.n = 3;
+            _context41.n = 3;
             break;
           }
-          _context38.n = 2;
+          _context41.n = 2;
           return account();
         case 2:
-          acc = _context38.v;
+          acc = _context41.v;
           favorites = new Set(acc.profile && acc.profile.favorites || []);
           list = list.filter(function(c) {
             return favorites.has(c.id);
           });
           title = "\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u044B\u0435";
         case 3:
-          _t28 = page;
-          _t29 = "".concat(QINO_TITLE, ": ").concat(title);
-          _context38.n = 4;
+          _t30 = catalogPage;
+          _t31 = "".concat(QINO_TITLE, ": ").concat(title);
+          _context41.n = 4;
           return channelItems(list, base);
         case 4:
-          return _context38.a(2, _t28(_t29, _context38.v));
-      }
-    }, _callee38);
-  }));
-  return _channelsPage.apply(this, arguments);
-}
-function searchPage(_x52, _x53) {
-  return _searchPage.apply(this, arguments);
-}
-function _searchPage() {
-  _searchPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee39(base, q) {
-    var query, needle, list, _t30, _t31;
-    return _regenerator().w(function(_context39) {
-      while (1) switch (_context39.n) {
-        case 0:
-          query = String(q.q && q.q !== "{search}" ? q.q : q.search || "").trim();
-          if (query) {
-            _context39.n = 1;
-            break;
-          }
-          return _context39.a(2, page("\u041F\u043E\u0438\u0441\u043A", [search("\u041F\u043E\u0438\u0441\u043A \u043A\u0430\u043D\u0430\u043B\u0430", "".concat(base, "/search?q={search}"), "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438\u043B\u0438 \u043D\u043E\u043C\u0435\u0440 \u043A\u0430\u043D\u0430\u043B\u0430")]));
-        case 1:
-          needle = query.toLowerCase();
-          _context39.n = 2;
-          return openChannels();
-        case 2:
-          list = _context39.v.filter(function(c) {
-            return c.title.toLowerCase().indexOf(needle) >= 0 || String(c.number) === needle.replace(/^0+/, "");
-          });
-          _t30 = page;
-          _t31 = "\u041F\u043E\u0438\u0441\u043A \xAB".concat(query, "\xBB");
-          _context39.n = 3;
-          return channelItems(list, base, "\u041F\u043E \u0437\u0430\u043F\u0440\u043E\u0441\u0443 \xAB".concat(query, "\xBB \u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E"));
-        case 3:
-          return _context39.a(2, _t30(_t31, _context39.v));
-      }
-    }, _callee39);
-  }));
-  return _searchPage.apply(this, arguments);
-}
-function channelItems(_x54, _x55) {
-  return _channelItems.apply(this, arguments);
-}
-function _channelItems() {
-  _channelItems = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee41(list, base) {
-    var emptyText, items, _args41 = arguments;
-    return _regenerator().w(function(_context41) {
-      while (1) switch (_context41.n) {
-        case 0:
-          emptyText = _args41.length > 2 && _args41[2] !== void 0 ? _args41[2] : "\u041A\u0430\u043D\u0430\u043B\u043E\u0432 \u043D\u0435\u0442";
-          _context41.n = 1;
-          return Promise.all(list.map(/* @__PURE__ */ (function() {
-            var _ref12 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee40(c) {
-              var _t32, _t33, _t34, _t35, _t36;
-              return _regenerator().w(function(_context40) {
-                while (1) switch (_context40.n) {
-                  case 0:
-                    _t32 = folder;
-                    _t33 = "".concat(num(c.number), " ").concat(c.title);
-                    _t34 = "".concat(base, "/channel/").concat(encodeURIComponent(c.mediaId));
-                    _t35 = c.logo;
-                    _context40.n = 1;
-                    return channelDescription(c);
-                  case 1:
-                    _t36 = _context40.v;
-                    return _context40.a(2, _t32(_t33, _t34, {
-                      logo: _t35,
-                      description: _t36
-                    }));
-                }
-              }, _callee40);
-            }));
-            return function(_x88) {
-              return _ref12.apply(this, arguments);
-            };
-          })()));
-        case 1:
-          items = _context41.v;
-          if (!items.length) items.push(info(emptyText));
-          return _context41.a(2, items);
+          return _context41.a(2, _t30(_t31, _context41.v, {
+            ctx: ctx2,
+            kind: "wide"
+          }));
       }
     }, _callee41);
   }));
-  return _channelItems.apply(this, arguments);
+  return _channelsPage.apply(this, arguments);
 }
-function channelDescription(_x56) {
-  return _channelDescription.apply(this, arguments);
+function searchPage(_x57, _x58, _x59) {
+  return _searchPage.apply(this, arguments);
 }
-function _channelDescription() {
-  _channelDescription = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee42(c) {
-    var _yield$nowAndNext, now, next, lines, img;
+function _searchPage() {
+  _searchPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee42(base, q, ctx2) {
+    var query, needle, list, _t32, _t33;
     return _regenerator().w(function(_context42) {
       while (1) switch (_context42.n) {
         case 0:
-          _context42.n = 1;
-          return nowAndNext(c.scheduleId);
+          query = String(q.q && q.q !== "{search}" ? q.q : q.search || "").trim();
+          if (query) {
+            _context42.n = 1;
+            break;
+          }
+          return _context42.a(2, page("\u041F\u043E\u0438\u0441\u043A", [search("\u041F\u043E\u0438\u0441\u043A \u043A\u0430\u043D\u0430\u043B\u0430", "".concat(base, "/search?q={search}"), "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438\u043B\u0438 \u043D\u043E\u043C\u0435\u0440 \u043A\u0430\u043D\u0430\u043B\u0430")]));
         case 1:
-          _yield$nowAndNext = _context42.v;
-          now = _yield$nowAndNext.now;
-          next = _yield$nowAndNext.next;
-          lines = [now && "\u0421\u0435\u0439\u0447\u0430\u0441: ".concat(time(now.begin), " ").concat(now.title), next && "\u0414\u0430\u043B\u0435\u0435: ".concat(time(next.begin), " ").concat(next.title)];
-          img = c.logo ? '<img src="'.concat(escapeHtml(c.logo), '" style="float:left;width:120px;margin:0 12px 6px 0">') : "";
-          return _context42.a(2, "".concat(img, "<b>").concat(escapeHtml("".concat(num(c.number), " ").concat(c.title)), "</b><br>").concat(lines.filter(Boolean).map(escapeHtml).join("<br>")));
+          needle = query.toLowerCase();
+          _context42.n = 2;
+          return openChannels();
+        case 2:
+          list = _context42.v.filter(function(c) {
+            return c.title.toLowerCase().indexOf(needle) >= 0 || String(c.number) === needle.replace(/^0+/, "");
+          });
+          _t32 = catalogPage;
+          _t33 = "\u041F\u043E\u0438\u0441\u043A \xAB".concat(query, "\xBB");
+          _context42.n = 3;
+          return channelItems(list, base, "\u041F\u043E \u0437\u0430\u043F\u0440\u043E\u0441\u0443 \xAB".concat(query, "\xBB \u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E"));
+        case 3:
+          return _context42.a(2, _t32(_t33, _context42.v, {
+            ctx: ctx2,
+            kind: "wide"
+          }));
       }
     }, _callee42);
   }));
+  return _searchPage.apply(this, arguments);
+}
+function channelItems(_x60, _x61) {
+  return _channelItems.apply(this, arguments);
+}
+function _channelItems() {
+  _channelItems = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee44(list, base) {
+    var emptyText, items, _args44 = arguments;
+    return _regenerator().w(function(_context44) {
+      while (1) switch (_context44.n) {
+        case 0:
+          emptyText = _args44.length > 2 && _args44[2] !== void 0 ? _args44[2] : "\u041A\u0430\u043D\u0430\u043B\u043E\u0432 \u043D\u0435\u0442";
+          _context44.n = 1;
+          return Promise.all(list.map(/* @__PURE__ */ (function() {
+            var _ref27 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee43(c) {
+              var _yield$nowAndNext, now, next, _t34, _t35, _t36, _t37, _t38, _t39, _t40, _t41;
+              return _regenerator().w(function(_context43) {
+                while (1) switch (_context43.n) {
+                  case 0:
+                    _context43.n = 1;
+                    return nowAndNext(c.scheduleId);
+                  case 1:
+                    _yield$nowAndNext = _context43.v;
+                    now = _yield$nowAndNext.now;
+                    next = _yield$nowAndNext.next;
+                    _t34 = _objectSpread2;
+                    _t35 = _objectSpread2;
+                    _t36 = {};
+                    _t37 = folder;
+                    _t38 = "".concat(num(c.number), " ").concat(c.title);
+                    _t39 = "".concat(base, "/channel/").concat(encodeURIComponent(c.mediaId));
+                    _t40 = c.logo;
+                    _context43.n = 2;
+                    return channelDescription(c);
+                  case 2:
+                    _t41 = _context43.v;
+                    return _context43.a(2, _t34(_t35(_t36, _t37(_t38, _t39, {
+                      logo: _t40,
+                      description: _t41
+                    })), {}, {
+                      note: now ? "".concat(time(now.begin), " ").concat(now.title) : "",
+                      long: [now && "\u0421\u0435\u0439\u0447\u0430\u0441: ".concat(time(now.begin), " ").concat(now.title), next && "\u0414\u0430\u043B\u0435\u0435: ".concat(time(next.begin), " ").concat(next.title)].filter(Boolean)
+                    }));
+                }
+              }, _callee43);
+            }));
+            return function(_x101) {
+              return _ref27.apply(this, arguments);
+            };
+          })()));
+        case 1:
+          items = _context44.v;
+          if (!items.length) items.push(info(emptyText));
+          return _context44.a(2, items);
+      }
+    }, _callee44);
+  }));
+  return _channelItems.apply(this, arguments);
+}
+function channelDescription(_x62) {
   return _channelDescription.apply(this, arguments);
 }
-function channelPage(_x57, _x58, _x59) {
+function _channelDescription() {
+  _channelDescription = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee45(c) {
+    var _yield$nowAndNext2, now, next, lines, img;
+    return _regenerator().w(function(_context45) {
+      while (1) switch (_context45.n) {
+        case 0:
+          _context45.n = 1;
+          return nowAndNext(c.scheduleId);
+        case 1:
+          _yield$nowAndNext2 = _context45.v;
+          now = _yield$nowAndNext2.now;
+          next = _yield$nowAndNext2.next;
+          lines = [now && "\u0421\u0435\u0439\u0447\u0430\u0441: ".concat(time(now.begin), " ").concat(now.title), next && "\u0414\u0430\u043B\u0435\u0435: ".concat(time(next.begin), " ").concat(next.title)];
+          img = c.logo ? '<img src="'.concat(escapeHtml(c.logo), '" style="float:left;width:120px;margin:0 12px 6px 0">') : "";
+          return _context45.a(2, "".concat(img, "<b>").concat(escapeHtml("".concat(num(c.number), " ").concat(c.title)), "</b><br>").concat(lines.filter(Boolean).map(escapeHtml).join("<br>")));
+      }
+    }, _callee45);
+  }));
+  return _channelDescription.apply(this, arguments);
+}
+function channelPage(_x63, _x64, _x65) {
   return _channelPage.apply(this, arguments);
 }
 function _channelPage() {
-  _channelPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee43(base, mediaId, q) {
-    var c, name4, opts, languages, lang, link, title, _t37, _t38, _t39;
-    return _regenerator().w(function(_context43) {
-      while (1) switch (_context43.n) {
+  _channelPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee46(base, mediaId, q) {
+    var c, name5, opts, languages, lang, link, title, _t42, _t43, _t44;
+    return _regenerator().w(function(_context46) {
+      while (1) switch (_context46.n) {
         case 0:
-          _context43.n = 1;
+          _context46.n = 1;
           return channels();
         case 1:
-          c = _context43.v.find(function(ch) {
+          c = _context46.v.find(function(ch) {
             return ch.mediaId === mediaId;
           });
-          name4 = c ? "".concat(num(c.number), " ").concat(c.title) : "\u041A\u0430\u043D\u0430\u043B";
-          _t37 = c && c.logo;
-          _t38 = c;
-          if (!_t38) {
-            _context43.n = 3;
+          name5 = c ? "".concat(num(c.number), " ").concat(c.title) : "\u041A\u0430\u043D\u0430\u043B";
+          _t42 = c && c.logo;
+          _t43 = c;
+          if (!_t43) {
+            _context46.n = 3;
             break;
           }
-          _context43.n = 2;
+          _context46.n = 2;
           return channelDescription(c);
         case 2:
-          _t38 = _context43.v;
+          _t43 = _context46.v;
         case 3:
-          _t39 = _t38;
+          _t44 = _t43;
           opts = {
-            logo: _t37,
-            description: _t39
+            logo: _t42,
+            description: _t44
           };
-          _context43.n = 4;
+          _context46.n = 4;
           return playback(mediaId);
         case 4:
-          languages = _context43.v;
+          languages = _context46.v;
           lang = languages.find(function(l) {
             return l.id === q.lang;
           }) || (languages.length === 1 ? languages[0] : null);
           link = "".concat(base, "/channel/").concat(encodeURIComponent(mediaId));
           if (lang) {
-            _context43.n = 5;
+            _context46.n = 5;
             break;
           }
-          return _context43.a(2, page("".concat(name4, ": \u0437\u0432\u0443\u043A"), languages.map(function(l) {
+          return _context46.a(2, page("".concat(name5, ": \u0437\u0432\u0443\u043A"), languages.map(function(l) {
             return folder("".concat(languageName(l.id)).concat(l.default ? " (\u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E)" : ""), "".concat(link, "?lang=").concat(encodeURIComponent(l.id)), opts);
           })));
         case 5:
-          title = languages.length > 1 ? "".concat(name4, ": ").concat(languageName(lang.id)) : name4;
-          return _context43.a(2, page("".concat(title, ": \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E"), lang.renditions.map(function(r) {
+          title = languages.length > 1 ? "".concat(name5, ": ").concat(languageName(lang.id)) : name5;
+          return _context46.a(2, page("".concat(title, ": \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E"), lang.renditions.map(function(r) {
             return stream(qualityName(r.id), "".concat(base, "/live/").concat(encodeURIComponent(mediaId), ".m3u8?lang=").concat(encodeURIComponent(lang.id), "&q=").concat(encodeURIComponent(r.id)), opts);
           })));
       }
-    }, _callee43);
+    }, _callee46);
   }));
   return _channelPage.apply(this, arguments);
 }
-function livePlaylist(_x60, _x61, _x62) {
+function livePlaylist(_x66, _x67, _x68) {
   return _livePlaylist.apply(this, arguments);
 }
 function _livePlaylist() {
-  _livePlaylist = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee44(mediaId, q, ctx2) {
-    var languages, lang, pick, _t40;
-    return _regenerator().w(function(_context44) {
-      while (1) switch (_context44.n) {
+  _livePlaylist = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee47(mediaId, q, ctx2) {
+    var languages, lang, pick, _t45;
+    return _regenerator().w(function(_context47) {
+      while (1) switch (_context47.n) {
         case 0:
-          _context44.n = 1;
+          _context47.n = 1;
           return playback(mediaId);
         case 1:
-          languages = _context44.v;
+          languages = _context47.v;
           lang = languages.find(function(l) {
             return l.id === q.lang;
           }) || languages[0];
           pick = lang.renditions.find(function(r) {
             return r.id === q.q;
           }) || lang.renditions[0];
-          _context44.n = 2;
+          _context47.n = 2;
           return absolutePlaylist(pick.url, ctx2.ua);
         case 2:
-          _t40 = _context44.v;
-          return _context44.a(2, {
-            playlist: _t40
+          _t45 = _context47.v;
+          return _context47.a(2, {
+            playlist: _t45
           });
       }
-    }, _callee44);
+    }, _callee47);
   }));
   return _livePlaylist.apply(this, arguments);
 }
@@ -22291,76 +22657,78 @@ function time(ms) {
 var ICON_BASE64 = "iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAVOklEQVR42u2d63dU5b2A8x/kK9/wP+DT+XDSzp5MzrFUbE2tBXqfAipyCQOESxKEoEAQEBC8cDUD4RJIgpMAJqJIqAoUhIwVPYUkZZZLIK6qpAcaTz1nnfUe9xvmtzyaSd49mZl9mee31rP6odKfmfI8mdnvzJ6SEoZhGIZhGIZhGIZhGI9Nb1l5+HpZeex6WaT+elmk2+ZaWSR1rSyirpVVaP4i/JvwH5p/Fz7WPCh8JPxIc1WYPMwPJqsPNT8W/qx5SPhAmKJJCg8LPZqfCFeEn2ouC48I72sqhUuanwkXhUc1fxJ+LlzQPDbMDx9T5zW/EM4JUzXvCdOEdzXThXc0vxT+KPxKc1b4tdCt+Y1wRvit5m3hd8Jpze+FtzTRYUJR9abwB80pYYbwhmam0KWZJXQKj2teF54QTmqeFE5oZqdOhGZ32xwPza4/Hnoqdjz0VBhTczB9ZeHS3rLyaG9Zeby3rDzZW1aurmsiwjUB+ZG/4PILx4WnNB3DJDtCc+IdoTnRjtCcUow2lL6vLBzrKwt395aFlS19GuRHfh/JrzpCc4R2zdzu9tDcWHtoLjEYQfzKvrJwoq8srPq0+MiP/IGSX0ho5iUSoXmViF9mRb8hlRYf+ZE/+PLrAGhes+alXrPmR4tO/H4R31LIj/xFKv995tsURwj6y6xwv4iP/MiP/GmOaapSx6yqcBDFL+0vsxL9Ij7yIz/yf0d+oc2qSrRZC0qDIn9lf5k1iPzIj/xG8qs2a4HNYJu1oNLvv/XjtvjIj/zI70h+Tesw8VYrVuo3+Sd+85s/ifzIj/zjkl+1WjGbZKsVm+gX+Seln/IjP/Ij/7jlVy3DDLZYCyd5XP5QtL8spJAf+ZE/p/KrFmthmijyIz/yF6f86qhmURT5kR/5i1P+NFHkR37kL0751RHN4qgHLvghP/Ijvwvyp5nk5lEfV/uRH/ndk181W4sHm63qiYWWv5RzfuRHftflv091stmqLi1kAHiHH/Ijvzfk1xy2quOFfG8/8iM/8ntH/vssqSzEU38+2IP8yO89+W0GD1tLSvMZAD7Si/zI7035NYesJYl83swD+ZEf+b0rvzpkLbUJ5yMA3MkH+ZHf+/LbpPJxDz/kR37k97786qBmWe7eJThhwgOpCRMeUADgG1K5kj/KgwngS6L89gfgWUDW8lfyIAL4msrxBCDBAwjgaxLZyl/KgwcQCEqzCUCMBw4gEMSyCUA3DxxAIOjm6T8ALwM4+wfgPQFjByCer3+RSGSySiSOq6GhIUfYf8b+s+xnP/uzIu4kAMl8yT8wMOD4h09j/9nxPAjsZ38R7086CUBefvtnU76RSsh+9rPfOabyh/MVgPH+8GnYz372Z0XY1fN//gKwn/2uBiBmEoB6AsB+9gcyAPWuvgGIvwDsZ7+rAegmAOxnPwFw5/P//AVgP/tdDUDKtSNA/g9gP/tdD4AiAOxnPwEgAOxnPwEgAOxnPwEoVAB4Kyj72e/eftcDwIdB2M9+9/a7HgA+Dsp+9ru73/UAAIB7EAAAAkAAAAgAAQAgAAQAgAAQAAACwIMEQAAAgAAAAAEAgGIIwEdlD6qPyn6kuSpMHuYHk9WHmh8Lf9Y8JHwgTNEkhYeFHs1PhCvCTzWXhUeE9zWVwiXNz4SLwqOaPwk/Fy5oHhvmh4+p85pfCOeEqZr3hGnCu5rpwjuaXwp/FH6lOSv8WujW/EY4I/xW87bwO+G05vfCW5roMKGoelP4g+aUMEN4QzNT6NLMEjqFxzWvC08IJzVPCic0s4XjwlOaDmGO0K6ZKySEeZrXrDTzhWOaKqFNs0BoFWKaFmGhcFSzSDiiWSw0C9Waw8IS4ZBmqXBQs0w4ICzXNIXT1Aj7NbXCPqFOExdWCI2ap4VXNSuFvcIqzR6hXtgdrjcJAPIjP/IHUf7d4dVmAUB+5Ef+4MlvFADkR37kD6b8DgKA/MiP/EGTf5dZAJAf+ZE/iPLvCj9jGADkR37kD5z8ZgFAfuRH/kDKbxQA5Ed+5A+m/DvNAoD8yI/8QZTfUQCQ39/yn526TF2s2qj6GjtUquVN9UXPNc3Q7c9VprH/u/Q/d6PltLreeEKdr9qsTk+tQ/4AyL8z/KxZAJDff/Kfm1Gv+hrb1Zc9f1H/fXdI5Xrs/83Pe66ra40n1NkZa5Hfh/IbBQD5/SN/T+12dbPzvbwIbxKETzrPq4u1O5DfJ/LvMAsA8ntZ/vMzVqmbne+6Iv3oMbigzsxYh/welt9RAJDfW/JfXbdX/WfvJ8rr8/feT9WVdU3I70H5d4TXmAUA+b0jvy3+V6NcuPPqDN3+Ql1uaEJ+D8lvFADk94b8ydptvhT/u/OP21+oC3W7kN8D8u8oNw4A8rsl/ztTq/WV/KDN33p6Vde0euR3Uf5XzAKA/G7J39+YUEGfjxs7kd8l+V8pX2sWAOQvrPznZ6xUd31wgS9XM9j7qXpr5gbkL7D8RgFA/sLKf3XdHk8d6RVqvr47pC41HET+AsrvIADIXwj5b3W+q4p9Up0Xkb9A8r9sFgDkz7f8Zx6aU1RP+cd+SXBTJabUIH+e5X+5fJ15AJAf+d2IAPLnT37jACB/fuS/MGNlUb7eN78u8JU6NXMT8udJfqMAID/yeyECyJ97+V8yCwDy5+NpP/I7i8CxKXXIn2P5HQUA+XnN7+bc6b2pI4D8uZP/pfIGswAgf+6O+pB/fBFA/tzJbxQA5Oec30tzo/MS8udI/hfNA4D8uXiHH5ObudDQjPw5kN8wAMifi/f2c9EvtxcFO2duQf5xyv9i+XqzACD/+D7Vx+v+/FwPQP7xyW8UAOTnI71enQ8bTyH/OOR3EADkz/ZmHoWez+fOVv9z+1bRRKB9WgPyZyn/drMAIH+2t/Fy404+t/71XzR39+5W/3v3buAD8FlPP/JnKf/28ufMA4D8zu/h58akA2Bz+8GIGjp5IvAROFu3D/mzkN84AMjv/O69bt3A89sBSGO/LPjnlcuBDcC9218ifxbyGwUA+bO7dbdbM1IA0txZszqwLwvONRxFfofybzMLAPI7/dION2/fPVoA0i8L7OsDwXsWcAf5HcrvKADIb/6NPW7OWAFI89mjjwTuZcG5hhbkdyD/tvINZgFAfvPv6nP767pMA/Dt6wNBOTb8su8W8juQ3ygAyO/sizrdHqcBCNqx4YlZ25DfUP4XzAKA/KZf0X3TA5/2yzYAQTk27O+6jPyG8jsKAPKPLr+NFz7wM54ABOHY8Ot7XyG/ofwvlG80CwDyjy1/T+12TwiQiwD4/djwzIom5DeQ3ygAyD+2/G/op//vBS4Afj027Ou6jPwG8jsIAPKPJv8boZme+bx/rgPgx2ND+2UA8o8t/1azACD/WPKfm1Hvmb/8+QqA344NO2ZtR/4x5N9avsksAMifWX6bvsb2ogmAX44Nk/HTyD+G/EYBQP7R5bdx42O/bgfA68eGA8m/Iv8Y8jsIAPJnkr/LQ6//Cx0ALx8b2tcBkH90+beYBQD5R5P/7NRlnvqL70YAvHps2Dp9E/KPIv+W8ufNA4D835e/KzRLXazaSAA8emzYFduL/KPIbxwA5B9Zfpu+xg4C4NFjw2T8beQfRX6jACB/ZvltUi1vEgCPHht+1HoO+UeRf7NZAJA/k/ydoVnqi55rBMCjx4a3kzeQfxT5zQOA/CPKTwC8fWyYDgDyjyz/5vLNBgFA/ozyd4YeV0Mu3v7LbwEo9LHh3YE7yD+K/EYBQP7M8tt4bfwQgEIeGyJ/ZvmfNwsA8meS/3UC4PljQ+TPLL+jACD/9+UnAN4/NkT+zPI/X77FLADIP7L8r4eeIAAeDwDyZ5bfKADIn1l+AuD9lwDIn1l+BwFA/pHkJwDevwiI/Jnl32QWAOTPJP/J0BMcA3r8GBD5M8u/qXyrWQCQf2T5T4ae5I1AHn8jEPJnlt8oAMifWX4C4P23AiN/Zvk3RYwDgPwjyW9zo+U0AfDoh4Gutl5A/lHk32gWAOTPJP+J0JPqeuMJAuDRjwNfiXcj/yjyb4y8YB4A5P++/CdCs9X5qs0EwKM3BDkZiyP/KPIbBwD5R5bf5vTUOgLg0VuCNU/fivyjyG8UAOTPLL/N8dBsbgrqwZuC/vPefyH/GPJvMAsA8o8mv83nPdeLMgBevi34rWQK+ceQ31EAkH9k+Y+HnlLXPHQhkC8GGZ7L8W7kH0P+DZFtZgFA/szy25ydsbZoAuCXrwZrm7UD+ceQ3ygAyD+6/B334ctBvfb6H/nHkv85swAg/1jyd4TmqE86zwcyAH78evDrXUnkN5DfUQCQP7P8NhdrdwQuAF471jOdUyuOIL+B/M9FtpsFAPlHl9+mPTTHEy8Dgnqs5+TpP/KbyW8UAOQ3k789NFd90nnB1wHw8rGe6VzTT/+R30R+BwFA/rHktzkzY51vA+D1Yz3zq/87kd9Q/vVmAUB+E/ltEqG56u+9n/oqAH451jOZz/sGkN+B/OsjL5oFAPnN5Le5sq7JFwHw07Ge6XSvb0d+B/IbBQD5zeVPhOZphm5/4dkA+PFYz2TuDgwiv0P5HQQA+U3lf82apy43NHkyAH491nP22x/5TeVvMAsA8juRf5j56h8uPQsI2rGes9/+yO9E/obIS+YBQH5z+W0u1O1yPQBBONYzmTdWHEX+LOQ3DgDyO5Pf5pg1X/2tp9e1AATlWG/MnzeZQv4s5TcKAPJnJ/8xq0p1Tasv/FFYgI71TObg9G3In6X868wCgPzZyJ/m48ZOxeRn3o+fRf5xyO8oAMjvXP42zQI16PKbg4I49pt+kH988q+LvGwWAOTPXn6bt2ZuUF976L6Bfh/7Az+ts3Yh/zjlNwoA8o9PfptWa4G61HAQc3M0Z9a3I38O5F9rHgDkH4/8w8RUqvMi9o5zrnV9gPw5kt8wAMifC/ltWqyYGuy9icXjeN2P/LmTf23kFbMAIH9u5LdJTKkhAlnK3/jwBuTPofxGAUD+3MnfYi3U2BH4+u5XWO3goh/y515+BwFA/lzJb3PUWqhOzdxEBBxf8Uf+XMq/xiwAyJ9r+Y9aizREAPndlH9NZId5AJA/t/LbHLEWqWNT6tQdrgnwmt8F+Y0DgPz5kf+ItVhDBJDfDfmNAoD8+ZXfpvk+Nzovcc7POX/B5H/WLADIXwj5m61qzYWG5qK8LmC/3ucdfoWV31EAkD//8h++T+fMLUX1ksB+ys97+wsv/7ORnWYBQP7CyX/YWiJ82Hgq8PLzkV735DcKAPK7I/8hzVLVPq1BfdbTHzjx7Tv5cDMPd+V/xiwAyO+W/GkOWkvV2bp96t7tL30vvn0DT+7h5w35zQOA/K7Kf9BaJpxrOKru3b7jS/G5dbe35H8msssgAMjvGfkPCMvVuYYW9WXfLV9c4OMbe7wpv1EAkN978ts0hYc5MWub6u+6rL6+552jQ/tIz/6WXr6o09vyOwgA8ntR/qZwjbA/XKPOrGhSfS7FwJb+eldSnVpxRL6eG/m9Lf9qswAgvx/k3x+uFfaFa1XHrO0qGT+tBpJ/zUsQbOHtK/mX492qbdYOtTu8Wu3SIL9f5F8d2W0WAOT3l/zD1Gni92mdvkl1xfaqZPxt9VHrOXU7eUNzd+DOKBfu7sg/d7X1groS71YnY3HVPH2r2h2u19KnQX7/yW8UAOT3v/zx8AqhUfO08KpmpbBXWKXZI9QLyB8M+R0EAPmRH/mDJn+9WQCQH/mRP4jy10f2mAcA+ZEf+YMlv3EAkB/5kT948tdXGAQA+ZEf+YMp/yqzACA/8iN/EOV3FADkR37kD5b8qyr2mgUA+ZEf+YMnv1EAkB/5kT+Y8q80CcCECQ8oAAgmBACAABAAAAJAAAAIAAEAIAAEAIAA8CABEAAAIAAAQAAAgACMn0hkskokjquhoSFH2H/G/rPsZz/7fRoA+wcYGBhw/MOnsf/seB4E9rO/mPe7HoBsyjdSCdnPfvb7MADj/eHTsJ/97CcA7Gc/+wkA+9nPfgLAfvazPycBSBEA9rM/kAFImQSgmwCwn/2BDEA3AWA/+wnAqAGoJwDsZ38gA1BvEoAYAWA/+wMZgJhJAMIEgP3sD2QAwiUmw1uB2c/+4O0vMZ0JEx5I8mEg9rM/UPuTTgIQ5+PA7Gd/oPbHnQQgys0TAAJF1EkASnnAAAJFaYmTyecbggCgoHSXOJ18vh8AAApKLJsA8DIAoBif/n8rAgkePABfkyjJdiZMeKCSBxDA11SWjGfyeX8AAMgrqZLxDu8JACiCs3+eBQDw23/Eec2aHz1mzVfHrCqhTbNAaBVimhZhoXBUs0g4olksNAvVmsPCEuGQZqlwULNMOCAs1zSF09QI+zW1wj6hThMXVgiNmqeFVzUrhb3CKs0eoV7YrVkt7NI8I+wUntXsENYMU75GvaJZK7ysWSe8JDRoXhTWC9s1zwnbhA2aF4SNwlbNJmGL5nlhs7BZ87ywRdik2TpMZKvaqHlB2CBs0zwnbBfWa14UGjQvCeuElzVrhVeENZodwrPCTs0zwi5htWa3UK/ZM0zFHrVK2KtZKbwqPK1pFFZo4kKdsE9TK+wXajRNwnLNAWGZcDBakss5ZlWlkB/5kd8X8qdKcj3HrKow8iM/8ntefptwST6mzapKID/yI7+n5U+U5GvarAWlbdaCQeRHfuT3pPyDyyoOlpbkc9qsBZXIj/zI7zn5bSpLCjGt1oI48iM/8ntK/nhJoabVipW2WrEk8iM/8ntC/mTen/qPEIGJLVZsEPmRH/ldld9+3T+xxI1psRZOQn7kR3535F86/J+TStycFmthFPmRH/kLL//SXL/bL9s5ai2KIj/yI38Ryv/tCCA/8iN/EcqfniPW4ijyIz/yF6H834rApGZr8SDyIz/y5/xq/6QSP0yzVT2x2apOIj/yI3/Ozvknlvhpmq3q0sNWdRz5kR/5x/cOv4K/ySeXc9haUnnYWjKI/MiP/I4/2FNZEoQ5bC0pPWQtSSA/8iO/2Ud6ff1bP9McspaGD1lLU8iP/Mg/8p188nYzDy/NQWtZ9BtSyI/8yK9JLfP68V6+QnDAWpZCfuQvUvlT31B84n93DljLKw+ElyeQH/mLRP7E8ooDlSXM/5+mcE1pU7gm1hSu6UZ+5A+Y/N3LKw7EllccKMV0g9kfri3dH66N7g/XxveFa5PIj/w+kz9ZU9EUr6loiiJ9jmZfuC68L1wX+0b++nh4Rfd9UsiP/C7Jn6qt2N99n/qaiv2xmoqmMKYyDMMwDMMwDMMwDOO1+T+n3YStd2RwLQAAAABJRU5ErkJggg==";
 var import_querystring2 = __toESM(require("querystring"), 1);
 var ICON = Buffer.from(ICON_BASE64, "base64");
-function handle(_x63, _x64) {
+function handle(_x69, _x70) {
   return _handle.apply(this, arguments);
 }
 function _handle() {
-  _handle = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee45(req, res) {
+  _handle = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee48(req, res) {
     var _body, _body2, _body3, _body4;
-    var url, base, q, ctx2, body, json, _t41, _t42, _t43, _t44, _t45, _t46;
-    return _regenerator().w(function(_context45) {
-      while (1) switch (_context45.p = _context45.n) {
+    var url, base, q, ctx2, body, json, _t46, _t47, _t48, _t49, _t50, _t51, _t52;
+    return _regenerator().w(function(_context48) {
+      while (1) switch (_context48.p = _context48.n) {
         case 0:
           url = new URL(req.url, "http://localhost");
           if (!(url.pathname === "/icon.png" || url.pathname === "/favicon.ico")) {
-            _context45.n = 1;
+            _context48.n = 1;
             break;
           }
           res.writeHead(200, {
             "Content-Type": "image/png",
             "Cache-Control": "public, max-age=86400"
           });
-          return _context45.a(2, res.end(ICON));
+          return _context48.a(2, res.end(ICON));
         case 1:
           base = baseUrl(req);
           q = _objectSpread2({}, import_querystring2.default.parse((url.search || "").replace(/^\?/, "")));
-          _t41 = base;
-          _t42 = req.headers["user-agent"] || "";
-          _t43 = req.method;
+          _t46 = base;
+          _t47 = selfPath(url.pathname, q);
+          _t48 = req.headers["user-agent"] || "";
+          _t49 = req.method;
           if (!(req.method === "POST")) {
-            _context45.n = 3;
+            _context48.n = 3;
             break;
           }
-          _context45.n = 2;
+          _context48.n = 2;
           return readJson(req);
         case 2:
-          _t44 = _context45.v;
-          _context45.n = 4;
+          _t50 = _context48.v;
+          _context48.n = 4;
           break;
         case 3:
-          _t44 = void 0;
+          _t50 = void 0;
         case 4:
-          _t45 = _t44;
+          _t51 = _t50;
           ctx2 = {
-            base: _t41,
-            ua: _t42,
-            method: _t43,
-            body: _t45
+            base: _t46,
+            self: _t47,
+            ua: _t48,
+            method: _t49,
+            body: _t51
           };
-          _context45.p = 5;
-          _context45.n = 6;
+          _context48.p = 5;
+          _context48.n = 6;
           return route(url.pathname.replace(/\/+$/, "") || "/", q, ctx2);
         case 6:
-          body = _context45.v;
-          _context45.n = 9;
+          body = _context48.v;
+          _context48.n = 9;
           break;
         case 7:
-          _context45.p = 7;
-          _t46 = _context45.v;
-          console.error("[".concat(req.method, " ").concat(req.url, "]"), _t46);
+          _context48.p = 7;
+          _t52 = _context48.v;
+          console.error("[".concat(req.method, " ").concat(req.url, "]"), _t52);
           if (!url.pathname.endsWith(".m3u8")) {
-            _context45.n = 8;
+            _context48.n = 8;
             break;
           }
           res.writeHead(502, {
             "Content-Type": "text/plain; charset=utf-8"
           });
-          return _context45.a(2, res.end(_t46.message));
+          return _context48.a(2, res.end(_t52.message));
         case 8:
-          body = page("\u041E\u0448\u0438\u0431\u043A\u0430", [info("\u041E\u0448\u0438\u0431\u043A\u0430: ".concat(_t46.message), "\u041F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 \u043F\u043E\u0437\u0436\u0435 \u0438\u043B\u0438 \u0441\u043C\u0435\u043D\u0438\u0442\u0435 \u0437\u0435\u0440\u043A\u0430\u043B\u043E \u0441\u0430\u0439\u0442\u0430.")]);
+          body = page("\u041E\u0448\u0438\u0431\u043A\u0430", [info("\u041E\u0448\u0438\u0431\u043A\u0430: ".concat(_t52.message), "\u041F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 \u043F\u043E\u0437\u0436\u0435 \u0438\u043B\u0438 \u0441\u043C\u0435\u043D\u0438\u0442\u0435 \u0437\u0435\u0440\u043A\u0430\u043B\u043E \u0441\u0430\u0439\u0442\u0430.")]);
         case 9:
           if (!(((_body = body) === null || _body === void 0 ? void 0 : _body.playlist) !== void 0)) {
-            _context45.n = 10;
+            _context48.n = 10;
             break;
           }
           res.writeHead(200, {
@@ -22368,37 +22736,37 @@ function _handle() {
             "Access-Control-Allow-Origin": "*",
             "Cache-Control": "no-store"
           });
-          return _context45.a(2, res.end(body.playlist));
+          return _context48.a(2, res.end(body.playlist));
         case 10:
           if (!(((_body2 = body) === null || _body2 === void 0 ? void 0 : _body2.binary) !== void 0)) {
-            _context45.n = 11;
+            _context48.n = 11;
             break;
           }
           res.writeHead(body.status || 200, {
             "Content-Type": body.type,
             "Cache-Control": "no-store"
           });
-          return _context45.a(2, res.end(body.binary));
+          return _context48.a(2, res.end(body.binary));
         case 11:
           if (!(((_body3 = body) === null || _body3 === void 0 ? void 0 : _body3.html) !== void 0)) {
-            _context45.n = 12;
+            _context48.n = 12;
             break;
           }
           res.writeHead(200, {
             "Content-Type": "text/html; charset=utf-8",
             "Cache-Control": "no-store"
           });
-          return _context45.a(2, res.end(body.html));
+          return _context48.a(2, res.end(body.html));
         case 12:
           if (!(((_body4 = body) === null || _body4 === void 0 ? void 0 : _body4.json) !== void 0)) {
-            _context45.n = 13;
+            _context48.n = 13;
             break;
           }
           res.writeHead(body.status || 200, {
             "Content-Type": "application/json; charset=utf-8",
             "Cache-Control": "no-store"
           });
-          return _context45.a(2, res.end(JSON.stringify(body.json)));
+          return _context48.a(2, res.end(JSON.stringify(body.json)));
         case 13:
           json = JSON.stringify(body, null, q.pretty ? 2 : 0);
           res.writeHead(200, {
@@ -22408,14 +22776,14 @@ function _handle() {
           });
           res.end(json);
         case 14:
-          return _context45.a(2);
+          return _context48.a(2);
       }
-    }, _callee45, null, [[5, 7]]);
+    }, _callee48, null, [[5, 7]]);
   }));
   return _handle.apply(this, arguments);
 }
 function readJson(req) {
-  return new Promise(function(resolve4) {
+  return new Promise(function(resolve5) {
     var data = "";
     req.on("data", function(chunk) {
       data += chunk;
@@ -22423,13 +22791,13 @@ function readJson(req) {
     });
     req.on("end", function() {
       try {
-        resolve4(data ? JSON.parse(data) : {});
+        resolve5(data ? JSON.parse(data) : {});
       } catch (e) {
-        resolve4({});
+        resolve5({});
       }
     });
     req.on("error", function() {
-      return resolve4({});
+      return resolve5({});
     });
   });
 }
@@ -22437,6 +22805,23 @@ function baseUrl(req) {
   var proto = (req.headers["x-forwarded-proto"] || "http").split(",")[0].trim();
   var host = req.headers["x-forwarded-host"] || req.headers.host;
   return "".concat(proto, "://").concat(host);
+}
+var PAGE_PARAMS = ["path", "page", "q", "search", "u", "e", "p", "h", "lang", "fav", "genre"];
+function selfPath(pathname, q) {
+  var kept = {};
+  var _iterator11 = _createForOfIteratorHelper(PAGE_PARAMS), _step11;
+  try {
+    for (_iterator11.s(); !(_step11 = _iterator11.n()).done; ) {
+      var k = _step11.value;
+      kept[k] = q[k];
+    }
+  } catch (err) {
+    _iterator11.e(err);
+  } finally {
+    _iterator11.f();
+  }
+  var query = qs(kept);
+  return pathname + (query ? "?".concat(query) : "");
 }
 function qs(params) {
   var kept = {};
@@ -22446,70 +22831,88 @@ function qs(params) {
   }
   return import_querystring2.default.stringify(kept);
 }
-function route(_x65, _x66, _x67) {
+function route(_x71, _x72, _x73) {
   return _route.apply(this, arguments);
 }
 function _route() {
-  _route = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee46(path2, q, ctx2) {
-    var base, _path2$split, _path2$split2, siteId, action, site, link, _t47;
-    return _regenerator().w(function(_context46) {
-      while (1) switch (_context46.n) {
+  _route = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee49(path2, q, ctx2) {
+    var base, back, backQuery, _path2$split, _path2$split2, siteId, action, site, link, _t53;
+    return _regenerator().w(function(_context49) {
+      while (1) switch (_context49.n) {
         case 0:
           base = ctx2.base;
           if (!(path2 === "/")) {
-            _context46.n = 1;
+            _context49.n = 1;
             break;
           }
-          return _context46.a(2, rootPage2(base));
+          return _context49.a(2, rootPage2(ctx2));
         case 1:
-          if (!(path2 === "/qino" || path2.indexOf("/qino/") === 0)) {
-            _context46.n = 2;
+          if (!(path2.indexOf("/view/") === 0)) {
+            _context49.n = 2;
             break;
           }
-          return _context46.a(2, qinoRoute(path2.slice(5), q, ctx2));
+          return _context49.a(2, viewIcon(path2.slice(6)));
         case 2:
-          if (!(path2 === "/login")) {
-            _context46.n = 3;
+          if (!(path2 === "/view")) {
+            _context49.n = 3;
             break;
           }
-          return _context46.a(2, qinoRoute("/login", q, ctx2));
+          setViewMode(q.set);
+          back = new URL(/^\/(?!\/|view)/.test(q.back || "") ? q.back : "/", "http://localhost");
+          backQuery = _objectSpread2({}, import_querystring2.default.parse((back.search || "").replace(/^\?/, "")));
+          return _context49.a(2, route(back.pathname.replace(/\/+$/, "") || "/", backQuery, _objectSpread2(_objectSpread2({}, ctx2), {}, {
+            self: selfPath(back.pathname, backQuery)
+          })));
         case 3:
+          if (!(path2 === "/qino" || path2.indexOf("/qino/") === 0)) {
+            _context49.n = 4;
+            break;
+          }
+          return _context49.a(2, qinoRoute(path2.slice(5), q, ctx2));
+        case 4:
+          if (!(path2 === "/login")) {
+            _context49.n = 5;
+            break;
+          }
+          return _context49.a(2, qinoRoute("/login", q, ctx2));
+        case 5:
           _path2$split = path2.split("/"), _path2$split2 = _slicedToArray(_path2$split, 3), siteId = _path2$split2[1], action = _path2$split2[2];
           site = sites[siteId];
           if (site) {
-            _context46.n = 4;
+            _context49.n = 6;
             break;
           }
-          return _context46.a(2, page("\u041D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E", [info("\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439 \u0440\u0430\u0437\u0434\u0435\u043B: ".concat(path2)), folder("\u041D\u0430 \u0433\u043B\u0430\u0432\u043D\u0443\u044E", "".concat(base, "/"))]));
-        case 4:
+          return _context49.a(2, page("\u041D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E", [info("\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439 \u0440\u0430\u0437\u0434\u0435\u043B: ".concat(path2)), folder("\u041D\u0430 \u0433\u043B\u0430\u0432\u043D\u0443\u044E", "".concat(base, "/"))]));
+        case 6:
           link = function link2(act, params) {
             return "".concat(base, "/").concat(site.id, "/").concat(act, "?").concat(qs(params));
           };
-          _t47 = action;
-          _context46.n = _t47 === void 0 ? 5 : _t47 === "list" ? 6 : _t47 === "search" ? 7 : _t47 === "item" ? 8 : _t47 === "play" ? 9 : _t47 === "hls.m3u8" ? 10 : 11;
+          _t53 = action;
+          _context49.n = _t53 === void 0 ? 7 : _t53 === "list" ? 8 : _t53 === "search" ? 9 : _t53 === "item" ? 10 : _t53 === "play" ? 11 : _t53 === "hls.m3u8" ? 12 : 13;
           break;
-        case 5:
-          return _context46.a(2, sitePage(site, base, link));
-        case 6:
-          return _context46.a(2, listPage(site, q, link));
         case 7:
-          return _context46.a(2, searchPage2(site, q, link));
+          return _context49.a(2, sitePage(site, link, ctx2));
         case 8:
-          return _context46.a(2, itemPage(site, q, link, ctx2));
+          return _context49.a(2, listPage(site, q, link, ctx2));
         case 9:
-          return _context46.a(2, playPage(site, q, link, ctx2));
+          return _context49.a(2, searchPage2(site, q, link, ctx2));
         case 10:
-          return _context46.a(2, hlsPlaylist(site, q, ctx2));
+          return _context49.a(2, itemPage(site, q, link, ctx2));
         case 11:
-          return _context46.a(2, page("\u041D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E", [info("\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430\u044F \u043A\u043E\u043C\u0430\u043D\u0434\u0430")]));
+          return _context49.a(2, playPage(site, q, link, ctx2));
         case 12:
-          return _context46.a(2);
+          return _context49.a(2, hlsPlaylist(site, q, ctx2));
+        case 13:
+          return _context49.a(2, page("\u041D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E", [info("\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430\u044F \u043A\u043E\u043C\u0430\u043D\u0434\u0430")]));
+        case 14:
+          return _context49.a(2);
       }
-    }, _callee46);
+    }, _callee49);
   }));
   return _route.apply(this, arguments);
 }
-function rootPage2(base) {
+function rootPage2(ctx2) {
+  var base = ctx2.base;
   var channels2 = Object.values(sites).map(function(s) {
     return folder(s.title, "".concat(base, "/").concat(s.id), {
       logo: s.icon,
@@ -22525,129 +22928,240 @@ function rootPage2(base) {
     logo: icon,
     description: "\u0414\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442 \u044D\u0442\u043E\u0442 \u043F\u043E\u0440\u0442\u0430\u043B \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438 Fork browser"
   }));
-  return page("FXML \u041A\u0438\u043D\u043E", channels2, {
+  return catalogPage("FXML \u041A\u0438\u043D\u043E", channels2, {
+    ctx: ctx2,
+    kind: "icon",
     icon: icon
   });
 }
-function sitePage(site, base, link) {
-  var channels2 = [search("\u041F\u043E\u0438\u0441\u043A", link("search", {
+function siteButtons(site, link) {
+  return [search("\u041F\u043E\u0438\u0441\u043A", link("search", {
     q: "{search}"
-  }))];
-  var _iterator11 = _createForOfIteratorHelper(site.categories), _step11;
-  try {
-    for (_iterator11.s(); !(_step11 = _iterator11.n()).done; ) {
-      var _step11$value = _slicedToArray(_step11.value, 2), title = _step11$value[0], path2 = _step11$value[1];
-      channels2.push(folder(title, link("list", {
-        path: path2
-      })));
-    }
-  } catch (err) {
-    _iterator11.e(err);
-  } finally {
-    _iterator11.f();
-  }
-  return page(site.title, channels2, {
-    icon: site.icon
-  });
+  }))].concat(_toConsumableArray(site.categories.map(function(_ref22) {
+    var _ref23 = _slicedToArray(_ref22, 2), title = _ref23[0], path2 = _ref23[1];
+    return folder(title, link("list", {
+      path: path2
+    }));
+  })));
+}
+function sitePage(_x74, _x75, _x76) {
+  return _sitePage.apply(this, arguments);
+}
+function _sitePage() {
+  _sitePage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee50(site, link, ctx2) {
+    var buttons, _yield$site$list$catc, items, _t54, _t55, _t56;
+    return _regenerator().w(function(_context50) {
+      while (1) switch (_context50.n) {
+        case 0:
+          buttons = siteButtons(site, link);
+          if (!(viewMode() === "list")) {
+            _context50.n = 1;
+            break;
+          }
+          return _context50.a(2, page(site.title, [].concat(_toConsumableArray(buttons), [viewToggle(ctx2)]), {
+            icon: site.icon,
+            cacheinfo: "nocache"
+          }));
+        case 1:
+          _context50.n = 2;
+          return site.list(site.categories[0][1], 1).catch(function(err) {
+            console.error("[".concat(site.id, " home]"), err.message);
+            return {
+              items: []
+            };
+          });
+        case 2:
+          _yield$site$list$catc = _context50.v;
+          items = _yield$site$list$catc.items;
+          _t54 = catalogPage;
+          _t55 = site.title;
+          _t56 = cardItems;
+          _context50.n = 3;
+          return withStories(site, items);
+        case 3:
+          return _context50.a(2, _t54(_t55, _t56(_context50.v, link), {
+            ctx: ctx2,
+            buttons: buttons,
+            icon: site.icon
+          }));
+      }
+    }, _callee50);
+  }));
+  return _sitePage.apply(this, arguments);
+}
+function withStories(_x77, _x78) {
+  return _withStories.apply(this, arguments);
+}
+function _withStories() {
+  _withStories = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee52(site, items) {
+    var next, worker;
+    return _regenerator().w(function(_context52) {
+      while (1) switch (_context52.n) {
+        case 0:
+          if (!(viewMode() === "compact")) {
+            _context52.n = 1;
+            break;
+          }
+          return _context52.a(2, items);
+        case 1:
+          next = 0;
+          worker = /* @__PURE__ */ (function() {
+            var _ref28 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee51() {
+              var it;
+              return _regenerator().w(function(_context51) {
+                while (1) switch (_context51.n) {
+                  case 0:
+                    if (!(next < items.length)) {
+                      _context51.n = 2;
+                      break;
+                    }
+                    it = items[next++];
+                    _context51.n = 1;
+                    return site.story(it.url).catch(function() {
+                      return "";
+                    });
+                  case 1:
+                    it.story = _context51.v;
+                    _context51.n = 0;
+                    break;
+                  case 2:
+                    return _context51.a(2);
+                }
+              }, _callee51);
+            }));
+            return function worker2() {
+              return _ref28.apply(this, arguments);
+            };
+          })();
+          _context52.n = 2;
+          return Promise.all([worker(), worker(), worker(), worker(), worker()]);
+        case 2:
+          return _context52.a(2, items);
+      }
+    }, _callee52);
+  }));
+  return _withStories.apply(this, arguments);
 }
 function cardItems(items, link) {
   return items.map(function(it) {
-    return folder(it.title, link("item", {
+    var lines = (it.lines || []).filter(Boolean);
+    var long = it.story ? [it.story.length > 1e3 ? "".concat(it.story.slice(0, 1e3), "\u2026") : it.story] : lines;
+    return _objectSpread2(_objectSpread2({}, folder(it.title, link("item", {
       u: it.url
     }), {
       logo: it.poster,
-      description: cardDescription(it)
+      description: cardDescription(_objectSpread2(_objectSpread2({}, it), {}, {
+        lines: long
+      }))
+    })), {}, {
+      note: lines.join(" \xB7 ").slice(0, 180),
+      long: long
     });
   });
 }
-function listPage(_x68, _x69, _x70) {
+function listPage(_x79, _x80, _x81, _x82) {
   return _listPage.apply(this, arguments);
 }
 function _listPage() {
-  _listPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee47(site, q, link) {
+  _listPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee53(site, q, link, ctx2) {
     var _site$categories$find;
-    var path2, pageNo, _yield$site$list, items, hasNext, channels2, name4;
-    return _regenerator().w(function(_context47) {
-      while (1) switch (_context47.n) {
+    var path2, pageNo, _yield$site$list, items, hasNext, channels2, more, name5, _t57;
+    return _regenerator().w(function(_context53) {
+      while (1) switch (_context53.n) {
         case 0:
           path2 = q.path || "/";
           pageNo = Math.max(1, parseInt(q.page, 10) || 1);
-          _context47.n = 1;
+          _context53.n = 1;
           return site.list(path2, pageNo);
         case 1:
-          _yield$site$list = _context47.v;
+          _yield$site$list = _context53.v;
           items = _yield$site$list.items;
           hasNext = _yield$site$list.hasNext;
-          channels2 = cardItems(items, link);
+          _t57 = cardItems;
+          _context53.n = 2;
+          return withStories(site, items);
+        case 2:
+          channels2 = _t57(_context53.v, link);
           if (!channels2.length) channels2.push(info("\u041D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E"));
-          if (hasNext) channels2.push(folder("\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u0430 ".concat(pageNo + 1, " \u2192"), link("list", {
+          more = hasNext ? [folder("\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u0430 ".concat(pageNo + 1, " \u2192"), link("list", {
             path: path2,
             page: pageNo + 1
-          })));
-          name4 = ((_site$categories$find = site.categories.find(function(_ref13) {
-            var _ref14 = _slicedToArray(_ref13, 2), p = _ref14[1];
+          }))] : [];
+          name5 = ((_site$categories$find = site.categories.find(function(_ref29) {
+            var _ref30 = _slicedToArray(_ref29, 2), p = _ref30[1];
             return p === path2;
           })) === null || _site$categories$find === void 0 ? void 0 : _site$categories$find[0]) || path2;
-          return _context47.a(2, page("".concat(site.title, ": ").concat(name4).concat(pageNo > 1 ? " (\u0441\u0442\u0440. ".concat(pageNo, ")") : ""), channels2));
+          return _context53.a(2, catalogPage("".concat(site.title, ": ").concat(name5).concat(pageNo > 1 ? " (\u0441\u0442\u0440. ".concat(pageNo, ")") : ""), channels2, {
+            ctx: ctx2,
+            buttons: siteButtons(site, link),
+            more: more
+          }));
       }
-    }, _callee47);
+    }, _callee53);
   }));
   return _listPage.apply(this, arguments);
 }
-function searchPage2(_x71, _x72, _x73) {
+function searchPage2(_x83, _x84, _x85, _x86) {
   return _searchPage2.apply(this, arguments);
 }
 function _searchPage2() {
-  _searchPage2 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee48(site, q, link) {
-    var query, items, channels2;
-    return _regenerator().w(function(_context48) {
-      while (1) switch (_context48.n) {
+  _searchPage2 = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee54(site, q, link, ctx2) {
+    var query, items, channels2, _t58;
+    return _regenerator().w(function(_context54) {
+      while (1) switch (_context54.n) {
         case 0:
           query = (q.q && q.q !== "{search}" ? q.q : q.search || "").trim();
           if (query) {
-            _context48.n = 1;
+            _context54.n = 1;
             break;
           }
-          return _context48.a(2, page("\u041F\u043E\u0438\u0441\u043A", [search("\u041F\u043E\u0438\u0441\u043A", link("search", {
+          return _context54.a(2, page("\u041F\u043E\u0438\u0441\u043A", [search("\u041F\u043E\u0438\u0441\u043A", link("search", {
             q: "{search}"
           }))]));
         case 1:
-          _context48.n = 2;
+          _context54.n = 2;
           return site.search(query);
         case 2:
-          items = _context48.v;
-          channels2 = cardItems(items, link);
+          items = _context54.v;
+          _t58 = cardItems;
+          _context54.n = 3;
+          return withStories(site, items);
+        case 3:
+          channels2 = _t58(_context54.v, link);
           if (!channels2.length) channels2.push(info("\u041F\u043E \u0437\u0430\u043F\u0440\u043E\u0441\u0443 \xAB".concat(query, "\xBB \u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E")));
-          return _context48.a(2, page("".concat(site.title, ": \u043F\u043E\u0438\u0441\u043A \xAB").concat(query, "\xBB"), channels2));
+          return _context54.a(2, catalogPage("".concat(site.title, ": \u043F\u043E\u0438\u0441\u043A \xAB").concat(query, "\xBB"), channels2, {
+            ctx: ctx2,
+            buttons: siteButtons(site, link)
+          }));
       }
-    }, _callee48);
+    }, _callee54);
   }));
   return _searchPage2.apply(this, arguments);
 }
-function itemPage(_x74, _x75, _x76, _x77) {
+function itemPage(_x87, _x88, _x89, _x90) {
   return _itemPage.apply(this, arguments);
 }
 function _itemPage() {
-  _itemPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee49(site, q, link, ctx2) {
+  _itemPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee55(site, q, link, ctx2) {
     var d, ei, embed, path2, nodes, node, children, channels2, crumbs, walk, _iterator14, _step14, i;
-    return _regenerator().w(function(_context49) {
-      while (1) switch (_context49.n) {
+    return _regenerator().w(function(_context55) {
+      while (1) switch (_context55.n) {
         case 0:
-          _context49.n = 1;
+          _context55.n = 1;
           return site.details(q.u);
         case 1:
-          d = _context49.v;
+          d = _context55.v;
           if (d.embeds.length) {
-            _context49.n = 2;
+            _context55.n = 2;
             break;
           }
-          return _context49.a(2, page(d.title, [info("\u041F\u043B\u0435\u0435\u0440 \u0434\u043B\u044F \u044D\u0442\u043E\u0433\u043E \u0432\u0438\u0434\u0435\u043E \u043D\u0435 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442\u0441\u044F", d.description)]));
+          return _context55.a(2, page(d.title, [info("\u041F\u043B\u0435\u0435\u0440 \u0434\u043B\u044F \u044D\u0442\u043E\u0433\u043E \u0432\u0438\u0434\u0435\u043E \u043D\u0435 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442\u0441\u044F", d.description)]));
         case 2:
           if (!(q.e === void 0 && d.embeds.length > 1)) {
-            _context49.n = 3;
+            _context55.n = 3;
             break;
           }
-          return _context49.a(2, page(d.title, d.embeds.map(function(e, i2) {
+          return _context55.a(2, page(d.title, d.embeds.map(function(e, i2) {
             return folder("\u041F\u043B\u0435\u0435\u0440 ".concat(i2 + 1, ": ").concat(e.player.name), link("item", {
               u: q.u,
               e: i2
@@ -22659,16 +23173,16 @@ function _itemPage() {
           ei = Number(q.e) || 0;
           embed = d.embeds[ei];
           if (embed) {
-            _context49.n = 4;
+            _context55.n = 4;
             break;
           }
           throw new Error("\u041F\u043B\u0435\u0435\u0440 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D");
         case 4:
           path2 = q.p ? q.p.split(".").map(Number) : [];
-          _context49.n = 5;
+          _context55.n = 5;
           return playerTree(embed.player, embed.url, d.url, ctx2.ua);
         case 5:
-          nodes = _context49.v;
+          nodes = _context55.v;
           node = nodeAt(nodes, path2);
           children = node.children || [];
           channels2 = children.map(function(child, i2) {
@@ -22701,81 +23215,91 @@ function _itemPage() {
           } finally {
             _iterator14.f();
           }
-          return _context49.a(2, page([d.title].concat(crumbs).join(" / "), channels2));
+          return _context55.a(2, page([d.title].concat(crumbs).join(" / "), channels2));
       }
-    }, _callee49);
+    }, _callee55);
   }));
   return _itemPage.apply(this, arguments);
 }
-function resolveStream(_x78, _x79, _x80) {
+function resolveStream(_x91, _x92, _x93) {
   return _resolveStream.apply(this, arguments);
 }
 function _resolveStream() {
-  _resolveStream = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee50(site, q, ua) {
+  _resolveStream = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee56(site, q, ua) {
     var d, embed, path2, nodes, node, stream2;
-    return _regenerator().w(function(_context50) {
-      while (1) switch (_context50.n) {
+    return _regenerator().w(function(_context56) {
+      while (1) switch (_context56.n) {
         case 0:
-          _context50.n = 1;
+          _context56.n = 1;
           return site.details(q.u);
         case 1:
-          d = _context50.v;
+          d = _context56.v;
           embed = d.embeds[Number(q.e) || 0];
           if (embed) {
-            _context50.n = 2;
+            _context56.n = 2;
             break;
           }
           throw new Error("\u041F\u043B\u0435\u0435\u0440 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D");
         case 2:
           path2 = (q.p || "").split(".").filter(Boolean).map(Number);
-          _context50.n = 3;
+          _context56.n = 3;
           return playerTree(embed.player, embed.url, d.url, ua);
         case 3:
-          nodes = _context50.v;
+          nodes = _context56.v;
           node = nodeAt(nodes, path2);
           if (node.ref) {
-            _context50.n = 4;
+            _context56.n = 4;
             break;
           }
           throw new Error("\u042D\u0442\u043E \u043D\u0435 \u0432\u0438\u0434\u0435\u043E");
         case 4:
-          _context50.n = 5;
+          _context56.n = 5;
           return embed.player.resolve(embed.url, node.ref, d.url);
         case 5:
-          stream2 = _context50.v;
-          return _context50.a(2, _objectSpread2({
+          stream2 = _context56.v;
+          return _context56.a(2, _objectSpread2({
             d: d,
             embed: embed,
             node: node
           }, stream2));
       }
-    }, _callee50);
+    }, _callee56);
   }));
   return _resolveStream.apply(this, arguments);
 }
-function playPage(_x81, _x82, _x83, _x84) {
+function playPage(_x94, _x95, _x96, _x97) {
   return _playPage.apply(this, arguments);
 }
 function _playPage() {
-  _playPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee51(site, q, link, ctx2) {
-    var _yield$resolveStream, d, embed, node, url, subtitles, opts, streamUrl, channels2, _iterator15, _step15, v, _t48;
-    return _regenerator().w(function(_context51) {
-      while (1) switch (_context51.n) {
+  _playPage = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee57(site, q, link, ctx2) {
+    var _yield$resolveStream, d, embed, node, url, subtitles, variants, opts, channels3, streamUrl, channels2, _iterator15, _step15, v, _t59;
+    return _regenerator().w(function(_context57) {
+      while (1) switch (_context57.n) {
         case 0:
-          _context51.n = 1;
+          _context57.n = 1;
           return resolveStream(site, q, ctx2.ua);
         case 1:
-          _yield$resolveStream = _context51.v;
+          _yield$resolveStream = _context57.v;
           d = _yield$resolveStream.d;
           embed = _yield$resolveStream.embed;
           node = _yield$resolveStream.node;
           url = _yield$resolveStream.url;
           subtitles = _yield$resolveStream.subtitles;
+          variants = _yield$resolveStream.variants;
           opts = {
             logo: d.poster,
             description: d.description,
             subtitles: subtitles
           };
+          if (!variants) {
+            _context57.n = 2;
+            break;
+          }
+          channels3 = variants.length ? variants.map(function(v2) {
+            return stream("".concat(v2.height, "p"), v2.url, opts);
+          }) : [stream("\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C", url, opts)];
+          return _context57.a(2, page("".concat(d.title, " / ").concat(node.title), channels3));
+        case 2:
           streamUrl = embed.player.uaBound ? function(h) {
             return link("hls.m3u8", {
               u: q.u,
@@ -22787,11 +23311,11 @@ function _playPage() {
             return variantUrl || url;
           };
           channels2 = [stream("\u0410\u0432\u0442\u043E (\u043B\u0443\u0447\u0448\u0435\u0435 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E)", streamUrl(), opts)];
-          _t48 = _createForOfIteratorHelper;
-          _context51.n = 2;
+          _t59 = _createForOfIteratorHelper;
+          _context57.n = 3;
           return hlsVariants(url, ctx2.ua);
-        case 2:
-          _iterator15 = _t48(_context51.v);
+        case 3:
+          _iterator15 = _t59(_context57.v);
           try {
             for (_iterator15.s(); !(_step15 = _iterator15.n()).done; ) {
               v = _step15.value;
@@ -22802,58 +23326,58 @@ function _playPage() {
           } finally {
             _iterator15.f();
           }
-          return _context51.a(2, page("".concat(d.title, " / ").concat(node.title), channels2));
+          return _context57.a(2, page("".concat(d.title, " / ").concat(node.title), channels2));
       }
-    }, _callee51);
+    }, _callee57);
   }));
   return _playPage.apply(this, arguments);
 }
-function hlsPlaylist(_x85, _x86, _x87) {
+function hlsPlaylist(_x98, _x99, _x100) {
   return _hlsPlaylist.apply(this, arguments);
 }
 function _hlsPlaylist() {
-  _hlsPlaylist = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee52(site, q, ctx2) {
-    var _yield$resolveStream2, url, height, variant, _t49, _t50;
-    return _regenerator().w(function(_context52) {
-      while (1) switch (_context52.n) {
+  _hlsPlaylist = _asyncToGenerator2(/* @__PURE__ */ _regenerator().m(function _callee58(site, q, ctx2) {
+    var _yield$resolveStream2, url, height, variant, _t60, _t61;
+    return _regenerator().w(function(_context58) {
+      while (1) switch (_context58.n) {
         case 0:
-          _context52.n = 1;
+          _context58.n = 1;
           return resolveStream(site, q, ctx2.ua);
         case 1:
-          _yield$resolveStream2 = _context52.v;
+          _yield$resolveStream2 = _context58.v;
           url = _yield$resolveStream2.url;
           height = Number(q.h) || 0;
           if (!height) {
-            _context52.n = 4;
+            _context58.n = 4;
             break;
           }
-          _context52.n = 2;
+          _context58.n = 2;
           return hlsVariants(url, ctx2.ua);
         case 2:
-          variant = _context52.v.find(function(v) {
+          variant = _context58.v.find(function(v) {
             return v.height === height;
           });
           if (!variant) {
-            _context52.n = 4;
+            _context58.n = 4;
             break;
           }
-          _context52.n = 3;
+          _context58.n = 3;
           return absolutePlaylist(variant.url, ctx2.ua);
         case 3:
-          _t49 = _context52.v;
-          return _context52.a(2, {
-            playlist: _t49
+          _t60 = _context58.v;
+          return _context58.a(2, {
+            playlist: _t60
           });
         case 4:
-          _context52.n = 5;
+          _context58.n = 5;
           return absolutePlaylist(url, ctx2.ua);
         case 5:
-          _t50 = _context52.v;
-          return _context52.a(2, {
-            playlist: _t50
+          _t61 = _context58.v;
+          return _context58.a(2, {
+            playlist: _t61
           });
       }
-    }, _callee52);
+    }, _callee58);
   }));
   return _hlsPlaylist.apply(this, arguments);
 }
@@ -22866,7 +23390,7 @@ function log(msg) {
 function start(reason) {
   if (server) return log(reason + ": already listening");
   try {
-    server = import_http6.default.createServer(function(req, res) {
+    server = import_http7.default.createServer(function(req, res) {
       handle(req, res).catch(function(err) {
         log(req.url + " " + (err && err.stack));
         try {
