@@ -9,6 +9,8 @@ on Samsung Smart TVs as [Fork browser](https://wiki.forkbrowser.top/wiki/FXML) (
 - Pick the season and the voice-over; its episodes then play one after another. Quality up to 1080p:
   videos start at Fork browser's **Settings → Video & Audio → Video quality** (720p by default) and can
   be switched in the player.
+- Episodes start quickly: the TV keeps what it has read from the sites for a while and prepares the
+  next episode while one plays.
 - The sites are read **by the TV itself**: no PC and no server. If the sites open on your
   computer, they should work on your TV too.
 - QINO ТВ, the live TV channels of [qino.live](https://qino.live/). It needs a qino.live account; you
