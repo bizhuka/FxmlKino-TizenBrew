@@ -5,6 +5,47 @@
 // parsers and the account stay online, as the engine itself calls them.
 var Ldata = ["js/main.js"];
 
+// Errors on screen: a TV has no debugger, so script errors, scripts that fail to load and the
+// service's crash lines are shown in red at the bottom of the screen (each for 20 s, during the
+// first FXML_ERRORS_SHOWN_MS after the start), and also go to the console.
+var FXML_ERRORS_SHOWN_MS = 120000;
+var fxmlStartedAt = new Date().getTime();
+var fxmlErrors = [];
+var fxmlErrorsTimer = null;
+function showFxmlError(text) {
+	text = String(text).slice(0, 300);
+	try { console.log('[fxml] ERROR ' + text); } catch (e) {}
+	if (fxmlErrors[fxmlErrors.length - 1] === text) return;
+	fxmlErrors.push(text);
+	if (fxmlErrors.length > 4) fxmlErrors.shift();
+	if (new Date().getTime() - fxmlStartedAt < FXML_ERRORS_SHOWN_MS) renderFxmlErrors();
+}
+function renderFxmlErrors() {
+	if (!document.body) return setTimeout(renderFxmlErrors, 500);
+	var box = document.getElementById('fxml-errors');
+	if (!box) {
+		box = document.createElement('div');
+		box.id = 'fxml-errors';
+		box.style.cssText = 'position:fixed;left:16px;right:16px;bottom:44px;z-index:2147483647;font:15px sans-serif;' +
+			'color:#fff;background:rgba(140,0,0,0.88);padding:6px 10px;white-space:pre-wrap;word-wrap:break-word;pointer-events:none';
+		document.body.appendChild(box);
+	}
+	box.textContent = fxmlErrors.join('\n');
+	box.style.display = 'block';
+	clearTimeout(fxmlErrorsTimer);
+	fxmlErrorsTimer = setTimeout(function () { box.style.display = 'none'; }, 20000);
+}
+if (window.addEventListener) window.addEventListener('error', function (e) {
+	var t = e.target;
+	// Capture phase: also scripts that fail to load (pictures are left out: posters fail often).
+	if (t && t !== window && t.tagName) {
+		if (t.tagName === 'SCRIPT') showFxmlError('Не загрузился скрипт: ' + (t.getAttribute('src') || ''));
+		return;
+	}
+	var where = e.filename ? ' (' + String(e.filename).replace(/^.*\//, '') + ':' + e.lineno + ')' : '';
+	showFxmlError('Ошибка JS: ' + (e.message || (e.error && e.error.message) || 'неизвестная') + where);
+}, true);
+
 // The same app is built for Samsung Tizen (.wgt) and LG webOS (.ipk, tools/webos/build.mjs).
 // webOS's web runtime provides PalmSystem / PalmServiceBridge; LG's own Fork app uses these values.
 var FXML_ON_WEBOS = typeof window.PalmSystem !== 'undefined' || typeof window.PalmServiceBridge !== 'undefined';
@@ -17,7 +58,7 @@ var version_local_js = 1;
 // Fork engine version the remote loader expects; FxmlKino's own version is FXMLKINO_VERSION
 // (same as config.xml).
 var app_version = "1.1.1";
-var FXMLKINO_VERSION = "1.3.3";
+var FXMLKINO_VERSION = "1.3.4";
 
 // The Tizen emulator can't run web services (see AGENTS.md).
 function isEmulator() {
@@ -108,7 +149,10 @@ function checkFxmlService(attempt) {
 		if (attempt < 60) setTimeout(function () { checkFxmlService(attempt + 1); }, 1000);
 		else {
 			if (FXML_ON_EMULATOR) showFxmlStatus(where + 'не отвечает. Запустите на ПК: cd fxml-parser && npm start');
-			else showFxmlStatus('сервис не отвечает (' + FXML_PORTAL_URL + ')');
+			else {
+				showFxmlStatus('сервис не отвечает (' + FXML_PORTAL_URL + ')');
+				showFxmlError('Сервис FXML не отвечает (' + FXML_PORTAL_URL + ')');
+			}
 			autostartFxmlPortal();
 		}
 	};
@@ -121,7 +165,7 @@ function checkFxmlService(attempt) {
 // error). Opening the portal later through an 'appcontrol' event doesn't work on webOS. Elsewhere
 // waiting would only slow the start (1.2.2: +2–3 s on Samsung), so the engine starts at once.
 var FXML_WAIT_FOR_SERVICE = FXML_ON_WEBOS;
-var FXML_START_WAIT_MS = 20000;
+var FXML_START_WAIT_MS = 40000; // 20 s was short for a 2015 LG loading the service
 var fxmlReadyWaiters = [];
 function runFxmlReadyWaiters() {
 	var waiters = fxmlReadyWaiters;
@@ -136,6 +180,16 @@ function whenFxmlServiceReady(callback) {
 	setTimeout(once, FXML_START_WAIT_MS);
 }
 
+// A crash line from the service (webOS /start reply, Tizen log port): shown once, on screen.
+// Before the service answers it means the bundle didn't load, so the engine stops waiting for it.
+var fxmlCrashShown = false;
+function fxmlServiceCrashed(line) {
+	if (fxmlCrashShown) return;
+	fxmlCrashShown = true;
+	showFxmlError('Сервис FXML: ' + line);
+	if (!fxmlServiceReady) runFxmlReadyWaiters();
+}
+
 // Starts the FXML web service (declared in config.xml) unless it is already running.
 // Same approach as TizenBrew: an app control with the "service" operation.
 // The service's console is not visible on a TV, so it sends its log lines to the
@@ -146,6 +200,7 @@ function startFxmlService() {
 		tizen.messageport.requestLocalMessagePort('fxml-log').addMessagePortListener(function (data) {
 			for (var i = 0; i < data.length; i++) {
 				fxmlLastLog = data[i].value;
+				if (String(data[i].value).indexOf('CRASH') === 0) fxmlServiceCrashed(data[i].value);
 				console.log('[fxml-service] ' + data[i].value);
 			}
 			showFxmlStatus();
@@ -184,6 +239,7 @@ function startWebosService() {
 	try {
 		webosCall(WEBOS_SERVICE + '/start', { subscribe: true }, function (reply) {
 			if (reply.log && reply.log.length) fxmlLastLog = reply.log[reply.log.length - 1];
+			if (reply.crash) fxmlServiceCrashed(reply.crash);
 			if (reply.returnValue === false) showFxmlStatus('не удалось запустить сервис: ' + (reply.errorText || reply.errorCode));
 			else if (fxmlStatusText === 'запуск сервиса…') showFxmlStatus('запуск принят');
 			else showFxmlStatus();
