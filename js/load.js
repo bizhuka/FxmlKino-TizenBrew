@@ -1,18 +1,9 @@
-var Ldata = [
-	"http://browser.appfxml.com/jsobf/load.js.php?from=tizen&token=213ee2b9a052664487e22145848f8913c97666c0",
-	"https://browser2.appinfo.su/jsobf/load.js.php?from=tizen&token=213ee2b9a052664487e22145848f8913c97666c0",
-	"https://cdn.jsdelivr.net/gh/komivp/appinfodl@main/app.js",
-	"http://browser.appinfo.su/jsobf/load.js.php?from=tizen&token=213ee2b9a052664487e22145848f8913c97666c0",
-	"http://browser2.appinfo.su/jsobf/load.js.php?from=tizen&token=213ee2b9a052664487e22145848f8913c97666c0",
-	"js/main.js"
-];
-
-// Fork engine inside the app: js/engine.js is the engine's GitHub copy (komivp/appinfodl,
-// app_2610.js). With FORK_ENGINE_LOCAL the local loader js/main.js goes first: it loads the
-// libraries from js/library/ and the engine from js/engine.js, the servers only as a fallback.
-// Icons come from static/ anyway (version_local_files); search, parsers and the account stay online.
-var FORK_ENGINE_LOCAL = true;
-if (FORK_ENGINE_LOCAL) Ldata.unshift(Ldata.splice(Ldata.indexOf("js/main.js"), 1)[0]);
+// Fork engine inside the app only (1.3.2): the local loader js/main.js loads the libraries from
+// js/library/ and the engine from js/engine.js (the GitHub copy of komivp/appinfodl app_2610.js).
+// No mirrors: Fork's five loader servers (browser.appfxml.com, browser(2).appinfo.su, jsDelivr)
+// sometimes failed or hung the start. Icons come from static/ (version_local_files); search,
+// parsers and the account stay online, as the engine itself calls them.
+var Ldata = ["js/main.js"];
 
 // The same app is built for Samsung Tizen (.wgt) and LG webOS (.ipk, tools/webos/build.mjs).
 // webOS's web runtime provides PalmSystem / PalmServiceBridge; LG's own Fork app uses these values.
@@ -26,7 +17,7 @@ var version_local_js = 1;
 // Fork engine version the remote loader expects; FxmlKino's own version is FXMLKINO_VERSION
 // (same as config.xml).
 var app_version = "1.1.1";
-var FXMLKINO_VERSION = "1.3.1";
+var FXMLKINO_VERSION = "1.3.2";
 
 // The Tizen emulator can't run web services (see AGENTS.md).
 function isEmulator() {
@@ -1570,7 +1561,7 @@ var VapeMenu = (function() {
 	}
 	
 	function canOpenSourceMenuFromLoading() {
-		if (state.sourceMenuVisible) return false;
+		if (state.sourceMenuVisible || Ldata.length < 2) return false;
 		return isStartLogoVisible();
 	}
 	

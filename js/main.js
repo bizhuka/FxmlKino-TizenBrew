@@ -331,19 +331,25 @@ var librarys={
 		catch(e){}	
 		return (ver||"");	
 	},
+	// FxmlKino: local files only, no mirrors (see js/load.js). The engine is always js/engine.js,
+	// so the "ver" setting no longer picks a build (its menu is hidden in the engine). JW Player
+	// only off Tizen: it is Fork's default HLS player on webOS and Android (maJor.ds()
+	// streamplayer "jw"), while Tizen defaults to AVPlay and its .wgt leaves the file out
+	// (tizen_web_project.yaml excludes); the engine drops "jw" from the player list without it.
+	// LIB is "library/" in the Android build (android/build-fork.ps1).
 	libs:function(){
-		
-		return [
-		{name:"jquery",important:0,url:["js/library/jquery-1.12.4.min.js","http://browser.appfxml.com/library/jquery-1.12.4.min.js","http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js","http://komivp.github.appfxml.com/library/jquery-1.12.4.min.js"]},
-		{name:"json",important:1,url:["js/library/json.js","http://browser.appfxml.com/library/json.js","http://komivp.github.appfxml.com/library/json.js","https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.min.js"]},
-		{name:"underscore",important:1,require:"jquery",url:["js/library/underscore_1.8.3.js","http://browser.appfxml.com/library/underscore_1.8.3.js","http://komivp.github.appfxml.com/library/underscore_1.8.3.js","https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"]},
-		{name:"md5",important:1,url:["js/library/md5.js","http://browser.appfxml.com/library/md5.js","http://komivp.github.appfxml.com/library/md5.js","https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"]},
-		{name:"langs",important:0,url:["js/library/langs.js","http://browser.appfxml.com/library/langs.js","http://komivp.github.appfxml.com/library/langs.js"]},
-		{name:"guide",important:0,url:["js/library/jtv.js","http://exec.remotecurl.appfxml.com/curl/jtv.js","http://85.17.30.89/common/jtv.js?v=6","http://46.36.220.208/common/jtv.js?v=6"]},
-		{name:"webOS",important:0,url:["js/library/webOS.js","http://browser.appfxml.com/library/webOS.js","http://komivp.github.appfxml.com/library/webOS.js"]},
-		{name:"jw",important:0,url:["js/library/jwplayer_8.20.1.js","http://browser.appfxml.com/library/jwplayer_8.20.1.js","http://komivp.github.appfxml.com/library/jwplayer_8.20.1.js"]},	
-		{name:"js",require:"jquery",important:0,url:["js/engine.js","http://browser.appfxml.com/jsobf/beta.js.php?ver="+this.getver(),"http://browser2.appfxml.com/jsobf/beta.js.php?ver="+this.getver(),"http://komivp.github.appfxml.com/app_"+(this.getver()||this.versions().stable)+".js","http://browser2.appinfo.su/jsobf/beta.js.php?ver="+this.getver()]}		
-		];
+		var LIB="js/library/";
+		var jw=/tizen/.test(loader_platform)?[]:[{name:"jw",important:0,url:[LIB+"jwplayer_8.20.1.js"]}];
+		return jw.concat([
+		{name:"jquery",important:0,url:[LIB+"jquery-1.12.4.min.js"]},
+		{name:"json",important:1,url:[LIB+"json.js"]},
+		{name:"underscore",important:1,require:"jquery",url:[LIB+"underscore_1.8.3.js"]},
+		{name:"md5",important:1,url:[LIB+"md5.js"]},
+		{name:"langs",important:0,url:[LIB+"langs.js"]},
+		{name:"guide",important:0,url:[LIB+"jtv.js"]},
+		{name:"webOS",important:0,url:[LIB+"webOS.js"]},
+		{name:"js",require:"jquery",important:0,url:["js/engine.js"]}
+		]);
 	},
 	exis:function(l){
 		var n=l.name||l;
