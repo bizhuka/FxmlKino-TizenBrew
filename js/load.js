@@ -46,6 +46,50 @@ if (window.addEventListener) window.addEventListener('error', function (e) {
 	showFxmlError('Ошибка JS: ' + (e.message || (e.error && e.error.message) || 'неизвестная') + where);
 }, true);
 
+// Old TV browsers: LG webOS 2.x (2015) is WebKit 538 (about Safari 8), webOS 1.x older still. They
+// lack NodeList.forEach (js/main.js calls it on the loader menu: "undefined is not a function" on a
+// webOS 2.2 LF652V) and a few ES2015 methods. Each is added only when missing.
+(function () {
+	function def(obj, name, fn) {
+		if (obj && typeof obj[name] !== 'function') {
+			try { Object.defineProperty(obj, name, { value: fn, configurable: true, writable: true }); } catch (e) { obj[name] = fn; }
+		}
+	}
+	if (window.NodeList) def(NodeList.prototype, 'forEach', Array.prototype.forEach);
+	if (window.Element) {
+		var ep = Element.prototype;
+		def(ep, 'matches', ep.webkitMatchesSelector || ep.msMatchesSelector || function (sel) {
+			var all = (this.ownerDocument || document).querySelectorAll(sel);
+			for (var i = 0; i < all.length; i++) if (all[i] === this) return true;
+			return false;
+		});
+		def(ep, 'closest', function (sel) {
+			for (var el = this; el && el.nodeType === 1; el = el.parentNode) if (el.matches(sel)) return el;
+			return null;
+		});
+		def(ep, 'remove', function () { if (this.parentNode) this.parentNode.removeChild(this); });
+	}
+	def(String.prototype, 'includes', function (s, pos) { return this.indexOf(s, pos) !== -1; });
+	def(String.prototype, 'startsWith', function (s, pos) { pos = pos || 0; return this.substr(pos, String(s).length) === String(s); });
+	def(String.prototype, 'endsWith', function (s) { s = String(s); return this.length >= s.length && this.slice(this.length - s.length) === s; });
+	def(String.prototype, 'repeat', function (n) { var out = ''; for (var i = 0; i < n; i++) out += this; return out; });
+	def(Array.prototype, 'includes', function (x) { return this.indexOf(x) !== -1; });
+	def(Array.prototype, 'find', function (fn, self) { for (var i = 0; i < this.length; i++) if (fn.call(self, this[i], i, this)) return this[i]; });
+	def(Array.prototype, 'findIndex', function (fn, self) { for (var i = 0; i < this.length; i++) if (fn.call(self, this[i], i, this)) return i; return -1; });
+	def(Array, 'from', function (src, fn) {
+		var out = [];
+		for (var i = 0; i < src.length; i++) out.push(fn ? fn(src[i], i) : src[i]);
+		return out;
+	});
+	def(Object, 'assign', function (target) {
+		for (var i = 1; i < arguments.length; i++) {
+			var src = arguments[i];
+			if (src) for (var k in src) if (Object.prototype.hasOwnProperty.call(src, k)) target[k] = src[k];
+		}
+		return target;
+	});
+})();
+
 // The same app is built for Samsung Tizen (.wgt) and LG webOS (.ipk, tools/webos/build.mjs).
 // webOS's web runtime provides PalmSystem / PalmServiceBridge; LG's own Fork app uses these values.
 var FXML_ON_WEBOS = typeof window.PalmSystem !== 'undefined' || typeof window.PalmServiceBridge !== 'undefined';
@@ -58,7 +102,7 @@ var version_local_js = 1;
 // Fork engine version the remote loader expects; FxmlKino's own version is FXMLKINO_VERSION
 // (same as config.xml).
 var app_version = "1.1.1";
-var FXMLKINO_VERSION = "1.3.4";
+var FXMLKINO_VERSION = "1.3.5";
 
 // The Tizen emulator can't run web services (see AGENTS.md).
 function isEmulator() {
@@ -254,6 +298,42 @@ function startWebosService() {
 	} catch (e) {
 		showFxmlStatus('ошибка запуска сервиса: ' + e.message);
 	}
+	startWebosTorr();
+}
+
+// "Fork TorrServe" on webOS: the engine's built-in TorrServer settings item, its install
+// window and the «Установить Fork Torrserve» button of «Необходим Torrserve или Ace Stream» were for
+// Fork for Android, which answers them through andr.forkTorrServe*. Here the same calls go to our
+// service (tools/webos/service/torrserver.js), which downloads the official TorrServer on first use
+// and runs it on 127.0.0.1:8090 while the app is open. The engine reads the status synchronously,
+// so it is kept here from a subscription. tools/patch-engine.mjs makes the engine use this object.
+var fxmlTorrStatus = {};
+function startWebosTorr() {
+	try {
+		webosCall(WEBOS_SERVICE + '/torr', { cmd: 'status', subscribe: true }, function (reply) {
+			if (reply.status) fxmlTorrStatus = reply.status;
+		});
+	} catch (e) {}
+	var send = function (cmd, guess) {
+		// The reply comes later; until then the engine sees the expected state.
+		for (var k in guess) fxmlTorrStatus[k] = guess[k];
+		try {
+			webosCall(WEBOS_SERVICE + '/torr', { cmd: cmd }, function (reply) {
+				if (reply.status) fxmlTorrStatus = reply.status;
+			});
+		} catch (e) {}
+	};
+	window.fxmlTorr = {
+		forkTorrServeStatus: function () { return JSON.stringify(fxmlTorrStatus); },
+		forkTorrServeInstall: function () {
+			send('install', fxmlTorrStatus.installed ? {} : { installing: true, installProgress: 0, installError: '', installMessage: 'Подготовка...' });
+		},
+		forkTorrServeStart: function () { send('start', { startError: '' }); },
+		forkTorrServeRestart: function () { send('restart', {}); },
+		forkTorrServeDelete: function () { send('delete', {}); },
+		forkTorrServeSetEnabled: function (on) { send(on ? 'enable' : 'disable', {}); },
+		forkTorrServeSetHost: function () {}
+	};
 }
 
 if (FXML_ON_EMULATOR) {
